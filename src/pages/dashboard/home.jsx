@@ -34,7 +34,7 @@ export function Home() {
         ))}
       </div>
 
-      <div className="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-3">
+      <div className="mb-4  gap-6 xl:grid-cols-3">
         <Card>
           <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
             <Typography variant="h6" color="white">
@@ -59,6 +59,46 @@ export function Home() {
                       className="text-sm font-bold uppercase text-blue-gray-400"
                     >
                       Artist
+                    </Typography>
+                  </th>
+                  <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
+                    <Typography
+                      variant="small"
+                      className="text-sm font-bold uppercase text-blue-gray-400"
+                    >
+                      Year
+                    </Typography>
+                  </th>
+                  <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
+                    <Typography
+                      variant="small"
+                      className="text-sm font-bold uppercase text-blue-gray-400"
+                    >
+                      Year
+                    </Typography>
+                  </th>
+                  <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
+                    <Typography
+                      variant="small"
+                      className="text-sm font-bold uppercase text-blue-gray-400"
+                    >
+                      Year
+                    </Typography>
+                  </th>
+                  <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
+                    <Typography
+                      variant="small"
+                      className="text-sm font-bold uppercase text-blue-gray-400"
+                    >
+                      Year
+                    </Typography>
+                  </th>
+                  <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
+                    <Typography
+                      variant="small"
+                      className="text-sm font-bold uppercase text-blue-gray-400"
+                    >
+                      Year
                     </Typography>
                   </th>
                   <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
