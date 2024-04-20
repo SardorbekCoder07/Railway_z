@@ -5,6 +5,7 @@ import {
   InformationCircleIcon,
   ServerStackIcon,
   RectangleStackIcon,
+  GlobeAltIcon,
 } from "@heroicons/react/24/solid";
 import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
@@ -54,9 +55,9 @@ export const routes = [
         element: <SignIn />,
       },
       {
-        icon: <RectangleStackIcon {...icon} />,
-        name: "sign up",
-        path: "/sign-up",
+        icon: <GlobeAltIcon {...icon} />,
+        name: "Visit web site",
+        path:' https://themecrafter.com/kyber/elementor/homepage-02/',
         element: <SignUp />,
       },
     ],
