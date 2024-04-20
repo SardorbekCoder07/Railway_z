@@ -34,7 +34,7 @@ export function Home() {
         ))}
       </div>
 
-      <div className="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-3">
+      <div className="mb-6  gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
         <Card>
           <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
             <Typography variant="h6" color="white">
