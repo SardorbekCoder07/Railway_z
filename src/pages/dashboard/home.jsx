@@ -69,6 +69,46 @@ export function Home() {
                       Year
                     </Typography>
                   </th>
+                  <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
+                    <Typography
+                      variant="small"
+                      className="text-sm font-bold uppercase text-blue-gray-400"
+                    >
+                      Year
+                    </Typography>
+                  </th>
+                  <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
+                    <Typography
+                      variant="small"
+                      className="text-sm font-bold uppercase text-blue-gray-400"
+                    >
+                      Year
+                    </Typography>
+                  </th>
+                  <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
+                    <Typography
+                      variant="small"
+                      className="text-sm font-bold uppercase text-blue-gray-400"
+                    >
+                      Year
+                    </Typography>
+                  </th>
+                  <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
+                    <Typography
+                      variant="small"
+                      className="text-sm font-bold uppercase text-blue-gray-400"
+                    >
+                      Year
+                    </Typography>
+                  </th>
+                  <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
+                    <Typography
+                      variant="small"
+                      className="text-sm font-bold uppercase text-blue-gray-400"
+                    >
+                      Year
+                    </Typography>
+                  </th>
                 </tr>
               </thead>
               <tbody>
