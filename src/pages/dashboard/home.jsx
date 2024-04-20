@@ -4,29 +4,13 @@ import {
   Card,
   CardHeader,
   CardBody,
-  IconButton,
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
   Avatar,
   Tooltip,
   Progress,
 } from "@material-tailwind/react";
-import {
-  EllipsisVerticalIcon,
-  ArrowUpIcon,
-} from "@heroicons/react/24/outline";
 import { StatisticsCard } from "@/widgets/cards";
-import { StatisticsChart } from "@/widgets/charts";
-import {
-  statisticsCardsData,
-  statisticsChartsData,
-  projectsTableData,
-  ordersOverviewData,
-} from "@/data";
+import { statisticsCardsData } from "@/data";
 import { CheckCircleIcon, ClockIcon } from "@heroicons/react/24/solid";
-import { Tables } from '@/pages/dashboard';
 
 export function Home() {
   return (
@@ -51,8 +35,77 @@ export function Home() {
       </div>
 
       <div className="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-3">
-
-            <div className="bg-green-500">HeartIcon</div>
+        <Card>
+          <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
+            <Typography variant="h6" color="white">
+              Songs Table
+            </Typography>
+          </CardHeader>
+          <CardBody className="overflow-x-scroll">
+            <table className="w-full min-w-full table-auto">
+              <thead>
+                <tr>
+                  <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
+                    <Typography
+                      variant="small"
+                      className="text-sm font-bold uppercase text-blue-gray-400"
+                    >
+                      Song
+                    </Typography>
+                  </th>
+                  <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
+                    <Typography
+                      variant="small"
+                      className="text-sm font-bold uppercase text-blue-gray-400"
+                    >
+                      Artist
+                    </Typography>
+                  </th>
+                  <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
+                    <Typography
+                      variant="small"
+                      className="text-sm font-bold uppercase text-blue-gray-400"
+                    >
+                      Year
+                    </Typography>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">
+                    <div className="flex items-center gap-4">
+                      <CheckCircleIcon className="h-5 w-5 text-green-500" />
+                      <span>The Sliding Mr. Bones (Next Stop, Pottersville)</span>
+                    </div>
+                  </td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">Malcolm Lockyer</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1961</td>
+                </tr>
+                <tr>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">
+                    <div className="flex items-center gap-4">
+                      <ClockIcon className="h-5 w-5 text-yellow-500" />
+                      <span>Witchy Woman</span>
+                    </div>
+                  </td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">The Eagles</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1972</td>
+                </tr>
+                <tr>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">
+                    <div className="flex items-center gap-4">
+                      <ClockIcon className="h-5 w-5 text-yellow-500" />
+                      <span>Shining Star</span>
+                    </div>
+                  </td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">Earth, Wind, and Fire</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
+                </tr>
+              </tbody>
+            </table>
+          </CardBody>
+        </Card>
       </div>
     </div>
   );
