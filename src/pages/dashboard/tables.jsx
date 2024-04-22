@@ -1,19 +1,25 @@
+import React from "react";
 import {
   Card,
   CardHeader,
   CardBody,
   Typography,
-  Avatar,
-  Chip,
-  Tooltip,
-  Progress,
 } from "@material-tailwind/react";
-import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
-import { authorsTableData, projectsTableData } from "@/data";
+import { authorsTableData} from "@/data";
+import { CircularPagination } from "@/widgets/layout/circlePagination";
+import { UserModal } from "@/widgets/layout/userModal";
 
 export function Tables() {
+  const [editModal, setEditModal] = React.useState(false)
+  const [deleteModal, setDeleteModal] = React.useState(false)
+
+  const openEditModal = () => setEditModal(!editModal)
+  const closeEditModal = () => setEditModal(false)
+  const openDeleteModal = () => setDeleteModal(true)
+  const closeDeleteModal = () => setDeleteModal(false)
+
   return (
-    <div className="mt-12 mb-8 flex flex-col gap-12">
+    <div className="mt-12 mb-8 flex flex-col gap-12 ">
       <Card>
         <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
           <Typography variant="h6" color="white">
@@ -67,29 +73,31 @@ export function Tables() {
                         <Typography className="text-xs font-semibold text-blue-gray-600">
                           {lastName}
                         </Typography>
-                       
                       </td>
-                      
                       <td className={className}>
                         <Typography className="text-xs font-semibold text-blue-gray-600">
                           {phoneNumber}
                         </Typography>
                       </td>
-                      <td className={`${className} flex gap-5`}>
+                      <td className={`${className}`}>
+                        <div className="flex gap-5">
                         <Typography
+                          onClick={openEditModal}
                           as="a"
                           href="#"
-                          className="text-xs font-semibold text-blue-gray-600"
+                          className="text-xs font-semibold text-yellow-600"
                         >
                           Edit
                         </Typography>
                         <Typography
                           as="a"
                           href="#"
-                          className="text-xs font-semibold text-blue-gray-600"
+                          className="text-xs font-semibold text-red-600"
                         >
                           Delete
                         </Typography>
+                        </div>
+                       
                       </td>
                     </tr>
                   );
@@ -99,6 +107,13 @@ export function Tables() {
           </table>
         </CardBody>
       </Card>
+      <div className="w-full flex justify-center items-center">
+
+      <CircularPagination/>
+
+      </div>
+      {/* <UserModal isOpen={editModal} onClose={closeEditModal}  click={closeEditModal}/> */}
+
       {/* <Card>
         <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
           <Typography variant="h6" color="white">
