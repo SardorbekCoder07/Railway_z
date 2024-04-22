@@ -11,7 +11,7 @@ import {
   Button,
   Input,
 } from "@material-tailwind/react";
-import { authorsTableData} from "@/data";
+import { authorsTableData} from "@/admin/data";
 import { CircularPagination } from "@/widgets/layout/circlePagination";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 

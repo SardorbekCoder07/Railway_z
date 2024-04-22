@@ -16,7 +16,7 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 import { StatisticsCard } from "@/widgets/cards";
-import { statisticsCardsData } from "@/data";
+import { statisticsCardsData } from "@/admin/data";
 import { CheckCircleIcon, ClockIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import { CircularPagination } from "@/widgets/layout/circlePagination";
 
