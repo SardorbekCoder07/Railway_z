@@ -8,13 +8,13 @@ import {
 export const statisticsCardsData = [
   {
     color: "gray",
-    icon: BanknotesIcon,
-    title: "Today's Money",
-    value: "$53k",
+    icon: UsersIcon,
+    title: "Worker number",
+    value: "53",
     footer: {
       color: "text-green-500",
-      value: "+55%",
-      label: "than last week",
+      value: "55",
+      label: "Absentee workers",
     },
   },
   {
