@@ -131,6 +131,10 @@ export function Home() {
                   </td>
                   <td className="border-b border-blue-gray-200 py-3 px-5">The Eagles</td>
                   <td className="border-b border-blue-gray-200 py-3 px-5">1972</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1972</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1972</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1972</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1972</td>
                 </tr>
                 <tr>
                   <td className="border-b border-blue-gray-200 py-3 px-5">
@@ -140,6 +144,11 @@ export function Home() {
                     </div>
                   </td>
                   <td className="border-b border-blue-gray-200 py-3 px-5">Earth, Wind, and Fire</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1975</td> 
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
                   <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
                 </tr>
               </tbody>
