@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Typography,
   Card,
@@ -8,12 +8,23 @@ import {
   Avatar,
   Tooltip,
   Progress,
+  Button,
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  Input,
+  DialogFooter,
 } from "@material-tailwind/react";
 import { StatisticsCard } from "@/widgets/cards";
 import { statisticsCardsData } from "@/data";
-import { CheckCircleIcon, ClockIcon } from "@heroicons/react/24/solid";
+import { CheckCircleIcon, ClockIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 
 export function Home() {
+  const [addModal, setAddModal] = useState(false)
+
+
+  const openAddModal = () => setAddModal(true)
+  const closeAddModal = () => setAddModal(false)
   return (
     <div className="mt-12">
       <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
@@ -41,12 +52,13 @@ export function Home() {
             <Typography variant="h6" color="white">
               Songs Table
             </Typography>
-            <button
+            <Button
+             onClick={openAddModal} 
               className="bg-[#fff] text-black px-3 py-2 rounded-md"
               // onClick={handleOpenModal} // Attach event handler to open modal
             >
-              Add +
-            </button>
+               <UserPlusIcon className="h-6 w-6 text-black"/>
+            </Button>
           </CardHeader>
           <CardBody className=" md:overflow-x-scroll">
             <table className="w-full min-w-full table-auto">
@@ -123,6 +135,52 @@ export function Home() {
             </table>
           </CardBody>
         </Card>
+      </div>
+      <div>
+      <Dialog open={addModal} handler={closeAddModal}>
+        <DialogHeader>PD qo'shish</DialogHeader>
+        <DialogBody>
+          <div className="flex justify-center flex-col items-center gap-7">
+          <div className="w-full max-w-[24rem]">
+      <Input id="addname" label="Ism" />
+    </div>
+    <div className="w-full max-w-[24rem]">
+      <Input id="addlastname" label="Familya" />
+    </div>
+        <div className="relative flex w-full max-w-[24rem]">
+        <Button
+        disabled
+        size="sm"
+        className="!absolute left-1 top-1 rounded"
+      >
+        +998
+      </Button>
+      <Input
+      id="addphone" 
+        type="number"
+        className="ps-20"
+        containerProps={{
+          className: "min-w-0",
+        }}
+      />
+      
+    </div>
+          </div>
+        </DialogBody>
+        <DialogFooter>
+          <Button
+            variant="text"
+            color="red"
+            onClick={closeAddModal}
+            className="mr-1"
+          >
+            <span>Orqaga</span>
+          </Button>
+          <Button variant="gradient" color="gray">
+            <span>Qo'shish</span>
+          </Button>
+        </DialogFooter>
+      </Dialog>
       </div>
     </div>
   );

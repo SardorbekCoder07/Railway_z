@@ -1,31 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardHeader,
   CardBody,
   Typography,
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+  Button,
+  Input,
 } from "@material-tailwind/react";
 import { authorsTableData} from "@/data";
 import { CircularPagination } from "@/widgets/layout/circlePagination";
-import { UserModal } from "@/widgets/layout/userModal";
+import { UserPlusIcon } from "@heroicons/react/24/solid";
 
 export function Tables() {
-  const [editModal, setEditModal] = React.useState(false)
-  const [deleteModal, setDeleteModal] = React.useState(false)
+  const [editModal, setEditModal] = useState(false)
+  const [deleteModal, setDeleteModal] = useState(false)
+  const [addModal, setAddModal] = useState(false)
 
-  const openEditModal = () => setEditModal(!editModal)
+
+  const openEditModal = () => setEditModal(true)
   const closeEditModal = () => setEditModal(false)
   const openDeleteModal = () => setDeleteModal(true)
   const closeDeleteModal = () => setDeleteModal(false)
+  const openAddModal = () => setAddModal(true)
+  const closeAddModal = () => setAddModal(false)
 
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12 ">
       <Card>
-        <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
-          <Typography variant="h6" color="white">
-          Foydalanuvchilar jadvali
-          </Typography>
-        </CardHeader>
+      <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
+            <Typography variant="h6" color="white">
+              Hodimlar jadvali
+            </Typography>
+            <Button
+             onClick={openAddModal} 
+              className="bg-[#fff] text-black px-3 py-2 rounded-md"
+              // onClick={handleOpenModal} // Attach event handler to open modal
+            >
+               <UserPlusIcon className="h-6 w-6 text-black"/>
+            </Button>
+          </CardHeader>
         <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
           <table className="w-full min-w-[640px] table-auto">
             <thead>
@@ -81,10 +98,10 @@ export function Tables() {
                       </td>
 
                       <td className={`${className} flex py-5 gap-3`}>
-                        <Typography className=" cursor-pointer text-xs font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
+                        <Typography onClick={openEditModal} className=" cursor-pointer text-xs font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
                           Edit
                         </Typography>
-                        <Typography className=" cursor-pointer text-xs font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
+                        <Typography onClick={openDeleteModal} className=" cursor-pointer text-xs font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
                           Delete
                         </Typography>
                       </td>                     
@@ -99,7 +116,127 @@ export function Tables() {
       <div className="w-full flex justify-center items-center">
       <CircularPagination/>
       </div>
-      {/* <UserModal isOpen={editModal} onClose={closeEditModal}  click={closeEditModal}/> */}
+      <div>
+      <Dialog open={editModal} handler={closeEditModal}>
+        <DialogHeader>Tahrirlash</DialogHeader>
+        <DialogBody>
+          <div className="flex justify-center flex-col items-center gap-7">
+          <div className="w-full max-w-[24rem]">
+      <Input id="addname" label="Ism" />
+    </div>
+    <div className="w-full max-w-[24rem]">
+      <Input id="addlastname" label="Familya" />
+    </div>
+        <div className="relative flex w-full max-w-[24rem]">
+        <Button
+        disabled
+        size="sm"
+        className="!absolute left-1 top-1 rounded"
+      >
+        +998
+      </Button>
+      <Input
+      id="addphone" 
+        type="number"
+        className="ps-20"
+        containerProps={{
+          className: "min-w-0",
+        }}
+      />
+      
+    </div>
+          </div>
+        </DialogBody>
+        <DialogFooter>
+          <Button
+            variant="text"
+            color="red"
+            onClick={closeEditModal}
+            className="mr-1"
+          >
+            <span>Orqaga</span>
+          </Button>
+          <Button variant="gradient" color="gray">
+            <span>Tahrirlash</span>
+          </Button>
+        </DialogFooter>
+      </Dialog>
+      </div>
+      <div>
+      <Dialog open={addModal} handler={closeAddModal}>
+        <DialogHeader>Hodim qo'shish</DialogHeader>
+        <DialogBody>
+          <div className="flex justify-center flex-col items-center gap-7">
+          <div className="w-full max-w-[24rem]">
+      <Input id="editname" label="Ism" />
+    </div>
+    <div className="w-full max-w-[24rem]">
+      <Input id="editlastname" label="Familya" />
+    </div>
+        <div className="relative flex w-full max-w-[24rem]">
+        <Button
+        disabled
+        size="sm"
+        className="!absolute left-1 top-1 rounded"
+      >
+        +998
+      </Button>
+      <Input
+      id="editphone" 
+        type="number"
+        className="ps-20"
+        containerProps={{
+          className: "min-w-0",
+        }}
+      />
+      
+    </div>
+          </div>
+        </DialogBody>
+        <DialogFooter>
+          <Button
+            variant="text"
+            color="red"
+            onClick={closeAddModal}
+            className="mr-1"
+          >
+            <span>Orqaga</span>
+          </Button>
+          <Button variant="gradient" color="gray">
+            <span>Qo'shish</span>
+          </Button>
+        </DialogFooter>
+      </Dialog>
+      </div>
+      <div>
+      <Dialog open={deleteModal} handler={closeDeleteModal}>
+        <DialogHeader>O'chirish</DialogHeader>
+        <DialogBody>
+          <div className="flex justify-center">
+
+         <Typography
+         variant="large"
+         className=" font-bold uppercase text-blue-gray-400">
+          Bu hodimni o'chirishingizga ishonchingiz komilmi?
+         </Typography>
+          </div>
+        </DialogBody>
+        <DialogFooter>
+          <Button
+            variant="text"
+            color="red"
+            onClick={closeDeleteModal}
+            className="mr-1"
+          >
+            <span>Yo'q</span>
+          </Button>
+          <Button variant="gradient" color="gray">
+            <span>Ha</span>
+          </Button>
+        </DialogFooter>
+      </Dialog>
+      </div>
+      
 
       {/* <Card>
         <CardHeader variant="gradient" color="gray" className="mb-8 p-6">

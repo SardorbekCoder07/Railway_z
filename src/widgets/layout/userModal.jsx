@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   Dialog,
@@ -6,11 +7,11 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
  
-export function UserModal(Modalname, isOpen, onclose, click) {
+export function UserModal( isOpen = "false", onclose, click = {onclose}) {
   return (
-    <>
+    <div>
       <Dialog open={isOpen} handler={onclose}>
-        <DialogHeader>{Modalname}</DialogHeader>
+        <DialogHeader>kal               </DialogHeader>
         <DialogBody>
           The key to more success is to have a lot of pillows. Put it this way,
           it took me twenty five years to get these plants, twenty five years of
@@ -31,6 +32,6 @@ export function UserModal(Modalname, isOpen, onclose, click) {
           </Button>
         </DialogFooter>
       </Dialog>
-    </>
+    </div>
   );
 }
