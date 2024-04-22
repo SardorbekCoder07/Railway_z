@@ -45,10 +45,10 @@ export function Home() {
         <Card>
           <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
             <Typography variant="h6" color="white">
-              Songs Table
+              Dashboard
             </Typography>
             <Button
-             onClick={openAddModal} 
+             onClick={openAddModal}
               className="bg-[#fff] text-black px-3 py-2 rounded-md"
             // onClick={handleOpenModal} // Attach event handler to open modal
             >
@@ -154,14 +154,14 @@ export function Home() {
         +998
       </Button>
       <Input
-      id="addphone" 
+      id="addphone"
         type="number"
         className="ps-20"
         containerProps={{
           className: "min-w-0",
         }}
       />
-      
+
     </div>
           </div>
         </DialogBody>

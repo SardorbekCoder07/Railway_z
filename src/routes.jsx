@@ -30,7 +30,7 @@ export const routes = [
         path: "/tables",
         element: <Tables />,
       },
-     
+
       {
         icon: <InformationCircleIcon {...icon} />,
         name: "Bildirishnomlar",
@@ -43,17 +43,18 @@ export const routes = [
     layout: "auth",
     pages: [
       {
-        icon: <ServerStackIcon {...icon} />,
-        name: "tizimga kirish",
-        path: "/sign-in",
-        element: <SignIn />,
-      },
-      {
         icon: <GlobeAltIcon {...icon} />,
         name: "Veb-saytga kirish",
         path:' https://themecrafter.com/kyber/elementor/homepage-02/',
         element: <SignUp />,
       },
+      {
+        icon: <ServerStackIcon {...icon} />,
+        name: "Tizimdan Chiqish",
+        path: "/sign-in",
+        element: <SignIn />,
+      },
+
     ],
   },
 ];
