@@ -26,37 +26,31 @@ export const routes = [
       },
       {
         icon: <TableCellsIcon {...icon} />,
-        name: "tables",
+        name: "jadvallar",
         path: "/tables",
         element: <Tables />,
       },
-      {
-        icon: <UserCircleIcon {...icon} />,
-        name: "profile",
-        path: "/profile",
-        element: <Profile />,
-      },
+     
       {
         icon: <InformationCircleIcon {...icon} />,
-        name: "notifications",
+        name: "Bildirishnomlar",
         path: "/notifications",
         element: <Notifications />,
       },
     ],
   },
   {
-    title: "auth pages",
     layout: "auth",
     pages: [
       {
         icon: <ServerStackIcon {...icon} />,
-        name: "sign in",
+        name: "tizimga kirish",
         path: "/sign-in",
         element: <SignIn />,
       },
       {
         icon: <GlobeAltIcon {...icon} />,
-        name: "Visit web site",
+        name: "Veb-saytga kirish",
         path:' https://themecrafter.com/kyber/elementor/homepage-02/',
         element: <SignUp />,
       },

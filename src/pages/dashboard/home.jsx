@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   Typography,
@@ -34,14 +35,20 @@ export function Home() {
         ))}
       </div>
 
-      <div className="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-3">
+      <div className="mb-6  gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
         <Card>
-          <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
+          <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
             <Typography variant="h6" color="white">
               Songs Table
             </Typography>
+            <button
+              className="bg-[#fff] text-black px-3 py-2 rounded-md"
+              // onClick={handleOpenModal} // Attach event handler to open modal
+            >
+              Add +
+            </button>
           </CardHeader>
-          <CardBody className="overflow-x-scroll">
+          <CardBody className=" md:overflow-x-scroll">
             <table className="w-full min-w-full table-auto">
               <thead>
                 <tr>
@@ -50,7 +57,7 @@ export function Home() {
                       variant="small"
                       className="text-sm font-bold uppercase text-blue-gray-400"
                     >
-                      Song
+                      PD
                     </Typography>
                   </th>
                   <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
@@ -58,7 +65,7 @@ export function Home() {
                       variant="small"
                       className="text-sm font-bold uppercase text-blue-gray-400"
                     >
-                      Artist
+                      Location
                     </Typography>
                   </th>
                   <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
@@ -66,9 +73,10 @@ export function Home() {
                       variant="small"
                       className="text-sm font-bold uppercase text-blue-gray-400"
                     >
-                      Year
+                      Data
                     </Typography>
                   </th>
+
                 </tr>
               </thead>
               <tbody>
@@ -85,21 +93,30 @@ export function Home() {
                 <tr>
                   <td className="border-b border-blue-gray-200 py-3 px-5">
                     <div className="flex items-center gap-4">
-                      <ClockIcon className="h-5 w-5 text-yellow-500" />
+                    <CheckCircleIcon className="h-5 w-5 text-green-500" />
                       <span>Witchy Woman</span>
                     </div>
                   </td>
                   <td className="border-b border-blue-gray-200 py-3 px-5">The Eagles</td>
                   <td className="border-b border-blue-gray-200 py-3 px-5">1972</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1972</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1972</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1972</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1972</td>
                 </tr>
                 <tr>
                   <td className="border-b border-blue-gray-200 py-3 px-5">
                     <div className="flex items-center gap-4">
-                      <ClockIcon className="h-5 w-5 text-yellow-500" />
+                    <CheckCircleIcon className="h-5 w-5 text-green-500" />
                       <span>Shining Star</span>
                     </div>
                   </td>
                   <td className="border-b border-blue-gray-200 py-3 px-5">Earth, Wind, and Fire</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1975</td> 
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
                   <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
                 </tr>
               </tbody>
