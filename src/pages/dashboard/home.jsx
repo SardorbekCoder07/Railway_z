@@ -12,10 +12,11 @@ import {
 import { StatisticsCard } from "@/widgets/cards";
 import { statisticsCardsData } from "@/data";
 import { CheckCircleIcon, ClockIcon } from "@heroicons/react/24/solid";
+import { CircularPagination } from "@/widgets/layout/circlePagination";
 
 export function Home() {
   return (
-    <div className="mt-12">
+    <div className="mt-12 ">
       <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
         {statisticsCardsData.map(({ icon, title, footer, ...rest }) => (
           <StatisticsCard
@@ -24,7 +25,7 @@ export function Home() {
             title={title}
             icon={React.createElement(icon, {
               className: "w-6 h-6 text-white",
-            })} 
+            })}
           />
         ))}
       </div>
@@ -37,7 +38,7 @@ export function Home() {
             </Typography>
             <button
               className="bg-[#fff] text-black px-3 py-2 rounded-md"
-              // onClick={handleOpenModal} // Attach event handler to open modal
+            // onClick={handleOpenModal} // Attach event handler to open modal
             >
               Add +
             </button>
@@ -87,7 +88,7 @@ export function Home() {
                 <tr>
                   <td className="border-b border-blue-gray-200 py-3 px-5">
                     <div className="flex items-center gap-4">
-                    <CheckCircleIcon className="h-5 w-5 text-green-500" />
+                      <CheckCircleIcon className="h-5 w-5 text-green-500" />
                       <span>Witchy Woman</span>
                     </div>
                   </td>
@@ -101,12 +102,12 @@ export function Home() {
                 <tr>
                   <td className="border-b border-blue-gray-200 py-3 px-5">
                     <div className="flex items-center gap-4">
-                    <CheckCircleIcon className="h-5 w-5 text-green-500" />
+                      <CheckCircleIcon className="h-5 w-5 text-green-500" />
                       <span>Shining Star</span>
                     </div>
                   </td>
                   <td className="border-b border-blue-gray-200 py-3 px-5">Earth, Wind, and Fire</td>
-                  <td className="border-b border-blue-gray-200 py-3 px-5">1975</td> 
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
                   <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
                   <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
                   <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
@@ -117,6 +118,9 @@ export function Home() {
             </table>
           </CardBody>
         </Card>
+        <div className="mt-8 w-full flex justify-center items-center">
+          <CircularPagination />
+        </div>
       </div>
     </div>
   );
