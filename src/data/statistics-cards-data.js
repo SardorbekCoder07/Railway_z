@@ -9,24 +9,15 @@ export const statisticsCardsData = [
   {
     color: "gray",
     icon: UsersIcon,
-    title: "Worker number",
+    title: "Hodimlar Soni",
     value: "53",
-    footer: {
-      color: "text-green-500",
-      value: "55",
-      label: "Absentee workers",
-    },
+
   },
   {
     color: "gray",
-    icon: UsersIcon,
-    title: "Today's Users",
+    icon: ChartBarIcon,
+    title: "PD soni",
     value: "2,300",
-    footer: {
-      color: "text-green-500",
-      value: "+3%",
-      label: "than last month",
-    },
   },
   {
     color: "gray",
