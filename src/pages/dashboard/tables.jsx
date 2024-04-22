@@ -214,4 +214,3 @@ export function Tables() {
   );
 }
 
-export default Tables;
