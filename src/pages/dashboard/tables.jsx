@@ -8,7 +8,7 @@ import {
   Tooltip,
   Progress,
 } from "@material-tailwind/react";
-import { authorsTableData} from "@/data";
+import { authorsTableData} from "@/admin/data";
 import { CircularPagination } from "@/widgets/layout/circlePagination";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 
@@ -68,9 +68,9 @@ export function Tables() {
                         <Typography className="text-xs font-semibold text-blue-gray-600">
                           {lastName}
                         </Typography>
-                       
+
                       </td>
-                      
+
                       <td className={className}>
                         <Typography className="text-xs font-semibold text-blue-gray-600">
                           {phoneNumber}
@@ -83,7 +83,7 @@ export function Tables() {
                         <Typography className=" cursor-pointer text-xs font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
                           Delete
                         </Typography>
-                      </td>                     
+                      </td>
                     </tr>
                   );
                 }
