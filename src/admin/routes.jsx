@@ -7,7 +7,7 @@ import {
   RectangleStackIcon,
   GlobeAltIcon,
 } from "@heroicons/react/24/solid";
-import { Home, Profile, Tables, Notifications } from "@/admin/dashboard";
+import { Home, Profile, Tables, Notifications } from "@/admin/admin";
 import { SignIn, SignUp } from "@/auth";
 
 const icon = {
@@ -19,11 +19,11 @@ const logout = <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 
 ;
 export const routes = [
   {
-    layout: "dashboard",
+    layout: "admin",
     pages: [
       {
         icon: <HomeIcon {...icon} />,
-        name: "dashboard",
+        name: "admin",
         path: "/home",
         element: <Home />,
       },

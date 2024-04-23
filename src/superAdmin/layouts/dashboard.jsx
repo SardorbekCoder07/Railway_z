@@ -7,10 +7,10 @@ import {
   Configurator,
   Footer,
 } from "@/superAdmin/widgets/layout";
-import routes from "@/admin/routes";
+import routes from "@/superAdmin/routes";
 import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
 
-export function Dashboard() {
+export function SuperDashboard() {
   const [controller, dispatch] = useMaterialTailwindController();
   const { sidenavType } = controller;
 
@@ -37,7 +37,7 @@ export function Dashboard() {
         <Routes>
           {routes.map(
             ({ layout, pages }) =>
-              layout === "superAdmin" &&
+              layout === "super-admin" &&
               pages.map(({ path, element }) => (
                 <Route exact path={path} element={element} />
               ))
@@ -51,6 +51,6 @@ export function Dashboard() {
   );
 }
 
-Dashboard.displayName = "/src/layout/dashboard.jsx";
+SuperDashboard.displayName = "/src/layout/dashboard.jsx";
 
-export default Dashboard;
+export default SuperDashboard;

@@ -6,18 +6,18 @@ import {
   ArrowRightOnRectangleIcon,
 } from "@heroicons/react/24/solid";
 import { Navbar, Footer } from "@/superAdmin/widgets/layout";
-import routes from "@/admin/routes";
+import routes from "@/superAdmin/routes";
 
 export function Auth() {
   const navbarRoutes = [
     {
       name: "dashboard",
-      path: "/superAdmin/home",
+      path: "/super-admin/home",
       icon: ChartPieIcon,
     },
     {
       name: "profile",
-      path: "/superAdmin/home",
+      path: "/super-admin/home",
       icon: UserIcon,
     },
     {
