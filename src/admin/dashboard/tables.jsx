@@ -12,7 +12,7 @@ import {
   Input,
 } from "@material-tailwind/react";
 import { authorsTableData} from "@/admin/data";
-import { CircularPagination } from "@/widgets/layout/circlePagination";
+import { CircularPagination } from "@/admin/widgets/layout/circlePagination";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 
 export function Tables() {

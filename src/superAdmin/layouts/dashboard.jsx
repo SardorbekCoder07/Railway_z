@@ -6,7 +6,7 @@ import {
   DashboardNavbar,
   Configurator,
   Footer,
-} from "@/admin/widgets/layout";
+} from "@/superAdmin/widgets/layout";
 import routes from "@/routes";
 import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
 

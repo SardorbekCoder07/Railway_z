@@ -7,7 +7,7 @@ import {
   RectangleStackIcon,
   GlobeAltIcon,
 } from "@heroicons/react/24/solid";
-import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
+import { Home, Profile, Tables, Notifications } from "@/admin/dashboard";
 import { SignIn, SignUp } from "@/auth";
 
 const icon = {

@@ -15,10 +15,10 @@ import {
   Input,
   DialogFooter,
 } from "@material-tailwind/react";
-import { StatisticsCard } from "@/widgets/cards";
+import { StatisticsCard } from "@/admin/widgets/cards";
 import { statisticsCardsData } from "@/admin/data";
 import { CheckCircleIcon, ClockIcon, UserPlusIcon } from "@heroicons/react/24/solid";
-import { CircularPagination } from "@/widgets/layout/circlePagination";
+import { CircularPagination } from "@/admin/widgets/layout/circlePagination";
 
 export function Home() {
   const [addModal, setAddModal] = useState(false)
