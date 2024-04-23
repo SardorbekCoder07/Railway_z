@@ -22,7 +22,7 @@ export function Home() {
   const closeAddModal = () => setAddModal(false)
   return (
     <div className="mt-12 ">
-      <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
+      <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
         {statisticsCardsData.map(({ icon, title, footer, ...rest }) => (
           <StatisticsCard
             key={title}
@@ -58,6 +58,32 @@ export function Home() {
               <UserPlusIcon className="h-6 w-6 text-black" />
             </Button>
           </CardHeader>
+          <div className="px-6 flex  justify-center items-center gap-3 md:justify-end" >
+            <h1 className="text-4xl font-semibold text-black">PD-1</h1>
+            <div>
+              <table className="w-full min-w-max table-auto text-left">
+                <tbody>
+                  <tr>
+                    <td className=" text-black font-medium border-r-2 border-b-2 border-black border-solid px-1 text-xl ">
+                      PD
+                    </td>
+                    <td className=" px-1 text-xl text-black font-medium  border-b-2 border-solid border-black ">
+                      S.Nurmuhammedov
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="  text-black font-medium border-r-2  border-black border-solid px-1 text-xl">
+                      PDB-1
+                    </td>
+                    <td className=" text-black font-medium border-black border-solid px-1 text-xl">
+                      A.Yuldoshev
+                    </td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+          </div>
           <CardBody className=" md:overflow-x-scroll flex gap-3 flex-wrap" >
             <Link to={'/'}>
               <Button
