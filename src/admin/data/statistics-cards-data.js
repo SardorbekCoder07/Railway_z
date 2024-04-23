@@ -1,6 +1,6 @@
 import {
-  BanknotesIcon,
-  UserPlusIcon,
+  UserGroupIcon,
+  BuildingOffice2Icon,
   UsersIcon,
   ChartBarIcon,
 } from "@heroicons/react/24/solid";
@@ -8,22 +8,22 @@ import {
 export const statisticsCardsData = [
   {
     color: "gray",
-    icon: UsersIcon,
+    icon: UserGroupIcon,
     title: "Hodimlar Soni",
     value: "53",
 
   },
   {
     color: "gray",
-    icon: ChartBarIcon,
+    icon: UsersIcon,
     title: "PD soni",
     value: "2,300",
   },
   {
     color: "gray",
-    icon: UserPlusIcon,
-    title: "New Clients",
-    value: "3,462",
+    icon: BuildingOffice2Icon,
+    title: "Bemor hodimlar",
+    value: "23",
     footer: {
       color: "text-red-500",
       value: "-2%",
@@ -33,8 +33,30 @@ export const statisticsCardsData = [
   {
     color: "gray",
     icon: ChartBarIcon,
-    title: "Sales",
-    value: "$103,430",
+    title: "Odkul",
+    value: "12",
+    footer: {
+      color: "text-green-500",
+      value: "+5%",
+      label: "than yesterday",
+    },
+  },
+  {
+    color: "gray",
+    icon: ChartBarIcon,
+    title: "Komandirovkada",
+    value: "12",
+    footer: {
+      color: "text-green-500",
+      value: "+5%",
+      label: "than yesterday",
+    },
+  },
+  {
+    color: "gray",
+    icon: ChartBarIcon,
+    title: "Odkul",
+    value: "12",
     footer: {
       color: "text-green-500",
       value: "+5%",
