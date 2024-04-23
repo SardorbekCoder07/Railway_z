@@ -5,7 +5,7 @@ const HomePage = () => {
   const onSign = () => document.getElementById("sign").click()
   return (
     <div>
-    <Link id='sign' to={"/auth/log-out"}></Link>
+    <Link id='sign' to={"/auth/log-in"}></Link>
      <h1>Landing page</h1>
      <button onClick={() => onSign()}>Sign Up</button>
     </div>
