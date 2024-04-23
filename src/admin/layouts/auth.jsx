@@ -12,12 +12,12 @@ export function Auth() {
   const navbarRoutes = [
     {
       name: "dashboard",
-      path: "/dashboard/home",
+      path: "/admin/home",
       icon: ChartPieIcon,
     },
     {
       name: "profile",
-      path: "/dashboard/home",
+      path: "/admin/home",
       icon: UserIcon,
     },
     {
