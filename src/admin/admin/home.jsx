@@ -14,6 +14,7 @@ import {
 import { StatisticsCard } from "@/admin/widgets/cards";
 import { statisticsCardsData } from "@/admin/data";
 import { CheckCircleIcon, ClockIcon, UserPlusIcon } from "@heroicons/react/24/solid";
+import { Link } from "react-router-dom";
 
 export function Home() {
   const [addModal, setAddModal] = useState(false)
@@ -57,8 +58,85 @@ export function Home() {
               <UserPlusIcon className="h-6 w-6 text-black" />
             </Button>
           </CardHeader>
-          <CardBody className=" md:overflow-x-scroll">
-            
+          <CardBody className=" md:overflow-x-scroll flex gap-3 flex-wrap" >
+            <Link to={'/'}>
+              <Button
+                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
+              >
+                3752 km
+              </Button>
+            </Link>
+            <Link to={'/'}>
+              <Button
+                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
+              >
+                3752 km
+              </Button>
+            </Link>
+            <Link to={'/'}>
+              <Button
+                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
+              >
+                3752 km
+              </Button>
+            </Link>
+            <Link to={'/'}>
+              <Button
+                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
+              >
+                3752 km
+              </Button>
+            </Link>
+            <Link to={'/'}>
+              <Button
+                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
+              >
+                3752 km
+              </Button>
+            </Link>
+            <Link to={'/'}>
+              <Button
+                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
+              >
+                3752 km
+              </Button>
+            </Link>
+            <Link to={'/'}>
+              <Button
+                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
+              >
+                3752 km
+              </Button>
+            </Link>
+            <Link to={'/'}>
+              <Button
+                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
+              >
+                3752 km
+              </Button>
+            </Link>
+            <Link to={'/'}>
+              <Button
+                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
+              >
+                3752 km
+              </Button>
+            </Link>
+            <Link to={'/'}>
+              <Button
+                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
+              >
+                3752 km
+              </Button>
+            </Link>
+            <Link to={'/'}>
+              <Button
+                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
+              >
+                3752 km
+              </Button>
+            </Link>
+
           </CardBody>
         </Card>
       </div>
