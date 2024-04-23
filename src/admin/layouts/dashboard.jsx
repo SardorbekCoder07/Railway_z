@@ -7,7 +7,7 @@ import {
   Configurator,
   Footer,
 } from "@/admin/widgets/layout";
-import routes from "@/routes";
+import routes from "@/admin/routes";
 import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
 
 export function Dashboard() {

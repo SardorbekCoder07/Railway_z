@@ -7,7 +7,7 @@ import {
   Configurator,
   Footer,
 } from "@/superAdmin/widgets/layout";
-import routes from "@/routes";
+import routes from "@/admin/routes";
 import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
 
 export function Dashboard() {
@@ -37,7 +37,7 @@ export function Dashboard() {
         <Routes>
           {routes.map(
             ({ layout, pages }) =>
-              layout === "dashboard" &&
+              layout === "superAdmin" &&
               pages.map(({ path, element }) => (
                 <Route exact path={path} element={element} />
               ))
