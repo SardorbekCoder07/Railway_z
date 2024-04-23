@@ -10,8 +10,9 @@ import {
   DialogBody,
   DialogFooter,
   Input,
+
 } from "@material-tailwind/react";
-import { CheckCircleIcon, UserPlusIcon } from "@heroicons/react/24/solid";
+import { CheckCircleIcon, UserPlusIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { CircularPagination } from "@/superAdmin/widgets/layout/circlePagination";
 
 export function Home() {
