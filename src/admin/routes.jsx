@@ -55,7 +55,7 @@ export const routes = [
       {
         icon: logout,
         name: "Tizimdan Chiqish",
-        path: "/log-out",
+        path: "/log-in",
         element: <SignIn />,
       },
 
