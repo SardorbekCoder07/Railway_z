@@ -36,7 +36,7 @@ export function Tables() {
               Hodimlar jadvali
             </Typography>
             <Button
-             onClick={openAddModal} 
+             onClick={openAddModal}
               className="bg-[#fff] text-black px-3 py-2 rounded-md"
               // onClick={handleOpenModal} // Attach event handler to open modal
             >
@@ -90,7 +90,9 @@ export function Tables() {
                         <Typography className="text-xs font-semibold text-blue-gray-600">
                           {lastName}
                         </Typography>
+
                       </td>
+
                       <td className={className}>
                         <Typography className="text-xs font-semibold text-blue-gray-600">
                           {phoneNumber}
@@ -104,7 +106,7 @@ export function Tables() {
                         <Typography onClick={openDeleteModal} className=" cursor-pointer text-xs font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
                           Delete
                         </Typography>
-                      </td>                     
+                      </td>
                     </tr>
                   );
                 }
@@ -136,14 +138,14 @@ export function Tables() {
         +998
       </Button>
       <Input
-      id="addphone" 
+      id="addphone"
         type="number"
         className="ps-20"
         containerProps={{
           className: "min-w-0",
         }}
       />
-      
+
     </div>
           </div>
         </DialogBody>
@@ -182,14 +184,14 @@ export function Tables() {
         +998
       </Button>
       <Input
-      id="editphone" 
+      id="editphone"
         type="number"
         className="ps-20"
         containerProps={{
           className: "min-w-0",
         }}
       />
-      
+
     </div>
           </div>
         </DialogBody>
@@ -236,7 +238,7 @@ export function Tables() {
         </DialogFooter>
       </Dialog>
       </div>
-      
+
 
       {/* <Card>
         <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
