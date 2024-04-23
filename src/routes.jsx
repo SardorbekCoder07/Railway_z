@@ -27,6 +27,7 @@ export const routes = [
         path: "/home",
         element: <Home />,
       },
+      // sa
       {
         icon: <TableCellsIcon {...icon} />,
         name: "jadvallar",
