@@ -83,6 +83,14 @@ export function Home() {
                       Data
                     </Typography>
                   </th>
+                  <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
+                    <Typography
+                      variant="small"
+                      className="text-sm font-bold uppercase text-blue-gray-400"
+                    >
+                      Actions
+                    </Typography>
+                  </th>
 
                 </tr>
               </thead>
@@ -96,6 +104,7 @@ export function Home() {
                   </td>
                   <td className="border-b border-blue-gray-200 py-3 px-5">Malcolm Lockyer</td>
                   <td className="border-b border-blue-gray-200 py-3 px-5">1961</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1961</td>
                 </tr>
                 <tr>
                   <td className="border-b border-blue-gray-200 py-3 px-5">
@@ -105,7 +114,11 @@ export function Home() {
                     </div>
                   </td>
                   <td className="border-b border-blue-gray-200 py-3 px-5">The Eagles</td>
-                   <td className="border-b border-blue-gray-200 py-3 px-5">1972</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1972</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1972</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1972</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1972</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1972</td>
                 </tr>
                 <tr>
                   <td className="border-b border-blue-gray-200 py-3 px-5">
@@ -114,8 +127,13 @@ export function Home() {
                       <span>Witchy Woman</span>
                     </div>
                   </td>
-                  <td className="border-b border-blue-gray-200 py-3 px-5">The Eagles</td>
-                   <td className="border-b border-blue-gray-200 py-3 px-5">1972</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">Earth, Wind, and Fire</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
+                  <td className="border-b border-blue-gray-200 py-3 px-5">1975</td>
                 </tr>
               </tbody>
             </table>
