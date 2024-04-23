@@ -10,7 +10,6 @@ import {
   DialogBody,
   DialogFooter,
   Input,
-
 } from "@material-tailwind/react";
 import { CheckCircleIcon, UserPlusIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { CircularPagination } from "@/superAdmin/widgets/layout/circlePagination";
@@ -18,6 +17,8 @@ import { CircularPagination } from "@/superAdmin/widgets/layout/circlePagination
 export function Home() {
   const [openModal, setOpenModal] = useState(false);
   const [addModal, setAddModal] = useState(false);
+  const [todayModal, setTodayModal] = useState(false);
+  const [tomorrowModal, setTomorrowModal] = useState(false);
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -33,6 +34,22 @@ export function Home() {
 
   const closeAddModal = () => {
     setAddModal(false);
+  };
+
+  const handleOpenTodayModal = () => {
+    setTodayModal(true);
+  };
+
+  const handleCloseTodayModal = () => {
+    setTodayModal(false);
+  };
+
+  const handleOpenTomorrowModal = () => {
+    setTomorrowModal(true);
+  };
+
+  const handleCloseTomorrowModal = () => {
+    setTomorrowModal(false);
   };
 
   return (
@@ -52,63 +69,77 @@ export function Home() {
             </Button>
           </CardHeader>
           <CardBody className="md:overflow-x-scroll">
-            <table className="w-full min-w-full table-auto">
-              <thead>
-                <tr>
-                  <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
-                    <Typography variant="small" className="text-sm font-bold uppercase text-blue-gray-400">
-                      PD
-                    </Typography>
-                  </th>
-                  <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
-                    <Typography variant="small" className="text-sm font-bold uppercase text-blue-gray-400">
-                      Location
-                    </Typography>
-                  </th>
-                  <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
-                    <Typography variant="small" className="text-sm font-bold uppercase text-blue-gray-400">
-                      Data
-                    </Typography>
-                  </th>
-                  <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
-                    <Typography variant="small" className="text-sm font-bold uppercase text-blue-gray-400">
-                      Actions
-                    </Typography>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="border-b border-blue-gray-200 py-3 px-5">
-                    <div className="flex items-center gap-4">
-                      <CheckCircleIcon className="h-5 w-5 text-green-500" />
-                      <span>PD-1</span>
-                    </div>
-                  </td>
-                  <td className="border-b border-blue-gray-200 py-3 px-5">1347 - 1357</td>
-                  <td className="border-b border-blue-gray-200 py-3 px-5">
-                    <Button onClick={handleOpenModal}>Ma'lumotlar</Button>
-                    <Dialog open={openModal} onClose={handleCloseModal}>
-                      <DialogHeader>Modal Title</DialogHeader>
-                      <DialogBody>
-                        <p>This is the modal content.</p>
-                      </DialogBody>
-                      <DialogFooter>
-                        <Button onClick={handleCloseModal}>Close Modal</Button>
-                      </DialogFooter>
-                    </Dialog>
-                  </td>
-                  <td className="border-b border-blue-gray-200 py-3 px-5">
-  <button className="flex items-center justify-center gap-1 bg-red-500 text-white px-3 py-1 rounded-md">
-    <TrashIcon className="h-4 w-4" />
-    Delete
-  </button>
-</td>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-full table-auto">
+                <thead>
+                  <tr>
+                    <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
+                      <Typography variant="small" className="text-sm font-bold uppercase text-blue-gray-400">
+                        PD
+                      </Typography>
+                    </th>
+                    <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
+                      <Typography variant="small" className="text-sm font-bold uppercase text-blue-gray-400">
+                        Manzil
+                      </Typography>
+                    </th>
+                    <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
+                      <Typography variant="small" className="text-sm font-bold uppercase text-blue-gray-400">
+                        Ma'lumotlar
+                      </Typography>
+                    </th>
+                    <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
+                      <Typography variant="small" className="text-sm font-bold uppercase text-blue-gray-400">
+                        Actions
+                      </Typography>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border-b border-blue-gray-200 py-3 px-5">
+                      <div className="flex items-center gap-4">
+                        <CheckCircleIcon className="h-5 w-5 text-green-500" />
+                        <span>PD-1</span>
+                      </div>
+                    </td>
+                    <td className="border-b border-blue-gray-200 py-3 px-5">1347 - 1357</td>
+                    <td className="border-b border-blue-gray-200 py-3 px-5">
+                    <div className="flex items-center gap-2">
 
-                </tr>
-                {/* Additional rows go here */}
-              </tbody>
-            </table>
+                      <Button onClick={handleOpenTodayModal}>Bugungi</Button>
+                      <Button onClick={handleOpenTomorrowModal}>Ertangi</Button>
+                    </div>
+                      <Dialog open={todayModal} onClose={handleCloseTodayModal}>
+                        <DialogHeader>Bugungi Modal</DialogHeader>
+                        <DialogBody>
+                          <p>This is the modal content for today.</p>
+                        </DialogBody>
+                        <DialogFooter>
+                          <Button onClick={handleCloseTodayModal}>Close Modal</Button>
+                        </DialogFooter>
+                      </Dialog>
+                      <Dialog open={tomorrowModal} onClose={handleCloseTomorrowModal}>
+                        <DialogHeader>Ertangi Modal</DialogHeader>
+                        <DialogBody>
+                          <p>This is the modal content for tomorrow.</p>
+                        </DialogBody>
+                        <DialogFooter>
+                          <Button onClick={handleCloseTomorrowModal}>Close Modal</Button>
+                        </DialogFooter>
+                      </Dialog>
+                    </td>
+                    <td className="border-b border-blue-gray-200 py-3 px-5">
+                      <button className="flex items-center justify-center gap-1 bg-red-500 text-white px-3 py-1 rounded-md">
+                        <TrashIcon className="h-4 w-4" />
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                  {/* Additional rows go here */}
+                </tbody>
+              </table>
+            </div>
           </CardBody>
         </Card>
         <div className="mt-8 w-full flex justify-center items-center">
