@@ -1,14 +1,15 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-const SignUp = () => {
-  const router = useNavigate();
+const HomePage = () => {
+  const onSign = () => document.getElementById("sign").click()
   return (
     <div>
+    <Link id='sign' to={"/auth/log-out"}></Link>
      <h1>Landing page</h1>
-     <button onClick={() => router("signIn")}>Sign Up</button>
+     <button onClick={() => onSign()}>Sign Up</button>
     </div>
   )
 }
 
-export default SignUp
+export default HomePage
