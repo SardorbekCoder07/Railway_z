@@ -8,8 +8,9 @@ import {
   Tooltip,
   Progress,
 } from "@material-tailwind/react";
-import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
-import { authorsTableData, projectsTableData } from "@/data";
+import { authorsTableData} from "@/data";
+import { CircularPagination } from "@/widgets/layout/circlePagination";
+import { UserPlusIcon } from "@heroicons/react/24/solid";
 
 export function Tables() {
   return (
