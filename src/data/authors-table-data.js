@@ -60,8 +60,8 @@ export const authorsTableData = [
     phoneNumber: "+998972220790",
   },
   {
-    name: "John",
-    lastName: "Liras",
+    name: "Sardorbek",
+    lastName: "Sayfullayev",
     phoneNumber:  "+9980221478",
    
   },
