@@ -7,7 +7,7 @@ import {
   RectangleStackIcon,
   GlobeAltIcon,
 } from "@heroicons/react/24/solid";
-import { Home, Profile, Tables, Notifications } from "@/admin/admin";
+import { Home, Profile, Tables, Notifications,Works, Tools } from "@/admin/admin";
 import { SignIn, SignUp } from "@/auth";
 
 const icon = {
@@ -33,6 +33,18 @@ export const routes = [
         name: "jadvallar",
         path: "/tables",
         element: <Tables />,
+      },
+      {
+        icon: <TableCellsIcon {...icon} />,
+        name: "Hisobot",
+        path: "/report",
+        element: <Works />,
+      },
+      {
+        icon: <TableCellsIcon {...icon} />,
+        name: "Ish qurollar",
+        path: "/tools",
+        element: <Tools />,
       },
 
       {
