@@ -10,9 +10,8 @@ import {
   DocumentDuplicateIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/solid";
-import { Home, Profile, Tables, Notifications,Works, Tools } from "@/admin/admin";
+import { Home, Profile, Tables, Notifications,Works, Tools,MenuPk } from "@/admin/admin";
 import { SignIn, SignUp } from "@/auth";
-import { dataMenu } from './admin/dataMenu';
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -42,7 +41,7 @@ export const routes = [
         icon: <TableCellsIcon {...icon} />,
         name: "PK",
         path: "/menuPk",
-        element: <dataMenu />,
+        element: <MenuPk/>,
       },
       {
         icon: <DocumentDuplicateIcon {...icon} />,
