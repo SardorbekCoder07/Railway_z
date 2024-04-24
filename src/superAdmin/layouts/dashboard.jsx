@@ -9,8 +9,7 @@ import {
 } from "@/superAdmin/widgets/layout";
 import routes from "@/superAdmin/routes";
 import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
-import { StatisticsCard } from "@/admin/widgets/cards";
-import { statisticsCardsData } from "@/admin/data";
+ 
 
 export function SuperDashboard() {
   const [controller, dispatch] = useMaterialTailwindController();

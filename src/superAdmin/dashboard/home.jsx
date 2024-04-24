@@ -13,6 +13,8 @@ import {
 } from "@material-tailwind/react";
 import { CheckCircleIcon, UserPlusIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { CircularPagination } from "@/superAdmin/widgets/layout/circlePagination";
+import { StatisticsCard } from "@/admin/widgets/cards";
+import { statisticsCardsData } from "@/admin/data";
 
 export function Home() {
   const [openModal, setOpenModal] = useState(false);
