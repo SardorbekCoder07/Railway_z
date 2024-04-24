@@ -57,9 +57,7 @@ export function Tools() {
           shadow={false}
           className="m-0 p-4"
         >
-          <Typography variant="h5" color="blue-gray">
-            Alerts with Icon
-          </Typography>
+
         </CardHeader>
         <CardBody className="flex flex-col gap-4 p-4">
           {alerts.map((color) => (

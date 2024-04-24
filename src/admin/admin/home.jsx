@@ -16,11 +16,18 @@ import { CheckCircleIcon, ClockIcon, UserPlusIcon } from "@heroicons/react/24/so
 import { Link } from "react-router-dom";
 
 export function Home() {
-  const [addModal, setAddModal] = useState(false)
-  const openAddModal = () => setAddModal(true)
-  const closeAddModal = () => setAddModal(false)
+  const [addModal, setAddModal] = useState(false);
+  const [selectedKmIndex, setSelectedKmIndex] = useState(null);
+
+  const openAddModal = () => setAddModal(true);
+  const closeAddModal = () => setAddModal(false);
+
+  const handleKmButtonClick = (index) => {
+    setSelectedKmIndex(index);
+  };
+
   return (
-    <div className="mt-12 ">
+    <div className="mt-12">
       <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
         {statisticsCardsData.map(({ icon, title, footer, ...rest }) => (
           <StatisticsCard
@@ -33,19 +40,18 @@ export function Home() {
           />
         ))}
       </div>
-
-      <div className="mb-6  gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mb-6 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
         <Card>
-          <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
+          <CardHeader
+            variant="gradient"
+            color="gray"
+            className="mb-8 flex items-center justify-between p-6"
+          >
             <div className="flex gap-5">
-              <Button
-                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md"
-              >
+              <Button className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md">
                 PDB-1
               </Button>
-              <Button
-                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md"
-              >
+              <Button className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md">
                 PDB-2
               </Button>
               
@@ -53,118 +59,113 @@ export function Home() {
             <Button
               onClick={openAddModal}
               className="bg-[#fff] text-black px-3 py-2 rounded-md"
-            // onClick={handleOpenModal} // Attach event handler to open modal
             >
               <UserPlusIcon className="h-6 w-6 text-black" />
             </Button>
           </CardHeader>
-          <div className="px-6 flex  justify-center items-center gap-3 md:justify-end" >
+          <div className="px-6 flex bg-gray-300 justify-center items-center gap-3 md:justify-end">
             <h1 className="text-4xl font-semibold text-black">PD-1</h1>
             <div>
               <table className="w-full min-w-max table-auto text-left">
                 <tbody>
                   <tr>
-                    <td className=" text-black font-medium border-r-2 border-b-2 border-black border-solid px-1 text-xl ">
+                    <td className="text-black font-medium border-r-2 border-b-2 border-black border-solid px-1 text-xl">
                       PD
                     </td>
-                    <td className=" px-1 text-xl text-black font-medium  border-b-2 border-solid border-black ">
+                    <td className="px-1 text-xl text-black font-medium border-b-2 border-solid border-black">
                       S.Nurmuhammedov
                     </td>
                   </tr>
                   <tr>
-                    <td className="  text-black font-medium border-r-2  border-black border-solid px-1 text-xl">
+                    <td className="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
                       PDB-1
                     </td>
-                    <td className=" text-black font-medium border-black border-solid px-1 text-xl">
+                    <td className="text-black font-medium border-black border-solid px-1 text-xl">
                       A.Yuldoshev
                     </td>
                   </tr>
                 </tbody>
-
               </table>
             </div>
           </div>
-          <CardBody className=" md:overflow-x-scroll flex gap-3 flex-wrap" >
-            <Link to={'/'}>
-              <Button
-                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
-              >
-                3752 km
-              </Button>
-            </Link>
-            <Link to={'/'}>
-              <Button
-                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
-              >
-                3752 km
-              </Button>
-            </Link>
-            <Link to={'/'}>
-              <Button
-                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
-              >
-                3752 km
-              </Button>
-            </Link>
-            <Link to={'/'}>
-              <Button
-                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
-              >
-                3752 km
-              </Button>
-            </Link>
-            <Link to={'/'}>
-              <Button
-                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
-              >
-                3752 km
-              </Button>
-            </Link>
-            <Link to={'/'}>
-              <Button
-                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
-              >
-                3752 km
-              </Button>
-            </Link>
-            <Link to={'/'}>
-              <Button
-                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
-              >
-                3752 km
-              </Button>
-            </Link>
-            <Link to={'/'}>
-              <Button
-                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
-              >
-                3752 km
-              </Button>
-            </Link>
-            <Link to={'/'}>
-              <Button
-                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
-              >
-                3752 km
-              </Button>
-            </Link>
-            <Link to={'/'}>
-              <Button
-                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
-              >
-                3752 km
-              </Button>
-            </Link>
-            <Link to={'/'}>
-              <Button
-                className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md  border-[1px] border-solid border-gray-500 transition-all   hover:scale-105"
-              >
-                3752 km
-              </Button>
-            </Link>
-
+          <CardBody className="md:overflow-x-scroll flex gap-3 flex-wrap">
+            {[...Array(10)].map((_, index) => (
+              <Link key={index} to={"/"}>
+                <Button
+                  onClick={() => handleKmButtonClick(index)}
+                  className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105 ${
+                    selectedKmIndex === index ? "bg-gray-500" : ""
+                  }`}
+                >
+                  3752 km
+                </Button>
+              </Link>
+            ))}
           </CardBody>
         </Card>
+        {selectedKmIndex !== null && (
+          <Card>
+            <CardHeader
+              variant="gradient"
+              color="gray"
+              className="mb-8 flex items-center justify-between p-6"
+            >
+              <div className="flex gap-5">
+                <Button className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md">
+                  PDB-1
+                </Button>
+                <Button className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md">
+                  PDB-2
+                </Button>
+              </div>
+              <Button
+                onClick={openAddModal}
+                className="bg-[#fff] text-black px-3 py-2 rounded-md"
+              >
+                <UserPlusIcon className="h-6 w-6 text-black" />
+              </Button>
+            </CardHeader>
+            <div className="px-6 flex bg-gray-300 justify-center items-center gap-3 md:justify-end">
+              <h1 className="text-4xl font-semibold text-black">PD-1</h1>
+              <div>
+                <table className="w-full min-w-max table-auto text-left">
+                  <tbody>
+                    <tr>
+                      <td className="text-black font-medium border-r-2 border-b-2 border-black border-solid px-1 text-xl">
+                        PD
+                      </td>
+                      <td className="px-1 text-xl text-black font-medium border-b-2 border-solid border-black">
+                        S.Nurmuhammedov
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
+                        PDB-1
+                      </td>
+                      <td className="text-black font-medium border-black border-solid px-1 text-xl">
+                        A.Yuldoshev
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <CardBody className="md:overflow-x-scroll flex gap-3 flex-wrap">
+              {[...Array(10)].map((_, index) => (
+                <Link key={index} to={"/"}>
+                  <Button
+                    onClick={() => handleKmButtonClick(index)}
+                    className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105 ${
+                      selectedKmIndex === index ? "bg-gray-500" : ""
+                    }`}
+                  >
+                    3752 km
+                  </Button>
+                </Link>
+              ))}
+            </CardBody>
+          </Card>
+        )}
       </div>
       <div>
         <Dialog open={addModal} handler={closeAddModal}>
@@ -193,17 +194,11 @@ export function Home() {
                     className: "min-w-0",
                   }}
                 />
-
               </div>
             </div>
           </DialogBody>
           <DialogFooter>
-            <Button
-              variant="text"
-              color="red"
-              onClick={closeAddModal}
-              className="mr-1"
-            >
+            <Button variant="text" color="red" onClick={closeAddModal} className="mr-1">
               <span>Orqaga</span>
             </Button>
             <Button variant="gradient" color="gray">
