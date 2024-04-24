@@ -6,9 +6,13 @@ import {
   ServerStackIcon,
   RectangleStackIcon,
   GlobeAltIcon,
+  UsersIcon,
+  DocumentDuplicateIcon,
+  WrenchScrewdriverIcon,
 } from "@heroicons/react/24/solid";
 import { Home, Profile, Tables, Notifications,Works, Tools } from "@/admin/admin";
 import { SignIn, SignUp } from "@/auth";
+import { dataMenu } from './admin/dataMenu';
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -29,19 +33,25 @@ export const routes = [
       },
       // sa
       {
-        icon: <TableCellsIcon {...icon} />,
-        name: "jadvallar",
+        icon: <UsersIcon {...icon} />,
+        name: "Hodilmar",
         path: "/tables",
         element: <Tables />,
       },
       {
         icon: <TableCellsIcon {...icon} />,
+        name: "PK",
+        path: "/menuPk",
+        element: <dataMenu />,
+      },
+      {
+        icon: <DocumentDuplicateIcon {...icon} />,
         name: "Hisobot",
         path: "/report",
         element: <Works />,
       },
       {
-        icon: <TableCellsIcon {...icon} />,
+        icon: <WrenchScrewdriverIcon {...icon} />,
         name: "Ish qurollar",
         path: "/tools",
         element: <Tools />,

@@ -15,7 +15,7 @@ import { statisticsCardsData } from "@/admin/data";
 import { CheckCircleIcon, ClockIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 
-export function Home() {
+export function dataMenu() {
   const [addModal, setAddModal] = useState(false);
   const [selectedKmIndex, setSelectedKmIndex] = useState(null);
 
@@ -210,4 +210,4 @@ export function Home() {
   );
 }
 
-export default Home;
+export default dataMenu;
