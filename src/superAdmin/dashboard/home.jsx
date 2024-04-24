@@ -15,14 +15,16 @@ import { StatisticsCard } from "@/superAdmin/widgets/cards";
 import { statisticsCardsData } from "@/superAdmin/data";
 import { CheckCircleIcon, UserPlusIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { CircularPagination } from "@/superAdmin/widgets/layout/circlePagination";
-import { StatisticsCard } from "@/admin/widgets/cards";
-import { statisticsCardsData } from "@/admin/data";
 
 export function Home() {
   const [openModal, setOpenModal] = useState(false);
   const [addModal, setAddModal] = useState(false);
   const [todayModal, setTodayModal] = useState(false);
   const [tomorrowModal, setTomorrowModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false)
+
+
+  const openDeleteModal = () => setDeleteModal(true)
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -195,6 +197,7 @@ export function Home() {
           </Button>
         </DialogFooter>
       </Dialog>
+      
     </div>
   );
 }
