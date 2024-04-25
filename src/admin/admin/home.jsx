@@ -54,7 +54,7 @@ export function Home() {
               <Button className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md">
                 PDB-2
               </Button>
-              
+
             </div>
             <Button
               onClick={openAddModal}
@@ -89,8 +89,8 @@ export function Home() {
             </div>
           </div>
           <CardBody className="md:overflow-x-scroll flex gap-3 flex-wrap">
-            {[...Array(10)].map((_, index) => (
-              <Link key={index} to={"/"}>
+            {[...Array(20)].map((_, index) => (
+              <Link key={index} to={"/menuPk"}>
                 <Button
                   onClick={() => handleKmButtonClick(index)}
                   className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105 ${
