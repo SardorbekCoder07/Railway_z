@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardHeader,
@@ -15,10 +15,12 @@ import { authorsTableData} from "@/superAdmin/data";
 import { CircularPagination } from "@/superAdmin/widgets/layout/circlePagination";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
-import { api, config } from "@/api/api";
+import { api, byId, config } from "@/api/api";
 import toast from "react-hot-toast";
 
 export function Tables() {
+  const [users, setUsers] = useState(null)
+  const [userData, setUserData] = useState(null)
   const [editModal, setEditModal] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false)
   const [addModal, setAddModal] = useState(false)
@@ -31,23 +33,73 @@ export function Tables() {
   const openAddModal = () => setAddModal(true)
   const closeAddModal = () => setAddModal(false)
 
+  useEffect(() => {
+    getUser()
+  }, [])
+
+  const getUser = () => {
+    axios.get(`${api}user/admins`, config) 
+      .then((res) => {
+        setUsers(res.data);
+
+      })
+      .catch((err) => console.log(err))
+  }
+
   const addUser = () => {
     const addData = {
-        firstName: "Behruz",
-        lastName: "Xonniyozov",
-        password: "123",
-        phoneNumber: "972220790"
+        firstName: byId("addname"),
+        lastName: byId("addlastname"),
+        password: byId("addpassword"),
+        phoneNumber: byId("addphone")
     }
     axios.post(`${api}auth/register`, addData, config) 
     .then((res) => {
+      closeAddModal()
+      getUser()
       toast.success("Vazifa muoffaqqiyatli bajarildi!")
-      console.log(res.data);
     })
     .catch((err) => {
+      closeAddModal()
+      toast.error("xato")
       console.log(err);
     })
   }
 
+  const editUser = () => {
+    const editData = {
+      firstName: byId("editname"),
+      lastName: byId("editlastname"),
+      password: byId("editpassword"),
+      phoneNumber: byId("editphone")
+  }
+    axios.put(`${api}user/update?id=${userData ? userData.id : 0}`, editData, config)
+    .then((res) => {
+      closeEditModal()
+      getUser()
+      toast.success("Bu hodim muvoffaqqiyatli tahrirlandi!👌")
+
+    })
+    .catch((err) => {
+      console.log(err)
+      closeEditModal()
+    })
+  }
+
+  const deleteUser = () => {
+    axios.delete(`${api}user/delete?id=${userData ? userData.id : 0}`)
+    .then((res) => {
+      closeDeleteModal()
+      getUser()
+      toast.success("Bu hodim muvoffaqqiyatli tahrirlandi!👌")
+
+    })
+    .catch((err) => {
+      console.log(err);
+      closeDeleteModal()
+    })
+
+  }
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12 ">
       <Card>
@@ -83,16 +135,16 @@ export function Tables() {
               </tr>
             </thead>
             <tbody>
-              {authorsTableData.map(
-                ({ name, lastName, phoneNumber }, key) => {
+            
+              {users && users.map((item, i) => {
                   const className = `py-3 px-5  ${
-                    key === authorsTableData.length - 1
+                    i === authorsTableData.length - 1
                       ? ""
                       : "border-b border-blue-gray-50"
-                  }`;
-
+                  }`
                   return (
-                    <tr key={name}>
+
+                    <tr key={i}>
                       <td className={className}>
                         <div className="flex items-center gap-4">
                           <div>
@@ -101,64 +153,72 @@ export function Tables() {
                               color="blue-gray"
                               className="font-semibold"
                             >
-                              {name}
+                              {item.firstname}
                             </Typography>
                           </div>
                         </div>
                       </td>
                       <td className={className}>
                         <Typography className="text-xs font-semibold text-blue-gray-600">
-                          {lastName}
+                          {item.lastname}
                         </Typography>
                       </td>
                       <td className={className}>
                         <Typography className="text-xs font-semibold text-blue-gray-600">
-                          {phoneNumber}
+                          {item.phoneNumber}
                         </Typography>
                       </td>
 
                       <td className={`${className} flex py-5 gap-3`}>
-                        <Typography onClick={openEditModal} className=" cursor-pointer text-xs font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
+                        <Typography onClick={() => {
+                          openEditModal()
+                          setUserData(item)
+                        }} className=" cursor-pointer text-xs font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
                           Edit
                         </Typography>
-                        <Typography onClick={openDeleteModal} className=" cursor-pointer text-xs font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
+                        <Typography onClick={() => {
+                          openDeleteModal()
+                          setUserData(item)
+                        }} className=" cursor-pointer text-xs font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
                           Delete
                         </Typography>
                       </td>                     
                     </tr>
-                  );
-                }
-              )}
+                  )
+              }
+            )}
+                  
             </tbody>
           </table>
         </CardBody>
       </Card>
-      <div className="w-full flex justify-center items-center">
+      {/* <div className="w-full flex justify-center items-center">
       <CircularPagination/>
-      </div>
+      </div> */}
       <div>
 
         {/* edit modal */}
       <Dialog open={editModal} handler={closeEditModal}>
         <DialogHeader>Tahrirlash</DialogHeader>
         <DialogBody>
-          <div className="flex justify-center flex-col items-center gap-7">
+        <div className="flex justify-center flex-col items-center gap-7">
           <div className="w-full max-w-[24rem]">
-      <Input id="addname" label="Ism" />
+      <Input defaultValue={userData ? userData.firstname : "Ma'lumot yo'q"} id="editname" label="Ism" />
     </div>
     <div className="w-full max-w-[24rem]">
-      <Input id="addlastname" label="Familya" />
+      <Input defaultValue={userData ? userData.lastname : "Ma'lumot yo'q"} id="editlastname" label="Familya" />
     </div>
         <div className="relative flex w-full max-w-[24rem]">
         <Button
         disabled
         size="sm"
-        className="!absolute left-1 top-1 rounded"
+        className="!absolute left-1 top-1 rounded z-50"
       >
         +998
       </Button>
       <Input
-      id="addphone" 
+       defaultValue={userData ? userData.phoneNumber : ""}
+      id="editphone" 
         type="number"
         className="ps-20"
         containerProps={{
@@ -166,6 +226,9 @@ export function Tables() {
         }}
       />
       
+    </div>
+    <div className="w-full max-w-[24rem]">
+      <Input type="password" id="editpassword" label="Parol" />
     </div>
           </div>
         </DialogBody>
@@ -178,7 +241,7 @@ export function Tables() {
           >
             <span>Orqaga</span>
           </Button>
-          <Button variant="gradient" color="gray">
+          <Button onClick={editUser} variant="gradient" color="gray">
             <span>Tahrirlash</span>
           </Button>
         </DialogFooter>
@@ -192,21 +255,21 @@ export function Tables() {
         <DialogBody>
           <div className="flex justify-center flex-col items-center gap-7">
           <div className="w-full max-w-[24rem]">
-      <Input id="editname" label="Ism" />
+      <Input id="addname" label="Ism" />
     </div>
     <div className="w-full max-w-[24rem]">
-      <Input id="editlastname" label="Familya" />
+      <Input id="addlastname" label="Familya" />
     </div>
         <div className="relative flex w-full max-w-[24rem]">
         <Button
         disabled
         size="sm"
-        className="!absolute left-1 top-1 rounded"
+        className="!absolute left-1 top-1 rounded z-50"
       >
         +998
       </Button>
       <Input
-      id="editphone" 
+      id="addphone" 
         type="number"
         className="ps-20"
         containerProps={{
@@ -214,6 +277,9 @@ export function Tables() {
         }}
       />
       
+    </div>
+    <div className="w-full max-w-[24rem]">
+      <Input type="password" id="addpassword" label="Parol" />
     </div>
           </div>
         </DialogBody>
@@ -256,7 +322,7 @@ export function Tables() {
           >
             <span>Yo'q</span>
           </Button>
-          <Button variant="gradient" color="gray">
+          <Button onClick={deleteUser} variant="gradient" color="gray">
             <span>Ha</span>
           </Button>
         </DialogFooter>

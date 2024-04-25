@@ -23,7 +23,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <ThemeProvider>
         <MaterialTailwindControllerProvider>
-          <Toaster/>
+          <Toaster containerClassName="z-50"/>
           <App />
         </MaterialTailwindControllerProvider>
       </ThemeProvider>
