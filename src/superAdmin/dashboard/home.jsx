@@ -21,6 +21,10 @@ export function Home() {
   const [addModal, setAddModal] = useState(false);
   const [todayModal, setTodayModal] = useState(false);
   const [tomorrowModal, setTomorrowModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false)
+
+
+  const openDeleteModal = () => setDeleteModal(true)
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -193,6 +197,7 @@ export function Home() {
           </Button>
         </DialogFooter>
       </Dialog>
+      
     </div>
   );
 }
