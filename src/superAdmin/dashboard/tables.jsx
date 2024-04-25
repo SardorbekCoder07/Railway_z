@@ -14,6 +14,9 @@ import {
 import { authorsTableData} from "@/superAdmin/data";
 import { CircularPagination } from "@/superAdmin/widgets/layout/circlePagination";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
+import axios from "axios";
+import { api, config } from "@/api/api";
+import toast from "react-hot-toast";
 
 export function Tables() {
   const [editModal, setEditModal] = useState(false)
@@ -27,6 +30,23 @@ export function Tables() {
   const closeDeleteModal = () => setDeleteModal(false)
   const openAddModal = () => setAddModal(true)
   const closeAddModal = () => setAddModal(false)
+
+  const addUser = () => {
+    const addData = {
+        firstName: "Behruz",
+        lastName: "Xonniyozov",
+        password: "123",
+        phoneNumber: "972220790"
+    }
+    axios.post(`${api}auth/register`, addData, config) 
+    .then((res) => {
+      toast.success("Vazifa muoffaqqiyatli bajarildi!")
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
 
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12 ">
@@ -117,6 +137,8 @@ export function Tables() {
       <CircularPagination/>
       </div>
       <div>
+
+        {/* edit modal */}
       <Dialog open={editModal} handler={closeEditModal}>
         <DialogHeader>Tahrirlash</DialogHeader>
         <DialogBody>
@@ -163,6 +185,8 @@ export function Tables() {
       </Dialog>
       </div>
       <div>
+
+        {/* add modal */}
       <Dialog open={addModal} handler={closeAddModal}>
         <DialogHeader>Hodim qo'shish</DialogHeader>
         <DialogBody>
@@ -202,13 +226,15 @@ export function Tables() {
           >
             <span>Orqaga</span>
           </Button>
-          <Button variant="gradient" color="gray">
+          <Button onClick={addUser} variant="gradient" color="gray">
             <span>Qo'shish</span>
           </Button>
         </DialogFooter>
       </Dialog>
       </div>
       <div>
+
+        {/* delete modal */}
       <Dialog open={deleteModal} handler={closeDeleteModal}>
         <DialogHeader>O'chirish</DialogHeader>
         <DialogBody>
