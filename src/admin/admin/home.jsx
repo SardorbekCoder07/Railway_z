@@ -93,9 +93,8 @@ export function Home() {
               <Link key={index} to={"/menuPk"}>
                 <Button
                   onClick={() => handleKmButtonClick(index)}
-                  className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105 ${
-                    selectedKmIndex === index ? "bg-gray-500" : ""
-                  }`}
+                  className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105 ${selectedKmIndex === index ? "bg-gray-500" : ""
+                    }`}
                 >
                   3752 km
                 </Button>
@@ -155,9 +154,8 @@ export function Home() {
                 <Link key={index} to={"/"}>
                   <Button
                     onClick={() => handleKmButtonClick(index)}
-                    className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105 ${
-                      selectedKmIndex === index ? "bg-gray-500" : ""
-                    }`}
+                    className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105 ${selectedKmIndex === index ? "bg-gray-500" : ""
+                      }`}
                   >
                     3752 km
                   </Button>
