@@ -30,7 +30,7 @@ export const routes = [
       // sa
       {
         icon: <TableCellsIcon {...icon} />,
-        name: "jadvallar",
+        name: "Adminlar",
         path: "/tables",
         element: <Tables />,
       },

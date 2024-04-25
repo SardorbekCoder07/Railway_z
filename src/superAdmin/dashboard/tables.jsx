@@ -24,18 +24,30 @@ export function Tables() {
   const [editModal, setEditModal] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false)
   const [addModal, setAddModal] = useState(false)
+  const [regex, setRegex] = useState(true)
 
 
   const openEditModal = () => setEditModal(true)
-  const closeEditModal = () => setEditModal(false)
+  const closeEditModal = () => {
+    setEditModal(false)
+    setRegex(true)
+  }
   const openDeleteModal = () => setDeleteModal(true)
   const closeDeleteModal = () => setDeleteModal(false)
   const openAddModal = () => setAddModal(true)
-  const closeAddModal = () => setAddModal(false)
+  const closeAddModal = () => {
+    setAddModal(false)
+    setRegex(true)
+  }
 
   useEffect(() => {
     getUser()
   }, [])
+
+
+
+  // *******************GET USER **********************
+
 
   const getUser = () => {
     axios.get(`${api}user/admins`, config) 
@@ -45,6 +57,9 @@ export function Tables() {
       })
       .catch((err) => console.log(err))
   }
+
+  // *******************ADD USER **********************
+
 
   const addUser = () => {
     const addData = {
@@ -66,6 +81,11 @@ export function Tables() {
     })
   }
 
+
+
+  // *******************EDIT USER **********************
+  
+
   const editUser = () => {
     const editData = {
       firstName: byId("editname"),
@@ -86,6 +106,8 @@ export function Tables() {
     })
   }
 
+  // *******************DELETE USER **********************
+
   const deleteUser = () => {
     axios.delete(`${api}user/delete?id=${userData ? userData.id : 0}`)
     .then((res) => {
@@ -100,6 +122,39 @@ export function Tables() {
     })
 
   }
+
+
+
+  // ******************* REGEX **********************
+
+  const addRegex = () => {
+    if (
+      byId("addname") !== "" &&
+      byId("addlastname") !== "" &&
+      byId("addphone") !== "" &&
+      byId("addpassword") !== ""
+    ) {
+      setRegex(false)
+    }
+    else {
+      setRegex(true)
+    }
+  }
+
+  const editRegex = () => {
+    if (
+      byId("editname") !== "" &&
+      byId("editlastname") !== "" &&
+      byId("editphone") !== "" &&
+      byId("editpassword") !== ""
+    ) {
+      setRegex(false)
+    }
+    else {
+      setRegex(true)
+    }
+  }
+
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12 ">
       <Card>
@@ -203,10 +258,10 @@ export function Tables() {
         <DialogBody>
         <div className="flex justify-center flex-col items-center gap-7">
           <div className="w-full max-w-[24rem]">
-      <Input defaultValue={userData ? userData.firstname : "Ma'lumot yo'q"} id="editname" label="Ism" />
+      <Input onChange={editRegex} required defaultValue={userData ? userData.firstname : "Ma'lumot yo'q"} id="editname" label="Ism" />
     </div>
     <div className="w-full max-w-[24rem]">
-      <Input defaultValue={userData ? userData.lastname : "Ma'lumot yo'q"} id="editlastname" label="Familya" />
+      <Input onChange={editRegex} required defaultValue={userData ? userData.lastname : "Ma'lumot yo'q"} id="editlastname" label="Familya" />
     </div>
         <div className="relative flex w-full max-w-[24rem]">
         <Button
@@ -217,6 +272,7 @@ export function Tables() {
         +998
       </Button>
       <Input
+       onChange={editRegex} required
        defaultValue={userData ? userData.phoneNumber : ""}
       id="editphone" 
         type="number"
@@ -228,7 +284,7 @@ export function Tables() {
       
     </div>
     <div className="w-full max-w-[24rem]">
-      <Input type="password" id="editpassword" label="Parol" />
+      <Input onChange={editRegex} required type="password" id="editpassword" label="Parol" />
     </div>
           </div>
         </DialogBody>
@@ -241,24 +297,30 @@ export function Tables() {
           >
             <span>Orqaga</span>
           </Button>
-          <Button onClick={editUser} variant="gradient" color="gray">
+          <span className={`${regex ? "cursor-not-allowed" : ""}`}>
+
+          <Button disabled={regex} onClick={editUser} variant="gradient" color="gray">
             <span>Tahrirlash</span>
           </Button>
+          </span>
         </DialogFooter>
       </Dialog>
       </div>
       <div>
 
         {/* add modal */}
+
+
+
       <Dialog open={addModal} handler={closeAddModal}>
         <DialogHeader>Hodim qo'shish</DialogHeader>
         <DialogBody>
           <div className="flex justify-center flex-col items-center gap-7">
           <div className="w-full max-w-[24rem]">
-      <Input id="addname" label="Ism" />
+      <Input onChange={addRegex} required id="addname" label="Ism" />
     </div>
     <div className="w-full max-w-[24rem]">
-      <Input id="addlastname" label="Familya" />
+      <Input onChange={addRegex} id="addlastname" label="Familya" />
     </div>
         <div className="relative flex w-full max-w-[24rem]">
         <Button
@@ -269,6 +331,7 @@ export function Tables() {
         +998
       </Button>
       <Input
+       onChange={addRegex}
       id="addphone" 
         type="number"
         className="ps-20"
@@ -279,7 +342,7 @@ export function Tables() {
       
     </div>
     <div className="w-full max-w-[24rem]">
-      <Input type="password" id="addpassword" label="Parol" />
+      <Input onChange={addRegex} type="password" id="addpassword" label="Parol" />
     </div>
           </div>
         </DialogBody>
@@ -292,9 +355,12 @@ export function Tables() {
           >
             <span>Orqaga</span>
           </Button>
-          <Button onClick={addUser} variant="gradient" color="gray">
+          <span className={`${regex ? "cursor-not-allowed" : ""}`}>
+
+          <Button disabled={regex} onClick={addUser} variant="gradient" color="gray">
             <span>Qo'shish</span>
           </Button>
+          </span>
         </DialogFooter>
       </Dialog>
       </div>
