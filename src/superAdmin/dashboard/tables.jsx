@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardHeader,
@@ -11,58 +11,165 @@ import {
   Button,
   Input,
 } from "@material-tailwind/react";
-import { authorsTableData} from "@/superAdmin/data";
+import { authorsTableData } from "@/superAdmin/data";
 import { CircularPagination } from "@/superAdmin/widgets/layout/circlePagination";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
-import { api, config } from "@/api/api";
+import { api, byId, config } from "@/api/api";
 import toast from "react-hot-toast";
 
 export function Tables() {
+  const [users, setUsers] = useState(null)
+  const [userData, setUserData] = useState(null)
   const [editModal, setEditModal] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false)
   const [addModal, setAddModal] = useState(false)
+  const [regex, setRegex] = useState(true)
 
 
   const openEditModal = () => setEditModal(true)
-  const closeEditModal = () => setEditModal(false)
+  const closeEditModal = () => {
+    setEditModal(false)
+    setRegex(true)
+  }
   const openDeleteModal = () => setDeleteModal(true)
   const closeDeleteModal = () => setDeleteModal(false)
   const openAddModal = () => setAddModal(true)
-  const closeAddModal = () => setAddModal(false)
+  const closeAddModal = () => {
+    setAddModal(false)
+    setRegex(true)
+  }
+
+  useEffect(() => {
+    getUser()
+  }, [])
+
+
+
+  // *******************GET USER **********************
+
+
+  const getUser = () => {
+    axios.get(`${api}user/admins`, config)
+      .then((res) => {
+        setUsers(res.data);
+
+      })
+      .catch((err) => console.log(err))
+  }
+
+  // *******************ADD USER **********************
+
 
   const addUser = () => {
     const addData = {
-        firstName: "Behruz",
-        lastName: "Xonniyozov",
-        password: "123",
-        phoneNumber: "972220790"
+      firstName: byId("addname"),
+      lastName: byId("addlastname"),
+      password: byId("addpassword"),
+      phoneNumber: byId("addphone")
     }
-    axios.post(`${api}auth/register`, addData, config) 
-    .then((res) => {
-      toast.success("Vazifa muoffaqqiyatli bajarildi!")
-      console.log(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+    axios.post(`${api}auth/register`, addData, config)
+      .then((res) => {
+        closeAddModal()
+        getUser()
+        toast.success("Vazifa muoffaqqiyatli bajarildi!")
+      })
+      .catch((err) => {
+        closeAddModal()
+        toast.error("xato")
+        console.log(err);
+      })
+  }
+
+
+
+  // *******************EDIT USER **********************
+
+
+  const editUser = () => {
+    const editData = {
+      firstName: byId("editname"),
+      lastName: byId("editlastname"),
+      password: byId("editpassword"),
+      phoneNumber: byId("editphone")
+    }
+    axios.put(`${api}user/update?id=${userData ? userData.id : 0}`, editData, config)
+      .then((res) => {
+        closeEditModal()
+        getUser()
+        toast.success("Bu hodim muvoffaqqiyatli tahrirlandi!👌")
+
+      })
+      .catch((err) => {
+        console.log(err)
+        closeEditModal()
+      })
+  }
+
+  // *******************DELETE USER **********************
+
+  const deleteUser = () => {
+    axios.delete(`${api}user/delete?id=${userData ? userData.id : 0}`)
+      .then((res) => {
+        closeDeleteModal()
+        getUser()
+        toast.success("Bu hodim muvoffaqqiyatli tahrirlandi!👌")
+
+      })
+      .catch((err) => {
+        console.log(err);
+        closeDeleteModal()
+      })
+
+  }
+
+
+
+  // ******************* REGEX **********************
+
+  const addRegex = () => {
+    if (
+      byId("addname") !== "" &&
+      byId("addlastname") !== "" &&
+      byId("addphone") !== "" &&
+      byId("addpassword") !== ""
+    ) {
+      setRegex(false)
+    }
+    else {
+      setRegex(true)
+    }
+  }
+
+  const editRegex = () => {
+    if (
+      byId("editname") !== "" &&
+      byId("editlastname") !== "" &&
+      byId("editphone") !== "" &&
+      byId("editpassword") !== ""
+    ) {
+      setRegex(false)
+    }
+    else {
+      setRegex(true)
+    }
   }
 
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12 ">
       <Card>
-      <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
-            <Typography variant="h6" color="white">
-              Hodimlar jadvali
-            </Typography>
-            <Button
-             onClick={openAddModal} 
-              className="bg-[#fff] text-black px-3 py-2 rounded-md"
-              // onClick={handleOpenModal} // Attach event handler to open modal
-            >
-               <UserPlusIcon className="h-6 w-6 text-black"/>
-            </Button>
-          </CardHeader>
+        <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
+          <Typography variant="h6" color="white">
+            Hodimlar jadvali
+          </Typography>
+          <Button
+            onClick={openAddModal}
+            className="bg-[#fff] text-black px-3 py-2 rounded-md"
+          // onClick={handleOpenModal} // Attach event handler to open modal
+          >
+            <UserPlusIcon className="h-6 w-6 text-black" />
+          </Button>
+        </CardHeader>
         <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
           <table className="w-full min-w-[640px] table-auto">
             <thead>
@@ -83,186 +190,210 @@ export function Tables() {
               </tr>
             </thead>
             <tbody>
-              {authorsTableData.map(
-                ({ name, lastName, phoneNumber }, key) => {
-                  const className = `py-3 px-5  ${
-                    key === authorsTableData.length - 1
-                      ? ""
-                      : "border-b border-blue-gray-50"
-                  }`;
 
-                  return (
-                    <tr key={name}>
-                      <td className={className}>
-                        <div className="flex items-center gap-4">
-                          <div>
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-semibold"
-                            >
-                              {name}
-                            </Typography>
-                          </div>
+              {users && users.map((item, i) => {
+                const className = `py-3 px-5  ${i === authorsTableData.length - 1
+                    ? ""
+                    : "border-b border-blue-gray-50"
+                  }`
+                return (
+
+                  <tr key={i}>
+                    <td className={className}>
+                      <div className="flex items-center gap-4">
+                        <div>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-semibold"
+                          >
+                            {item.firstname}
+                          </Typography>
                         </div>
-                      </td>
-                      <td className={className}>
-                        <Typography className="text-xs font-semibold text-blue-gray-600">
-                          {lastName}
-                        </Typography>
-                      </td>
-                      <td className={className}>
-                        <Typography className="text-xs font-semibold text-blue-gray-600">
-                          {phoneNumber}
-                        </Typography>
-                      </td>
+                      </div>
+                    </td>
+                    <td className={className}>
+                      <Typography className="text-xs font-semibold text-blue-gray-600">
+                        {item.lastname}
+                      </Typography>
+                    </td>
+                    <td className={className}>
+                      <Typography className="text-xs font-semibold text-blue-gray-600">
+                        {item.phoneNumber}
+                      </Typography>
+                    </td>
 
-                      <td className={`${className} flex py-5 gap-3`}>
-                        <Typography onClick={openEditModal} className=" cursor-pointer text-xs font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
-                          Edit
-                        </Typography>
-                        <Typography onClick={openDeleteModal} className=" cursor-pointer text-xs font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
-                          Delete
-                        </Typography>
-                      </td>                     
-                    </tr>
-                  );
-                }
+                    <td className={`${className} flex py-5 gap-3`}>
+                      <Typography onClick={() => {
+                        openEditModal()
+                        setUserData(item)
+                      }} className=" cursor-pointer text-xs font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
+                        Edit
+                      </Typography>
+                      <Typography onClick={() => {
+                        openDeleteModal()
+                        setUserData(item)
+                      }} className=" cursor-pointer text-xs font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
+                        Delete
+                      </Typography>
+                    </td>
+                  </tr>
+                )
+              }
               )}
+
             </tbody>
           </table>
         </CardBody>
       </Card>
-      <div className="w-full flex justify-center items-center">
+      {/* <div className="w-full flex justify-center items-center">
       <CircularPagination/>
-      </div>
+      </div> */}
       <div>
 
         {/* edit modal */}
-      <Dialog open={editModal} handler={closeEditModal}>
-        <DialogHeader>Tahrirlash</DialogHeader>
-        <DialogBody>
-          <div className="flex justify-center flex-col items-center gap-7">
-          <div className="w-full max-w-[24rem]">
-      <Input id="addname" label="Ism" />
-    </div>
-    <div className="w-full max-w-[24rem]">
-      <Input id="addlastname" label="Familya" />
-    </div>
-        <div className="relative flex w-full max-w-[24rem]">
-        <Button
-        disabled
-        size="sm"
-        className="!absolute left-1 top-1 rounded"
-      >
-        +998
-      </Button>
-      <Input
-      id="addphone" 
-        type="number"
-        className="ps-20"
-        containerProps={{
-          className: "min-w-0",
-        }}
-      />
-      
-    </div>
-          </div>
-        </DialogBody>
-        <DialogFooter>
-          <Button
-            variant="text"
-            color="red"
-            onClick={closeEditModal}
-            className="mr-1"
-          >
-            <span>Orqaga</span>
-          </Button>
-          <Button variant="gradient" color="gray">
-            <span>Tahrirlash</span>
-          </Button>
-        </DialogFooter>
-      </Dialog>
+        <Dialog open={editModal} handler={closeEditModal}>
+          <DialogHeader>Tahrirlash</DialogHeader>
+          <DialogBody>
+            <div className="flex justify-center flex-col items-center gap-7">
+              <div className="w-full max-w-[24rem]">
+                <Input onChange={editRegex} required defaultValue={userData ? userData.firstname : "Ma'lumot yo'q"} id="editname" label="Ism" />
+              </div>
+              <div className="w-full max-w-[24rem]">
+                <Input onChange={editRegex} required defaultValue={userData ? userData.lastname : "Ma'lumot yo'q"} id="editlastname" label="Familya" />
+              </div>
+              <div className="relative flex w-full max-w-[24rem]">
+                <Button
+                  disabled
+                  size="sm"
+                  className="!absolute left-1 top-1 rounded z-50"
+                >
+                  +998
+                </Button>
+                <Input
+                  onChange={editRegex} required
+                  defaultValue={userData ? userData.phoneNumber : ""}
+                  id="editphone"
+                  type="number"
+                  className="ps-20"
+                  containerProps={{
+                    className: "min-w-0",
+                  }}
+                />
+
+              </div>
+              <div className="w-full max-w-[24rem]">
+                <Input onChange={editRegex} required type="password" id="editpassword" label="Parol" />
+              </div>
+            </div>
+          </DialogBody>
+          <DialogFooter>
+            <Button
+              variant="text"
+              color="red"
+              onClick={closeEditModal}
+              className="mr-1"
+            >
+              <span>Orqaga</span>
+            </Button>
+            <span className={`${regex ? "cursor-not-allowed" : ""}`}>
+
+              <Button disabled={regex} onClick={editUser} variant="gradient" color="gray">
+                <span>Tahrirlash</span>
+              </Button>
+            </span>
+          </DialogFooter>
+        </Dialog>
       </div>
       <div>
 
         {/* add modal */}
-      <Dialog open={addModal} handler={closeAddModal}>
-        <DialogHeader>Hodim qo'shish</DialogHeader>
-        <DialogBody>
-          <div className="flex justify-center flex-col items-center gap-7">
-          <div className="w-full max-w-[24rem]">
-      <Input id="editname" label="Ism" />
-    </div>
-    <div className="w-full max-w-[24rem]">
-      <Input id="editlastname" label="Familya" />
-    </div>
-        <div className="relative flex w-full max-w-[24rem]">
-        <Button
-        disabled
-        size="sm"
-        className="!absolute left-1 top-1 rounded"
-      >
-        +998
-      </Button>
-      <Input
-      id="editphone" 
-        type="number"
-        className="ps-20"
-        containerProps={{
-          className: "min-w-0",
-        }}
-      />
-      
-    </div>
-          </div>
-        </DialogBody>
-        <DialogFooter>
-          <Button
-            variant="text"
-            color="red"
-            onClick={closeAddModal}
-            className="mr-1"
-          >
-            <span>Orqaga</span>
-          </Button>
-          <Button onClick={addUser} variant="gradient" color="gray">
-            <span>Qo'shish</span>
-          </Button>
-        </DialogFooter>
-      </Dialog>
+
+
+
+        <Dialog open={addModal} handler={closeAddModal}>
+          <DialogHeader>Hodim qo'shish</DialogHeader>
+          <DialogBody>
+            <div className="flex justify-center flex-col items-center gap-7">
+              <div className="w-full max-w-[24rem]">
+                <Input onChange={addRegex} required id="addname" label="Ism" />
+              </div>
+              <div className="w-full max-w-[24rem]">
+                <Input onChange={addRegex} id="addlastname" label="Familya" />
+              </div>
+              <div className="relative flex w-full max-w-[24rem]">
+                <Button
+                  disabled
+                  size="sm"
+                  className="!absolute left-1 top-1 rounded z-50"
+                >
+                  +998
+                </Button>
+                <Input
+                  onChange={addRegex}
+                  id="addphone"
+                  type="number"
+                  className="ps-20"
+                  containerProps={{
+                    className: "min-w-0",
+                  }}
+                />
+
+              </div>
+              <div className="w-full max-w-[24rem]">
+                <Input onChange={addRegex} type="password" id="addpassword" label="Parol" />
+              </div>
+            </div>
+          </DialogBody>
+          <DialogFooter>
+            <Button
+              variant="text"
+              color="red"
+              onClick={closeAddModal}
+              className="mr-1"
+            >
+              <span>Orqaga</span>
+            </Button>
+            <span className={`${regex ? "cursor-not-allowed" : ""}`}>
+
+              <Button disabled={regex} onClick={addUser} variant="gradient" color="gray">
+                <span>Qo'shish</span>
+              </Button>
+            </span>
+          </DialogFooter>
+        </Dialog>
       </div>
       <div>
 
         {/* delete modal */}
-      <Dialog open={deleteModal} handler={closeDeleteModal}>
-        <DialogHeader>O'chirish</DialogHeader>
-        <DialogBody>
-          <div className="flex justify-center">
+        <Dialog open={deleteModal} handler={closeDeleteModal}>
+          <DialogHeader>O'chirish</DialogHeader>
+          <DialogBody>
+            <div className="flex justify-center">
 
-         <Typography
-         variant="large"
-         className=" font-bold uppercase text-blue-gray-400">
-          Bu hodimni o'chirishingizga ishonchingiz komilmi?
-         </Typography>
-          </div>
-        </DialogBody>
-        <DialogFooter>
-          <Button
-            variant="text"
-            color="red"
-            onClick={closeDeleteModal}
-            className="mr-1"
-          >
-            <span>Yo'q</span>
-          </Button>
-          <Button variant="gradient" color="gray">
-            <span>Ha</span>
-          </Button>
-        </DialogFooter>
-      </Dialog>
+              <Typography
+                variant="large"
+                className=" font-bold uppercase text-blue-gray-400">
+                Bu hodimni o'chirishingizga ishonchingiz komilmi?
+              </Typography>
+            </div>
+          </DialogBody>
+          <DialogFooter>
+            <Button
+              variant="text"
+              color="red"
+              onClick={closeDeleteModal}
+              className="mr-1"
+            >
+              <span>Yo'q</span>
+            </Button>
+            <Button onClick={deleteUser} variant="gradient" color="gray">
+              <span>Ha</span>
+            </Button>
+          </DialogFooter>
+        </Dialog>
       </div>
-      
+
 
       {/* <Card>
         <CardHeader variant="gradient" color="gray" className="mb-8 p-6">

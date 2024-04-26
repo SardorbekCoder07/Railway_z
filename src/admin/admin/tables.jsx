@@ -11,7 +11,7 @@ import {
   Button,
   Input,
 } from "@material-tailwind/react";
-import { authorsTableData} from "@/admin/data";
+import { authorsTableData } from "@/admin/data";
 import { CircularPagination } from "@/admin/widgets/layout/circlePagination";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 
@@ -31,18 +31,18 @@ export function Tables() {
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12 ">
       <Card>
-      <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
-            <Typography variant="h6" color="white">
-              Hodimlar jadvali
-            </Typography>
-            <Button
-             onClick={openAddModal}
-              className="bg-[#fff] text-black px-3 py-2 rounded-md"
-              // onClick={handleOpenModal} // Attach event handler to open modal
-            >
-               <UserPlusIcon className="h-6 w-6 text-black"/>
-            </Button>
-          </CardHeader>
+        <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
+          <Typography variant="h6" color="white">
+            Hodimlar jadvali
+          </Typography>
+          <Button
+            onClick={openAddModal}
+            className="bg-[#fff] text-black px-3 py-2 rounded-md"
+          // onClick={handleOpenModal} // Attach event handler to open modal
+          >
+            <UserPlusIcon className="h-6 w-6 text-black" />
+          </Button>
+        </CardHeader>
         <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
           <table className="w-full min-w-[640px] table-auto">
             <thead>
@@ -65,11 +65,10 @@ export function Tables() {
             <tbody>
               {authorsTableData.map(
                 ({ name, lastName, phoneNumber }, key) => {
-                  const className = `py-3 px-5  ${
-                    key === authorsTableData.length - 1
+                  const className = `py-3 px-5  ${key === authorsTableData.length - 1
                       ? ""
                       : "border-b border-blue-gray-50"
-                  }`;
+                    }`;
 
                   return (
                     <tr key={name}>
@@ -116,127 +115,127 @@ export function Tables() {
         </CardBody>
       </Card>
       <div className="w-full flex justify-center items-center">
-      <CircularPagination/>
+        <CircularPagination />
       </div>
       <div>
-      <Dialog open={editModal} handler={closeEditModal}>
-        <DialogHeader>Tahrirlash</DialogHeader>
-        <DialogBody>
-          <div className="flex justify-center flex-col items-center gap-7">
-          <div className="w-full max-w-[24rem]">
-      <Input id="addname" label="Ism" />
-    </div>
-    <div className="w-full max-w-[24rem]">
-      <Input id="addlastname" label="Familya" />
-    </div>
-        <div className="relative flex w-full max-w-[24rem]">
-        <Button
-        disabled
-        size="sm"
-        className="!absolute left-1 top-1 rounded"
-      >
-        +998
-      </Button>
-      <Input
-      id="addphone"
-        type="number"
-        className="ps-20"
-        containerProps={{
-          className: "min-w-0",
-        }}
-      />
+        <Dialog open={editModal} handler={closeEditModal}>
+          <DialogHeader>Tahrirlash</DialogHeader>
+          <DialogBody>
+            <div className="flex justify-center flex-col items-center gap-7">
+              <div className="w-full max-w-[24rem]">
+                <Input id="addname" label="Ism" />
+              </div>
+              <div className="w-full max-w-[24rem]">
+                <Input id="addlastname" label="Familya" />
+              </div>
+              <div className="relative flex w-full max-w-[24rem]">
+                <Button
+                  disabled
+                  size="sm"
+                  className="!absolute left-1 top-1 rounded"
+                >
+                  +998
+                </Button>
+                <Input
+                  id="addphone"
+                  type="number"
+                  className="ps-20"
+                  containerProps={{
+                    className: "min-w-0",
+                  }}
+                />
 
-    </div>
-          </div>
-        </DialogBody>
-        <DialogFooter>
-          <Button
-            variant="text"
-            color="red"
-            onClick={closeEditModal}
-            className="mr-1"
-          >
-            <span>Orqaga</span>
-          </Button>
-          <Button variant="gradient" color="gray">
-            <span>Tahrirlash</span>
-          </Button>
-        </DialogFooter>
-      </Dialog>
+              </div>
+            </div>
+          </DialogBody>
+          <DialogFooter>
+            <Button
+              variant="text"
+              color="red"
+              onClick={closeEditModal}
+              className="mr-1"
+            >
+              <span>Orqaga</span>
+            </Button>
+            <Button variant="gradient" color="gray">
+              <span>Tahrirlash</span>
+            </Button>
+          </DialogFooter>
+        </Dialog>
       </div>
       <div>
-      <Dialog open={addModal} handler={closeAddModal}>
-        <DialogHeader>Hodim qo'shish</DialogHeader>
-        <DialogBody>
-          <div className="flex justify-center flex-col items-center gap-7">
-          <div className="w-full max-w-[24rem]">
-      <Input id="editname" label="Ism" />
-    </div>
-    <div className="w-full max-w-[24rem]">
-      <Input id="editlastname" label="Familya" />
-    </div>
-        <div className="relative flex w-full max-w-[24rem]">
-        <Button
-        disabled
-        size="sm"
-        className="!absolute left-1 top-1 rounded"
-      >
-        +998
-      </Button>
-      <Input
-      id="editphone"
-        type="number"
-        className="ps-20"
-        containerProps={{
-          className: "min-w-0",
-        }}
-      />
+        <Dialog open={addModal} handler={closeAddModal}>
+          <DialogHeader>Hodim qo'shish</DialogHeader>
+          <DialogBody>
+            <div className="flex justify-center flex-col items-center gap-7">
+              <div className="w-full max-w-[24rem]">
+                <Input id="editname" label="Ism" />
+              </div>
+              <div className="w-full max-w-[24rem]">
+                <Input id="editlastname" label="Familya" />
+              </div>
+              <div className="relative flex w-full max-w-[24rem]">
+                <Button
+                  disabled
+                  size="sm"
+                  className="!absolute left-1 top-1 rounded"
+                >
+                  +998
+                </Button>
+                <Input
+                  id="editphone"
+                  type="number"
+                  className="ps-20"
+                  containerProps={{
+                    className: "min-w-0",
+                  }}
+                />
 
-    </div>
-          </div>
-        </DialogBody>
-        <DialogFooter>
-          <Button
-            variant="text"
-            color="red"
-            onClick={closeAddModal}
-            className="mr-1"
-          >
-            <span>Orqaga</span>
-          </Button>
-          <Button variant="gradient" color="gray">
-            <span>Qo'shish</span>
-          </Button>
-        </DialogFooter>
-      </Dialog>
+              </div>
+            </div>
+          </DialogBody>
+          <DialogFooter>
+            <Button
+              variant="text"
+              color="red"
+              onClick={closeAddModal}
+              className="mr-1"
+            >
+              <span>Orqaga</span>
+            </Button>
+            <Button variant="gradient" color="gray">
+              <span>Qo'shish</span>
+            </Button>
+          </DialogFooter>
+        </Dialog>
       </div>
       <div>
-      <Dialog open={deleteModal} handler={closeDeleteModal}>
-        <DialogHeader>O'chirish</DialogHeader>
-        <DialogBody>
-          <div className="flex justify-center">
+        <Dialog open={deleteModal} handler={closeDeleteModal}>
+          <DialogHeader>O'chirish</DialogHeader>
+          <DialogBody>
+            <div className="flex justify-center">
 
-         <Typography
-         variant="large"
-         className=" font-bold uppercase text-blue-gray-400">
-          Bu hodimni o'chirishingizga ishonchingiz komilmi?
-         </Typography>
-          </div>
-        </DialogBody>
-        <DialogFooter>
-          <Button
-            variant="text"
-            color="red"
-            onClick={closeDeleteModal}
-            className="mr-1"
-          >
-            <span>Yo'q</span>
-          </Button>
-          <Button variant="gradient" color="gray">
-            <span>Ha</span>
-          </Button>
-        </DialogFooter>
-      </Dialog>
+              <Typography
+                variant="large"
+                className=" font-bold uppercase text-blue-gray-400">
+                Bu hodimni o'chirishingizga ishonchingiz komilmi?
+              </Typography>
+            </div>
+          </DialogBody>
+          <DialogFooter>
+            <Button
+              variant="text"
+              color="red"
+              onClick={closeDeleteModal}
+              className="mr-1"
+            >
+              <span>Yo'q</span>
+            </Button>
+            <Button variant="gradient" color="gray">
+              <span>Ha</span>
+            </Button>
+          </DialogFooter>
+        </Dialog>
       </div>
 
 
