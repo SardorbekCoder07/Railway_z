@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardHeader,
@@ -29,16 +29,20 @@ export function Tables() {
   const closeDeleteModal = () => setDeleteModal(false)
   const openAddModal = () => setAddModal(true)
   const closeAddModal = () => setAddModal(false)
-  // ***************get user***********
-  const getPdb = () => {
-    axios.get(`${api}pdb/one?id=${
-      
-    }`, config)
-      .then((res) => {
-        setUsers(res.data);
+  console.log('hello');
 
-      })
-      .catch((err) => console.log(err))
+  useEffect(()=>{
+    getPDB()
+  },[])
+
+  const getPDB=()=>{
+    axios.get(`${api}pdb`,config)
+    .then(res=>{
+      console.log(res.data);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
   }
 
   // ************Add PDB******************
