@@ -29,7 +29,17 @@ export function Tables() {
   const closeDeleteModal = () => setDeleteModal(false)
   const openAddModal = () => setAddModal(true)
   const closeAddModal = () => setAddModal(false)
+  // ***************get user***********
+  const getPdb = () => {
+    axios.get(`${api}pdb/one?id=${
+      
+    }`, config)
+      .then((res) => {
+        setUsers(res.data);
 
+      })
+      .catch((err) => console.log(err))
+  }
 
   // ************Add PDB******************
   const addUser = () => {
@@ -40,7 +50,7 @@ export function Tables() {
     axios.post(`${api}pdb`, addData, config)
       .then((res) => {
         closeAddModal()
-        getUser()
+        getPdb()
         toast.success("Vazifa muoffaqqiyatli bajarildi!")
       })
       .catch((err) => {
@@ -139,7 +149,7 @@ export function Tables() {
       <div className="w-full flex justify-center items-center">
         <CircularPagination />
       </div>
-       {/* Edit pdb  */}
+      {/* Edit pdb  */}
       <div>
         <Dialog open={editModal} handler={closeEditModal}>
           <DialogHeader>Tahrirlash</DialogHeader>
