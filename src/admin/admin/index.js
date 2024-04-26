@@ -4,4 +4,4 @@ export * from "@/admin/admin/tables";
 export * from "@/admin/admin/notifications";
 export * from "@/admin/admin/works";
 export * from "@/admin/admin/tools";
-export * from "@/admin/admin/dataMenu";
+export * from "@/admin/admin/hiddenKD";
