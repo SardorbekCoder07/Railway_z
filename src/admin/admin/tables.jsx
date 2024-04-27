@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardHeader,
@@ -14,6 +14,8 @@ import {
 import { authorsTableData } from "@/admin/data";
 import { CircularPagination } from "@/admin/widgets/layout/circlePagination";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
+import { api, byId, config } from "@/api/api";
+import axios from "axios";
 
 export function Tables() {
   const [editModal, setEditModal] = useState(false)
@@ -27,13 +29,47 @@ export function Tables() {
   const closeDeleteModal = () => setDeleteModal(false)
   const openAddModal = () => setAddModal(true)
   const closeAddModal = () => setAddModal(false)
+  console.log('hello');
+
+  useEffect(()=>{
+    getPDB()
+  },[])
+
+  const getPDB=()=>{
+    axios.get(`${api}pdb`,config)
+    .then(res=>{
+      console.log(res.data);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
+
+  // ************Add PDB******************
+  const addUser = () => {
+    const addData = {
+      firstName: byId("addname"),
+      lastName: byId("addlastname"),
+    }
+    axios.post(`${api}pdb`, addData, config)
+      .then((res) => {
+        closeAddModal()
+        getPdb()
+        toast.success("Vazifa muoffaqqiyatli bajarildi!")
+      })
+      .catch((err) => {
+        closeAddModal()
+        toast.error("xato")
+        console.log(err);
+      })
+  }
 
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12 ">
       <Card>
         <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
           <Typography variant="h6" color="white">
-            Hodimlar jadvali
+            PDB lar jadvali
           </Typography>
           <Button
             onClick={openAddModal}
@@ -66,8 +102,8 @@ export function Tables() {
               {authorsTableData.map(
                 ({ name, lastName, phoneNumber }, key) => {
                   const className = `py-3 px-5  ${key === authorsTableData.length - 1
-                      ? ""
-                      : "border-b border-blue-gray-50"
+                    ? ""
+                    : "border-b border-blue-gray-50"
                     }`;
 
                   return (
@@ -117,59 +153,14 @@ export function Tables() {
       <div className="w-full flex justify-center items-center">
         <CircularPagination />
       </div>
+      {/* Edit pdb  */}
       <div>
         <Dialog open={editModal} handler={closeEditModal}>
           <DialogHeader>Tahrirlash</DialogHeader>
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
-                <Input id="addname" label="Ism" />
-              </div>
-              <div className="w-full max-w-[24rem]">
-                <Input id="addlastname" label="Familya" />
-              </div>
-              <div className="relative flex w-full max-w-[24rem]">
-                <Button
-                  disabled
-                  size="sm"
-                  className="!absolute left-1 top-1 rounded"
-                >
-                  +998
-                </Button>
-                <Input
-                  id="addphone"
-                  type="number"
-                  className="ps-20"
-                  containerProps={{
-                    className: "min-w-0",
-                  }}
-                />
-
-              </div>
-            </div>
-          </DialogBody>
-          <DialogFooter>
-            <Button
-              variant="text"
-              color="red"
-              onClick={closeEditModal}
-              className="mr-1"
-            >
-              <span>Orqaga</span>
-            </Button>
-            <Button variant="gradient" color="gray">
-              <span>Tahrirlash</span>
-            </Button>
-          </DialogFooter>
-        </Dialog>
-      </div>
-      <div>
-        <Dialog open={addModal} handler={closeAddModal}>
-          <DialogHeader>Hodim qo'shish</DialogHeader>
-          <DialogBody>
-            <div className="flex justify-center flex-col items-center gap-7">
-              <div className="w-full max-w-[24rem]">
-                <Input id="editname" label="Ism" />
+                <Input id="editName" label="Ism" />
               </div>
               <div className="w-full max-w-[24rem]">
                 <Input id="editlastname" label="Familya" />
@@ -198,6 +189,35 @@ export function Tables() {
             <Button
               variant="text"
               color="red"
+              onClick={closeEditModal}
+              className="mr-1"
+            >
+              <span>Orqaga</span>
+            </Button>
+            <Button variant="gradient" color="gray">
+              <span>Tahrirlash</span>
+            </Button>
+          </DialogFooter>
+        </Dialog>
+      </div>
+      {/* Add pdb modal */}
+      <div>
+        <Dialog open={addModal} handler={closeAddModal}>
+          <DialogHeader>PDB qo'shish</DialogHeader>
+          <DialogBody>
+            <div className="flex justify-center flex-col items-center gap-7">
+              <div className="w-full max-w-[24rem]">
+                <Input id="addname" label="Nomi" />
+              </div>
+              <div className="w-full max-w-[24rem]">
+                <Input id="addlastname" label="Admin Ism , familya" />
+              </div>
+            </div>
+          </DialogBody>
+          <DialogFooter>
+            <Button
+              variant="text"
+              color="red"
               onClick={closeAddModal}
               className="mr-1"
             >
@@ -209,6 +229,7 @@ export function Tables() {
           </DialogFooter>
         </Dialog>
       </div>
+      {/* Delete pdb modal */}
       <div>
         <Dialog open={deleteModal} handler={closeDeleteModal}>
           <DialogHeader>O'chirish</DialogHeader>

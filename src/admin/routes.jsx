@@ -10,7 +10,7 @@ import {
   DocumentDuplicateIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/solid";
-import { Home, Profile, Tables, Notifications,Works, Tools,MenuPk } from "@/admin/admin";
+import { Home, Profile, Tables, Notifications,Works, Tools } from "@/admin/admin";
 import { SignIn, SignUp } from "@/auth";
 
 const icon = {
@@ -37,12 +37,7 @@ export const routes = [
         path: "/tables",
         element: <Tables />,
       },
-      {
-        icon: <TableCellsIcon {...icon} />,
-        name: "PK",
-        path: "/menuPk",
-        element: <MenuPk/>,
-      },
+
       {
         icon: <DocumentDuplicateIcon {...icon} />,
         name: "Hisobot",
