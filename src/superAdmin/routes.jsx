@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { Home, Profile, Tables, Notifications } from "@/superAdmin/dashboard";
 import { SignIn, SignUp } from "@/auth";
+import { PdUsers } from "./dashboard/pdUsers";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -34,7 +35,12 @@ export const routes = [
         path: "/tables",
         element: <Tables />,
       },
-
+      {
+        icon: <TableCellsIcon {...icon} />,
+        name: "PD",
+        path: "/pd",
+        element: <PdUsers />,
+      },
       {
         icon: <InformationCircleIcon {...icon} />,
         name: "Bildirishnomlar",

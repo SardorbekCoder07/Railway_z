@@ -10,6 +10,8 @@ import {
   DialogFooter,
   Button,
   Input,
+  Select,
+  Option,
 } from "@material-tailwind/react";
 import { authorsTableData } from "@/superAdmin/data";
 import { CircularPagination } from "@/superAdmin/widgets/layout/circlePagination";
@@ -18,8 +20,10 @@ import axios from "axios";
 import { api, byId, config } from "@/api/api";
 import toast from "react-hot-toast";
 
-export function Tables() {
+export function PdUsers() {
+  const [PD, setPD] = useState(null)
   const [users, setUsers] = useState(null)
+  const [userID, setUserId] = useState(null)
   const [userData, setUserData] = useState(null)
   const [editModal, setEditModal] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false)
@@ -41,8 +45,10 @@ export function Tables() {
   }
 
   useEffect(() => {
+    getPD()
     getUser()
   }, [])
+
 
 
 
@@ -53,25 +59,34 @@ export function Tables() {
     axios.get(`${api}user/admins`, config)
       .then((res) => {
         setUsers(res.data);
+      })
+      .catch((err) => console.log(err))
+  }
 
+
+  // *******************GET USER **********************
+
+
+  const getPD = () => {
+    axios.get(`${api}pd/all`, config)
+      .then((res) => {
+        setPD(res.data.body);
       })
       .catch((err) => console.log(err))
   }
 
   // *******************ADD USER **********************
 
-
-  const addUser = () => {
+  const addPD = () => {
     const addData = {
-      firstName: byId("addname"),
-      lastName: byId("addlastname"),
-      password: byId("addpassword"),
-      phoneNumber: byId("addphone")
+      name: byId("addPD"),
+      employeeCount: byId("addemployeeCount"),
+      userId: userID
     }
-    axios.post(`${api}auth/register`, addData, config)
+    axios.post(`${api}pd/add`, addData, config)
       .then((res) => {
         closeAddModal()
-        getUser()
+        getPD()
         toast.success("Vazifa muoffaqqiyatli bajarildi!")
       })
       .catch((err) => {
@@ -86,17 +101,16 @@ export function Tables() {
   // *******************EDIT USER **********************
 
 
-  const editUser = () => {
+  const editPd = () => {
     const editData = {
-      firstName: byId("editname"),
-      lastName: byId("editlastname"),
-      password: byId("editpassword"),
-      phoneNumber: byId("editphone")
+      name: byId("editPD"),
+      employeeCount: byId("editemployeeCount"),
+      userId: userID
     }
-    axios.put(`${api}user/update?id=${userData ? userData.id : 0}`, editData, config)
+    axios.put(`${api}pd/update?id=${userData ? userData.id : 0}`, editData, config)
       .then((res) => {
         closeEditModal()
-        getUser()
+        getPD()
         toast.success("Bu hodim muvoffaqqiyatli tahrirlandi!👌")
 
       })
@@ -108,11 +122,11 @@ export function Tables() {
 
   // *******************DELETE USER **********************
 
-  const deleteUser = () => {
-    axios.delete(`${api}user/delete?id=${userData ? userData.id : 0}`)
-      .then((res) => {
+  const deletePD = () => {
+    axios.delete(`${api}pd/delete?id=${userData ? userData.id : 0}`)
+      .then(() => {
         closeDeleteModal()
-        getUser()
+        getPD()
         toast.success("Bu hodim muvoffaqqiyatli tahrirlandi!👌")
 
       })
@@ -129,10 +143,8 @@ export function Tables() {
 
   const addRegex = () => {
     if (
-      byId("addname") !== "" &&
-      byId("addlastname") !== "" &&
-      byId("addphone") !== "" &&
-      byId("addpassword") !== ""
+      byId("addPD") !== "" &&
+      byId("addemployeeCount") !== ""
     ) {
       setRegex(false)
     }
@@ -142,11 +154,10 @@ export function Tables() {
   }
 
   const editRegex = () => {
+    console.log(userID);
     if (
-      byId("editname") !== "" &&
-      byId("editlastname") !== "" &&
-      byId("editphone") !== "" &&
-      byId("editpassword") !== ""
+      byId("editPD") !== "" &&
+      byId("editemployeeCount") !== ""
     ) {
       setRegex(false)
     }
@@ -174,7 +185,7 @@ export function Tables() {
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["First name", "Last name", "Phone number", "Actions"].map((el) => (
+                {["PD nomi", "Ishchilar soni", "Admin", "Actions"].map((el) => (
                   <th
                     key={el}
                     className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -191,10 +202,10 @@ export function Tables() {
             </thead>
             <tbody>
 
-              {users && users.map((item, i) => {
+              {PD && PD.map((item, i) => {
                 const className = `py-3 px-5  ${i === authorsTableData.length - 1
-                    ? ""
-                    : "border-b border-blue-gray-50"
+                  ? ""
+                  : "border-b border-blue-gray-50"
                   }`
                 return (
 
@@ -207,22 +218,21 @@ export function Tables() {
                             color="blue-gray"
                             className="font-semibold"
                           >
-                            {item.firstName}
+                            {item.name}
                           </Typography>
                         </div>
                       </div>
                     </td>
                     <td className={className}>
                       <Typography className="text-xs font-semibold text-blue-gray-600">
-                        {item.lastName}
+                        {item.employeeCount}
                       </Typography>
                     </td>
                     <td className={className}>
                       <Typography className="text-xs font-semibold text-blue-gray-600">
-                        {item.phoneNumber}
+                        {item.userFullName}
                       </Typography>
                     </td>
-
                     <td className={`${className} flex py-5 gap-3`}>
                       <Typography onClick={() => {
                         openEditModal()
@@ -257,33 +267,22 @@ export function Tables() {
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
-                <Input onChange={editRegex} required defaultValue={userData ? userData.firstname : "Ma'lumot yo'q"} id="editname" label="Ism" />
+                <Input onChange={editRegex} required defaultValue={userData ? userData.name : "Ma'lumot yo'q"} id="editPD" label="PD nomi" />
               </div>
               <div className="w-full max-w-[24rem]">
-                <Input onChange={editRegex} required defaultValue={userData ? userData.lastname : "Ma'lumot yo'q"} id="editlastname" label="Familya" />
-              </div>
-              <div className="relative flex w-full max-w-[24rem]">
-                <Button
-                  disabled
-                  size="sm"
-                  className="!absolute left-1 top-1 rounded z-50"
-                >
-                  +998
-                </Button>
-                <Input
-                  onChange={editRegex} required
-                  defaultValue={userData ? userData.phoneNumber : ""}
-                  id="editphone"
-                  type="number"
-                  className="ps-20"
-                  containerProps={{
-                    className: "min-w-0",
-                  }}
-                />
-
+                <Input onChange={editRegex} required defaultValue={userData ? userData.employeeCount : "Ma'lumot yo'q"} id="editemployeeCount" label="Ishchi soni" />
               </div>
               <div className="w-full max-w-[24rem]">
-                <Input onChange={editRegex} required type="password" id="editpassword" label="Parol" />
+                <Select onChange={(e) => {
+                  setUserId(e)
+                  editRegex()
+                }} label="PD admini">
+                  {
+                    users && users.map((item, i) =>
+                      <Option key={i} value={item.id}>{item.firstName} {item.lastName}</Option>
+                    )
+                  }
+                </Select>
               </div>
             </div>
           </DialogBody>
@@ -298,7 +297,7 @@ export function Tables() {
             </Button>
             <span className={`${regex ? "cursor-not-allowed" : ""}`}>
 
-              <Button disabled={regex} onClick={editUser} variant="gradient" color="gray">
+              <Button disabled={regex} onClick={editPd} variant="gradient" color="gray">
                 <span>Tahrirlash</span>
               </Button>
             </span>
@@ -312,36 +311,26 @@ export function Tables() {
 
 
         <Dialog open={addModal} handler={closeAddModal}>
-          <DialogHeader>Hodim qo'shish</DialogHeader>
+          <DialogHeader>PD qo'shish</DialogHeader>
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
-                <Input onChange={addRegex} required id="addname" label="Ism" />
+                <Input onChange={addRegex} required id="addPD" label="PD nomi" />
               </div>
               <div className="w-full max-w-[24rem]">
-                <Input onChange={addRegex} id="addlastname" label="Familya" />
-              </div>
-              <div className="relative flex w-full max-w-[24rem]">
-                <Button
-                  disabled
-                  size="sm"
-                  className="!absolute left-1 top-1 rounded z-50"
-                >
-                  +998
-                </Button>
-                <Input
-                  onChange={addRegex}
-                  id="addphone"
-                  type="number"
-                  className="ps-20"
-                  containerProps={{
-                    className: "min-w-0",
-                  }}
-                />
-
+                <Input onChange={addRegex} required id="addemployeeCount" label="Ishchi soni" />
               </div>
               <div className="w-full max-w-[24rem]">
-                <Input onChange={addRegex} type="password" id="addpassword" label="Parol" />
+                <Select onChange={(e) => {
+                  setUserId(e)
+                  addRegex()
+                }} label="PD admini">
+                  {
+                    users && users.map((item, i) =>
+                      <Option key={i} value={item.id}>{item.firstName} {item.lastName}</Option>
+                    )
+                  }
+                </Select>
               </div>
             </div>
           </DialogBody>
@@ -356,7 +345,7 @@ export function Tables() {
             </Button>
             <span className={`${regex ? "cursor-not-allowed" : ""}`}>
 
-              <Button disabled={regex} onClick={addUser} variant="gradient" color="gray">
+              <Button disabled={regex} onClick={addPD} variant="gradient" color="gray">
                 <span>Qo'shish</span>
               </Button>
             </span>
@@ -374,7 +363,7 @@ export function Tables() {
               <Typography
                 variant="large"
                 className=" font-bold uppercase text-blue-gray-400">
-                Bu hodimni o'chirishingizga ishonchingiz komilmi?
+                Bu PDni o'chirishingizga ishonchingiz komilmi?
               </Typography>
             </div>
           </DialogBody>
@@ -387,7 +376,7 @@ export function Tables() {
             >
               <span>Yo'q</span>
             </Button>
-            <Button onClick={deleteUser} variant="gradient" color="gray">
+            <Button onClick={deletePD} variant="gradient" color="gray">
               <span>Ha</span>
             </Button>
           </DialogFooter>
