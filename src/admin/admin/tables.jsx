@@ -31,10 +31,19 @@ export function Tables() {
   const openAddModal = () => setAddModal(true)
   const closeAddModal = () => setAddModal(false)
 
+  useEffect(()=>{
+    getPDBuser();
+  },[])
 
-  // const getPDBuser=()={
-  //   axios.get(``)
-  // }
+  const getPDBuser=()=>{
+    axios.get(`${api}pdb`,config)
+    .then((res)=>{
+      console.log(res.data);
+    })
+    .catch((err)=>{
+      console.log('xato bor')
+    })
+  }
 
   // ----------PDB add------------
   const addPdb=()=>{
@@ -45,6 +54,7 @@ export function Tables() {
     axios.post(`${api}pdb`,addPDBdata,config)
     .then((res)=>{
       closeAddModal();
+      getPDBuser()
       toast.success("Vazifa muvoffaqqiyatli bajarildi!")
     })
     .catch((err)=>{
