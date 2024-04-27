@@ -311,7 +311,6 @@ export function Tools() {
           <DialogHeader>O'chirish</DialogHeader>
           <DialogBody>
             <div className="flex justify-center">
-
               <Typography
                 variant="large"
                 className=" font-bold uppercase text-blue-gray-400">
@@ -334,7 +333,6 @@ export function Tools() {
           </DialogFooter>
         </Dialog>
       </div>
-
 
       {/* <Card>
         <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
