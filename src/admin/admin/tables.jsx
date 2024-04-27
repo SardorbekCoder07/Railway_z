@@ -36,7 +36,7 @@ export function Tables() {
   },[])
 
   const getPDBuser=()=>{
-    axios.get(`${api}pdb`,config)
+    axios.get(`${api}pdb`, config)
     .then((res)=>{
       console.log(res.data);
     })

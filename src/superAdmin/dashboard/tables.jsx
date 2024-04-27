@@ -192,7 +192,7 @@ export function Tables() {
             <tbody>
 
               {users && users.map((item, i) => {
-                const className = `py-3 px-5  ${i === authorsTableData.length - 1
+                const className = `py-3 px-5  ${i === users && users.length - 1
                     ? ""
                     : "border-b border-blue-gray-50"
                   }`

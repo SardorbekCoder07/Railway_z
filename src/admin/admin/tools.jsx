@@ -15,16 +15,16 @@ import {
 } from "@material-tailwind/react";
 import { authorsTableData } from "@/superAdmin/data";
 import { CircularPagination } from "@/superAdmin/widgets/layout/circlePagination";
-import { UserPlusIcon } from "@heroicons/react/24/solid";
+import { UserPlusIcon, WrenchScrewdriverIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { api, byId, config } from "@/api/api";
 import toast from "react-hot-toast";
 
 export function Tools() {
-  const [PD, setPD] = useState(null)
+  const [tool, settool] = useState(null)
   const [users, setUsers] = useState(null)
-  const [userID, setUserId] = useState(null)
-  const [userData, setUserData] = useState(null)
+  const [toolsData, settoolsData] = useState(null)
+  const [ToolData, setToolData] = useState(null)
   const [editModal, setEditModal] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false)
   const [addModal, setAddModal] = useState(false)
@@ -45,7 +45,7 @@ export function Tools() {
   }
 
   useEffect(() => {
-    getPD()
+    gettool()
     getUser()
   }, [])
 
@@ -67,26 +67,24 @@ export function Tools() {
   // *******************GET USER **********************
 
 
-  const getPD = () => {
-    axios.get(`${api}pd/all`, config)
+  const gettool = () => {
+    axios.get(`${api}tool/all`, config)
       .then((res) => {
-        setPD(res.data.body);
+        settool(res.data.body);
       })
       .catch((err) => console.log(err))
   }
 
   // *******************ADD USER **********************
 
-  const addPD = () => {
+  const addtool = () => {
     const addData = {
-      name: byId("addPD"),
-      employeeCount: byId("addemployeeCount"),
-      userId: userID
+      name: byId("addtool")
     }
-    axios.post(`${api}pd/add`, addData, config)
+    axios.post(`${api}work-tool/add`, addData, config )
       .then((res) => {
         closeAddModal()
-        getPD()
+        gettool()
         toast.success("Vazifa muoffaqqiyatli bajarildi!")
       })
       .catch((err) => {
@@ -101,16 +99,14 @@ export function Tools() {
   // *******************EDIT USER **********************
 
 
-  const editPd = () => {
+  const edittool = () => {
     const editData = {
-      name: byId("editPD"),
-      employeeCount: byId("editemployeeCount"),
-      userId: userID
+      name: byId("edittool"),
     }
-    axios.put(`${api}pd/update?id=${userData ? userData.id : 0}`, editData, config)
+    axios.put(`${api}work-tool/edit?id=${ToolData ? ToolData.id : 0}`, editData, config)
       .then((res) => {
         closeEditModal()
-        getPD()
+        gettool()
         toast.success("Bu hodim muvoffaqqiyatli tahrirlandi!👌")
 
       })
@@ -122,11 +118,11 @@ export function Tools() {
 
   // *******************DELETE USER **********************
 
-  const deletePD = () => {
-    axios.delete(`${api}pd/delete?id=${userData ? userData.id : 0}`)
+  const deletetool = () => {
+    axios.delete(`${api}work-tool/delete?id=${ToolData ? ToolData.id : 0}`)
       .then(() => {
         closeDeleteModal()
-        getPD()
+        gettool()
         toast.success("Bu hodim muvoffaqqiyatli tahrirlandi!👌")
 
       })
@@ -143,8 +139,7 @@ export function Tools() {
 
   const addRegex = () => {
     if (
-      byId("addPD") !== "" &&
-      byId("addemployeeCount") !== ""
+      byId("addtool") !== ""
     ) {
       setRegex(false)
     }
@@ -154,10 +149,8 @@ export function Tools() {
   }
 
   const editRegex = () => {
-    console.log(userID);
     if (
-      byId("editPD") !== "" &&
-      byId("editemployeeCount") !== ""
+      byId("edittool") !== ""
     ) {
       setRegex(false)
     }
@@ -178,14 +171,14 @@ export function Tools() {
             className="bg-[#fff] text-black px-3 py-2 rounded-md"
           // onClick={handleOpenModal} // Attach event handler to open modal
           >
-            <UserPlusIcon className="h-6 w-6 text-black" />
+            <WrenchScrewdriverIcon className="h-6 w-6 text-black inline-block" /> +
           </Button>
         </CardHeader>
         <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["PD nomi", "Ishchilar soni", "Admin", "Actions"].map((el) => (
+                {["Ish quroli nomi", "Actions"].map((el) => (
                   <th
                     key={el}
                     className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -202,8 +195,8 @@ export function Tools() {
             </thead>
             <tbody>
 
-              {PD && PD.map((item, i) => {
-                const className = `py-3 px-5  ${i === authorsTableData.length - 1
+              {tool && tool.map((item, i) => {
+                const className = `py-3 px-5  ${i === tool && tool.length - 1
                   ? ""
                   : "border-b border-blue-gray-50"
                   }`
@@ -223,26 +216,17 @@ export function Tools() {
                         </div>
                       </div>
                     </td>
-                    <td className={className}>
-                      <Typography className="text-xs font-semibold text-blue-gray-600">
-                        {item.employeeCount}
-                      </Typography>
-                    </td>
-                    <td className={className}>
-                      <Typography className="text-xs font-semibold text-blue-gray-600">
-                        {item.userFullName}
-                      </Typography>
-                    </td>
+                   
                     <td className={`${className} flex py-5 gap-3`}>
                       <Typography onClick={() => {
                         openEditModal()
-                        setUserData(item)
+                        setToolData(item)
                       }} className=" cursor-pointer text-xs font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
                         Edit
                       </Typography>
                       <Typography onClick={() => {
                         openDeleteModal()
-                        setUserData(item)
+                        setToolData(item)
                       }} className=" cursor-pointer text-xs font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
                         Delete
                       </Typography>
@@ -267,22 +251,7 @@ export function Tools() {
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
-                <Input onChange={editRegex} required defaultValue={userData ? userData.name : "Ma'lumot yo'q"} id="editPD" label="PD nomi" />
-              </div>
-              <div className="w-full max-w-[24rem]">
-                <Input onChange={editRegex} required defaultValue={userData ? userData.employeeCount : "Ma'lumot yo'q"} id="editemployeeCount" label="Ishchi soni" />
-              </div>
-              <div className="w-full max-w-[24rem]">
-                <Select onChange={(e) => {
-                  setUserId(e)
-                  editRegex()
-                }} label="PD admini">
-                  {
-                    users && users.map((item, i) =>
-                      <Option key={i} value={item.id}>{item.firstName} {item.lastName}</Option>
-                    )
-                  }
-                </Select>
+                <Input onChange={editRegex} required defaultValue={ToolData ? ToolData.name : "Ma'lumot yo'q"} id="edittool" label="tool nomi" />
               </div>
             </div>
           </DialogBody>
@@ -297,7 +266,7 @@ export function Tools() {
             </Button>
             <span className={`${regex ? "cursor-not-allowed" : ""}`}>
 
-              <Button disabled={regex} onClick={editPd} variant="gradient" color="gray">
+              <Button disabled={regex} onClick={edittool} variant="gradient" color="gray">
                 <span>Tahrirlash</span>
               </Button>
             </span>
@@ -311,26 +280,11 @@ export function Tools() {
 
 
         <Dialog open={addModal} handler={closeAddModal}>
-          <DialogHeader>PD qo'shish</DialogHeader>
+          <DialogHeader>Ish quroli qo'shish</DialogHeader>
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
-                <Input onChange={addRegex} required id="addPD" label="PD nomi" />
-              </div>
-              <div className="w-full max-w-[24rem]">
-                <Input onChange={addRegex} required id="addemployeeCount" label="Ishchi soni" />
-              </div>
-              <div className="w-full max-w-[24rem]">
-                <Select onChange={(e) => {
-                  setUserId(e)
-                  addRegex()
-                }} label="PD admini">
-                  {
-                    users && users.map((item, i) =>
-                      <Option key={i} value={item.id}>{item.firstName} {item.lastName}</Option>
-                    )
-                  }
-                </Select>
+                <Input onChange={addRegex} required id="addtool" label="Ish quroli nomi" />
               </div>
             </div>
           </DialogBody>
@@ -345,7 +299,7 @@ export function Tools() {
             </Button>
             <span className={`${regex ? "cursor-not-allowed" : ""}`}>
 
-              <Button disabled={regex} onClick={addPD} variant="gradient" color="gray">
+              <Button disabled={regex} onClick={addtool} variant="gradient" color="gray">
                 <span>Qo'shish</span>
               </Button>
             </span>
@@ -363,7 +317,7 @@ export function Tools() {
               <Typography
                 variant="large"
                 className=" font-bold uppercase text-blue-gray-400">
-                Bu PDni o'chirishingizga ishonchingiz komilmi?
+                Bu toolni o'chirishingizga ishonchingiz komilmi?
               </Typography>
             </div>
           </DialogBody>
@@ -376,7 +330,7 @@ export function Tools() {
             >
               <span>Yo'q</span>
             </Button>
-            <Button onClick={deletePD} variant="gradient" color="gray">
+            <Button onClick={deletetool} variant="gradient" color="gray">
               <span>Ha</span>
             </Button>
           </DialogFooter>

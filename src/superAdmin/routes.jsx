@@ -41,12 +41,12 @@ export const routes = [
         path: "/pd",
         element: <PdUsers />,
       },
-      {
-        icon: <InformationCircleIcon {...icon} />,
-        name: "Bildirishnomlar",
-        path: "/notifications",
-        element: <Notifications />,
-      },
+      // {
+      //   icon: <InformationCircleIcon {...icon} />,
+      //   name: "Bildirishnomlar",
+      //   path: "/notifications",
+      //   element: <Notifications />,
+      // },
     ],
   },
   {

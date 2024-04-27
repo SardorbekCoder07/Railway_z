@@ -203,7 +203,7 @@ export function PdUsers() {
             <tbody>
 
               {PD && PD.map((item, i) => {
-                const className = `py-3 px-5  ${i === authorsTableData.length - 1
+                const className = `py-3 px-5  ${i === PD && PD.length - 1
                   ? ""
                   : "border-b border-blue-gray-50"
                   }`
