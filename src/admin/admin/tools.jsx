@@ -298,16 +298,14 @@ export function Tools() {
               <span>Orqaga</span>
             </Button>
             <span className={`${regex ? "cursor-not-allowed" : ""}`}>
-
-              <Button disabled={regex} onClick={addtool} variant="gradient" color="gray">
+                           <Button disabled={regex} onClick={addtool} variant="gradient" color="gray">
                 <span>Qo'shish</span>
               </Button>
             </span>
           </DialogFooter>
         </Dialog>
       </div>
-      <div>
-
+      <div>                                                    
         {/* delete modal */}
         <Dialog open={deleteModal} handler={closeDeleteModal}>
           <DialogHeader>O'chirish</DialogHeader>
@@ -317,7 +315,7 @@ export function Tools() {
               <Typography
                 variant="large"
                 className=" font-bold uppercase text-blue-gray-400">
-                Bu toolni o'chirishingizga ishonchingiz komilmi?
+                Bu ish qurolini o'chirishingizga ishonchingiz komilmi?
               </Typography>
             </div>
           </DialogBody>
