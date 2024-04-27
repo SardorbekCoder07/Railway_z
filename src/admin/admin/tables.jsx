@@ -16,6 +16,7 @@ import { CircularPagination } from "@/admin/widgets/layout/circlePagination";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 import { api, byId, config } from "@/api/api";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 export function Tables() {
   const [editModal, setEditModal] = useState(false)
@@ -29,41 +30,39 @@ export function Tables() {
   const closeDeleteModal = () => setDeleteModal(false)
   const openAddModal = () => setAddModal(true)
   const closeAddModal = () => setAddModal(false)
-  console.log('hello');
 
   useEffect(()=>{
-    getPDB()
+    getPDBuser();
   },[])
 
-  const getPDB=()=>{
+  const getPDBuser=()=>{
     axios.get(`${api}pdb`,config)
-    .then(res=>{
+    .then((res)=>{
       console.log(res.data);
     })
     .catch((err)=>{
-      console.log(err);
+      console.log('xato bor')
     })
   }
 
-  // ************Add PDB******************
-  const addUser = () => {
-    const addData = {
-      firstName: byId("addname"),
-      lastName: byId("addlastname"),
+  // ----------PDB add------------
+  const addPdb=()=>{
+    const addPDBdata={
+      name:byId("addname"),
+      firstName:byId("addlastname"),
     }
-    axios.post(`${api}pdb`, addData, config)
-      .then((res) => {
-        closeAddModal()
-        getPdb()
-        toast.success("Vazifa muoffaqqiyatli bajarildi!")
-      })
-      .catch((err) => {
-        closeAddModal()
-        toast.error("xato")
-        console.log(err);
-      })
+    axios.post(`${api}pdb`,addPDBdata,config)
+    .then((res)=>{
+      closeAddModal();
+      getPDBuser()
+      toast.success("Vazifa muvoffaqqiyatli bajarildi!")
+    })
+    .catch((err)=>{
+      closeAddModal();
+      toast.error("Xato");
+      console.log(err);
+    })
   }
-
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12 ">
       <Card>
