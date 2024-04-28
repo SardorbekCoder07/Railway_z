@@ -4,8 +4,12 @@ import {
     CardHeader,
     CardBody,
     Button,
+    Dialog,
+    DialogHeader,
+    DialogBody,
+    DialogFooter,
+    Input,
 } from "@material-tailwind/react";
-
 import {StatisticsCard} from "@/admin/widgets/cards";
 import {statisticsCardsData} from "@/admin/data";
 import {UserPlusIcon} from "@heroicons/react/24/solid";
@@ -177,7 +181,14 @@ export function Home() {
                 <DialogBody>
                     <TabsWithWork/>
                 </DialogBody>
-
+                <DialogFooter>
+                    <Button variant="text" color="red" onClick={closePdModal} className="mr-1">
+                        <span>Orqaga</span>
+                    </Button>
+                    <Button variant="gradient" color="gray">
+                        <span>Qo'shish</span>
+                    </Button>
+                </DialogFooter>
             </Dialog>
         </div>
     </div>);
