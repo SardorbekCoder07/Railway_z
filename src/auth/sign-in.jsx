@@ -14,24 +14,38 @@ export function SignIn() {
     useEffect(() => {
         document.getElementById('link').click()
     }, [role])
+
     function logIn() {
         let phoneNumber = document.getElementById('phoneNumber').value;
         let password = document.getElementById('password').value;
-        axios.post(api + "auth/login", {phoneNumber, password})
-            .then(res => {
-                sessionStorage.setItem('jwtTokin', "Bearer " + res.data.body);
-                if (res.data.message === "ROLE_SUPER_ADMIN") {
-                    setRole('/super-admin/home');
-                    toast.success("Successfully logged in!")
-                } else if (res.data.message === "ROLE_ADMIN") {
-                    setRole('/admin/home');
-                    toast.success("Successfully logged in!")
-                }
-            }).catch((err) => {
-            console.log(err);
-            alert(err)
-        })
+        if (phoneNumber && password) {
+            axios.post(api + "auth/login", {phoneNumber, password})
+                .then(res => {
+                    sessionStorage.setItem('jwtTokin', "Bearer " + res.data.body);
+                    if (res.data.message === "ROLE_SUPER_ADMIN") {
+                        setRole('/super-admin/home');
+                        toast.success("Tizimga muvaffaqiyatli kirdingiz✔")
+                    } else if (res.data.message === "ROLE_ADMIN") {
+                        setRole('/admin/home');
+                        toast.success("Tizimga muvaffaqiyatli kirdingiz✔")
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    toast.error('Serverda xatolik yuz berdi❌')
+                    alert(err)
+                })
+        } else toast.error('Ma\'lumotlarni to\'liq kiriting.')
+
     }
+
+    function checkKeyPress(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            logIn()
+        }
+    }
+
     return (
         <section className="m-8 flex justify-center gap-4">
             <div className="w-full lg:w-3/5 mt-24">
@@ -47,6 +61,7 @@ export function SignIn() {
                             Telefon raqam*
                         </Typography>
                         <Input
+                            onKeyDown={checkKeyPress}
                             id="phoneNumber"
                             type="number"
                             size="lg"
@@ -60,6 +75,7 @@ export function SignIn() {
                             Parol*
                         </Typography>
                         <Input
+                            onKeyDown={checkKeyPress}
                             id="password"
                             type="password"
                             size="lg"
