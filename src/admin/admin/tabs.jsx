@@ -158,21 +158,21 @@ export function TabsWithWork() {
           {data.map(({ value, input }) => (
             <TabPanel key={value} value={value} className="flex flex-col gap-2">
               {input}
-              <Button
-                className={`flex gap-2 items-center ${
-                  selectedTab === "html" && !htmlInputValue
-                    ? "opacity-50 cursor-not-allowed"
-                    : ""
-                }`}
-                onClick={handleNextButtonClick}
-                disabled={selectedTab === "html" && !htmlInputValue}
-              >
-                Next <ForwardIcon className="h-4 w-4 ml-1" />
-              </Button>
             </TabPanel>
           ))}
         </TabsBody>
       </Tabs>
+      <Button
+        className={`flex gap-2 items-center ${
+          selectedTab === "html" && !htmlInputValue
+            ? "opacity-50 cursor-not-allowed"
+            : ""
+        }`}
+        onClick={handleNextButtonClick}
+        disabled={selectedTab === "html" && !htmlInputValue}
+      >
+        Next <ForwardIcon className="h-4 w-4 ml-1" />
+      </Button>
     </div>
   );
 }

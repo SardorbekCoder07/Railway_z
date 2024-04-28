@@ -181,14 +181,7 @@ export function Home() {
                 <DialogBody>
                     <TabsWithWork/>
                 </DialogBody>
-                <DialogFooter>
-                    <Button variant="text" color="red" onClick={closePdModal} className="mr-1">
-                        <span>Orqaga</span>
-                    </Button>
-                    <Button variant="gradient" color="gray">
-                        <span>Qo'shish</span>
-                    </Button>
-                </DialogFooter>
+
             </Dialog>
         </div>
     </div>);
