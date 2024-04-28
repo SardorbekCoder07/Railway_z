@@ -81,17 +81,71 @@ export function TabsWithWork() {
        </div>
      ),
       button: (
-        <Button
-          onClick={handleNextButtonClick}
-          className={`flex gap-2 items-center ${
-            selectedTab === "react" ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-          disabled={selectedTab === "react"}
-        >
-          Yuborish <ForwardIcon className="h-4 w-4 ml-1" />
-        </Button>
+       <Button
+       className={`flex gap-2 items-center ${
+         selectedTab === "html" && !htmlInputValue ? "opacity-50 cursor-not-allowed" : ""
+       }`}
+       onClick={handleNextButtonClick}
+       disabled={selectedTab === "html" && !htmlInputValue}
+     >
+       Next <ForwardIcon className="h-4 w-4 ml-1" />
+     </Button>
       ),
     },
+    {
+     label: "Ish Qurollari",
+     value: "css",
+     input:(
+     <div className="relative w-full min-w-[200px]">
+     <table className="min-w-full divide-y divide-gray-200">
+       <thead className="bg-gray-50">
+         <tr>
+           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+             Oylik toʻlovlar
+           </th>
+           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+             Taomlar
+           </th>
+           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+             Foydalanuvchi
+           </th>
+           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+             Chek
+           </th>
+         </tr>
+       </thead>
+       <tbody className="bg-white divide-y divide-gray-200">
+         <tr>
+           <td className="px-6 py-4 whitespace-nowrap">
+             <div className="text-sm text-gray-900">250</div>
+           </td>
+           <td className="px-6 py-4 whitespace-nowrap">
+             <div className="text-sm text-gray-900">Ko'p sevimli taomlar</div>
+           </td>
+           <td className="px-6 py-4 whitespace-nowrap">
+             <div className="text-sm text-gray-900">Ali</div>
+           </td>
+           <td className="px-6 py-4 whitespace-nowrap">
+             <input type="checkbox" className="h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
+           </td>
+         </tr>
+         {/* Additional rows go here */}
+       </tbody>
+     </table>
+   </div>
+     ),
+     button: (
+       <Button
+         className={`flex gap-2 items-center ${
+           selectedTab === "html" && !htmlInputValue ? "opacity-50 cursor-not-allowed" : ""
+         }`}
+         onClick={handleNextButtonClick}
+         disabled={selectedTab === "html" && !htmlInputValue}
+       >
+         Yuborish
+       </Button>
+     ),
+   },
   ];
 
   return (
