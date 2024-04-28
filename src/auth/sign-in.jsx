@@ -1,8 +1,6 @@
 import {api} from "@/api/api";
 import {
-    Card,
     Input,
-    Checkbox,
     Button,
     Typography,
 } from "@material-tailwind/react";
@@ -13,11 +11,9 @@ import {Link} from "react-router-dom";
 
 export function SignIn() {
     const [role, setRole] = useState('/auth/log-in')
-
     useEffect(() => {
         document.getElementById('link').click()
     }, [role])
-
     function logIn() {
         let phoneNumber = document.getElementById('phoneNumber').value;
         let password = document.getElementById('password').value;
@@ -36,7 +32,6 @@ export function SignIn() {
             alert(err)
         })
     }
-
     return (
         <section className="m-8 flex justify-center gap-4">
             <div className="w-full lg:w-3/5 mt-24">
