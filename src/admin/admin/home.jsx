@@ -7,24 +7,33 @@ import {
   Dialog,
   DialogHeader,
   DialogBody,
-  Input,
   DialogFooter,
+  Input,
+  Tabs,
+  TabsHeader,
+  TabsBody,
+  Tab,
+  TabPanel,
 } from "@material-tailwind/react";
 import { StatisticsCard } from "@/admin/widgets/cards";
 import { statisticsCardsData } from "@/admin/data";
-import { CheckCircleIcon, ClockIcon, UserPlusIcon } from "@heroicons/react/24/solid";
+import { UserPlusIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 
 export function Home() {
   const [addModal, setAddModal] = useState(false);
+  const [pdModal, setPdModal] = useState(false);
+  const [showKmTable, setShowKmTable] = useState(true);
   const [selectedKmIndex, setSelectedKmIndex] = useState(null);
 
   const openAddModal = () => setAddModal(true);
   const closeAddModal = () => setAddModal(false);
+  const closePdModal = () => setPdModal(false);
+  const openPdModal = () => setPdModal(true);
 
   const handleKmButtonClick = (index) => {
-    console.log(index);
     setSelectedKmIndex(index);
+    setShowKmTable(false);
   };
 
   return (
@@ -90,9 +99,7 @@ export function Home() {
           </div>
           <CardBody className="md:overflow-x-scroll flex gap-3 flex-wrap">
             {[...Array(20)].map((_, index) => (
-
               <Button
-
                 key={index}
                 onClick={() => handleKmButtonClick(index)}
                 className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105 ${
@@ -104,7 +111,24 @@ export function Home() {
             ))}
           </CardBody>
         </Card>
-
+        {/* New Table */}
+        {showKmTable ? (
+          <table>
+            <CardBody className="md:overflow-x-scroll flex gap-3 flex-wrap">
+              {[...Array(20)].map((_, index) => (
+                <Button
+                  key={index}
+                  onClick={() => openPdModal()}
+                  className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105 ${
+                    selectedKmIndex === index ? "bg-gray-500" : ""
+                  }`}
+                >
+                  PK-{index}
+                </Button>
+              ))}
+            </CardBody>
+          </table>
+        ) : null}
       </div>
       <div>
         <Dialog open={addModal} handler={closeAddModal}>
@@ -145,6 +169,35 @@ export function Home() {
             </Button>
           </DialogFooter>
         </Dialog>
+        <Dialog open={pdModal} handler={closePdModal}>
+      <DialogHeader>PD-index</DialogHeader>
+      <DialogBody>
+        <Tabs value="html">
+          <TabsHeader>
+            <Tab key={1}>
+              Bugungi ishlar
+            </Tab>
+            <Tab key={2}>
+              ertangi ishlar
+            </Tab>
+          </TabsHeader>
+          <TabsBody>
+            <TabPanel>
+              <input type="text" />
+              <button>Yuborish</button>
+            </TabPanel>
+          </TabsBody>
+        </Tabs>
+      </DialogBody>
+      <DialogFooter>
+        <Button variant="text" color="red" onClick={closePdModal} className="mr-1">
+          <span>Orqaga</span>
+        </Button>
+        <Button variant="gradient" color="gray">
+          <span>Qo'shish</span>
+        </Button>
+      </DialogFooter>
+    </Dialog>
       </div>
     </div>
   );
