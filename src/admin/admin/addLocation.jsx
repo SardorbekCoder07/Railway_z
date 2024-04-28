@@ -29,6 +29,11 @@ export function AddLocation() {
   const [regex, setRegex] = useState(true)
 
 
+
+  const logoAdd = () => { <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+  <path fill-rule="evenodd" d="m7.539 14.841.003.003.002.002a.755.755 0 0 0 .912 0l.002-.002.003-.003.012-.009a5.57 5.57 0 0 0 .19-.153 15.588 15.588 0 0 0 2.046-2.082c1.101-1.362 2.291-3.342 2.291-5.597A5 5 0 0 0 3 7c0 2.255 1.19 4.235 2.292 5.597a15.591 15.591 0 0 0 2.046 2.082 8.916 8.916 0 0 0 .189.153l.012.01ZM8 8.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" clip-rule="evenodd" />
+</svg>}
+
   const openEditModal = () => setEditModal(true)
   const closeEditModal = () => {
     setEditModal(false)
@@ -63,7 +68,7 @@ export function AddLocation() {
 
 
   // *******************GET USER **********************
-  
+
 
   const getkm = () => {
     axios.get(`${api}railway`, config)
@@ -175,7 +180,7 @@ export function AddLocation() {
             className="bg-[#fff] text-black px-3 py-2 rounded-md"
           // onClick={handleOpenModal} // Attach event handler to open modal
           >
-            <WrenchScrewdriverIcon className="h-6 w-6 text-black inline-block" /> +
+            <logoAdd className="h-6 w-6 text-black inline-block" /> +
           </Button>
         </CardHeader>
         <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
@@ -232,7 +237,7 @@ export function AddLocation() {
                         openDeleteModal()
                         setkmData(item)
                       }} className=" cursor-pointer text-xs font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
-                        O'chirish 
+                        O'chirish
                       </Typography> */}
                     </td>
                   </tr>
