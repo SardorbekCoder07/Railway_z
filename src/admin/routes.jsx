@@ -1,16 +1,12 @@
 import {
   HomeIcon,
-  UserCircleIcon,
-  TableCellsIcon,
   InformationCircleIcon,
-  ServerStackIcon,
-  RectangleStackIcon,
   GlobeAltIcon,
   UsersIcon,
   DocumentDuplicateIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/solid";
-import { Home, Profile, Tables, Notifications, Works, Tools } from "@/admin/admin";
+import { Home,Tables, Notifications, Works, Tools } from "@/admin/admin";
 import { SignIn, SignUp } from "@/auth";
 
 const icon = {

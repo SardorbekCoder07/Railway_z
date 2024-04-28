@@ -17,8 +17,12 @@ import {
 } from "@material-tailwind/react";
 import { StatisticsCard } from "@/admin/widgets/cards";
 import { statisticsCardsData } from "@/admin/data";
+<<<<<<< HEAD
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
+=======
+import {UserPlusIcon } from "@heroicons/react/24/solid";
+>>>>>>> 1f1be00ac9c7a95413f256bfe3c47b3480a1db15
 
 export function Home() {
   const [addModal, setAddModal] = useState(false);

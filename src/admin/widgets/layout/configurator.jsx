@@ -30,13 +30,10 @@ function formatNumber(number, decPlaces) {
         number = 1;
         i++;
       }
-
       number += abbrev[i];
-
       break;
     }
   }
-
   return number;
 }
 

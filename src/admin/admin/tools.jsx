@@ -13,9 +13,7 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
-import { authorsTableData } from "@/superAdmin/data";
-import { CircularPagination } from "@/superAdmin/widgets/layout/circlePagination";
-import { UserPlusIcon, WrenchScrewdriverIcon } from "@heroicons/react/24/solid";
+import { WrenchScrewdriverIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { api, byId, config } from "@/api/api";
 import toast from "react-hot-toast";
