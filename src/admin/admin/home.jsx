@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
     Card,
     CardHeader,
@@ -10,11 +10,11 @@ import {
     DialogFooter,
     Input,
 } from "@material-tailwind/react";
-import {StatisticsCard} from "@/admin/widgets/cards";
-import {statisticsCardsData} from "@/admin/data";
-import {UserPlusIcon} from "@heroicons/react/24/solid";
-import {getPdb, getPk, getRailway} from "@/admin/admin/apiFunction.jsx";
-import {setConfig} from "@/api/api.jsx";
+import { StatisticsCard } from "@/admin/widgets/cards";
+import { statisticsCardsData } from "@/admin/data";
+import { UserPlusIcon } from "@heroicons/react/24/solid";
+import { getPdb, getPk, getRailway } from "@/admin/admin/apiFunction.jsx";
+import { setConfig } from "@/api/api.jsx";
 import { TabsWithWork } from './tabs';
 
 export function Home() {
@@ -24,6 +24,12 @@ export function Home() {
     const [pdb, setPdb] = useState(null);
     const [railway, setRailway] = useState(null);
     const [pk, setPk] = useState(null);
+    const today = new Date();
+    const options = {  year: 'numeric', month: 'numeric', day: 'numeric' };
+    const todayDate = today.toLocaleDateString('uz-UZ', options);
+
+    console.log('Bugun: ' + todayDate);
+
 
     const closePdModal = () => setPdModal(false);
     const openPdModal = () => setPdModal(true);
@@ -41,7 +47,7 @@ export function Home() {
 
     return (<div className="mt-12">
         <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
-            {statisticsCardsData.map(({icon, title, footer, ...rest}) => (<StatisticsCard
+            {statisticsCardsData.map(({ icon, title, footer, ...rest }) => (<StatisticsCard
                 key={title}
                 {...rest}
                 title={title}
@@ -82,47 +88,47 @@ export function Home() {
                     <div>
                         <table className="w-full min-w-max table-auto text-left">
                             <tbody>
-                            <tr>
-                                <td className="text-black font-medium border-r-2 border-b-2 border-black border-solid px-1 text-xl">
-                                    PD
-                                </td>
-                                <td className="px-1 text-xl text-black font-medium border-b-2 border-solid border-black">
-                                    S.Nurmuhammedov
-                                </td>
-                            </tr>
-                            <tr>
-                                {firstNamePdb ? (
-                                    <>
-                                        <td className="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
-
-                                        {firstNamePdb.name}
-                                        </td>
-                                        <td className="text-black font-medium border-black border-solid px-1 text-xl">
-                                            {firstNamePdb.userFullName}
-                                        </td>
-                                    </>
-                                ) : (
-                                    pdb ? (
+                                <tr>
+                                    <td className="text-black font-medium border-r-2 border-b-2 border-black border-solid px-1 text-xl">
+                                        PD
+                                    </td>
+                                    <td className="px-1 text-xl text-black font-medium border-b-2 border-solid border-black">
+                                        S.Nurmuhammedov
+                                    </td>
+                                </tr>
+                                <tr>
+                                    {firstNamePdb ? (
                                         <>
                                             <td className="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
-                                                {pdb[0].name}
+
+                                                {firstNamePdb.name}
                                             </td>
                                             <td className="text-black font-medium border-black border-solid px-1 text-xl">
-                                                {pdb[0].userFullName}
+                                                {firstNamePdb.userFullName}
                                             </td>
                                         </>
                                     ) : (
-                                        <>
-                                            <td className="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
-                                                NOT FOUND
-                                            </td>
-                                            <td className="text-black font-medium border-black border-solid px-1 text-xl">
-                                                NOT FOUND
-                                            </td>
-                                        </>
-                                    )
-                                )}
-                            </tr>
+                                        pdb ? (
+                                            <>
+                                                <td className="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
+                                                    {pdb[0].name}
+                                                </td>
+                                                <td className="text-black font-medium border-black border-solid px-1 text-xl">
+                                                    {pdb[0].userFullName}
+                                                </td>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <td className="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
+                                                    NOT FOUND
+                                                </td>
+                                                <td className="text-black font-medium border-black border-solid px-1 text-xl">
+                                                    NOT FOUND
+                                                </td>
+                                            </>
+                                        )
+                                    )}
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -179,7 +185,7 @@ export function Home() {
         <div>
             <Dialog open={pdModal} handler={closePdModal}>
                 <DialogBody>
-                <TabsWithWork/>
+                    <TabsWithWork />
                 </DialogBody>
                 <DialogFooter>
                     <Button variant="text" color="red" onClick={closePdModal} className="mr-1">
