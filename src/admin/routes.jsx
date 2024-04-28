@@ -5,8 +5,9 @@ import {
   UsersIcon,
   DocumentDuplicateIcon,
   WrenchScrewdriverIcon,
+  MapPinIcon,
 } from "@heroicons/react/24/solid";
-import { Home,Tables, Notifications, Works, Tools } from "@/admin/admin";
+import { Home,Tables, Notifications, Works, Tools, AddLocation } from "@/admin/admin";
 import { SignIn, SignUp } from "@/auth";
 
 const icon = {
@@ -40,6 +41,12 @@ export const routes = [
         name: "Ish qurollar",
         path: "/tools",
         element: <Tools />,
+      },
+      {
+        icon: <MapPinIcon {...icon} />,
+        name: "Manzil",
+        path: "/add-km",
+        element: <AddLocation />,
       },
 
 
