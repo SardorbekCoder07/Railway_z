@@ -9,17 +9,13 @@ import {
     DialogBody,
     DialogFooter,
     Input,
-    Tabs,
-    TabsHeader,
-    TabsBody,
-    Tab,
-    TabPanel,
 } from "@material-tailwind/react";
 import {StatisticsCard} from "@/admin/widgets/cards";
 import {statisticsCardsData} from "@/admin/data";
 import {UserPlusIcon} from "@heroicons/react/24/solid";
 import {getPdb, getPk, getRailway} from "@/admin/admin/apiFunction.jsx";
 import {setConfig} from "@/api/api.jsx";
+import { TabsWithWork } from './tabs';
 
 export function Home() {
     const [pdModal, setPdModal] = useState(false);
@@ -98,7 +94,8 @@ export function Home() {
                                 {firstNamePdb ? (
                                     <>
                                         <td className="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
-                                            {firstNamePdb.name}
+
+                                        {firstNamePdb.name}
                                         </td>
                                         <td className="text-black font-medium border-black border-solid px-1 text-xl">
                                             {firstNamePdb.userFullName}
@@ -111,7 +108,7 @@ export function Home() {
                                                 {pdb[0].name}
                                             </td>
                                             <td className="text-black font-medium border-black border-solid px-1 text-xl">
-                                                {pdb[1].userFullName}
+                                                {pdb[0].userFullName}
                                             </td>
                                         </>
                                     ) : (
@@ -168,6 +165,7 @@ export function Home() {
                                 key={item.id}
                                 onClick={() => openPdModal()}
                                 className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105`}
+
                             >
                                 {item.name}
                             </Button>
@@ -180,24 +178,8 @@ export function Home() {
         </div>
         <div>
             <Dialog open={pdModal} handler={closePdModal}>
-                <DialogHeader>PD-index</DialogHeader>
                 <DialogBody>
-                    <Tabs value="html">
-                        <TabsHeader>
-                            <Tab key={1}>
-                                Bugungi ishlar
-                            </Tab>
-                            <Tab key={2}>
-                                ertangi ishlar
-                            </Tab>
-                        </TabsHeader>
-                        <TabsBody>
-                            <TabPanel>
-                                <input type="text"/>
-                                <button>Yuborish</button>
-                            </TabPanel>
-                        </TabsBody>
-                    </Tabs>
+                <TabsWithWork/>
                 </DialogBody>
                 <DialogFooter>
                     <Button variant="text" color="red" onClick={closePdModal} className="mr-1">

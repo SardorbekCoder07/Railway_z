@@ -34,12 +34,7 @@ export const routes = [
         element: <Tables />,
       },
 
-      {
-        icon: <DocumentDuplicateIcon {...icon} />,
-        name: "Hisobot",
-        path: "/report",
-        element: <Works />,
-      },
+
       {
         icon: <WrenchScrewdriverIcon {...icon} />,
         name: "Ish qurollar",
@@ -47,23 +42,13 @@ export const routes = [
         element: <Tools />,
       },
 
-      {
-        icon: <InformationCircleIcon {...icon} />,
-        name: "Bildirishnomlar",
-        path: "/notifications",
-        element: <Notifications />,
-      },
+
     ],
   },
   {
     layout: "auth",
     pages: [
-      {
-        icon: <GlobeAltIcon {...icon} />,
-        name: "Veb-saytga kirish",
-        path: ' https://themecrafter.com/kyber/elementor/homepage-02/',
-        element: <SignUp />,
-      },
+
       {
         icon: logout,
         name: "Tizimdan Chiqish",
