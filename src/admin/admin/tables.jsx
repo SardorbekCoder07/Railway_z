@@ -149,9 +149,6 @@ export function Tables() {
           </table>
         </CardBody>
       </Card>
-      <div className="w-full flex justify-center items-center">
-        <CircularPagination />
-      </div>
       {/* Edit pdb  */}
       <div>
         <Dialog open={editModal} handler={closeEditModal}>
