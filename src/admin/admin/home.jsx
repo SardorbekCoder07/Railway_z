@@ -111,7 +111,7 @@ export function Home() {
                                                 {pdb[0].name}
                                             </td>
                                             <td className="text-black font-medium border-black border-solid px-1 text-xl">
-                                                {pdb[1].userFullName}
+                                                {pdb[0].userFullName}
                                             </td>
                                         </>
                                     ) : (
