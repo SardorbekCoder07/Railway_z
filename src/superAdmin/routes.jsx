@@ -1,15 +1,13 @@
 import {
   HomeIcon,
-  UserCircleIcon,
-  TableCellsIcon,
   InformationCircleIcon,
-  ServerStackIcon,
-  RectangleStackIcon,
   GlobeAltIcon,
+  UsersIcon,
+  DocumentDuplicateIcon,
+  WrenchScrewdriverIcon,
 } from "@heroicons/react/24/solid";
-import { Home, Profile, Tables, Notifications } from "@/superAdmin/dashboard";
+import { Home,Tables, Notifications, Works, Tools } from "@/admin/admin";
 import { SignIn, SignUp } from "@/auth";
-import { PdUsers } from "./dashboard/pdUsers";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -20,33 +18,41 @@ const logout = <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 
   ;
 export const routes = [
   {
-    layout: "super-admin",
+    layout: "admin",
     pages: [
       {
         icon: <HomeIcon {...icon} />,
-        name: "dashboard",
+        name: "Admin",
         path: "/home",
         element: <Home />,
       },
       // sa
       {
-        icon: <TableCellsIcon {...icon} />,
-        name: "Adminlar",
+        icon: <UsersIcon {...icon} />,
+        name: "PDB lar ro'yxati",
         path: "/tables",
         element: <Tables />,
       },
+
       {
-        icon: <TableCellsIcon {...icon} />,
-        name: "PD",
-        path: "/pd",
-        element: <PdUsers />,
+        icon: <DocumentDuplicateIcon {...icon} />,
+        name: "Hisobot",
+        path: "/report",
+        element: <Works />,
       },
-      // {
-      //   icon: <InformationCircleIcon {...icon} />,
-      //   name: "Bildirishnomlar",
-      //   path: "/notifications",
-      //   element: <Notifications />,
-      // },
+      {
+        icon: <WrenchScrewdriverIcon {...icon} />,
+        name: "Ish qurollar",
+        path: "/tools",
+        element: <Tools />,
+      },
+
+      {
+        icon: <InformationCircleIcon {...icon} />,
+        name: "Bildirishnomlar",
+        path: "/notifications",
+        element: <Notifications />,
+      },
     ],
   },
   {
