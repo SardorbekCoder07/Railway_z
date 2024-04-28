@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from "react";
 import {
+    \
     Card,
     CardHeader,
     CardBody,
     Button,
-    Dialog,
-    DialogHeader,
-    DialogBody,
-    DialogFooter,
-    Input,
 } from "@material-tailwind/react";
 import { StatisticsCard } from "@/admin/widgets/cards";
 import { statisticsCardsData } from "@/admin/data";
-import { UserPlusIcon } from "@heroicons/react/24/solid";
 import { getPdb, getPk, getRailway } from "@/admin/admin/apiFunction.jsx";
 import { setConfig } from "@/api/api.jsx";
-import { TabsWithWork } from './tabs';
 
 export function Home() {
     const [pdModal, setPdModal] = useState(false);
@@ -182,21 +176,7 @@ export function Home() {
                 </CardBody>
             </table>
         </div>
-        <div>
-            <Dialog open={pdModal} handler={closePdModal}>
-                <DialogBody>
-                    <TabsWithWork />
-                </DialogBody>
-                <DialogFooter>
-                    <Button variant="text" color="red" onClick={closePdModal} className="mr-1">
-                        <span>Orqaga</span>
-                    </Button>
-                    <Button variant="gradient" color="gray">
-                        <span>Qo'shish</span>
-                    </Button>
-                </DialogFooter>
-            </Dialog>
-        </div>
+       
     </div>);
 }
 

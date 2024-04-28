@@ -85,21 +85,21 @@ export function Tables() {
 
     // *******************DELETE USER **********************
 
-    const deletePDB = () => {
-      axios.delete(`${api}pdb/delete?id=${pdbData ? pdbData.id : 0}`,config)
-        .then((res) => {
-          closeDeleteModal()
-          getPDBuser()
-          toast.success("PDB muvoffaqqiyatli o'chirildi!👌")
+    // const deletePDB = () => {
+    //   axios.delete(`${api}pdb/delete?id=${pdbData ? pdbData.id : 0}`,config)
+    //     .then((res) => {
+    //       closeDeleteModal()
+    //       getPDBuser()
+    //       toast.success("PDB muvoffaqqiyatli o'chirildi!👌")
   
-        })
-        .catch((err) => {
-          console.log(err);
-          closeDeleteModal()
-          toast.error("PDB o'chirilmadi!❌")
-        })
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //       closeDeleteModal()
+    //       toast.error("PDB o'chirilmadi!❌")
+    //     })
   
-    }
+    // }
   
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12 ">
@@ -169,12 +169,12 @@ export function Tables() {
                         }} className=" cursor-pointer text-xs font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
                           Edit
                         </Typography>
-                        <Typography onClick={() => {
+                        {/* <Typography onClick={() => {
                           openDeleteModal()
                           setpdbdata(item)
                         }} className=" cursor-pointer text-xs font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
                           Delete
-                        </Typography>
+                        </Typography> */}
                       </td>
                     </tr>
                   );
@@ -246,7 +246,7 @@ export function Tables() {
           </DialogFooter>
         </Dialog>
       </div>
-      {/* Delete pdb modal */}
+      {/* Delete pdb modal
       <div>
         <Dialog open={deleteModal} handler={closeDeleteModal}>
           <DialogHeader>O'chirish</DialogHeader>
@@ -275,7 +275,7 @@ export function Tables() {
             </Button>
           </DialogFooter>
         </Dialog>
-      </div>
+      </div> */}
 
 
       {/* <Card>
