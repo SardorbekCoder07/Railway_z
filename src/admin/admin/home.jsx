@@ -1,206 +1,197 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import {
-  Card,
-  CardHeader,
-  CardBody,
-  Button,
-  Dialog,
-  DialogHeader,
-  DialogBody,
-  DialogFooter,
-  Input,
-  Tabs,
-  TabsHeader,
-  TabsBody,
-  Tab,
-  TabPanel,
+    Card,
+    CardHeader,
+    CardBody,
+    Button,
+    Dialog,
+    DialogHeader,
+    DialogBody,
+    DialogFooter,
+    Input,
+    Tabs,
+    TabsHeader,
+    TabsBody,
+    Tab,
+    TabPanel,
 } from "@material-tailwind/react";
-import { StatisticsCard } from "@/admin/widgets/cards";
-import { statisticsCardsData } from "@/admin/data";
-import { UserPlusIcon } from "@heroicons/react/24/solid";
-import { Link } from "react-router-dom";
+import {StatisticsCard} from "@/admin/widgets/cards";
+import {statisticsCardsData} from "@/admin/data";
+import {UserPlusIcon} from "@heroicons/react/24/solid";
+import {getPdb, getRailway} from "@/admin/admin/apiFunction.jsx";
+import {setConfig} from "@/api/api.jsx";
 
 export function Home() {
-  const [addModal, setAddModal] = useState(false);
-  const [pdModal, setPdModal] = useState(false);
-  const [showKmTable, setShowKmTable] = useState(true);
-  const [selectedKmIndex, setSelectedKmIndex] = useState(null);
+    const [pdModal, setPdModal] = useState(false);
+    const [showKmTable, setShowKmTable] = useState(true);
+    const [selectedKmIndex, setSelectedKmIndex] = useState(null);
+    const [firstNamePdb, setFirstNamePdb] = useState('');
+    const [pdb, setPdb] = useState(null);
+    const [railway, setRailway] = useState(null);
 
-  const openAddModal = () => setAddModal(true);
-  const closeAddModal = () => setAddModal(false);
-  const closePdModal = () => setPdModal(false);
-  const openPdModal = () => setPdModal(true);
+    const closePdModal = () => setPdModal(false);
+    const openPdModal = () => setPdModal(true);
 
-  const handleKmButtonClick = (index) => {
-    setSelectedKmIndex(index);
-    setShowKmTable(false);
-  };
+    useEffect(() => {
+        setConfig()
+        getPdb(setPdb)
+        getRailway(1, setRailway)
+    }, []);
 
-  return (
-    <div className="mt-12">
-      <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
-        {statisticsCardsData.map(({ icon, title, footer, ...rest }) => (
-          <StatisticsCard
-            key={title}
-            {...rest}
-            title={title}
-            icon={React.createElement(icon, {
-              className: "w-6 h-6 text-white",
-            })}
-          />
-        ))}
-      </div>
-      <div className="mb-6 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
-        <Card>
-          <CardHeader
-            variant="gradient"
-            color="gray"
-            className="mb-8 flex items-center justify-between p-6"
-          >
-            <div className="flex gap-5">
-              <Button className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md">
-                PDB-1
-              </Button>
-              <Button className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md">
-                PDB-2
-              </Button>
-            </div>
-            <Button
-              onClick={openAddModal}
-              className="bg-[#fff] text-black px-3 py-2 rounded-md"
-            >
-              <UserPlusIcon className="h-6 w-6 text-black" />
-            </Button>
-          </CardHeader>
-          <div className="px-6 flex bg-gray-300 justify-center items-center gap-3 md:justify-end">
-            <h1 className="text-4xl font-semibold text-black">PD-1</h1>
-            <div>
-              <table className="w-full min-w-max table-auto text-left">
-                <tbody>
-                  <tr>
-                    <td className="text-black font-medium border-r-2 border-b-2 border-black border-solid px-1 text-xl">
-                      PD
-                    </td>
-                    <td className="px-1 text-xl text-black font-medium border-b-2 border-solid border-black">
-                      S.Nurmuhammedov
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
-                      PDB-1
-                    </td>
-                    <td className="text-black font-medium border-black border-solid px-1 text-xl">
-                      A.Yuldoshev
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <CardBody className="md:overflow-x-scroll flex gap-3 flex-wrap">
-            {[...Array(20)].map((_, index) => (
-              <Button
-                key={index}
-                onClick={() => handleKmButtonClick(index)}
-                className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105 ${
-                  selectedKmIndex === index ? "bg-gray-500" : ""
-                }`}
-              >
-                3752 km
-              </Button>
-            ))}
-          </CardBody>
-        </Card>
-        {/* New Table */}
-        {showKmTable ? (
-          <table>
-            <CardBody className="md:overflow-x-scroll flex gap-3 flex-wrap">
-              {[...Array(20)].map((_, index) => (
-                <Button
-                  key={index}
-                  onClick={() => openPdModal()}
-                  className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105 ${
-                    selectedKmIndex === index ? "bg-gray-500" : ""
-                  }`}
+    const handleKmButtonClick = (index) => {
+        setSelectedKmIndex(index);
+        setShowKmTable(false);
+    };
+
+    console.log(firstNamePdb)
+    return (<div className="mt-12">
+        <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
+            {statisticsCardsData.map(({icon, title, footer, ...rest}) => (<StatisticsCard
+                key={title}
+                {...rest}
+                title={title}
+                icon={React.createElement(icon, {
+                    className: "w-6 h-6 text-white",
+                })}
+            />))}
+        </div>
+        <div className="mb-6 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
+            <Card>
+                <CardHeader
+                    variant="gradient"
+                    color="gray"
+                    className="mb-8 flex items-center justify-between p-6"
                 >
-                  PK-{index}
-                </Button>
-              ))}
-            </CardBody>
-          </table>
-        ) : null}
-      </div>
-      <div>
-        <Dialog open={addModal} handler={closeAddModal}>
-          <DialogHeader>PD qo'shish</DialogHeader>
-          <DialogBody>
-            <div className="flex justify-center flex-col items-center gap-7">
-              <div className="w-full max-w-[24rem]">
-                <Input id="addname" label="Ism" />
-              </div>
-              <div className="w-full max-w-[24rem]">
-                <Input id="addlastname" label="Familya" />
-              </div>
-              <div className="relative flex w-full max-w-[24rem]">
-                <Button
-                  disabled
-                  size="sm"
-                  className="!absolute left-1 top-1 rounded"
-                >
-                  +998
-                </Button>
-                <Input
-                  id="addphone"
-                  type="number"
-                  className="ps-20"
-                  containerProps={{
-                    className: "min-w-0",
-                  }}
-                />
-              </div>
-            </div>
-          </DialogBody>
-          <DialogFooter>
-            <Button variant="text" color="red" onClick={closeAddModal} className="mr-1">
-              <span>Orqaga</span>
-            </Button>
-            <Button variant="gradient" color="gray">
-              <span>Qo'shish</span>
-            </Button>
-          </DialogFooter>
-        </Dialog>
-        <Dialog open={pdModal} handler={closePdModal}>
-      <DialogHeader>PD-index</DialogHeader>
-      <DialogBody>
-        <Tabs value="html">
-          <TabsHeader>
-            <Tab key={1}>
-              Bugungi ishlar
-            </Tab>
-            <Tab key={2}>
-              ertangi ishlar
-            </Tab>
-          </TabsHeader>
-          <TabsBody>
-            <TabPanel>
-              <input type="text" />
-              <button>Yuborish</button>
-            </TabPanel>
-          </TabsBody>
-        </Tabs>
-      </DialogBody>
-      <DialogFooter>
-        <Button variant="text" color="red" onClick={closePdModal} className="mr-1">
-          <span>Orqaga</span>
-        </Button>
-        <Button variant="gradient" color="gray">
-          <span>Qo'shish</span>
-        </Button>
-      </DialogFooter>
-    </Dialog>
-      </div>
-    </div>
-  );
+                    <div className="flex gap-5">
+                        {pdb ? (pdb.map(item => (<Button
+                            key={item.id}
+                            onClick={() => {
+                                setFirstNamePdb(item)
+                                getRailway(item.id, setRailway)
+                            }}
+                            className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md">
+                            {item.name}
+                        </Button>))) : (<Button className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md">
+                            PDB not found
+                        </Button>)}
+                    </div>
+                    {/*<Button*/}
+                    {/*    onClick={openAddModal}*/}
+                    {/*    className="bg-[#fff] text-black px-3 py-2 rounded-md"*/}
+                    {/*>*/}
+                    {/*    <UserPlusIcon className="h-6 w-6 text-black"/>*/}
+                    {/*</Button>*/}
+                </CardHeader>
+                <div className="px-6 flex bg-gray-300 justify-center items-center gap-3 md:justify-end">
+                    <h1 className="text-4xl font-semibold text-black">PD-1</h1>
+                    <div>
+                        <table className="w-full min-w-max table-auto text-left">
+                            <tbody>
+                            <tr>
+                                <td className="text-black font-medium border-r-2 border-b-2 border-black border-solid px-1 text-xl">
+                                    PD
+                                </td>
+                                <td className="px-1 text-xl text-black font-medium border-b-2 border-solid border-black">
+                                    S.Nurmuhammedov
+                                </td>
+                            </tr>
+                            <tr>
+                                {firstNamePdb ? (
+                                    <>
+                                        <td className="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
+                                            {firstNamePdb.name}
+                                        </td>
+                                        <td className="text-black font-medium border-black border-solid px-1 text-xl">
+                                            {firstNamePdb.userFullName}
+                                        </td>
+                                    </>
+                                ) : (
+                                    pdb ? (
+                                        <>
+                                            <td className="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
+                                                {pdb[0].name}
+                                            </td>
+                                            <td className="text-black font-medium border-black border-solid px-1 text-xl">
+                                                {pdb[1].userFullName}
+                                            </td>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <td className="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
+                                                NOT FOUND
+                                            </td>
+                                            <td className="text-black font-medium border-black border-solid px-1 text-xl">
+                                                NOT FOUND
+                                            </td>
+                                        </>
+                                    )
+                                )}
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <CardBody className="md:overflow-x-auto flex gap-3 flex-wrap">
+                    {railway ? (railway.length !== 0 ? (railway.map((item, index) => (<Button
+                        onClick={() => handleKmButtonClick(index)}
+                        className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105 ${selectedKmIndex === index ? "bg-gray-500" : ""}`}
+                    >
+                        {item['km']} km
+                    </Button>))) : (<Button
+                        className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105`}>
+                        not found
+                    </Button>)) : (<Button
+                        className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105`}>
+                        not found
+                    </Button>)}
+
+                </CardBody>
+            </Card>
+            {/* New Table */}
+            {showKmTable ? (<table>
+                <CardBody className="md:overflow-x-scroll flex gap-3 flex-wrap">
+                    {[...Array(20)].map((_, index) => (<Button
+                        key={index}
+                        onClick={() => openPdModal()}
+                        className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105 ${selectedKmIndex === index ? "bg-gray-500" : ""}`}
+                    >
+                        PK-{index}
+                    </Button>))}
+                </CardBody>
+            </table>) : null}
+        </div>
+        <div>
+            <Dialog open={pdModal} handler={closePdModal}>
+                <DialogHeader>PD-index</DialogHeader>
+                <DialogBody>
+                    <Tabs value="html">
+                        <TabsHeader>
+                            <Tab key={1}>
+                                Bugungi ishlar
+                            </Tab>
+                            <Tab key={2}>
+                                ertangi ishlar
+                            </Tab>
+                        </TabsHeader>
+                        <TabsBody>
+                            <TabPanel>
+                                <input type="text"/>
+                                <button>Yuborish</button>
+                            </TabPanel>
+                        </TabsBody>
+                    </Tabs>
+                </DialogBody>
+                <DialogFooter>
+                    <Button variant="text" color="red" onClick={closePdModal} className="mr-1">
+                        <span>Orqaga</span>
+                    </Button>
+                    <Button variant="gradient" color="gray">
+                        <span>Qo'shish</span>
+                    </Button>
+                </DialogFooter>
+            </Dialog>
+        </div>
+    </div>);
 }
 
 export default Home;
