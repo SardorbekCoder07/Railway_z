@@ -6,6 +6,8 @@ import {
   Tab,
   TabPanel,
   Button,
+  Switch,
+  Input,
 } from "@material-tailwind/react";
 import { ForwardIcon } from "@heroicons/react/24/outline";
 
@@ -84,19 +86,14 @@ export function TabsWithWork() {
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Oylik toʻlovlar
+                  Nomi
                 </th>
+                
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Taomlar
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Foydalanuvchi
+                  Qiymati
                 </th>
                 <th
                   scope="col"
@@ -111,17 +108,14 @@ export function TabsWithWork() {
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-900">250</div>
                 </td>
+               
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">Ko'p sevimli taomlar</div>
+                  <div className="text-sm text-gray-900">
+                    <Input type="number" placeholder="Soni" />
+                  </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">Ali</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <input
-                    type="checkbox"
-                    className="h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                  />
+                  <Switch/>
                 </td>
               </tr>
               {/* Additional rows go here */}
@@ -131,7 +125,7 @@ export function TabsWithWork() {
       ),
       button:(
         <div>
-          <Button className="flex items-center justify-end">Send</Button>
+          <Button className="flex items-center ju">Send</Button>
         </div>
       ),
     },
