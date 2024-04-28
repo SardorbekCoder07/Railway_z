@@ -24,7 +24,7 @@ export function AddLocation() {
   const [pdbId, setPDBid] = useState(null)
   const [kmData, setkmData] = useState(null)
   const [editModal, setEditModal] = useState(false)
-  const [deleteModal, setDeleteModal] = useState(false)
+  // const [deleteModal, setDeleteModal] = useState(false)
   const [addModal, setAddModal] = useState(false)
   const [regex, setRegex] = useState(true)
 
