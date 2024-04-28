@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Typography,
   Card,
@@ -15,6 +15,7 @@ import { StatisticsCard } from "@/superAdmin/widgets/cards";
 import { statisticsCardsData } from "@/superAdmin/data";
 import { CheckCircleIcon, UserPlusIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { CircularPagination } from "@/superAdmin/widgets/layout/circlePagination";
+import { setConfig } from "@/api/api";
 
 export function Home() {
   const [openModal, setOpenModal] = useState(false);
@@ -22,6 +23,10 @@ export function Home() {
   const [todayModal, setTodayModal] = useState(false);
   const [tomorrowModal, setTomorrowModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false)
+
+  useEffect(() => {
+    setConfig()
+  }, [])
 
 
   const openDeleteModal = () => setDeleteModal(true)

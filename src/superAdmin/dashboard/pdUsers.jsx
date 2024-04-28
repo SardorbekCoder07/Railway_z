@@ -17,7 +17,7 @@ import { authorsTableData } from "@/superAdmin/data";
 import { CircularPagination } from "@/superAdmin/widgets/layout/circlePagination";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
-import { api, byId, config } from "@/api/api";
+import { api, byId, config, setConfig } from "@/api/api";
 import toast from "react-hot-toast";
 
 export function PdUsers() {
@@ -47,6 +47,7 @@ export function PdUsers() {
   useEffect(() => {
     getPD()
     getUser()
+    setConfig()
   }, [])
 
 
