@@ -12,7 +12,6 @@ import {
   Input,
 } from "@material-tailwind/react";
 import { authorsTableData } from "@/admin/data";
-import { CircularPagination } from "@/admin/widgets/layout/circlePagination";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 import { api, byId, config } from "@/api/api";
 import axios from "axios";
@@ -102,8 +101,7 @@ export function Tables() {
                   const className = `py-3 px-5  ${key === authorsTableData.length - 1
                     ? ""
                     : "border-b border-blue-gray-50"
-                    }`;
-
+                    }`
                   return (
                     <tr key={name}>
                       <td className={className}>
