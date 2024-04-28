@@ -23,7 +23,7 @@ export function Home() {
   const closeAddModal = () => setAddModal(false);
 
   const handleKmButtonClick = (index) => {
-
+    console.log(index);
     setSelectedKmIndex(index);
   };
 
@@ -92,6 +92,7 @@ export function Home() {
             {[...Array(20)].map((_, index) => (
 
               <Button
+
                 key={index}
                 onClick={() => handleKmButtonClick(index)}
                 className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105 ${
