@@ -12,7 +12,7 @@ import {
 } from "@material-tailwind/react";
 import { StatisticsCard } from "@/admin/widgets/cards";
 import { statisticsCardsData } from "@/admin/data";
-import { CheckCircleIcon, ClockIcon, UserPlusIcon } from "@heroicons/react/24/solid";
+import { UserPlusIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 
 export function Hidden() {

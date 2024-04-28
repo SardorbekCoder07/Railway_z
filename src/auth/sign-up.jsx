@@ -1,13 +1,8 @@
 import {
-  Card,
   Input,
-  Checkbox,
   Button,
   Typography,
 } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
-
-
 export function SignUp() {
   return (
     <section className="m-8 flex justify-center gap-4">

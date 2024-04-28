@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   Dialog,
@@ -6,7 +5,6 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
- 
 export function UserModal( isOpen = "false", onclose, click = {onclose}) {
   return (
     <div>

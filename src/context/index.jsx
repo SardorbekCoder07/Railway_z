@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 export const MaterialTailwind = React.createContext(null);
 MaterialTailwind.displayName = "MaterialTailwindContext";
-
 export function reducer(state, action) {
   switch (action.type) {
     case "OPEN_SIDENAV": {
@@ -61,7 +60,6 @@ export function useMaterialTailwindController() {
       "useMaterialTailwindController should be used inside the MaterialTailwindControllerProvider."
     );
   }
-
   return context;
 }
 
