@@ -283,8 +283,17 @@ export function Tables() {
                 />
 
               </div>
-              <div className="w-full max-w-[24rem]">
-                <Input onChange={editRegex} required type="password" id="editpassword" label="Parol" />
+              <div className="relative flex w-full max-w-[24rem]">
+                <Button
+                  disabled
+                  size="sm"
+                  className="!absolute left-1 top-1 rounded z-50"
+                >
+                  +998
+                </Button>
+                <Input onChange={editRegex} className="ps-20" required type="password" id="editpassword" label="Parol" />
+
+
               </div>
             </div>
           </DialogBody>
