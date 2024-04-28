@@ -36,8 +36,8 @@ export function SignIn() {
     <section className="m-8 flex justify-center gap-4">
       <div className="w-full lg:w-3/5 mt-24">
         <div className="text-center">
-          <Typography variant="h2" className="font-bold mb-4">Login</Typography>
-          <Typography variant="paragraph" color="blue-gray" className="text-lg font-normal">Enter your email and password to login.</Typography>
+          <Typography variant="h2" className="font-bold mb-4">Kirish</Typography>
+          <Typography variant="paragraph" color="blue-gray" className="text-lg font-normal">Telefon raqamingiz hamda parolingizni kiriting.</Typography>
         </div>
         <div className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
           <div className="mb-1 flex flex-col gap-6">
@@ -71,7 +71,7 @@ export function SignIn() {
           <Button onClick={() => {
             logIn()
           }} className="mt-6" fullWidth>
-            Login
+            Kirish 
           </Button>
       <Link id="link" to={role} href={role}></Link>
         </div>

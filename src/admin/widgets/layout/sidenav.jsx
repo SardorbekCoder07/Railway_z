@@ -9,7 +9,7 @@ import {
 } from "@material-tailwind/react";
 import { useMaterialTailwindController, setOpenSidenav } from "@/context";
 
-export function Sidenav({ brandImg, brandName, routes }) {
+export function Sidenav({ routes }) {
   const [controller, dispatch] = useMaterialTailwindController();
   const { sidenavColor, sidenavType, openSidenav } = controller;
   const sidenavTypes = {
@@ -68,6 +68,13 @@ export function Sidenav({ brandImg, brandName, routes }) {
         >
           <XMarkIcon strokeWidth={2.5} className="h-5 w-5 text-white" />
         </IconButton>
+        {/* -------------PD brand-------------- */}
+        <Typography
+        className="text-center font-semibold text-2xl"
+            color={sidenavType === "dark" ? "white" : "blue-gray"}
+          >
+            PD-1
+          </Typography>
       </div>
       <div className="m-4">
         {routes.map(({ layout, title, pages }, key) => (
