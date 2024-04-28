@@ -19,10 +19,10 @@ import { api, byId, config } from "@/api/api";
 import toast from "react-hot-toast";
 
 export function AddLocation() {
-  const [tool, settool] = useState(null)
+  const [km, setkm] = useState(null)
   const [users, setUsers] = useState(null)
-  const [toolsData, settoolsData] = useState(null)
-  const [ToolData, setToolData] = useState(null)
+  const [pdbId, setPDBid] = useState(null)
+  const [kmData, setkmData] = useState(null)
   const [editModal, setEditModal] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false)
   const [addModal, setAddModal] = useState(false)
@@ -43,7 +43,7 @@ export function AddLocation() {
   }
 
   useEffect(() => {
-    gettool()
+    getkm()
     getUser()
   }, [])
 
@@ -54,21 +54,21 @@ export function AddLocation() {
 
 
   const getUser = () => {
-    axios.get(`${api}user/admins`, config)
+    axios.get(`${api}pdb`, config)
       .then((res) => {
-        setUsers(res.data);
+        setUsers(res.data.body);
       })
       .catch((err) => console.log(err))
   }
 
 
   // *******************GET USER **********************
+  
 
-
-  const gettool = () => {
-    axios.get(`${api}work-tool/work-tool`, config)
+  const getkm = () => {
+    axios.get(`${api}railway`, config)
       .then((res) => {
-        settool(res.data);
+        setkm(res.data);
         console.log(res.data);
       })
       .catch((err) => console.log(err))
@@ -76,14 +76,15 @@ export function AddLocation() {
 
   // *******************ADD USER **********************
 
-  const addtool = () => {
+  const addkm = () => {
     const addData = {
-      name: byId("addtool")
+      km: byId("addkm"),
+      pdbId: pdbId
     }
-    axios.post(`${api}work-tool/add`, addData, config )
+    axios.post(`${api}railway`, addData, config )
       .then((res) => {
         closeAddModal()
-        gettool()
+        getkm()
         toast.success("Ish quroli muoffaqqiyatli qo'shildi!👌")
       })
       .catch((err) => {
@@ -99,14 +100,15 @@ export function AddLocation() {
   // *******************EDIT USER **********************
 
 
-  const edittool = () => {
+  const editkm = () => {
     const editData = {
-      name: byId("edittool"),
+      km: byId("addkm"),
+      pdbId: pdbId
     }
-    axios.put(`${api}work-tool/edit?id=${ToolData ? ToolData.id : 0}`, editData, config)
+    axios.put(`${api}railway?id=${kmData ? kmData.id : 0}`, editData, config)
       .then((res) => {
         closeEditModal()
-        gettool()
+        getkm()
         toast.success("Ish quroli muvoffaqqiyatli tahrirlandi!👌")
 
       })
@@ -119,21 +121,21 @@ export function AddLocation() {
 
   // *******************DELETE USER **********************
 
-  const deletetool = () => {
-    axios.delete(`${api}work-tool/delete?id=${ToolData ? ToolData.id : 0}`, config)
-      .then(() => {
-        closeDeleteModal()
-        gettool()
-        toast.success("Ish quroli muvoffaqqiyatli o'chirildi!👌")
+  // const deletekm = () => {
+  //   axios.delete(`${api}railway/delete?id=${kmData ? kmData.id : 0}`, config)
+  //     .then(() => {
+  //       closeDeleteModal()
+  //       getkm()
+  //       toast.success("Ish quroli muvoffaqqiyatli o'chirildi!👌")
 
-      })
-      .catch((err) => {
-        toast.error("Ish quroli o'chirilmadi")
-        console.log(err);
-        closeDeleteModal()
-      })
+  //     })
+  //     .catch((err) => {
+  //       toast.error("Ish quroli o'chirilmadi")
+  //       console.log(err);
+  //       closeDeleteModal()
+  //     })
 
-  }
+  // }
 
 
 
@@ -141,7 +143,7 @@ export function AddLocation() {
 
   const addRegex = () => {
     if (
-      byId("addtool") !== ""
+      byId("addkm") !== ""
     ) {
       setRegex(false)
     }
@@ -152,7 +154,7 @@ export function AddLocation() {
 
   const editRegex = () => {
     if (
-      byId("edittool") !== ""
+      byId("editkm") !== ""
     ) {
       setRegex(false)
     }
@@ -180,7 +182,7 @@ export function AddLocation() {
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["Ish quroli nomi", "Actions"].map((el) => (
+                {["KM", "Harakatlar"].map((el) => (
                   <th
                     key={el}
                     className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -197,8 +199,8 @@ export function AddLocation() {
             </thead>
             <tbody>
 
-              {tool && tool.map((item, i) => {
-                const className = `py-3 px-5  ${i === tool && tool.length - 1
+              {km && km.map((item, i) => {
+                const className = `py-3 px-5  ${i === km && km.length - 1
                   ? ""
                   : "border-b border-blue-gray-50"
                   }`
@@ -222,16 +224,16 @@ export function AddLocation() {
                     <td className={`${className} flex py-5 gap-3`}>
                       <Typography onClick={() => {
                         openEditModal()
-                        setToolData(item)
+                        setkmData(item)
                       }} className=" cursor-pointer text-xs font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
-                        Edit
+                        Tahrirlash
                       </Typography>
-                      <Typography onClick={() => {
+                      {/* <Typography onClick={() => {
                         openDeleteModal()
-                        setToolData(item)
+                        setkmData(item)
                       }} className=" cursor-pointer text-xs font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
-                        Delete
-                      </Typography>
+                        O'chirish 
+                      </Typography> */}
                     </td>
                   </tr>
                 )
@@ -253,7 +255,19 @@ export function AddLocation() {
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
-                <Input onChange={editRegex} required defaultValue={ToolData ? ToolData.name : "Ma'lumot yo'q"} id="edittool" label="tool nomi" />
+                <Input type="number" onChange={editRegex} required defaultValue={kmData ? kmData.name : "Ma'lumot yo'q"} id="editkm" label="km nomi" />
+              </div>
+              <div className="w-full max-w-[24rem]">
+                <Select onChange={(e) => {
+                  setPDBid(e)
+                  editRegex()
+                }} label="PDB">
+                  {
+                    users && users.map((item, i) =>
+                      <Option key={i} value={item.id}>{item.name} {item.lastName}</Option>
+                    )
+                  }
+                </Select>
               </div>
             </div>
           </DialogBody>
@@ -268,7 +282,7 @@ export function AddLocation() {
             </Button>
             <span className={`${regex ? "cursor-not-allowed" : ""}`}>
 
-              <Button disabled={regex} onClick={edittool} variant="gradient" color="gray">
+              <Button disabled={regex} onClick={editkm} variant="gradient" color="gray">
                 <span>Tahrirlash</span>
               </Button>
             </span>
@@ -286,7 +300,19 @@ export function AddLocation() {
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
-                <Input onChange={addRegex} required id="addtool" label="Ish quroli nomi" />
+                <Input type="number" onChange={addRegex} required id="addkm" label="Ish quroli nomi" />
+              </div>
+              <div className="w-full max-w-[24rem]">
+                <Select onChange={(e) => {
+                  setPDBid(e)
+                  editRegex()
+                }} label="PDB">
+                  {
+                    users && users.map((item, i) =>
+                      <Option key={i} value={item.id}>{item.name} {item.lastName}</Option>
+                    )
+                  }
+                </Select>
               </div>
             </div>
           </DialogBody>
@@ -300,15 +326,15 @@ export function AddLocation() {
               <span>Orqaga</span>
             </Button>
             <span className={`${regex ? "cursor-not-allowed" : ""}`}>
-                           <Button disabled={regex} onClick={addtool} variant="gradient" color="gray">
+                           <Button disabled={regex} onClick={addkm} variant="gradient" color="gray">
                 <span>Qo'shish</span>
               </Button>
             </span>
           </DialogFooter>
         </Dialog>
       </div>
-      <div>
-        {/* delete modal */}
+      {/* <div>
+        delete modal
         <Dialog open={deleteModal} handler={closeDeleteModal}>
           <DialogHeader>O'chirish</DialogHeader>
           <DialogBody>
@@ -329,12 +355,12 @@ export function AddLocation() {
             >
               <span>Yo'q</span>
             </Button>
-            <Button onClick={deletetool} variant="gradient" color="gray">
+            <Button onClick={deletekm} variant="gradient" color="gray">
               <span>Ha</span>
             </Button>
           </DialogFooter>
         </Dialog>
-      </div>
+      </div> */}
 
       {/* <Card>
         <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
@@ -388,7 +414,7 @@ export function AddLocation() {
                       </td>
                       <td className={className}>
                         {members.map(({ img, name }, key) => (
-                          <Tooltip key={name} content={name}>
+                          <kmtip key={name} content={name}>
                             <Avatar
                               src={img}
                               alt={name}
@@ -398,7 +424,7 @@ export function AddLocation() {
                                 key === 0 ? "" : "-ml-2.5"
                               }`}
                             />
-                          </Tooltip>
+                          </kmtip>
                         ))}
                       </td>
                       <td className={className}>
