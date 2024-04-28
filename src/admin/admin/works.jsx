@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardBody,
 } from "@material-tailwind/react";
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
+import { ForwardIcon } from "@heroicons/react/24/outline";
 
 export function Works() {
   const [showAlerts, setShowAlerts] = React.useState({
