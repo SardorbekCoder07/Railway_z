@@ -11,7 +11,6 @@ import {
   Button,
   Input,
 } from "@material-tailwind/react";
-import { authorsTableData } from "@/admin/data";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 import { api, byId, config } from "@/api/api";
 import axios from "axios";
@@ -21,6 +20,8 @@ export function Tables() {
   const [editModal, setEditModal] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false)
   const [addModal, setAddModal] = useState(false)
+  const [pdbUsers, setPdbaUsers] = useState(null)
+  const [pdbData, setpdbdata] = useState(null)
 
 
   const openEditModal = () => setEditModal(true)
@@ -30,38 +31,76 @@ export function Tables() {
   const openAddModal = () => setAddModal(true)
   const closeAddModal = () => setAddModal(false)
 
-  useEffect(()=>{
+  useEffect(() => {
     getPDBuser();
-  },[])
+  }, [])
 
-  const getPDBuser=()=>{
+  const getPDBuser = () => {
     axios.get(`${api}pdb`, config)
-    .then((res)=>{
-      console.log(res.data);
-    })
-    .catch((err)=>{
-      console.log('xato bor')
-    })
+      .then((res) => {
+        setPdbaUsers(res.data.body)
+      })
+      .catch((err) => {
+        console.log('xato bor')
+      })
   }
 
   // ----------PDB add------------
-  const addPdb=()=>{
-    const addPDBdata={
-      name:byId("addname"),
-      firstName:byId("addlastname"),
+  const addPdb = () => {
+    const addPDBdata = {
+      name: byId("addname"),
+      userFullName: byId("addlastname"),
     }
-    axios.post(`${api}pdb`,addPDBdata,config)
-    .then((res)=>{
-      closeAddModal();
-      getPDBuser()
-      toast.success("Vazifa muvoffaqqiyatli bajarildi!")
-    })
-    .catch((err)=>{
-      closeAddModal();
-      toast.error("Xato");
-      console.log(err);
-    })
+    axios.post(`${api}pdb`, addPDBdata, config)
+      .then((res) => {
+        closeAddModal();
+        getPDBuser()
+        toast.success("Vazifa muvoffaqqiyatli bajarildi!")
+      })
+      .catch((err) => {
+        closeAddModal();
+        toast.error("Xato");
+        console.log(err);
+      })
   }
+
+  // ----------PDB edit------------
+  const editPDB = () => {
+    const editPDbdata = {
+      name: byId("editName"),
+      userFullName: byId("editlastname"),
+    }
+    axios.put(`${api}pdb?id=${pdbData ? pdbData.id:0}`, editPDbdata, config)
+      .then((res) => {
+        closeEditModal();
+        getPDBuser()
+        toast.success("Tahrirlandi!")
+      })
+      .catch((err) => {
+        closeEditModal();
+        toast.error("PDB tahrirlanmadi");
+        console.log(err);
+      })
+  }
+
+    // *******************DELETE USER **********************
+
+    const deletePDB = () => {
+      axios.delete(`${api}pdb/delete?id=${pdbData ? pdbData.id : 0}`,config)
+        .then((res) => {
+          closeDeleteModal()
+          getPDBuser()
+          toast.success("PDB muvoffaqqiyatli o'chirildi!👌")
+  
+        })
+        .catch((err) => {
+          console.log(err);
+          closeDeleteModal()
+          toast.error("PDB o'chirilmadi!❌")
+        })
+  
+    }
+  
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12 ">
       <Card>
@@ -80,7 +119,7 @@ export function Tables() {
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["First name", "Last name", "Phone number", "Actions"].map((el) => (
+                {["First name", "Last name", "Actions"].map((el) => (
                   <th
                     key={el}
                     className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -96,14 +135,14 @@ export function Tables() {
               </tr>
             </thead>
             <tbody>
-              {authorsTableData.map(
-                ({ name, lastName, phoneNumber }, key) => {
-                  const className = `py-3 px-5  ${key === authorsTableData.length - 1
+              {pdbUsers && pdbUsers.map(
+                (item, i) => {
+                  const className = `py-3 px-5  ${i === pdbUsers && pdbUsers.length - 1
                     ? ""
                     : "border-b border-blue-gray-50"
                     }`
                   return (
-                    <tr key={name}>
+                    <tr key={i}>
                       <td className={className}>
                         <div className="flex items-center gap-4">
                           <div>
@@ -112,29 +151,28 @@ export function Tables() {
                               color="blue-gray"
                               className="font-semibold"
                             >
-                              {name}
+                              {item.name}
                             </Typography>
                           </div>
                         </div>
                       </td>
                       <td className={className}>
                         <Typography className="text-xs font-semibold text-blue-gray-600">
-                          {lastName}
+                          {item.userFullName}
                         </Typography>
 
                       </td>
-
-                      <td className={className}>
-                        <Typography className="text-xs font-semibold text-blue-gray-600">
-                          {phoneNumber}
-                        </Typography>
-                      </td>
-
                       <td className={`${className} flex py-5 gap-3`}>
-                        <Typography onClick={openEditModal} className=" cursor-pointer text-xs font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
+                        <Typography onClick={() => {
+                          openEditModal()
+                          setpdbdata(item)
+                        }} className=" cursor-pointer text-xs font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
                           Edit
                         </Typography>
-                        <Typography onClick={openDeleteModal} className=" cursor-pointer text-xs font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
+                        <Typography onClick={() => {
+                          openDeleteModal()
+                          setpdbdata(item)
+                        }} className=" cursor-pointer text-xs font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
                           Delete
                         </Typography>
                       </td>
@@ -153,28 +191,10 @@ export function Tables() {
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
-                <Input id="editName" label="Ism" />
+                <Input defaultValue={pdbData ? pdbData.name : "Ma'lumot yo'q"} id="editName" label="PDB nomi" />
               </div>
               <div className="w-full max-w-[24rem]">
-                <Input id="editlastname" label="Familya" />
-              </div>
-              <div className="relative flex w-full max-w-[24rem]">
-                <Button
-                  disabled
-                  size="sm"
-                  className="!absolute left-1 top-1 rounded"
-                >
-                  +998
-                </Button>
-                <Input
-                  id="editphone"
-                  type="number"
-                  className="ps-20"
-                  containerProps={{
-                    className: "min-w-0",
-                  }}
-                />
-
+                <Input defaultValue={pdbData ? pdbData.userFullName : "Ma'lumot yo'q"} id="editlastname" label="Admin Ism familya" />
               </div>
             </div>
           </DialogBody>
@@ -187,7 +207,9 @@ export function Tables() {
             >
               <span>Orqaga</span>
             </Button>
-            <Button variant="gradient" color="gray">
+            <Button
+              onClick={editPDB}
+              variant="gradient" color="gray">
               <span>Tahrirlash</span>
             </Button>
           </DialogFooter>
@@ -216,7 +238,9 @@ export function Tables() {
             >
               <span>Orqaga</span>
             </Button>
-            <Button variant="gradient" color="gray">
+            <Button
+              onClick={addPdb}
+              variant="gradient" color="gray">
               <span>Qo'shish</span>
             </Button>
           </DialogFooter>
@@ -228,11 +252,10 @@ export function Tables() {
           <DialogHeader>O'chirish</DialogHeader>
           <DialogBody>
             <div className="flex justify-center">
-
               <Typography
                 variant="large"
                 className=" font-bold uppercase text-blue-gray-400">
-                Bu hodimni o'chirishingizga ishonchingiz komilmi?
+                PDB ni o'chirishingizga ishonchingiz komilmi?
               </Typography>
             </div>
           </DialogBody>
@@ -245,7 +268,9 @@ export function Tables() {
             >
               <span>Yo'q</span>
             </Button>
-            <Button variant="gradient" color="gray">
+            <Button
+            onClick={deletePDB}
+            variant="gradient" color="gray">
               <span>Ha</span>
             </Button>
           </DialogFooter>

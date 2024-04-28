@@ -9,63 +9,7 @@ export const authorsTableData = [
     lastName: "Liras",
     phoneNumber:  "+9980221478",
    
-  },
-  {
-    name: "John",
-    lastName: "Michael",
-    phoneNumber: "+998972220790",
-  },
-  {
-    name: "John",
-    lastName: "Liras",
-    phoneNumber:  "+9980221478",
-   
-  },
-  {
-    name: "John",
-    lastName: "Michael",
-    phoneNumber: "+998972220790",
-  },
-  {
-    name: "John",
-    lastName: "Liras",
-    phoneNumber:  "+9980221478",
-   
-  },
-  {
-    name: "John",
-    lastName: "Michael",
-    phoneNumber: "+998972220790",
-  },
-  {
-    name: "John",
-    lastName: "Liras",
-    phoneNumber:  "+9980221478",
-   
-  },
-  {
-    name: "John",
-    lastName: "Michael",
-    phoneNumber: "+998972220790",
-  },
-  {
-    name: "John",
-    lastName: "Liras",
-    phoneNumber:  "+9980221478",
-   
-  },
-  {
-    name: "John",
-    lastName: "Michael",
-    phoneNumber: "+998972220790",
-  },
-  {
-    name: "Sardorbek",
-    lastName: "Sayfullayev",
-    phoneNumber:  "+9980221478",
-   
-  },
-  
+  }  
 ];
 
 export default authorsTableData;

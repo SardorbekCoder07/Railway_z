@@ -66,9 +66,10 @@ export function Tools() {
 
 
   const gettool = () => {
-    axios.get(`${api}tool/all`, config)
+    axios.get(`${api}work-tool/work-tool`, config)
       .then((res) => {
-        settool(res.data.body);
+        settool(res.data);
+        console.log(res.data);
       })
       .catch((err) => console.log(err))
   }
@@ -83,11 +84,12 @@ export function Tools() {
       .then((res) => {
         closeAddModal()
         gettool()
-        toast.success("Vazifa muoffaqqiyatli bajarildi!")
+        toast.success("Ish quroli muoffaqqiyatli qo'shildi!👌")
       })
       .catch((err) => {
         closeAddModal()
-        toast.error("xato")
+        toast.error("Ish quroli qo'shilmadi❌")
+
         console.log(err);
       })
   }
@@ -105,10 +107,11 @@ export function Tools() {
       .then((res) => {
         closeEditModal()
         gettool()
-        toast.success("Bu hodim muvoffaqqiyatli tahrirlandi!👌")
+        toast.success("Ish quroli muvoffaqqiyatli tahrirlandi!👌")
 
       })
       .catch((err) => {
+        toast.error("Ish quroli tahrirlanmadi❌")
         console.log(err)
         closeEditModal()
       })
@@ -117,14 +120,15 @@ export function Tools() {
   // *******************DELETE USER **********************
 
   const deletetool = () => {
-    axios.delete(`${api}work-tool/delete?id=${ToolData ? ToolData.id : 0}`)
+    axios.delete(`${api}work-tool/delete?id=${ToolData ? ToolData.id : 0}`, config)
       .then(() => {
         closeDeleteModal()
         gettool()
-        toast.success("Bu hodim muvoffaqqiyatli tahrirlandi!👌")
+        toast.success("Ish quroli muvoffaqqiyatli o'chirildi!👌")
 
       })
       .catch((err) => {
+        toast.error("Ish quroli o'chirilmadi")
         console.log(err);
         closeDeleteModal()
       })
