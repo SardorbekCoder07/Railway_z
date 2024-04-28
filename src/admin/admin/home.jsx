@@ -18,16 +18,16 @@ import {
 import {StatisticsCard} from "@/admin/widgets/cards";
 import {statisticsCardsData} from "@/admin/data";
 import {UserPlusIcon} from "@heroicons/react/24/solid";
-import {getPdb, getRailway} from "@/admin/admin/apiFunction.jsx";
+import {getPdb, getPk, getRailway} from "@/admin/admin/apiFunction.jsx";
 import {setConfig} from "@/api/api.jsx";
 
 export function Home() {
     const [pdModal, setPdModal] = useState(false);
-    const [showKmTable, setShowKmTable] = useState(true);
     const [selectedKmIndex, setSelectedKmIndex] = useState(null);
     const [firstNamePdb, setFirstNamePdb] = useState('');
     const [pdb, setPdb] = useState(null);
     const [railway, setRailway] = useState(null);
+    const [pk, setPk] = useState(null);
 
     const closePdModal = () => setPdModal(false);
     const openPdModal = () => setPdModal(true);
@@ -36,14 +36,13 @@ export function Home() {
         setConfig()
         getPdb(setPdb)
         getRailway(1, setRailway)
+        getPk(1, setPk)
     }, []);
 
-    const handleKmButtonClick = (index) => {
-        setSelectedKmIndex(index);
-        setShowKmTable(false);
-    };
+    const handleKmButtonClick = (index) => setSelectedKmIndex(index);
 
-    console.log(firstNamePdb)
+    console.log(pk)
+
     return (<div className="mt-12">
         <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
             {statisticsCardsData.map(({icon, title, footer, ...rest}) => (<StatisticsCard
@@ -132,33 +131,52 @@ export function Home() {
                     </div>
                 </div>
                 <CardBody className="md:overflow-x-auto flex gap-3 flex-wrap">
-                    {railway ? (railway.length !== 0 ? (railway.map((item, index) => (<Button
-                        onClick={() => handleKmButtonClick(index)}
-                        className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105 ${selectedKmIndex === index ? "bg-gray-500" : ""}`}
-                    >
-                        {item['km']} km
-                    </Button>))) : (<Button
-                        className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105`}>
-                        not found
-                    </Button>)) : (<Button
-                        className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105`}>
-                        not found
-                    </Button>)}
-
+                    {railway ?
+                        (railway.length !== 0 ? (
+                            railway.map((item, index) => (
+                                <Button
+                                    onClick={() => {
+                                        getPk(item.id, setPk)
+                                        handleKmButtonClick(index)
+                                    }}
+                                    className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105 ${selectedKmIndex === index ? "bg-gray-500" : ""}`}
+                                >
+                                    {item['km']} km
+                                </Button>
+                            ))) : (
+                            <Button
+                                onClick={() => setPk(null)}
+                                className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105`}>
+                                Topilmadi
+                            </Button>
+                        )) : (
+                            <Button
+                                onClick={() => setPk(null)}
+                                className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105`}>
+                                Topilmadi
+                            </Button>
+                        )
+                    }
                 </CardBody>
             </Card>
             {/* New Table */}
-            {showKmTable ? (<table>
-                <CardBody className="md:overflow-x-scroll flex gap-3 flex-wrap">
-                    {[...Array(20)].map((_, index) => (<Button
-                        key={index}
-                        onClick={() => openPdModal()}
-                        className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105 ${selectedKmIndex === index ? "bg-gray-500" : ""}`}
-                    >
-                        PK-{index}
-                    </Button>))}
+            <table>
+                <CardBody className="md:overflow-x-auto flex gap-3 flex-wrap">
+                    {pk ? (
+                        pk.map(item => (
+                            <Button
+                                key={item.id}
+                                onClick={() => openPdModal()}
+                                className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105`}
+                            >
+                                {item.name}
+                            </Button>
+                        ))
+                    ) : (
+                        <p>PK lar mavjud emas!!!</p>
+                    )}
                 </CardBody>
-            </table>) : null}
+            </table>
         </div>
         <div>
             <Dialog open={pdModal} handler={closePdModal}>
