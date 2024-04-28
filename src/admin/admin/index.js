@@ -5,3 +5,4 @@ export * from "@/admin/admin/notifications";
 export * from "@/admin/admin/works";
 export * from "@/admin/admin/tools";
 export * from "@/admin/admin/hiddenKD";
+export * from "@/admin/admin/tabs";
