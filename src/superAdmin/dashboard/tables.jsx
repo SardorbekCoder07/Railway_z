@@ -67,6 +67,7 @@ export function Tables() {
       lastName: byId("addlastname"),
       password: byId("addpassword"),
       phoneNumber: byId("addphone")
+      
     }
     axios.post(`${api}auth/register`, addData, config)
       .then((res) => {
