@@ -51,6 +51,7 @@ export function TabsWithWork() {
           </label>
         </div>
       ),
+      button:"",
     },
     {
       label: "Ertangi Ishlar",
@@ -69,6 +70,7 @@ export function TabsWithWork() {
           </label>
         </div>
       ),
+      button:"",
     },
     {
       label: "Ish Qurollari",
@@ -127,6 +129,11 @@ export function TabsWithWork() {
           </table>
         </div>
       ),
+      button:(
+        <div>
+          <Button className="flex items-center justify-end">Send</Button>
+        </div>
+      ),
     },
   ];
 
@@ -155,24 +162,14 @@ export function TabsWithWork() {
             unmount: { y: 250 },
           }}
         >
-          {data.map(({ value, input }) => (
+          {data.map(({ value, input, button }) => (
             <TabPanel key={value} value={value} className="flex flex-col gap-2">
               {input}
+              {button}
             </TabPanel>
           ))}
         </TabsBody>
       </Tabs>
-      <Button
-        className={`flex gap-2 items-center ${
-          selectedTab === "html" && !htmlInputValue
-            ? "opacity-50 cursor-not-allowed"
-            : ""
-        }`}
-        onClick={handleNextButtonClick}
-        disabled={selectedTab === "html" && !htmlInputValue}
-      >
-        Next <ForwardIcon className="h-4 w-4 ml-1" />
-      </Button>
     </div>
   );
 }
