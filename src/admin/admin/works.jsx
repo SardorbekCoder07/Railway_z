@@ -47,7 +47,13 @@ export function Works() {
         </div>
       ),
       button: (
-        <Button className="flex gap-2 items-center" onClick={handleNextButtonClick}>
+        <Button
+          className={`flex gap-2 items-center ${
+            selectedTab === "html" && !htmlInputValue ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+          onClick={handleNextButtonClick}
+          disabled={selectedTab === "html" && !htmlInputValue}
+        >
           Next <ForwardIcon className="h-4 w-4 ml-1" />
         </Button>
       ),
@@ -56,7 +62,7 @@ export function Works() {
       label: "Ertangi Ishlar",
       value: "react",
       input: (
-        <div className="relative w-full min-w-[200px]">
+        <div className="relative w-full min-w-[200px] ">
           <input
             className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
             placeholder=" "
@@ -68,7 +74,13 @@ export function Works() {
         </div>
       ),
       button: (
-        <Button onClick={handleNextButtonClick} className="flex gap-2 items-center">
+        <Button
+          onClick={handleNextButtonClick}
+          className={`flex gap-2 items-center ${
+            selectedTab === "react" ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+          disabled={selectedTab === "react"}
+        >
           Yuborish <ForwardIcon className="h-4 w-4 ml-1" />
         </Button>
       ),
