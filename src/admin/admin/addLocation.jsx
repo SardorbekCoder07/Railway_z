@@ -50,7 +50,7 @@ export function AddLocation() {
 
 
 
-  // *******************GET USER **********************
+  // *******************GET PDB **********************
 
 
   const getUser = () => {
@@ -66,12 +66,11 @@ export function AddLocation() {
   
 
   const getkm = () => {
-    axios.get(`${api}railway`, config)
+    axios.get(`${api}railway/list/in/pd`, config)
       .then((res) => {
-        setkm(res.data);
-        console.log(res.data);
+        setkm(res.data.body);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log('thdrhgd'))
   }
 
   // *******************ADD USER **********************
@@ -182,7 +181,7 @@ export function AddLocation() {
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["KM", "Harakatlar"].map((el) => (
+                {["KM","PDB", "Harakatlar"].map((el) => (
                   <th
                     key={el}
                     className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -215,7 +214,20 @@ export function AddLocation() {
                             color="blue-gray"
                             className="font-semibold"
                           >
-                            {item.name}
+                            {item.km}
+                          </Typography>
+                        </div>
+                      </div>
+                    </td>
+                    <td className={className}>
+                      <div className="flex items-center gap-4">
+                        <div>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-semibold"
+                          >
+                            {item.pdbName}
                           </Typography>
                         </div>
                       </div>
@@ -255,7 +267,7 @@ export function AddLocation() {
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
-                <Input type="number" onChange={editRegex} required defaultValue={kmData ? kmData.name : "Ma'lumot yo'q"} id="editkm" label="km nomi" />
+                <Input type="number" onChange={editRegex} required defaultValue={kmData ? kmData.km : "Ma'lumot yo'q"} id="editkm" label="km nomi" />
               </div>
               <div className="w-full max-w-[24rem]">
                 <Select onChange={(e) => {
