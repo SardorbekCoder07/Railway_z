@@ -73,7 +73,6 @@ export function Tables() {
           <Button
             onClick={openAddModal}
             className="bg-[#fff] text-black px-3 py-2 rounded-md"
-          // onClick={handleOpenModal} // Attach event handler to open modal
           >
             <UserPlusIcon className="h-6 w-6 text-black" />
           </Button>
