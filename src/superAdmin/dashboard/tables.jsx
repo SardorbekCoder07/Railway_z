@@ -13,7 +13,7 @@ import {
 } from "@material-tailwind/react";
 import { authorsTableData } from "@/superAdmin/data";
 import { CircularPagination } from "@/superAdmin/widgets/layout/circlePagination";
-import { UserPlusIcon } from "@heroicons/react/24/solid";
+import { EyeIcon, UserPlusIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { api, byId, config, setConfig } from "@/api/api";
 import toast from "react-hot-toast";
@@ -25,8 +25,15 @@ export function Tables() {
   const [deleteModal, setDeleteModal] = useState(false)
   const [addModal, setAddModal] = useState(false)
   const [regex, setRegex] = useState(true)
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
 
+
+
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
   const openEditModal = () => setEditModal(true)
   const closeEditModal = () => {
     setEditModal(false)
@@ -68,7 +75,7 @@ export function Tables() {
       lastName: byId("addlastname"),
       password: byId("addpassword"),
       phoneNumber: byId("addphone")
-      
+
     }
     axios.post(`${api}auth/register`, addData, config)
       .then((res) => {
@@ -285,17 +292,21 @@ export function Tables() {
 
               </div>
               <div className="relative flex w-full max-w-[24rem]">
-                <Button
-                  disabled
-                  size="sm"
-                  className="!absolute left-1 top-1 rounded z-50"
-                >
-                  +998
-                </Button>
-                <Input onChange={editRegex} className="ps-20" required type="password" id="editpassword" label="Parol" />
-
-
-              </div>
+  <Button
+    size="sm"
+    className="!absolute right-1 top-1 rounded z-50"
+    onClick={togglePasswordVisibility}
+  >
+    {passwordVisible ? <EyeSlashIcon className="h-4 w-4 text-white" /> : <EyeIcon className="h-4 w-4 text-white" />}
+  </Button>
+  <Input
+    onChange={editRegex}
+    required
+    type={passwordVisible ? "text" : "password"} // Toggle between text and password type
+    id="editpassword"
+    label="Parol"
+  />
+</div>
             </div>
           </DialogBody>
           <DialogFooter>
