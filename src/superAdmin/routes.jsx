@@ -6,6 +6,7 @@ import {
   ServerStackIcon,
   RectangleStackIcon,
   GlobeAltIcon,
+  UsersIcon,
 } from "@heroicons/react/24/solid";
 import { Home, Profile, Tables, Notifications } from "@/superAdmin/dashboard";
 import { SignIn, SignUp } from "@/auth";
@@ -30,7 +31,7 @@ export const routes = [
       },
       // sa
       {
-        icon: <TableCellsIcon {...icon} />,
+        icon: <UsersIcon {...icon} />,
         name: "Adminlar",
         path: "/tables",
         element: <Tables />,

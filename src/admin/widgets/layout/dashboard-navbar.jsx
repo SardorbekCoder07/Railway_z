@@ -69,10 +69,8 @@ export function DashboardNavbar() {
             {page}
           </Typography>
         </div>
-        <div className="flex items-center">
-          <div className="mr-auto md:mr-4 md:w-56">
-            <Input label="Search" />
-          </div>
+        <div className="flex items-center justify-between">
+
           <IconButton
             variant="text"
             color="blue-gray"
@@ -82,7 +80,7 @@ export function DashboardNavbar() {
             <Bars3Icon strokeWidth={3} className="h-6 w-6 text-blue-gray-500" />
           </IconButton>
 
-          <Menu>
+          {/* <Menu>
             <MenuHandler>
               <IconButton variant="text" color="blue-gray">
                 <BellIcon className="h-5 w-5 text-blue-gray-500" />
@@ -159,7 +157,7 @@ export function DashboardNavbar() {
                 </div>
               </MenuItem>
             </MenuList>
-          </Menu>
+          </Menu> */}
           <IconButton
             variant="text"
             color="blue-gray"
