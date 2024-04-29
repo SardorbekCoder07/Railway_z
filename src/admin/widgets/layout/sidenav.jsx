@@ -17,7 +17,7 @@ export function Sidenav({routes}) {
         transparent: "bg-transparent",
     };
 
-    const emptyll = ""
+
     return (
         <aside
             className={`${sidenavTypes[sidenavType]} ${
@@ -30,7 +30,7 @@ export function Sidenav({routes}) {
             <div className={`relative`}>
             <div>
             <div>
-            <Link to="" className="py-6 px-8 flex justify-center items-center">
+            <Link to="/admin/home" className="py-6 px-8 flex justify-center items-center">
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                          width="60pt" height="60pt" viewBox="0 0 172.000000 135.000000"
                          preserveAspectRatio="xMidYMid meet">
