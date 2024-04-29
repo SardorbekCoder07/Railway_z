@@ -41,7 +41,11 @@ export const routes = [
         path: "/pd",
         element: <PdUsers />,
       },
-
+],
+  },
+  {
+    layout: "auth",
+    pages: [
       {
         icon: <GlobeAltIcon {...icon} />,
         name: "Veb-saytga kirish",

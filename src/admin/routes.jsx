@@ -49,7 +49,11 @@ export const routes = [
         element: <AddLocation />,
       },
 
-
+    ],
+  },
+  {
+    layout: "auth",
+    pages: [
 
       {
         icon: logout,
