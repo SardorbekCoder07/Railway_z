@@ -91,16 +91,16 @@ export function Tables() {
     //       closeDeleteModal()
     //       getPDBuser()
     //       toast.success("PDB muvoffaqqiyatli o'chirildi!👌")
-  
+
     //     })
     //     .catch((err) => {
     //       console.log(err);
     //       closeDeleteModal()
     //       toast.error("PDB o'chirilmadi!❌")
     //     })
-  
+
     // }
-  
+
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12 ">
       <Card>
@@ -169,12 +169,7 @@ export function Tables() {
                         }} className=" cursor-pointer text-xs font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
                           Edit
                         </Typography>
-                        {/* <Typography onClick={() => {
-                          openDeleteModal()
-                          setpdbdata(item)
-                        }} className=" cursor-pointer text-xs font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
-                          Delete
-                        </Typography> */}
+                      z
                       </td>
                     </tr>
                   );

@@ -181,7 +181,7 @@ export function Home() {
                 <DialogBody>
                     <TabsWithWork/>
                 </DialogBody>
-               
+
             </Dialog>
         </div>
     </div>);

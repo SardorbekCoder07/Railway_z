@@ -7,7 +7,7 @@ import {
   WrenchScrewdriverIcon,
   MapPinIcon,
 } from "@heroicons/react/24/solid";
-import { Home,Tables, Notifications, Works, Tools, AddLocation } from "@/admin/admin";
+import { Home,Tables, Works, Tools, AddLocation } from "@/admin/admin";
 import { SignIn, SignUp } from "@/auth";
 
 const icon = {
@@ -23,7 +23,7 @@ export const routes = [
     pages: [
       {
         icon: <HomeIcon {...icon} />,
-        name: "Admin",
+        name: "Dashboard",
         path: "/home",
         element: <Home />,
       },

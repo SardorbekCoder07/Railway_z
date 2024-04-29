@@ -88,7 +88,7 @@ export function TabsWithWork() {
                 >
                   Nomi
                 </th>
-                
+
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -108,7 +108,7 @@ export function TabsWithWork() {
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-900">250</div>
                 </td>
-               
+
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-900">
                     <Input type="number" placeholder="Soni" />
