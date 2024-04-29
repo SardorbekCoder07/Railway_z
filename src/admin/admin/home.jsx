@@ -79,53 +79,41 @@ export function Home() {
                 </CardHeader>
                 <div className="px-6 flex bg-gray-300 justify-center items-center gap-3 md:justify-end">
                     <h1 className="text-4xl font-semibold text-black">PD-1</h1>
-                    <div>
-                        <table className="w-full min-w-max table-auto text-left">
-                            <tbody>
-                            <tr>
-                                <td className="text-black font-medium border-r-2 border-b-2 border-black border-solid px-1 text-xl">
-                                    PD
-                                </td>
-                                <td className="px-1 text-xl text-black font-medium border-b-2 border-solid border-black">
-                                    S.Nurmuhammedov
-                                </td>
-                            </tr>
-                            <tr>
-                                {firstNamePdb ? (
-                                    <>
-                                        <td className="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
+                    <div class="overflow-x-auto">
+    <table class="w-full min-w-max table-auto text-left">
+        <tbody>
+            <tr>
+                <td class="text-black font-medium border-r-2 border-b-2 border-black border-solid px-1 text-xl">
+                    PD
+                </td>
+                <td class="px-1 text-xl text-black font-medium border-b-2 border-solid border-black">
+                    S.Nurmuhammedov
+                </td>
+            </tr>
+            <tr>
+                <td class="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
+                    <span class="sm:hidden">PDB:</span>
+                    <span class="hidden sm:inline">Personal Data:</span>
+                </td>
+                <td class="text-black font-medium border-black border-solid px-1 text-xl">
+                    <span class="sm:hidden">User:</span>
+                    <span class="hidden sm:inline">User Name:</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
+                    <span class="sm:hidden">No data available</span>
+                    <span class="hidden sm:inline">PDB yo'q</span>
+                </td>
+                <td class="text-black font-medium border-black border-solid px-1 text-xl">
+                    <span class="sm:hidden">No data available</span>
+                    <span class="hidden sm:inline">User yo'q</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
-                                            {firstNamePdb.name}
-                                        </td>
-                                        <td className="text-black font-medium border-black border-solid px-1 text-xl">
-                                            {firstNamePdb.userFullName}
-                                        </td>
-                                    </>
-                                ) : (
-                                    pdb && pdb.length !== 0 ? (
-                                        <>
-                                            <td className="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
-                                                {pdb[0].name}
-                                            </td>
-                                            <td className="text-black font-medium border-black border-solid px-1 text-xl">
-                                                {pdb[0].userFullName}
-                                            </td>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <td className="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
-                                                PDB yo&apos;q
-                                            </td>
-                                            <td className="text-black font-medium border-black border-solid px-1 text-xl">
-                                                User yo&apos;q
-                                            </td>
-                                        </>
-                                    )
-                                )}
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
                 <CardBody className="md:overflow-x-auto flex gap-3 flex-wrap">
                     {railway ?
@@ -177,12 +165,13 @@ export function Home() {
             </table>
         </div>
         <div>
-            <Dialog open={pdModal} handler={closePdModal}>
-                <DialogBody>
-                    <TabsWithWork/>
-                </DialogBody>
-
-            </Dialog>
+        <Dialog open={pdModal} handler={closePdModal}>
+        <Dialog open={pdModal} handler={closePdModal}>
+      <DialogBody className="sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl overflow-y-auto max-h-screen">
+        <TabsWithWork />
+      </DialogBody>
+    </Dialog>
+    </Dialog>
         </div>
     </div>);
 }

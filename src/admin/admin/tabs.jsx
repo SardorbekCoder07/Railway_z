@@ -6,7 +6,6 @@ import {
   Tab,
   TabPanel,
   Button,
-  Switch,
   Input,
 } from "@material-tailwind/react";
 import { api, byId, config, setConfig } from "@/api/api";
@@ -14,32 +13,25 @@ import axios from "axios";
 
 export function TabsWithWork() {
   const [selectedTab, setSelectedTab] = useState("html");
-  const [products, setProducts] = useState([])
-  const [tool, settool] = useState(null)
+  const [products, setProducts] = useState([]);
+  const [tool, setTool] = useState(null);
 
-  // -------------Useeffect------
   useEffect(() => {
-    setConfig()
-    gettool();
-  }, [])
+    setConfig();
+    getTool();
+  }, []);
 
-
-  // --------Switch button id ----------------
   function addProductIds(checked, item) {
-    console.log(products);
     if (checked) setProducts([...products, item]);
-    else setProducts(products.filter((product) => product.productId !== item.productId))
+    else setProducts(products.filter((product) => product.productId !== item.productId));
   }
-  // Today date
 
   const today = new Date();
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
   const todayDate = today.toLocaleDateString('uz-UZ', options);
 
-  //----------Today plan api-----------
-
   const todayPlanAdd = () => {
-    const todayPLanInfo = {
+    const todayPlanInfo = {
       todayPlan: byId("todayPlanID"),
       tomorrowPlan: byId("tomorrowPlan"),
       date: todayDate,
@@ -53,22 +45,17 @@ export function TabsWithWork() {
       protectionStackPR: byId("protectionStackPR"),
       relayConnectorsST: byId("relayConnectorsST"),
       relayConnectorsPR: byId("relayConnectorsPR"),
-      reqDayTools: [
-        {}
-      ]
-    }
-  }
+      reqDayTools: [{}],
+    };
+  };
 
-  // ---------------- get Work tool---------------
-  const gettool = () => {
+  const getTool = () => {
     axios.get(`${api}work-tool/work-tool`, config)
       .then((res) => {
-        settool(res.data);
-        // console.log(res.data);
+        setTool(res.data);
       })
-      .catch((err) => console.log(err))
-  }
-
+      .catch((err) => console.log(err));
+  };
 
   const data = [
     {
@@ -137,8 +124,8 @@ export function TabsWithWork() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {
-                tool && tool.map((item, i) =>
+              {tool &&
+                tool.map((item, i) => (
                   <tr key={i}>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900">{item.name}</div>
@@ -149,20 +136,8 @@ export function TabsWithWork() {
                         <Input type="number" placeholder="Soni" />
                       </div>
                     </td>
-                    {/* <td className="px-6 py-4 whitespace-nowrap">
-                      <input
-                        onChange={(e) => {
-                          addProductIds(e.target.checked, item)
-                        }}
-                        type="checkbox"
-                        className="w-5 h-5"
-                      />
-                    </td> */}
                   </tr>
-                )
-              }
-
-              {/* Additional rows go here */}
+                ))}
             </tbody>
           </table>
         </div>
@@ -192,12 +167,8 @@ export function TabsWithWork() {
         <Input type="number" id="protectionStackPR" label="Rels ulagichlari PR." />
         <Input type="number" id="relayConnectorsST" label="Himoya stiklari ishchilari soni ST." />
         <Input type="number" id="relayConnectorsPR" label="Hiimoya stiklari ishchilari soni PR." />
-
       </div>
-      <Tabs
-        id="custom-animation"
-        value={selectedTab}
-      >
+      <Tabs id="custom-animation" value={selectedTab}>
         <TabsHeader>
           {data.map(({ label, value }) => (
             <Tab key={value} value={value}>
