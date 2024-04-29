@@ -7,15 +7,32 @@ import {
     Typography,
 } from "@material-tailwind/react";
 import {useMaterialTailwindController, setOpenSidenav} from "@/context";
+import axios from "axios";
+import { api, config } from "@/api/api";
+import { useEffect, useState } from "react";
 
 export function Sidenav({routes}) {
     const [controller, dispatch] = useMaterialTailwindController();
+    const [userGetme,setUserGetMe]=useState(null)
     const {sidenavColor, sidenavType, openSidenav} = controller;
     const sidenavTypes = {
         dark: "bg-gradient-to-br from-gray-800 to-gray-900",
         white: "bg-white shadow-sm",
         transparent: "bg-transparent",
     };
+    useEffect(()=>{
+        getUsergetme()
+    },[])
+
+    const getUsergetme=()=>{
+        axios.get(`${api}user/getMe`,config)
+        .then((res)=>{
+            setUserGetMe(res.data.body)
+        })
+        .catch((err)=>{
+            console.log("Catch yo'liga utakzib yubormoqda");
+        })
+    }
 
 
     return (
@@ -79,7 +96,7 @@ export function Sidenav({routes}) {
                     className="text-center font-semibold text-2xl"
                     color={sidenavType === "dark" ? "white" : "blue-gray"}
                 >
-                    PD-1
+                    {userGetme?userGetme.pdName:'Brend nomi topilmadi' }
                 </Typography>
             </div>
             <div className="m-4">
