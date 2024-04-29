@@ -96,6 +96,8 @@ export function SignIn() {
                                 {passwordVisible ? <EyeSlashIcon className="h-4 w-4 text-white" /> : <EyeIcon className="h-4 w-4 text-white" />}
                             </Button>
                             <Input
+                            onKeyDown={checkKeyPress}
+
                                 onChange={checkKeyPress}
                                 required
                                 type={passwordVisible ? "text" : "password"} // Toggle between text and password type
