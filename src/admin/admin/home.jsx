@@ -12,7 +12,6 @@ import {
 } from "@material-tailwind/react";
 import { StatisticsCard } from "@/admin/widgets/cards";
 import { statisticsCardsData } from "@/admin/data";
-import { UserPlusIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { getPdb, getPk, getRailway } from "@/admin/admin/apiFunction.jsx";
 import { setConfig } from "@/api/api.jsx";
 import { TabsWithWork } from './tabs';
@@ -49,14 +48,15 @@ export function Home() {
 
     return (<div className="mt-12">
         <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
-            {statisticsCardsData.map(({ icon, title, footer, ...rest }) => (<StatisticsCard
+            {/* {statisticsCardsData.map(({ icon, title, footer, ...rest }) => (<StatisticsCard
                 key={title}
                 {...rest}
                 title={title}
                 icon={React.createElement(icon, {
                     className: "w-6 h-6 text-white",
                 })}
-            />))}
+            />))} */}
+            <StatisticsCard/>
         </div>
         <div className="mb-6 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
             <Card>

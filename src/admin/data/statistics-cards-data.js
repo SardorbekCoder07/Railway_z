@@ -1,13 +1,25 @@
+import { api, config } from "@/api/api";
 import {
   UserGroupIcon,
   BuildingOffice2Icon,
   UsersIcon,
   ChartBarIcon,
 } from "@heroicons/react/24/solid";
+import axios from "axios";
+import { useEffect } from "react";
+const AdminStastistic = () => {
+  useEffect(()=>{
+    axios.get(`${api}user/statistic/admin`, config)
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => console.log("Apida xato bor yoki ma'lumot yolg'on"))
+  },)
+}
 
 export const statisticsCardsData = [
   {
-    color: "gray",
+    color: "",
     icon: UserGroupIcon,
     title: "Hodimlar Soni",
     value: "53",
