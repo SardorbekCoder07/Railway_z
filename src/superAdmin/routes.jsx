@@ -6,7 +6,6 @@ import {
   ServerStackIcon,
   RectangleStackIcon,
   GlobeAltIcon,
-  UsersIcon,
 } from "@heroicons/react/24/solid";
 import { Home, Profile, Tables, Notifications } from "@/superAdmin/dashboard";
 import { SignIn, SignUp } from "@/auth";
@@ -31,7 +30,7 @@ export const routes = [
       },
       // sa
       {
-        icon: <UsersIcon {...icon} />,
+        icon: <TableCellsIcon {...icon} />,
         name: "Adminlar",
         path: "/tables",
         element: <Tables />,
@@ -42,17 +41,7 @@ export const routes = [
         path: "/pd",
         element: <PdUsers />,
       },
-      // {
-      //   icon: <InformationCircleIcon {...icon} />,
-      //   name: "Bildirishnomlar",
-      //   path: "/notifications",
-      //   element: <Notifications />,
-      // },
-    ],
-  },
-  {
-    layout: "auth",
-    pages: [
+
       {
         icon: <GlobeAltIcon {...icon} />,
         name: "Veb-saytga kirish",
@@ -65,9 +54,10 @@ export const routes = [
         path: "/log-in",
         element: <SignIn />,
       },
-
     ],
-  },
+
+    },
+
 ];
 
 export default routes;

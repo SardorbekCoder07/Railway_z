@@ -28,7 +28,9 @@ export function Sidenav({routes}) {
 
 
             <div className={`relative`}>
-                <Link to="/" className="py-6 px-8 flex justify-center items-center">
+            <div>
+            <div>
+            <Link to="" className="py-6 px-8 flex justify-center items-center">
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                          width="60pt" height="60pt" viewBox="0 0 172.000000 135.000000"
                          preserveAspectRatio="xMidYMid meet">
@@ -57,6 +59,11 @@ export function Sidenav({routes}) {
                         Railway Plan
                     </Typography>
                 </Link>
+                </div>
+                {/* x icon */}
+                </div>
+
+
                 <IconButton
                     variant="text"
                     color="white"
