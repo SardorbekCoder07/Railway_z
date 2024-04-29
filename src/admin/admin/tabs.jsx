@@ -12,10 +12,13 @@ import { api, byId, config, setConfig } from "@/api/api";
 import axios from "axios";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 
-export function TabsWithWork() {
+export function TabsWithWork({ pk }) {
   const [selectedTab, setSelectedTab] = useState("html");
   const [products, setProducts] = useState([]);
-  const [tool, setTool] = useState(null);
+  const [tool, setTool] = useState([]);
+  const [toolId, setToolId] = useState([]);
+
+
 
   useEffect(() => {
     setConfig();
@@ -31,23 +34,95 @@ export function TabsWithWork() {
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
   const todayDate = today.toLocaleDateString('uz-UZ', options);
 
+
+
+
+
+  const handleInputChange = (value, item) => {
+    setTool(prevTool => {
+      const newTool = [...prevTool];
+      const index = newTool.findIndex(toolItem => toolItem.id === item.id);
+
+      if (value) {
+        // Agar qiymat mavjud bo'lsa, yangilaymiz yoki qo'shamiz
+        if (index !== null) {
+          newTool[index].count = value;
+        } else {
+          newTool.push({ workToolId: +item.id, count: +value });
+        }
+      } else {
+        // Agar qiymat bo'sh bo'lsa, count ni 0 ga o'zgartiramiz, lekin obyektni o'chirmaymiz
+        if (index !== null) {
+          newTool[index].count = 0;
+        }
+      }
+
+      return newTool;
+    });
+  };
+
+
   const todayPlanAdd = () => {
-    const todayPlanInfo = {
+
+    toolId.splice(0, toolId.length); // toolId array'ini tozalaymiz
+
+    for (let i = 0; i < tool.length; i++) {
+      if (tool[i].count) {
+        // parseInt yordamida count qiymatini number turiga o'zgartiramiz
+        const countAsNumber = parseInt(tool[i].count, 10);
+        if (!isNaN(countAsNumber)) {
+          toolId.push({ ...tool[i], count: countAsNumber });
+        }
+      }
+    }
+
+    console.log(toolId);
+
+
+    function todayPlanInfo(obj) {
+
+      for (let key in obj) {
+        if (!obj[key]) {
+          return false;
+          // Agar inputlardan birortasi bulsa xam (undefined, null, false, 0, NaN, ''), false qaytariladi
+        }
+      }
+      return true; // xammasi 100% tuldirilsa true qaytaradi
+    }
+
+    let dataObj = {
+      pkIds: pk,
       todayPlan: byId("todayPlanID"),
       tomorrowPlan: byId("tomorrowPlan"),
-      date: todayDate,
-      employeeCount: byId("employeeCount"),
-      vacationCount: byId("vacationCount"),
-      sickCount: byId("sickCount"),
-      restCount: byId("restCount"),
-      tripCount: byId("tripCount"),
-      onTrainingCount: byId("onTrainingCount"),
+      date: "2024-04-29",
+      employeeCount: +byId("employeeCount"),
+      vacationCount: +byId("vacationCount"),
+      sickCount: +byId("sickCount"),
+      restCount: +byId("restCount"),
+      tripCount: +byId("tripCount"),
+      onTrainingCount: +byId("onTrainingCount"),
       protectionStackST: byId("protectionStackST"),
       protectionStackPR: byId("protectionStackPR"),
       relayConnectorsST: byId("relayConnectorsST"),
       relayConnectorsPR: byId("relayConnectorsPR"),
-      reqDayTools: [{}],
-    };
+      reqDayTools: toolId,
+    }
+    let result = todayPlanInfo(dataObj);
+
+
+    if (result) {
+      axios.post(`${api}day/plan`, dataObj, config)
+        .then((res) => {
+          console.log(res.data);
+        }).catch((error) => {
+          console.error(error);
+        })
+      alert(true)
+      console.log(dataObj);
+    } else {
+      alert(result);
+
+    }
   };
 
   const getTool = () => {
@@ -57,6 +132,8 @@ export function TabsWithWork() {
       })
       .catch((err) => console.log(err));
   };
+
+
 
   const data = [
     {
@@ -129,7 +206,14 @@ export function TabsWithWork() {
 
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900">
-                        <Input type="number" placeholder="Soni" />
+                        <Input
+                          className="elinp"
+                          value={tool.find(toolItem => toolItem.id === item.id)?.count || ''}
+                          onChange={(e) => handleInputChange(e.target.value, item)}
+                          type="number"
+                          placeholder="Soni"
+                          id={item.id}
+                        />
                       </div>
                     </td>
                   </tr>
@@ -140,7 +224,7 @@ export function TabsWithWork() {
       ),
       button: (
         <div>
-          <Button className="flex items-center ju">Send</Button>
+          <Button onClick={todayPlanAdd} className="flex items-center ju" >Send</Button>
         </div>
       ),
     },
@@ -159,8 +243,8 @@ export function TabsWithWork() {
         <Input required type="number" id="restCount" label="Kamandirofkadagilar soni" />
         <Input required type="number" id="tripCount" label="Malaka oshirishga ketganlar" />
         <Input required type="number" id="onTrainingCount" label="Odkul" />
-        <Input type="number" id="protectionStackST" label="Rels ulagichlari ST." />
-        <Input type="number" id="protectionStackPR" label="Rels ulagichlari PR." />
+        <Input type="text" id="protectionStackST" label="Rels ulagichlari ST." />
+        <Input type="text" id="protectionStackPR" label="Rels ulagichlari PR." />
         <Input type="number" id="relayConnectorsST" label="Himoya stiklari ishchilari soni ST." />
         <Input type="number" id="relayConnectorsPR" label="Hiimoya stiklari ishchilari soni PR." />
       </div>
