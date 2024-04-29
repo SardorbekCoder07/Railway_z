@@ -28,6 +28,7 @@ export function Home() {
     const options = {year: 'numeric', month: 'numeric', day: 'numeric'};
     const todayDate = today.toLocaleDateString('uz-UZ', options);
 
+    const empty = ""
     const closePdModal = () => setPdModal(false);
     const openPdModal = () => setPdModal(true);
 
