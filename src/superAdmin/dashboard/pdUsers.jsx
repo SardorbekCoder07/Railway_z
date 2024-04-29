@@ -277,7 +277,7 @@ export function PdUsers() {
                 <Select onChange={(e) => {
                   setUserId(e)
                   editRegex()
-                }} label="PD admini">
+                }} label="PD admini" >
                   {
                     users && users.map((item, i) =>
                       <Option key={i} value={item.id}>{item.firstName} {item.lastName}</Option>
