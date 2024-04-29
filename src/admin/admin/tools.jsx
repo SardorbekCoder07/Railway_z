@@ -117,7 +117,7 @@ export function Tools() {
       })
   }
 
- 
+
   const deletetool = () => {
     axios.delete(`${api}work-tool/delete?id=${ToolData ? ToolData.id : 0}`, config)
       .then(() => {

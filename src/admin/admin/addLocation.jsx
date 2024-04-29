@@ -15,7 +15,7 @@ import {
 } from "@material-tailwind/react";
 import { MapPinIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
-import { api, byId, config, setConfig } from "@/api/api";
+import { api, byId, config } from "@/api/api";
 import toast from "react-hot-toast";
 
 export function AddLocation() {
@@ -50,7 +50,6 @@ export function AddLocation() {
   }
 
   useEffect(() => {
-    setConfig()
     getkm()
     getUser()
   }, [])
@@ -74,7 +73,7 @@ export function AddLocation() {
 
 
   const getkm = () => {
-    axios.get(`${api}railway/list/in/pd`, config)
+    axios.get(`${api}railwa/list/in/pd`, config)
       .then((res) => {
         setkm(res.data.body);
       })
