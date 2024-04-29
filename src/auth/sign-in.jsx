@@ -87,7 +87,7 @@ export function SignIn() {
                         <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
                             Parol*
                         </Typography>
-                        <div className="relative flex w-full max-w-[24rem]">
+                        <div className="relative flex w-full ">
                             <Button
                                 size="sm"
                                 className="!absolute right-1 top-1 rounded z-50"
@@ -96,6 +96,8 @@ export function SignIn() {
                                 {passwordVisible ? <EyeSlashIcon className="h-4 w-4 text-white" /> : <EyeIcon className="h-4 w-4 text-white" />}
                             </Button>
                             <Input
+                            onKeyDown={checkKeyPress}
+
                                 onChange={checkKeyPress}
                                 required
                                 type={passwordVisible ? "text" : "password"} // Toggle between text and password type
