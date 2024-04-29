@@ -84,9 +84,7 @@ export function Home() {
             <Typography variant="h6" color="white">
               Dashboard
             </Typography>
-            <Button onClick={openAddModal} className="bg-[#fff] text-black px-3 py-2 rounded-md">
-              <UserPlusIcon className="h-6 w-6 text-black"/>
-            </Button>
+            
           </CardHeader>
           <CardBody className="md:overflow-x-scroll">
             <div className="overflow-x-auto">
