@@ -100,7 +100,8 @@ export function SignIn() {
                                 required
                                 type={passwordVisible ? "text" : "password"} // Toggle between text and password type
                                 id="password"
-                                label="*******"
+                                placeholder="*******"
+
                             />
                         </div>
                     </div>
