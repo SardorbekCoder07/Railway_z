@@ -266,10 +266,10 @@ export function Tables() {
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
-                <Input onChange={editRegex} required defaultValue={userData ? userData.firstname : "Ma'lumot yo'q"} id="editname" label="Ism" />
+                <Input onChange={editRegex} required defaultValue={userData ? userData.firstName : "Ma'lumot yo'q"} id="editname" label="Ism" />
               </div>
               <div className="w-full max-w-[24rem]">
-                <Input onChange={editRegex} required defaultValue={userData ? userData.lastname : "Ma'lumot yo'q"} id="editlastname" label="Familya" />
+                <Input onChange={editRegex} required defaultValue={userData ? userData.lastName : "Ma'lumot yo'q"} id="editlastname" label="Familya" />
               </div>
               <div className="relative flex w-full max-w-[24rem]">
                 <Button
@@ -280,7 +280,7 @@ export function Tables() {
                   +998
                 </Button>
                 <Input
-                  onChange={editRegex} required
+                  onChange={editRegex}
                   defaultValue={userData ? userData.phoneNumber : ""}
                   id="editphone"
                   type="number"
@@ -301,7 +301,7 @@ export function Tables() {
   </Button>
   <Input
     onChange={editRegex}
-    required
+
     type={passwordVisible ? "text" : "password"} // Toggle between text and password type
     id="editpassword"
     label="Parol"
@@ -353,6 +353,7 @@ export function Tables() {
                 </Button>
                 <Input
                   onChange={addRegex}
+                  defaultValue={""}
                   id="addphone"
                   type="number"
                   className="ps-20"
@@ -372,7 +373,8 @@ export function Tables() {
   </Button>
   <Input
     onChange={editRegex}
-    required
+    defaultValue={""}
+    
     type={passwordVisible ? "text" : "password"} // Toggle between text and password type
     id="addpassword"
     label="Parol"
