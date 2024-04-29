@@ -10,6 +10,7 @@ import {
 } from "@material-tailwind/react";
 import { api, byId, config, setConfig } from "@/api/api";
 import axios from "axios";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 
 export function TabsWithWork() {
   const [selectedTab, setSelectedTab] = useState("html");
@@ -115,7 +116,7 @@ export function TabsWithWork() {
                 >
                   Qiymati
                 </th>
-                
+
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">

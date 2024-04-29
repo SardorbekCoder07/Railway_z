@@ -12,7 +12,7 @@ import {
 } from "@material-tailwind/react";
 import {StatisticsCard} from "@/admin/widgets/cards";
 import {statisticsCardsData} from "@/admin/data";
-import {UserPlusIcon} from "@heroicons/react/24/solid";
+import {UserPlusIcon, XMarkIcon} from "@heroicons/react/24/solid";
 import {getPdb, getPk, getRailway} from "@/admin/admin/apiFunction.jsx";
 import {setConfig} from "@/api/api.jsx";
 import {TabsWithWork} from './tabs';
@@ -166,11 +166,11 @@ export function Home() {
         </div>
         <div>
         <Dialog open={pdModal} handler={closePdModal}>
-        <Dialog open={pdModal} handler={closePdModal}>
       <DialogBody className="sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl overflow-y-auto max-h-screen">
+      <XMarkIcon className="h-6 absolute right-10 top-10 cursor-pointer" onClick={closePdModal}/>
+
         <TabsWithWork />
       </DialogBody>
-    </Dialog>
     </Dialog>
         </div>
     </div>);
