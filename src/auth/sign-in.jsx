@@ -1,48 +1,61 @@
-import {api} from "@/api/api";
+import { api } from "@/api/api";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import {
     Input,
     Button,
     Typography,
 } from "@material-tailwind/react";
 import axios from "axios";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function SignIn() {
-    const [role, setRole] = useState('/auth/log-in')
+    const [role, setRole] = useState('/auth/log-in');
+    const [loading, setLoading] = useState(false);
+    const [passwordVisible, setPasswordVisible] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
+
     useEffect(() => {
-        document.getElementById('link').click()
-    }, [role])
+        document.getElementById('link').click();
+    }, [role]);
 
     function logIn() {
         let phoneNumber = document.getElementById('phoneNumber').value;
         let password = document.getElementById('password').value;
         if (phoneNumber && password) {
-            axios.post(api + "auth/login", {phoneNumber, password})
+            setLoading(true); // Set loading state to true
+            axios.post(api + "auth/login", { phoneNumber, password })
                 .then(res => {
                     sessionStorage.setItem('jwtTokin', "Bearer " + res.data.body);
                     if (res.data.message === "ROLE_SUPER_ADMIN") {
                         setRole('/super-admin/home');
-                        toast.success("Tizimga muvaffaqiyatli kirdingiz✔")
+                        toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
                     } else if (res.data.message === "ROLE_ADMIN") {
                         setRole('/admin/home');
-                        toast.success("Tizimga muvaffaqiyatli kirdingiz✔")
+                        toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
                     }
                 })
                 .catch((err) => {
                     console.log(err);
-                    toast.error('Serverda xatolik yuz berdi❌')
-                    alert(err)
+                    toast.error('Serverda xatolik yuz berdi❌');
+                    alert(err);
                 })
-        } else toast.error('Ma\'lumotlarni to\'liq kiriting.')
-
+                .finally(() => {
+                    setLoading(false); // Set loading state to false when request is complete
+                });
+        } else {
+            toast.error('Ma\'lumotlarni to\'liq kiriting.');
+        }
     }
 
     function checkKeyPress(event) {
         if (event.key === "Enter") {
             event.preventDefault();
-            logIn()
+            logIn();
         }
     }
 
@@ -74,22 +87,25 @@ export function SignIn() {
                         <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
                             Parol*
                         </Typography>
-                        <Input
-                            onKeyDown={checkKeyPress}
-                            id="password"
-                            type="password"
-                            size="lg"
-                            placeholder="********"
-                            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                            labelProps={{
-                                className: "before:content-none after:content-none",
-                            }}
-                        />
+                        <div className="relative flex w-full max-w-[24rem]">
+                            <Button
+                                size="sm"
+                                className="!absolute right-1 top-1 rounded z-50"
+                                onClick={togglePasswordVisibility}
+                            >
+                                {passwordVisible ? <EyeSlashIcon className="h-4 w-4 text-white" /> : <EyeIcon className="h-4 w-4 text-white" />}
+                            </Button>
+                            <Input
+                                onChange={checkKeyPress}
+                                required
+                                type={passwordVisible ? "text" : "password"} // Toggle between text and password type
+                                id="password"
+                                label="*******"
+                            />
+                        </div>
                     </div>
-                    <Button onClick={() => {
-                        logIn()
-                    }} className="mt-6" fullWidth>
-                        Kirish
+                    <Button onClick={() => logIn()} className="mt-6" fullWidth disabled={loading}>
+                        {loading ? "Yuklanmoqda..." : "Kirish"} {/* Show loading text when loading */}
                     </Button>
                     <Link id="link" to={role}></Link>
                 </div>
