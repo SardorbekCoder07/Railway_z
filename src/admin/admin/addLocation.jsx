@@ -74,7 +74,7 @@ export function AddLocation() {
 
 
   const getkm = () => {
-    axios.get(`${api}railwa/list/in/pd`, config)
+    axios.get(`${api}railway/list/in/pd`, config)
       .then((res) => {
         setkm(res.data.body);
       })
