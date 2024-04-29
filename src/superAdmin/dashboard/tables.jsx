@@ -362,9 +362,22 @@ export function Tables() {
                 />
 
               </div>
-              <div className="w-full max-w-[24rem]">
-                <Input onChange={addRegex} type="password" id="addpassword" label="Parol" />
-              </div>
+              <div className="relative flex w-full max-w-[24rem]">
+  <Button
+    size="sm"
+    className="!absolute right-1 top-1 rounded z-50"
+    onClick={togglePasswordVisibility}
+  >
+    {passwordVisible ? <EyeSlashIcon className="h-4 w-4 text-white" /> : <EyeIcon className="h-4 w-4 text-white" />}
+  </Button>
+  <Input
+    onChange={editRegex}
+    required
+    type={passwordVisible ? "text" : "password"} // Toggle between text and password type
+    id="addpassword"
+    label="Parol"
+  />
+</div>
             </div>
           </DialogBody>
           <DialogFooter>
