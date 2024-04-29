@@ -162,9 +162,9 @@ export function Home() {
             </div>
           </CardBody>
         </Card>
-        <div className="mt-8 w-full flex justify-center items-center">
+        {/* <div className="mt-8 w-full flex justify-center items-center">
           <CircularPagination />
-        </div>
+        </div> */}
       </div>
 
       {/* Add Modal */}
@@ -202,7 +202,7 @@ export function Home() {
           </Button>
         </DialogFooter>
       </Dialog>
-      
+
     </div>
   );
 }
