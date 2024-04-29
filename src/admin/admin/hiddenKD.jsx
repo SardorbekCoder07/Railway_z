@@ -72,6 +72,8 @@ export function Hidden() {
                     <td className="text-black font-medium border-r-2 border-b-2 border-black border-solid px-1 text-xl">
                       PD
                     </td>
+
+                    
                     <td className="px-1 text-xl text-black font-medium border-b-2 border-solid border-black">
                       S.Nurmuhammedov
                     </td>
