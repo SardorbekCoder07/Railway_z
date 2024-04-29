@@ -57,9 +57,9 @@ export function PdUsers() {
 
 
   const getUser = () => {
-    axios.get(`${api}user/admins`, config)
+    axios.get(`${api}user/admins/no/pd`, config)
       .then((res) => {
-        setUsers(res.data);
+        setUsers(res.data.body);
       })
       .catch((err) => console.log(err))
   }

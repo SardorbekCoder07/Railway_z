@@ -10,6 +10,8 @@ import {
   DialogFooter,
   Button,
   Input,
+  Select,
+  Option,
 } from "@material-tailwind/react";
 import { authorsTableData } from "@/superAdmin/data";
 import { CircularPagination } from "@/superAdmin/widgets/layout/circlePagination";
@@ -20,7 +22,9 @@ import toast from "react-hot-toast";
 
 export function Tables() {
   const [users, setUsers] = useState(null)
+  const [noPdUsers, setNoPdUsers] = useState(null)
   const [userData, setUserData] = useState(null)
+  const [newAdmin, setNewAdmin] = useState(null)
   const [editModal, setEditModal] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false)
   const [addModal, setAddModal] = useState(false)
@@ -48,8 +52,9 @@ export function Tables() {
   }
 
   useEffect(() => {
-    getUser()
     setConfig()
+    getUser()
+    getNoPDUser()
   }, [])
 
 
@@ -61,7 +66,17 @@ export function Tables() {
     axios.get(`${api}user/admins`, config)
       .then((res) => {
         setUsers(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err))
+  }
 
+  // ********************get no pd user **************
+
+  const getNoPDUser = () => {
+    axios.get(`${api}user/admins/no/pd`, config)
+      .then((res) => {
+        setNoPdUsers(res.data.body);
       })
       .catch((err) => console.log(err))
   }
@@ -118,7 +133,7 @@ export function Tables() {
   // *******************DELETE USER **********************
 
   const deleteUser = () => {
-    axios.delete(`${api}user/delete?id=${userData ? userData.id : 0}`)
+    axios.delete(`${api}user/delete?deleteUserId=${userData ? userData.id : 0}&updateUserId=${newAdmin ? newAdmin : 0}`)
       .then((res) => {
         closeDeleteModal()
         getUser()
@@ -202,8 +217,8 @@ export function Tables() {
 
               {users && users.map((item, i) => {
                 const className = `py-3 px-5  ${i === users && users.length - 1
-                    ? ""
-                    : "border-b border-blue-gray-50"
+                  ? ""
+                  : "border-b border-blue-gray-50"
                   }`
                 return (
 
@@ -291,22 +306,9 @@ export function Tables() {
                 />
 
               </div>
-              <div className="relative flex w-full max-w-[24rem]">
-  <Button
-    size="sm"
-    className="!absolute right-1 top-1 rounded z-50"
-    onClick={togglePasswordVisibility}
-  >
-    {passwordVisible ? <EyeSlashIcon className="h-4 w-4 text-white" /> : <EyeIcon className="h-4 w-4 text-white" />}
-  </Button>
-  <Input
-    onChange={editRegex}
-
-    type={passwordVisible ? "text" : "password"} // Toggle between text and password type
-    id="editpassword"
-    label="Parol"
-  />
-</div>
+              <div className="w-full max-w-[24rem]">
+                <Input type="password" onChange={addRegex} id="addpassword" label="Parol" />
+              </div>
             </div>
           </DialogBody>
           <DialogFooter>
@@ -363,7 +365,10 @@ export function Tables() {
                 />
 
               </div>
-              <div className="relative flex w-full max-w-[24rem]">
+              <div className="w-full max-w-[24rem]">
+                <Input type="password" onChange={addRegex} id="addpassword" label="Parol" />
+              </div>
+              {/* <div className="relative flex w-full max-w-[24rem]">
   <Button
     size="sm"
     className="!absolute right-1 top-1 rounded z-50"
@@ -379,7 +384,7 @@ export function Tables() {
     id="addpassword"
     label="Parol"
   />
-</div>
+</div> */}
             </div>
           </DialogBody>
           <DialogFooter>
@@ -411,7 +416,32 @@ export function Tables() {
               <Typography
                 variant="large"
                 className=" font-bold uppercase text-blue-gray-400">
-                Bu hodimni o'chirishingizga ishonchingiz komilmi?
+
+                {
+                  userData && userData.pdName !== null ? (
+                    <div className="w-full max-w-[24rem]">
+                      <Typography
+                variant="large"
+                className=" mb-3 font-bold uppercase text-blue-gray-400">
+                  {`Bu hodimni o'chirish uchun `} <span className="text-black">{userData ? userData.pdName : "PD"}</span> {` ning o'rniga yangi admin tayinlashingiz kerak.`}
+                </Typography>
+                      <Select onChange={(e) => {
+                        setNewAdmin(e)
+                      }} label="New Admin">
+                        {
+                          noPdUsers && noPdUsers.map((item, i) =>
+                            <Option key={i} value={item.id}>{item.firstName} {item.lastName}</Option>
+                          )
+                        }
+                      </Select>
+                    </div>
+                  ) : "Bu hodimni o'chirishingizga ishonchingiz komilmi?"
+                }
+
+
+
+
+
               </Typography>
             </div>
           </DialogBody>
