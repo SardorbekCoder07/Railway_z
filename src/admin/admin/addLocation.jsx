@@ -325,11 +325,11 @@ export function AddLocation() {
         {/* add modal */}
 
         <Dialog open={addModal} handler={closeAddModal}>
-          <DialogHeader>Ish quroli qo'shish</DialogHeader>
+          <DialogHeader>KM qo'shish</DialogHeader>
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
-                <Input type="number" onChange={addRegex} required id="addkm" label="Ish quroli nomi" />
+                <Input type="number" onChange={addRegex} required id="addkm" label="KM" />
               </div>
               <div className="w-full max-w-[24rem]">
                 <Select onChange={(e) => {
