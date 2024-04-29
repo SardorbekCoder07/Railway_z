@@ -12,7 +12,7 @@ import {
   Input,
 } from "@material-tailwind/react";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
-import { api, byId, config } from "@/api/api";
+import { api, byId, config, setConfig } from "@/api/api";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -32,6 +32,7 @@ export function Tables() {
   const closeAddModal = () => setAddModal(false)
 
   useEffect(() => {
+    setConfig()
     getPDBuser();
   }, [])
 
