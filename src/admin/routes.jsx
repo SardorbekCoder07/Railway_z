@@ -50,11 +50,6 @@ export const routes = [
       },
 
 
-    ],
-  },
-  {
-    layout: "auth",
-    pages: [
 
       {
         icon: logout,
