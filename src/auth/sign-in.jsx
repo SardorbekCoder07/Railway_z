@@ -87,7 +87,7 @@ export function SignIn() {
                         <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
                             Parol*
                         </Typography>
-                        <div className="relative flex w-full max-w-[24rem]">
+                        <div className="relative flex w-full ">
                             <Button
                                 size="sm"
                                 className="!absolute right-1 top-1 rounded z-50"
