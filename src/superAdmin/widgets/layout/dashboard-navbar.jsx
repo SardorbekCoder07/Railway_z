@@ -34,11 +34,8 @@ export function DashboardNavbar() {
 
   return (
     <Navbar
-      color={fixedNavbar ? "white" : "transparent"}
-      className={`rounded-xl transition-all ${
-        fixedNavbar
-          ? "sticky top-4 z-40 py-3 shadow-md shadow-blue-gray-500/5"
-          : "px-0 py-1"
+      color={"white"}
+      className={`rounded-xl transition-all ${"sticky top-4 z-40 py-3 shadow-md shadow-blue-gray-500/5"
       }`}
       fullWidth
       blurred={fixedNavbar}
@@ -73,7 +70,14 @@ export function DashboardNavbar() {
         </div>
         <div className="flex items-center justify-between">
 
-         
+        <IconButton
+            variant="text"
+            color="blue-gray"
+            className="grid xl:hidden"
+            onClick={() => setOpenSidenav(dispatch, !openSidenav)}
+          >
+            <Bars3Icon strokeWidth={3} className="h-6 w-6 text-blue-gray-500" />
+          </IconButton>
 
           {/* <Menu>
             <MenuHandler>
@@ -153,13 +157,7 @@ export function DashboardNavbar() {
               </MenuItem>
             </MenuList>
           </Menu> */}
-          <IconButton
-            variant="text"
-            color="blue-gray"
-            onClick={() => setOpenConfigurator(dispatch, true)}
-          >
-            <Cog6ToothIcon className="h-5 w-5 text-blue-gray-500" />
-          </IconButton>
+          
         </div>
       </div>
     </Navbar>
