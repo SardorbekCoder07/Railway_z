@@ -18,12 +18,14 @@ import { statisticsCardsData } from "@/superAdmin/data";
 import { CheckCircleIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { api, config, setConfig } from "@/api/api";
 import axios from "axios";
+import Download from "@/superAdmin/dashboard/download.jsx";
 
 export function Home() {
   const [elseModal, setElseModal] = useState(false);
   const [toolModal, setToolModal] = useState(false);
   const [todayModal, setTodayModal] = useState(false);
   const [tomorrowModal, setTomorrowModal] = useState(false);
+  const [isModalDown, setIsModalDown] = useState(false);
   const [dayPlan, setDayPlan] = useState(null)
   const [adminUsers, setAdminUsers] = useState(null)
   const [pdbList, setPdbList] = useState(null)
@@ -35,38 +37,16 @@ export function Home() {
     getUserAdmin()
   }, [])
 
-
-  const openElseModal = () => {
-    setElseModal(true);
-  };
-
-  const closeElseModal = () => {
-    setElseModal(false);
-  };
-  const openToolModal = () => {
-    setToolModal(true);
-  };
-
-  const closeToolModal = () => {
-    setToolModal(false);
-  };
-
-  const handleOpenTodayModal = () => {
-    setTodayModal(true);
-  };
-
-  const handleCloseTodayModal = () => {
-    setTodayModal(false);
-  };
-
-  const handleOpenTomorrowModal = () => {
-    setTomorrowModal(true);
-  };
-
-  const handleCloseTomorrowModal = () => {
-    setTomorrowModal(false);
-  };
-
+  const openElseModal = () => setElseModal(true);
+  const closeElseModal = () => setElseModal(false);
+  const openToolModal = () => setToolModal(true);
+  const closeToolModal = () => setToolModal(false);
+  const handleOpenTodayModal = () => setTodayModal(true);
+  const handleCloseTodayModal = () => setTodayModal(false);
+  const handleOpenTomorrowModal = () => setTomorrowModal(true);
+  const handleCloseTomorrowModal = () => setTomorrowModal(false);
+  const openDown = () => setIsModalDown(true)
+  const closeDown = () => setIsModalDown(false)
 
   // getUserAdmin
   const getUserAdmin = () => {
@@ -141,6 +121,7 @@ export function Home() {
           <Typography variant="h6" color="white">
             Dashboard
           </Typography>
+          <Button onClick={openDown} variant={`gradient`} color={`green`}>Yuklash</Button>
         </CardHeader>
         <CardBody className="md:overflow-x-scroll">
           {/*select*/}
@@ -237,25 +218,16 @@ export function Home() {
                           openElseModal()
                         }} disabled={!item.dayPlanIsActive} >Qo'shimcha</Button>
                       </div>
-
                     </td>
                     <td className="border-b border-blue-gray-200 py-3 px-5">
                       {
                         item.dayPlanIsActive ? (
-                          <div className="flex items-center justify-center gap-2">
-                            ✔
-                          </div>
+                          <div className="flex items-center justify-center gap-2">✔</div>
                         ) : (
-                          <div className="flex items-center justify-center gap-2">
-                            ✖
-                          </div>
+                          <div className="flex items-center justify-center gap-2">✖</div>
                         )
                       }
-
-
-
                     </td>
-
                   </tr>
                 )) : (
                   <tr>
@@ -265,7 +237,6 @@ export function Home() {
                       </Typography>
                     </td>
                   </tr>
-
                 )}
               </tbody>
             </table>
@@ -273,6 +244,9 @@ export function Home() {
         </CardBody>
       </Card>
     </div>
+
+    {/*download*/}
+    <Download isModalDown={isModalDown} closeDown={closeDown} />
 
     {/* TODAY PLAN */}
     <Dialog open={todayModal} onClose={handleCloseTodayModal}>
@@ -325,7 +299,6 @@ export function Home() {
         <DialogHeader>Qo'shimcha malumotlar</DialogHeader>
         <DialogBody className="">
           <div className="overflow-y-auto">
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-4">
               <div className="flex justify-between">
                 <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
