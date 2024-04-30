@@ -62,7 +62,7 @@ export function StatisticsCard() {
         </CardHeader>
         <CardBody className="p-4 text-right">
           <Typography variant="small" className="font-normal text-blue-gray-600">
-            Adminlar soni
+            PD lar soni
           </Typography>
           <Typography variant="h4" color="blue-gray">
             {adminstatistics ? adminstatistics.countPd:0}
@@ -83,7 +83,7 @@ export function StatisticsCard() {
         </CardHeader>
         <CardBody className="p-4 text-right">
           <Typography variant="small" className="font-normal text-blue-gray-600">
-            Adminlar soni
+            PDB lar soni
           </Typography>
           <Typography variant="h4" color="blue-gray">
             {adminstatistics ? adminstatistics.countPdb : 0}
