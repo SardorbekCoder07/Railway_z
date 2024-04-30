@@ -69,7 +69,7 @@ export function AddLocation() {
       .then((res) => {
         setUsers(res.data.body);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {})
   }
 
 
@@ -81,7 +81,7 @@ export function AddLocation() {
       .then((res) => {
         setkm(res.data.body);
       })
-      .catch((err) => console.log('thdrhgd'))
+      .catch((err) => {})
   }
 
   // *******************ADD USER **********************
@@ -102,7 +102,7 @@ export function AddLocation() {
       .catch((err) => {
         closeAddModal();
         toast.error("Manzil qo'shilmadi❌");
-        console.log(err);
+        ;
       })
       .finally(() => {
         setAddLoading(false);
@@ -129,7 +129,6 @@ export function AddLocation() {
       })
       .catch((err) => {
         toast.error("Ish quroli tahrirlanmadi❌");
-        console.log(err);
         closeEditModal();
       })
       .finally(() => {
@@ -148,7 +147,6 @@ export function AddLocation() {
   //     })
   //     .catch((err) => {
   //       toast.error("Ish quroli o'chirilmadi")
-  //       console.log(err);
   //       closeDeleteModal()
   //     })
 
@@ -264,7 +262,6 @@ export function AddLocation() {
                       <Typography onClick={() => {
                         openEditModal()
                         setkmData(item)
-                        console.log(item);
                       }} className=" cursor-pointer text-xs font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
                         Tahrirlash
                       </Typography>

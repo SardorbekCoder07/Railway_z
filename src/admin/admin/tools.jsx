@@ -59,7 +59,7 @@ export function Tools() {
       .then((res) => {
         setUsers(res.data);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {})
   }
 
 
@@ -70,9 +70,8 @@ export function Tools() {
     axios.get(`${api}work-tool/work-tool`, config)
       .then((res) => {
         settool(res.data);
-        console.log(res.data);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {})
   }
 
   // *******************ADD USER **********************
@@ -91,7 +90,7 @@ export function Tools() {
         closeAddModal()
         toast.error("Ish quroli qo'shilmadi❌")
 
-        console.log(err);
+        {};
       })
   }
 
@@ -113,7 +112,7 @@ export function Tools() {
       })
       .catch((err) => {
         toast.error("Ish quroli tahrirlanmadi❌")
-        console.log(err)
+        {}
         closeEditModal()
       })
   }
@@ -129,7 +128,7 @@ export function Tools() {
       })
       .catch((err) => {
         toast.error("Ish quroli o'chirilmadi")
-        console.log(err);
+        {};
         closeDeleteModal()
       })
 

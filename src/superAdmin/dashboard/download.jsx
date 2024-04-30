@@ -25,7 +25,6 @@ const Download = ({isModalDown, closeDown}) => {
                 .catch((err) => {
                     setError('')
                     closeDown()
-                    console.log(err)
                 })
         } else setError('Sanani tanlang!!!')
     }

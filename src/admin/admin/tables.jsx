@@ -42,7 +42,6 @@ export function Tables() {
         setPdbaUsers(res.data.body)
       })
       .catch((err) => {
-        console.log('xato bor')
       })
   }
 
@@ -61,7 +60,6 @@ export function Tables() {
       .catch((err) => {
         closeAddModal();
         toast.error("Xato");
-        console.log(err);
       })
   }
 
@@ -80,7 +78,6 @@ export function Tables() {
       .catch((err) => {
         closeEditModal();
         toast.error("PDB tahrirlanmadi");
-        console.log(err);
       })
   }
 
@@ -95,7 +92,6 @@ export function Tables() {
 
     //     })
     //     .catch((err) => {
-    //       console.log(err);
     //       closeDeleteModal()
     //       toast.error("PDB o'chirilmadi!❌")
     //     })

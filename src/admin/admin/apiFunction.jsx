@@ -8,7 +8,7 @@ export const getPdb = (setPdb) => {
             if (res.data.success === true) setPdb(res.data.body)
             else setPdb(null)
         })
-        .catch(err => console.log(err))
+        .catch(err => {})
 }
 
 // get railway
@@ -19,7 +19,7 @@ export const getRailway = (id, setRailway) => {
                 if (res.data.success === true) setRailway(res.data.body)
                 else setRailway(null)
             })
-            .catch(err => console.log(err))
+            .catch(err => {})
     }
 }
 
@@ -31,7 +31,7 @@ export const getPk = (id, setPk) => {
                 if (res.data.success === true) setPk(res.data.body)
                 else setPk(null)
             })
-            .catch(err => console.log(err))
+            .catch(err => {})
     }
 }
 
@@ -42,5 +42,5 @@ export const getDayPlan = (id, setDayPlan) => {
             if (res.data.success === true) setDayPlan(res.data.body)
             else setDayPlan(null)
         })
-        .catch(err => console.log(err))
+        .catch(err => {})
 }

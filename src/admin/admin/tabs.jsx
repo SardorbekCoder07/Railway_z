@@ -131,11 +131,9 @@ export function TabsWithWork({ pk, onClose }) {
           
         }).catch((error) => {
           alert("Malumotlarni saqlashda xatolik yuz berdi❌")
-          console.log(dataObj);
         })
     } else {
       alert("Malumotlar to'liq emas❌")
-      console.log(dataObj);
 
     }
   };
@@ -145,7 +143,7 @@ export function TabsWithWork({ pk, onClose }) {
       .then((res) => {
         setTool(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   };
 
 

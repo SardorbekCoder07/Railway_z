@@ -66,9 +66,8 @@ export function Tables() {
     axios.get(`${api}user/admins`, config)
       .then((res) => {
         setUsers(res.data);
-        console.log(res.data);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {})
   }
 
   // ********************get no pd user **************
@@ -78,7 +77,7 @@ export function Tables() {
       .then((res) => {
         setNoPdUsers(res.data.body);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {})
   }
 
   // *******************ADD USER **********************
@@ -101,7 +100,7 @@ export function Tables() {
       .catch((err) => {
         closeAddModal()
         toast.error("xato")
-        console.log(err);
+        {};
       })
   }
 
@@ -125,7 +124,7 @@ export function Tables() {
 
       })
       .catch((err) => {
-        console.log(err)
+        {}
         closeEditModal()
       })
   }
@@ -141,7 +140,7 @@ export function Tables() {
 
       })
       .catch((err) => {
-        console.log(err);
+        {};
         closeDeleteModal()
       })
 

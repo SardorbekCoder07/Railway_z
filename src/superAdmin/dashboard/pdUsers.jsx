@@ -61,7 +61,7 @@ export function PdUsers() {
       .then((res) => {
         setUsers(res.data.body);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {})
   }
 
 
@@ -73,7 +73,7 @@ export function PdUsers() {
       .then((res) => {
         setPD(res.data.body);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {})
   }
 
   // *******************ADD USER **********************
@@ -93,7 +93,7 @@ export function PdUsers() {
       .catch((err) => {
         closeAddModal()
         toast.error("xato")
-        console.log(err);
+        {};
       })
   }
 
@@ -116,7 +116,7 @@ export function PdUsers() {
 
       })
       .catch((err) => {
-        console.log(err)
+        {}
         closeEditModal()
       })
   }
@@ -132,7 +132,7 @@ export function PdUsers() {
 
       })
       .catch((err) => {
-        console.log(err);
+        {};
         closeDeleteModal()
       })
 
@@ -156,7 +156,6 @@ export function PdUsers() {
   }
 
   const editRegex = () => {
-    console.log(userID);
     if (
       byId("editPD") !== "" &&
       byId("editemployeeCount") !== ""

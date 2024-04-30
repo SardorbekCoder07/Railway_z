@@ -101,7 +101,6 @@ export function Hisobot() {
               <div className="w-full max-w-[24rem]">
                 <Select onChange={(e) => {
                   getPk(e, setPk)
-                  console.log(Pk);
                 }} label="PD admini">
                   {
                     railway ? railway.map((item, i) =>
@@ -165,7 +164,6 @@ export function Hisobot() {
                             }} disabled={!item.dayPlanIsActive} >Ertangi</Button>
                             <Button onClick={() => {
                               getDayPlan(item.id, setDayPlan)
-                              console.log(dayPlan);
                               openToolModal()
                             }} disabled={!item.dayPlanIsActive} >Ish qurollar</Button>
                             <Button onClick={() => {

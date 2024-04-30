@@ -21,11 +21,9 @@ export function StatisticsCard() {
   const getAdminStatistics = () => {
     axios.get(`${api}user/statistic/admin`, config)
       .then((res) => {
-        console.log(res.data.body)
         setgetAdminStatistic(res.data.body)
       })
       .catch((err) => {
-        console.log(err);
       })
   }
   // const statisticsCardsData = [

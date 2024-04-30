@@ -68,7 +68,6 @@ export function Home() {
                                     key={item.id}
                                     onClick={() => {
                                         setFirstNamePdb(item)
-                                        console.log(item);
                                         getRailway(item.id, setRailway)
                                     }}
                                     className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md">

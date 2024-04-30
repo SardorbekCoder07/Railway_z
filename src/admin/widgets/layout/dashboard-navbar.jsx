@@ -32,12 +32,8 @@ export function DashboardNavbar() {
 
   return (
     <Navbar
-      color={fixedNavbar ? "white" : "transparent"}
-      className={`rounded-xl transition-all ${
-        fixedNavbar
-          ? "sticky top-4 z-40 py-3 shadow-md shadow-blue-gray-500/5"
-          : "px-0 py-1"
-      }`}
+      color={"white"}
+      className={`rounded-xl transition-all ${ "sticky top-4 z-40 py-3 shadow-md shadow-blue-gray-500/5"}`}
       fullWidth
       blurred={fixedNavbar}
     >
@@ -158,13 +154,7 @@ export function DashboardNavbar() {
               </MenuItem>
             </MenuList>
           </Menu> */}
-          <IconButton
-            variant="text"
-            color="blue-gray"
-            onClick={() => setOpenConfigurator(dispatch, true)}
-          >
-            <Cog6ToothIcon className="h-5 w-5 text-blue-gray-500" />
-          </IconButton>
+          
         </div>
       </div>
     </Navbar>

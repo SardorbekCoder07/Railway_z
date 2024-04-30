@@ -30,7 +30,6 @@ export function Sidenav({routes}) {
             setUserGetMe(res.data.body)
         })
         .catch((err)=>{
-            console.log("Catch yo'liga utakzib yubormoqda");
         })
     }
 
