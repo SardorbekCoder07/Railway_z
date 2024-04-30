@@ -13,7 +13,7 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
-import { MapPinIcon } from "@heroicons/react/24/solid";
+import { MapPinIcon,XMarkIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { api, byId, config, setConfig } from "@/api/api";
 import toast from "react-hot-toast";
@@ -282,7 +282,9 @@ export function AddLocation() {
 
         {/* edit modal */}
         <Dialog open={editModal} handler={closeEditModal}>
-          <DialogHeader>Tahrirlash</DialogHeader>
+          <DialogHeader className="flex items-center justify-between">Tahrirlash
+          <XMarkIcon className="cursor-pointer" onClick={closeEditModal} width={20}/>
+</DialogHeader>
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
@@ -325,7 +327,9 @@ export function AddLocation() {
         {/* add modal */}
 
         <Dialog open={addModal} handler={closeAddModal}>
-          <DialogHeader>KM qo'shish</DialogHeader>
+          <DialogHeader className="flex -items-center justify-between">KM qo'shish
+          <XMarkIcon className="cursor-pointer" onClick={closeAddModal} width={20}/>
+</DialogHeader>
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">

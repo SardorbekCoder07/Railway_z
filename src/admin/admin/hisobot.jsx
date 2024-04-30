@@ -13,7 +13,7 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
-import { CheckCircleIcon, UserPlusIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { CheckCircleIcon, UserPlusIcon, TrashIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { api, config, setConfig } from "@/api/api";
 import axios from "axios";
 import { getDayPlan, getPdb, getPk, getRailway } from "./apiFunction";
@@ -210,7 +210,9 @@ export function Hisobot() {
       </div>
       {/* TODAY PLAN */}
       <Dialog open={todayModal} onClose={handleCloseTodayModal}>
-        <DialogHeader>Bugungi ishlar</DialogHeader>
+        <DialogHeader className="flex items-center justify-between">Bugungi ishlar
+        <XMarkIcon className="cursor-pointer" onClick={handleCloseTodayModal} width={20}/>
+</DialogHeader>
         <DialogBody>
           <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">{dayPlan ? dayPlan.todayPlan : "Malumot mavjud emas"}</Typography>
         </DialogBody>
@@ -221,7 +223,9 @@ export function Hisobot() {
 
       {/* TOMORROW PLAN */}
       <Dialog open={tomorrowModal} onClose={handleCloseTomorrowModal}>
-        <DialogHeader>Ertangi ishlar</DialogHeader>
+        <DialogHeader className="flex items-center justify-between">Ertangi ishlar
+        <XMarkIcon className="cursor-pointer" onClick={handleCloseTomorrowModal} width={20}/>
+</DialogHeader>
         <DialogBody>
           <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">{dayPlan ? dayPlan.tomorrowPlan : "Malumot mavjud emas"}</Typography>
         </DialogBody>
@@ -232,7 +236,9 @@ export function Hisobot() {
 
       {/* TOOLS */}
       <Dialog open={toolModal} onClose={closeToolModal}>
-        <DialogHeader>Ish qurollari</DialogHeader>
+        <DialogHeader className="flex items-center justify-between">Ish qurollari
+        <XMarkIcon className="cursor-pointer" onClick={closeToolModal} width={20}/>
+</DialogHeader>
         <DialogBody>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-4">
             {
@@ -256,7 +262,10 @@ export function Hisobot() {
 
       {/* ELSE PLAN */}
       <Dialog size="lg" open={elseModal} onClose={closeElseModal}>
-        <DialogHeader>Qo'shimcha malumotlar</DialogHeader>
+        <DialogHeader className="flex items-center justify-between">Qo'shimcha malumotlar
+        <XMarkIcon className="cursor-pointer" onClick={closeElseModal} width={20}/>
+
+        </DialogHeader>
         <DialogBody className="">
           <div className="overflow-y-auto">
 

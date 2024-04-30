@@ -13,7 +13,7 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
-import { WrenchScrewdriverIcon } from "@heroicons/react/24/solid";
+import { WrenchScrewdriverIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { api, byId, config, setConfig } from "@/api/api";
 import toast from "react-hot-toast";
@@ -245,7 +245,9 @@ export function Tools() {
 
         {/* edit modal */}
         <Dialog open={editModal} handler={closeEditModal}>
-          <DialogHeader>Tahrirlash</DialogHeader>
+          <DialogHeader className="flex items-center justify-between">Tahrirlash
+          <XMarkIcon className="cursor-pointer" onClick={closeEditModal} width={20}/>
+</DialogHeader>
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
@@ -278,7 +280,9 @@ export function Tools() {
 
 
         <Dialog open={addModal} handler={closeAddModal}>
-          <DialogHeader>Ish quroli qo'shish</DialogHeader>
+          <DialogHeader className="flex items-center justify-between">Ish quroli qo'shish
+          <XMarkIcon className="cursor-pointer" onClick={closeAddModal} width={20}/>
+</DialogHeader>
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
