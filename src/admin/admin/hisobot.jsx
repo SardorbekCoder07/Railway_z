@@ -260,8 +260,8 @@ export function Hisobot() {
         <DialogBody className="">
           <div className="overflow-y-auto">
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-4">
-              <div className="flex justify-around">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-4">
+              <div className="flex justify-between">
                 <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
                   Ishchilar soni:
                 </Typography>
@@ -269,7 +269,7 @@ export function Hisobot() {
                   {dayPlan ? dayPlan.employeeCount : "Malumot yo'q"}
                 </Typography>
               </div>
-              <div className="flex justify-around">
+              <div className="flex justify-between">
                 <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
                   Bemorlar soni:
                 </Typography>
@@ -277,7 +277,7 @@ export function Hisobot() {
                   {dayPlan ? dayPlan.sickCount : "Malumot yo'q"}
                 </Typography>
               </div>
-              <div className="flex justify-around">
+              <div className="flex justify-between">
                 <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
                   Ishdan javob olganlar soni:
                 </Typography>
@@ -285,7 +285,7 @@ export function Hisobot() {
                   {dayPlan ? dayPlan.restCount : "Malumot yo'q"}
                 </Typography>
               </div>
-              <div className="flex justify-around">
+              <div className="flex justify-between">
                 <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
                   Komandirofkadagilar soni:
                 </Typography>
@@ -293,7 +293,7 @@ export function Hisobot() {
                   {dayPlan ? dayPlan.tripCount : "Malumot yo'q"}
                 </Typography>
               </div>
-              <div className="flex justify-around">
+              <div className="flex justify-between">
                 <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
                   Dam oluvchilar soni:
                 </Typography>
@@ -301,7 +301,7 @@ export function Hisobot() {
                   {dayPlan ? dayPlan.vacationCount : "Malumot yo'q"}
                 </Typography>
               </div>
-              <div className="flex justify-around">
+              <div className="flex justify-between">
                 <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
                   Malaka oshirishdagilar soni:
                 </Typography>
@@ -310,8 +310,8 @@ export function Hisobot() {
                 </Typography>
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 mt-4">
-              <div className="flex justify-around">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-4 mt-4">
+              <div className="flex justify-between">
                 <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
                   Rels uzatgichlari ST:
                 </Typography>
@@ -319,7 +319,7 @@ export function Hisobot() {
                   {dayPlan ? dayPlan.relayConnectorsST : "Malumot yo'q"}
                 </Typography>
               </div>
-              <div className="flex justify-around">
+              <div className="flex justify-between">
                 <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
                   Rels uzatgichlari PR:
                 </Typography>
@@ -327,7 +327,7 @@ export function Hisobot() {
                   {dayPlan ? dayPlan.relayConnectorsPR : "Malumot yo'q"}
                 </Typography>
               </div>
-              <div className="flex justify-around">
+              <div className="flex justify-between">
                 <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
                   Ximoya sticklari ST:
                 </Typography>
@@ -335,7 +335,7 @@ export function Hisobot() {
                   {dayPlan ? dayPlan.protectionStackST : "Malumot yo'q"}
                 </Typography>
               </div>
-              <div className="flex justify-around">
+              <div className="flex justify-between">
                 <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
                   Ximoya sticklari PR:
                 </Typography>

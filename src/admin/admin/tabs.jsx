@@ -11,12 +11,15 @@ import {
 import { api, byId, config, setConfig } from "@/api/api";
 import axios from "axios";
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import toast from "react-hot-toast";
 
-export function TabsWithWork({ pk }) {
+export function TabsWithWork({ pk, onClose }) {
   const [selectedTab, setSelectedTab] = useState("html");
   const [products, setProducts] = useState([]);
   const [tool, setTool] = useState([]);
   const [toolId, setToolId] = useState([]);
+  const [results, setResults] = useState(true);
+  
 
 
 
@@ -76,7 +79,6 @@ export function TabsWithWork({ pk }) {
       }
     }
 
-    console.log(toolId);
 
 
     function todayPlanInfo(obj) {
@@ -94,7 +96,7 @@ export function TabsWithWork({ pk }) {
       pkIds: pk,
       todayPlan: byId("todayPlanID"),
       tomorrowPlan: byId("tomorrowPlan"),
-      date: "2024-04-29",
+      date: todayDate,
       employeeCount: +byId("employeeCount"),
       vacationCount: +byId("vacationCount"),
       sickCount: +byId("sickCount"),
@@ -109,18 +111,21 @@ export function TabsWithWork({ pk }) {
     }
     let result = todayPlanInfo(dataObj);
 
+    
+
 
     if (result) {
       axios.post(`${api}day/plan`, dataObj, config)
         .then((res) => {
-          console.log(res.data);
+          toast.success("Hisobot muvaffaqiyatli saqlandi✔")
+          onClose(
+            
+          )
         }).catch((error) => {
-          console.error(error);
+          alert("Malumotlarni saqlashda xatolik yuz berdi❌")
         })
-      alert(true)
-      console.log(dataObj);
     } else {
-      alert(result);
+      alert("Malumotlar to'liq emas❌")
 
     }
   };
