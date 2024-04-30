@@ -37,9 +37,9 @@ export function Home() {
         getRailway(null, setRailway)
         getPk(null, setPk)
         axios.get(`${api}user/getMe`, config)
-        .then((res) => {
-            setGetme(res.data.body);
-        })
+            .then((res) => {
+                setGetme(res.data.body);
+            })
     }, []);
 
     const handleKmButtonClick = (index) => setSelectedKmIndex(index);
@@ -82,8 +82,8 @@ export function Home() {
                     </div>
                 </CardHeader>
                 <div className="px-6 flex bg-gray-300 justify-center items-center gap-3 md:justify-end">
-                    <h1 className="text-4xl font-semibold text-black">                                        {getMe ? getMe.pdName : "PD"}
-</h1>
+                    <h1 className="text-4xl font-semibold text-black">{getMe ? getMe.pdName : "PD"}
+                    </h1>
                     <div class="overflow-x-auto">
                         <table class="w-full min-w-max table-auto text-left">
                             <tbody>
@@ -92,12 +92,12 @@ export function Home() {
                                         {getMe ? getMe.pdName : "PD"}
                                     </td>
                                     <td class="px-1 text-xl text-black font-medium border-b-2 border-solid border-black">
-                                    {getMe ? getMe.firstName : "name"}{" "}
-                                    {getMe ? getMe.lastName : ""}
+                                        {getMe ? getMe.firstName : "name"}{" "}
+                                        {getMe ? getMe.lastName : ""}
 
                                     </td>
                                 </tr>
-                               
+
                                 <tr>
                                     <td class="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
                                         <span class="hidden sm:inline">{firstNamePdb ? firstNamePdb.name : "Malumot yo'q"}</span>
