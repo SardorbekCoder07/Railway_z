@@ -230,13 +230,27 @@ export function Hisobot() {
         </DialogFooter>
       </Dialog>
 
-        {/* TOOLS */}
-        <Dialog open={tomorrowModal} onClose={handleCloseTomorrowModal}>
+      {/* TOOLS */}
+      <Dialog open={toolModal} onClose={closeToolModal}>
         <DialogHeader>Ish qurollari</DialogHeader>
         <DialogBody>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-4">
+            {
+              dayPlan && dayPlan.resDayTools.length !== 0 && dayPlan.resDayTools.map((item, i) =>
+                <div className="flex justify-around">
+                  <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
+                    {item.resWorkToolNamd}
+                  </Typography>
+                  <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
+                    {item.count}
+                  </Typography>
+                </div>
+              )
+            }
+          </div>
         </DialogBody>
         <DialogFooter>
-          <Button onClick={handleCloseTomorrowModal}>Close Modal</Button>
+          <Button onClick={closeToolModal}>Close Modal</Button>
         </DialogFooter>
       </Dialog>
 
