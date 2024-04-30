@@ -11,7 +11,7 @@ import {
   Button,
   Input,
 } from "@material-tailwind/react";
-import { UserPlusIcon } from "@heroicons/react/24/solid";
+import { UserPlusIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { api, byId, config, setConfig } from "@/api/api";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -170,7 +170,7 @@ export function Tables() {
                         }} className=" cursor-pointer text-xs font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
                           Edit
                         </Typography>
-                      z
+
                       </td>
                     </tr>
                   );
@@ -183,7 +183,12 @@ export function Tables() {
       {/* Edit pdb  */}
       <div>
         <Dialog open={editModal} handler={closeEditModal}>
-          <DialogHeader>Tahrirlash</DialogHeader>
+        <div>
+
+          <DialogHeader className="flex items-center justify-between">Tahrirlash
+          <XMarkIcon className="cursor-pointer" onClick={closeEditModal} width={20}/>
+</DialogHeader>
+        </div>
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
@@ -214,7 +219,9 @@ export function Tables() {
       {/* Add pdb modal */}
       <div>
         <Dialog open={addModal} handler={closeAddModal}>
-          <DialogHeader>PDB qo'shish</DialogHeader>
+          <DialogHeader className="flex items-center justify-between">PDB qo'shish
+          <XMarkIcon className="cursor-pointer" onClick={closeAddModal} width={20}/>
+          </DialogHeader>
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
