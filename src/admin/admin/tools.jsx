@@ -194,7 +194,7 @@ export function Tools() {
             </thead>
             <tbody>
 
-              {tool && tool.map((item, i) => {
+              {tool ? tool.map((item, i) => {
                 const className = `py-3 px-5  ${i === tool && tool.length - 1
                   ? ""
                   : "border-b border-blue-gray-50"
@@ -245,6 +245,15 @@ export function Tools() {
                   </tr>
                 )
               }
+              ) : (
+                <tr>
+                  <td></td>
+                  <td><Typography  className=" cursor-pointer text-center text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
+                  Malumot yo'q
+                </Typography></td>
+                  <td></td>
+                
+                </tr>
               )}
 
             </tbody>

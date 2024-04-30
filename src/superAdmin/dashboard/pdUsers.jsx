@@ -203,7 +203,7 @@ export function PdUsers() {
             </thead>
             <tbody>
 
-              {PD && PD.map((item, i) => {
+              {PD ? PD.map((item, i) => {
                 const className = `py-3 px-5  ${i === PD && PD.length - 1
                   ? ""
                   : "border-b border-blue-gray-50"
@@ -263,6 +263,18 @@ export function PdUsers() {
                   </tr>
                 )
               }
+              ) : (
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td className="text-center">
+                  <Typography  className=" cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
+                  Malumot yo'q
+                </Typography></td>
+              <td></td>
+              <td></td>
+
+                </tr>
               )}
 
             </tbody>

@@ -193,12 +193,15 @@ export function Hisobot() {
                       </tr>
                     ) : (
                       <tr>
-                        <td className="py-3">
-                          <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
-                            Ma'lumotlar topilmadi❌
-                          </Typography>
-                        </td>
-                      </tr>
+                  <td></td>
+                  <td></td>
+                  <td className="text-center">
+                  <Typography  className=" cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
+                  Malumot yo'q
+                </Typography></td>
+              <td></td>
+
+                </tr>
                     )
                   }
 

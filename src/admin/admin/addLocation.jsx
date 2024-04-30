@@ -290,15 +290,14 @@ export function AddLocation() {
               ) :
                 <tr>
                   <td></td>
-                  <td className="text-center">
-                  <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-semibold"
-                          >
-                            Malumot yo'q
-                          </Typography></td></tr>}
+                  <td></td>
+                  <td className="">
+                  <Typography  className=" cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
+                  Malumot yo'q
+                </Typography></td>
               <td></td>
+
+                </tr>}
             </tbody>
           </table>
         </CardBody>

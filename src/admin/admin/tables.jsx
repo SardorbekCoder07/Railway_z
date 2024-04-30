@@ -132,7 +132,7 @@ export function Tables() {
               </tr>
             </thead>
             <tbody>
-              {pdbUsers && pdbUsers.map(
+              {pdbUsers ? pdbUsers.map(
                 (item, i) => {
                   const className = `py-3 px-5  ${i === pdbUsers && pdbUsers.length - 1
                     ? ""
@@ -183,6 +183,17 @@ export function Tables() {
                     </tr>
                   );
                 }
+              ) : (
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td className="">
+                  <Typography  className=" cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
+                  Malumot yo'q
+                </Typography></td>
+              <td></td>
+
+                </tr>
               )}
             </tbody>
           </table>
