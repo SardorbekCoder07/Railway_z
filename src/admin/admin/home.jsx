@@ -183,7 +183,7 @@ export function Home() {
             <Dialog open={pdModal} handler={closePdModal}>
                 <Dialog open={pdModal} handler={closePdModal}>
                     <DialogBody className="sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl overflow-y-auto max-h-screen">
-                        <TabsWithWork pk={pkId} />
+                        <TabsWithWork pk={Array.from(new Set(pkId))} />
                     </DialogBody>
                 </Dialog>
             </Dialog>
