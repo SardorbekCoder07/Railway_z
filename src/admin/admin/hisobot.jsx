@@ -20,6 +20,7 @@ import { getDayPlan, getPdb, getPk, getRailway } from "./apiFunction";
 
 export function Hisobot() {
   const [elseModal, setElseModal] = useState(false);
+  const [toolModal, setToolModal] = useState(false);
   const [todayModal, setTodayModal] = useState(false);
   const [tomorrowModal, setTomorrowModal] = useState(false);
   const [dayPlan, setDayPlan] = useState(false)
@@ -40,6 +41,13 @@ export function Hisobot() {
 
   const closeElseModal = () => {
     setElseModal(false);
+  };
+  const openToolModal = () => {
+    setToolModal(true);
+  };
+
+  const closeToolModal = () => {
+    setToolModal(false);
   };
 
   const handleOpenTodayModal = () => {
@@ -152,6 +160,10 @@ export function Hisobot() {
                             <Button onClick={() => {
                               getDayPlan(item.id, setDayPlan)
                               console.log(dayPlan);
+                              openToolModal()
+                            }} disabled={!item.dayPlanIsActive} >Ish qurollar</Button>
+                            <Button onClick={() => {
+                              getDayPlan(item.id, setDayPlan)
                               openElseModal()
                             }} disabled={!item.dayPlanIsActive} >Qo'shimcha</Button>
                           </div>
@@ -198,7 +210,7 @@ export function Hisobot() {
       </div>
       {/* TODAY PLAN */}
       <Dialog open={todayModal} onClose={handleCloseTodayModal}>
-        <DialogHeader>Bugungi Modal</DialogHeader>
+        <DialogHeader>Bugungi ishlar</DialogHeader>
         <DialogBody>
           <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">{dayPlan ? dayPlan.todayPlan : "Malumot mavjud emas"}</Typography>
         </DialogBody>
@@ -209,9 +221,19 @@ export function Hisobot() {
 
       {/* TOMORROW PLAN */}
       <Dialog open={tomorrowModal} onClose={handleCloseTomorrowModal}>
-        <DialogHeader>Ertangi Modal</DialogHeader>
+        <DialogHeader>Ertangi ishlar</DialogHeader>
         <DialogBody>
           <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">{dayPlan ? dayPlan.tomorrowPlan : "Malumot mavjud emas"}</Typography>
+        </DialogBody>
+        <DialogFooter>
+          <Button onClick={handleCloseTomorrowModal}>Close Modal</Button>
+        </DialogFooter>
+      </Dialog>
+
+        {/* TOOLS */}
+        <Dialog open={tomorrowModal} onClose={handleCloseTomorrowModal}>
+        <DialogHeader>Ish qurollari</DialogHeader>
+        <DialogBody>
         </DialogBody>
         <DialogFooter>
           <Button onClick={handleCloseTomorrowModal}>Close Modal</Button>
