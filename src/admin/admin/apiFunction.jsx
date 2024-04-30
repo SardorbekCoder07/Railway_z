@@ -13,22 +13,26 @@ export const getPdb = (setPdb) => {
 
 // get railway
 export const getRailway = (id, setRailway) => {
-    axios.get(`${api}railway?pdbId=${id}`, config)
-        .then(res => {
-            if (res.data.success === true) setRailway(res.data.body)
-            else setRailway(null)
-        })
-        .catch(err => console.log(err))
+    if (id) {
+        axios.get(`${api}railway?pdbId=${id}`, config)
+            .then(res => {
+                if (res.data.success === true) setRailway(res.data.body)
+                else setRailway(null)
+            })
+            .catch(err => console.log(err))
+    }
 }
 
 // get pk
 export const getPk = (id, setPk) => {
-    axios.get(`${api}pk?railwayId=${id}`, config)
-        .then(res => {
-            if (res.data.success === true) setPk(res.data.body)
-            else setPk(null)
-        })
-        .catch(err => console.log(err))
+    if (id) {
+        axios.get(`${api}pk?railwayId=${id}`, config)
+            .then(res => {
+                if (res.data.success === true) setPk(res.data.body)
+                else setPk(null)
+            })
+            .catch(err => console.log(err))
+    }
 }
 
 // get pk
