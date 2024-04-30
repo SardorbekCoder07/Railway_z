@@ -15,7 +15,7 @@ import { statisticsCardsData } from "@/admin/data";
 import { getPdb, getPk, getRailway } from "@/admin/admin/apiFunction.jsx";
 import { setConfig } from "@/api/api.jsx";
 import { TabsWithWork } from './tabs';
-
+import { Checkbox } from "@material-tailwind/react";
 
 export function Home() {
     const [pdModal, setPdModal] = useState(false);
@@ -35,17 +35,14 @@ export function Home() {
     useEffect(() => {
         setConfig()
         getPdb(setPdb)
-        getRailway(1, setRailway)
-        getPk(1, setPk)
-
+        getRailway(null, setRailway)
+        getPk(null, setPk)
     }, []);
 
     const uniqueNumbers = Array.from(new Set(pkId));
-    console.log(uniqueNumbers);
-
-
     const handleKmButtonClick = (index) => setSelectedKmIndex(index);
 
+    console.log(pk)
     return (<div className="mt-12">
         <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
             {/* {statisticsCardsData.map(({ icon, title, footer, ...rest }) => (<StatisticsCard
@@ -161,9 +158,10 @@ export function Home() {
                                 onClick={() => {
                                     setPkId(prevState => [...prevState, item.id])
                                 }}
-                                className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105`}
-
+                                className={`bg-[#fff] flex items-center flex-wrap text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105`}
+                                disabled={item.dayPlanIsActive === true}
                             >
+                                <Checkbox defaultChecked={item.dayPlanIsActive === true ? true : false} />
                                 {item.name}
                             </Button>
                         ))
