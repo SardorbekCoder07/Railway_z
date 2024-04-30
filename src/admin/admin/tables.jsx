@@ -116,7 +116,7 @@ export function Tables() {
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["First name", "Last name", "Actions"].map((el) => (
+                {["#", "First name", "Last name", "Actions"].map((el) => (
                   <th
                     key={el}
                     className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -140,6 +140,18 @@ export function Tables() {
                     }`
                   return (
                     <tr key={i}>
+                      <td className={className}>
+                        <div className="flex items-center gap-4">
+                          <div>
+                            <Typography
+                              variant="small"
+                              className="font-semibold text-blue-gray-600"
+                            >
+                              {i+1}
+                            </Typography>
+                          </div>
+                        </div>
+                      </td>
                       <td className={className}>
                         <div className="flex items-center gap-4">
                           <div>

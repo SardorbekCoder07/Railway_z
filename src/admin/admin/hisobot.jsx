@@ -88,7 +88,7 @@ export function Hisobot() {
               <div className="w-full max-w-[24rem]">
                 <Select onChange={(e) => {
                   getRailway(e, setRailway)
-                }} label="PD admini">
+                }} label="PDB">
                   {
                     pdb ? pdb.map((item, i) =>
                       <Option key={i} value={item.id}>{item.name}</Option>) : (
@@ -101,7 +101,7 @@ export function Hisobot() {
               <div className="w-full max-w-[24rem]">
                 <Select onChange={(e) => {
                   getPk(e, setPk)
-                }} label="PD admini">
+                }} label="KM">
                   {
                     railway ? railway.map((item, i) =>
                       <Option key={i} value={item.id}>{item.km}</Option>) : (
@@ -118,7 +118,7 @@ export function Hisobot() {
                   <tr>
                     <th className="border-b border-blue-gray-200 py-3 px-5 text-left">
                       <Typography variant="small" className="text-sm font-bold uppercase text-blue-gray-400">
-                        N/o
+                        #
                       </Typography>
                     </th>
                     <th className="border-b border-blue-gray-200 py-3 px-5 text-left">

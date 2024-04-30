@@ -206,7 +206,7 @@ export function AddLocation() {
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["KM", "PDB", "Harakatlar"].map((el) => (
+                {["#","KM", "PDB", "Harakatlar"].map((el) => (
                   <th
                     key={el}
                     className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -231,6 +231,18 @@ export function AddLocation() {
                 return (
 
                   <tr key={i}>
+                    <td className={className}>
+                        <div className="flex items-center gap-4">
+                          <div>
+                            <Typography
+                              variant="small"
+                              className="font-semibold text-blue-gray-600"
+                            >
+                              {i+1}
+                            </Typography>
+                          </div>
+                        </div>
+                      </td>
                     <td className={className}>
                       <div className="flex items-center gap-4">
                         <div>
