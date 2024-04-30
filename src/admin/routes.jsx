@@ -1,13 +1,13 @@
 import {
   HomeIcon,
   InformationCircleIcon,
-  GlobeAltIcon,
+  DocumentCheckIcon,
   UsersIcon,
   DocumentDuplicateIcon,
   WrenchScrewdriverIcon,
   MapPinIcon,
 } from "@heroicons/react/24/solid";
-import { Home,Tables, Works, Tools, AddLocation } from "@/admin/admin";
+import { Home,Tables, Works, Tools, AddLocation, Hisobot } from "@/admin/admin";
 import { SignIn, SignUp } from "@/auth";
 
 const icon = {
@@ -26,6 +26,12 @@ export const routes = [
         name: "Dashboard",
         path: "/home",
         element: <Home />,
+      },
+      {
+        icon: <DocumentCheckIcon {...icon} />,
+        name: "Hisobot",
+        path: "/report",
+        element: <Hisobot />,
       },
       // sa
       {
