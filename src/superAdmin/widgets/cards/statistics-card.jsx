@@ -1,38 +1,98 @@
+import { api, config, setConfig } from "@/api/api";
+import { UserCircleIcon } from "@heroicons/react/24/solid";
 import {
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
   Typography,
 } from "@material-tailwind/react";
+import axios from "axios";
 import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 
-export function StatisticsCard({ color, icon, title, value, footer }) {
+export function StatisticsCard() {
+  const [adminstatistics, setAdminStatistics] = useState(null)
+
+  useEffect(()=>{
+    setConfig()
+    superAdminStatistics()
+  },[])
+
+  const superAdminStatistics = () => {
+    axios.get(`${api}user/statistic`, config)
+      .then((res) => {
+        console.log(res.data.body);
+        setAdminStatistics(res.data.body)
+      })
+      .catch((err) => console.log(err))
+  }
+
   return (
-    <Card className="border border-blue-gray-100 shadow-sm">
-      <CardHeader
-        variant="gradient"
-        color={color}
-        floated={false}
-        shadow={false}
-        className="absolute grid h-12 w-12 place-items-center"
-      >
-        {icon}
-      </CardHeader>
-      <CardBody className="p-4 text-right">
-        <Typography variant="small" className="font-normal text-blue-gray-600">
-          {title}
-        </Typography>
-        <Typography variant="h4" color="blue-gray">
-          {value}
-        </Typography>
-      </CardBody>
-      {footer && (
-        <CardFooter className="border-t border-blue-gray-50 p-4">
-          {footer}
-        </CardFooter>
-      )}
-    </Card>
+    <>
+      <Card className="border border-blue-gray-100 shadow-sm">
+        <CardHeader
+          variant="gradient"
+          color="gray"
+          floated={false}
+          shadow={false}
+          className="absolute grid h-12 w-12 place-items-center"
+        >
+          <UserCircleIcon />
+        </CardHeader>
+        <CardBody className="p-4 text-right">
+          <Typography variant="small" className="font-normal text-blue-gray-600">
+            Adminlar soni
+          </Typography>
+          <Typography variant="h4" color="blue-gray">
+            {adminstatistics ? adminstatistics.countAdmin:0}
+          </Typography>
+        </CardBody>
+      </Card>
+
+
+      <Card className="border border-blue-gray-100 shadow-sm">
+        <CardHeader
+          variant="gradient"
+          color="gray"
+          floated={false}
+          shadow={false}
+          className="absolute grid h-12 w-12 place-items-center"
+        >
+          <UserCircleIcon />
+        </CardHeader>
+        <CardBody className="p-4 text-right">
+          <Typography variant="small" className="font-normal text-blue-gray-600">
+            Adminlar soni
+          </Typography>
+          <Typography variant="h4" color="blue-gray">
+            {adminstatistics ? adminstatistics.countPd:0}
+          </Typography>
+        </CardBody>
+      </Card>
+
+
+      <Card className="border border-blue-gray-100 shadow-sm">
+        <CardHeader
+          variant="gradient"
+          color="gray"
+          floated={false}
+          shadow={false}
+          className="absolute grid h-12 w-12 place-items-center"
+        >
+          <UserCircleIcon />
+        </CardHeader>
+        <CardBody className="p-4 text-right">
+          <Typography variant="small" className="font-normal text-blue-gray-600">
+            Adminlar soni
+          </Typography>
+          <Typography variant="h4" color="blue-gray">
+            {adminstatistics ? adminstatistics.countPdb : 0}
+          </Typography>
+        </CardBody>
+      </Card>
+    </>
+
+
   );
 }
 
