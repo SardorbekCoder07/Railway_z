@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
     Card,
     CardHeader,
@@ -7,11 +7,11 @@ import {
     Dialog,
     DialogBody,
 } from "@material-tailwind/react";
-import {StatisticsCard} from "@/admin/widgets/cards";
-import {getPdb, getPk, getRailway} from "@/admin/admin/apiFunction.jsx";
-import {setConfig} from "@/api/api.jsx";
-import {TabsWithWork} from './tabs';
-import {Checkbox} from "@material-tailwind/react";
+import { StatisticsCard } from "@/admin/widgets/cards";
+import { getPdb, getPk, getRailway } from "@/admin/admin/apiFunction.jsx";
+import { setConfig } from "@/api/api.jsx";
+import { TabsWithWork } from './tabs';
+import { Checkbox } from "@material-tailwind/react";
 
 export function Home() {
     const [pdModal, setPdModal] = useState(false);
@@ -21,7 +21,7 @@ export function Home() {
     const [railway, setRailway] = useState(null);
     const [pk, setPk] = useState(null);
     const today = new Date();
-    const options = {year: 'numeric', month: 'numeric', day: 'numeric'};
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
     const todayDate = today.toLocaleDateString('uz-UZ', options);
     const [pkId, setPkId] = useState([]);
 
@@ -45,15 +45,7 @@ export function Home() {
 
     return (<div className="mt-12">
         <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
-            {/* {statisticsCardsData.map(({ icon, title, footer, ...rest }) => (<StatisticsCard
-                key={title}
-                {...rest}
-                title={title}
-                icon={React.createElement(icon, {
-                    className: "w-6 h-6 text-white",
-                })}
-            />))} */}
-            <StatisticsCard/>
+            <StatisticsCard />
         </div>
         <div className="mb-6 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
             <Card>
@@ -86,34 +78,30 @@ export function Home() {
                     <div class="overflow-x-auto">
                         <table class="w-full min-w-max table-auto text-left">
                             <tbody>
-                            <tr>
-                                <td class="text-black font-medium border-r-2 border-b-2 border-black border-solid px-1 text-xl">
-                                    PD
-                                </td>
-                                <td class="px-1 text-xl text-black font-medium border-b-2 border-solid border-black">
-                                    S.Nurmuhammedov
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
-                                    <span class="sm:hidden">PDB:</span>
-                                    <span class="hidden sm:inline">Personal Data:</span>
-                                </td>
-                                <td class="text-black font-medium border-black border-solid px-1 text-xl">
-                                    <span class="sm:hidden">User:</span>
-                                    <span class="hidden sm:inline">User Name:</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
-                                    <span class="sm:hidden">No data available</span>
-                                    <span class="hidden sm:inline">PDB yo'q</span>
-                                </td>
-                                <td class="text-black font-medium border-black border-solid px-1 text-xl">
-                                    <span class="sm:hidden">No data available</span>
-                                    <span class="hidden sm:inline">User yo'q</span>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td class="text-black font-medium border-r-2 border-b-2 border-black border-solid px-1 text-xl">
+                                        PD
+                                    </td>
+                                    <td class="px-1 text-xl text-black font-medium border-b-2 border-solid border-black">
+                                        S.Nurmuhammedov
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
+                                        <span class="sm:hidden">PDB:</span>
+                                    </td>
+                                    <td class="text-black font-medium border-black border-solid px-1 text-xl">
+                                        <span class="sm:hidden">User:</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
+                                        <span class="hidden sm:inline">PDB yo'q</span>
+                                    </td>
+                                    <td class="text-black font-medium border-black border-solid px-1 text-xl">
+                                        <span class="hidden sm:inline">User yo'q</span>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -160,7 +148,7 @@ export function Home() {
                             >
                                 <Checkbox
                                     onClick={(e) => addProductIds(e.target.checked, item)}
-                                    defaultChecked={item.dayPlanIsActive === true ? true : false}/>
+                                    defaultChecked={item.dayPlanIsActive === true ? true : false} />
                                 {item.name}
                             </Button>
                         ))
@@ -180,7 +168,7 @@ export function Home() {
             <Dialog open={pdModal} handler={closePdModal}>
                 <Dialog open={pdModal} handler={closePdModal}>
                     <DialogBody className="sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl overflow-y-auto max-h-screen">
-                        <TabsWithWork pk={pkId}/>
+                        <TabsWithWork pk={pkId} onClose={closePdModal} />
                     </DialogBody>
                 </Dialog>
             </Dialog>
