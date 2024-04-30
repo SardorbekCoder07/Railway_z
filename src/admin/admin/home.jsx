@@ -10,16 +10,18 @@ import {
 } from "@material-tailwind/react";
 import { StatisticsCard } from "@/admin/widgets/cards";
 import { getPdb, getPk, getRailway } from "@/admin/admin/apiFunction.jsx";
-import { setConfig } from "@/api/api.jsx";
+import { api, config, setConfig } from "@/api/api.jsx";
 import { TabsWithWork } from './tabs';
 import { Checkbox } from "@material-tailwind/react";
+import axios from "axios";
 
 export function Home() {
     const [pdModal, setPdModal] = useState(false);
     const [selectedKmIndex, setSelectedKmIndex] = useState(null);
     const [firstNamePdb, setFirstNamePdb] = useState('');
     const [pdb, setPdb] = useState(null);
-    const [railway, setRailway] = useState(null);
+    const [railway, setRailway] = useState(null)
+    const [getMe, setGetme] = useState(null)
     const [pk, setPk] = useState(null);
     const today = new Date();
     const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
@@ -34,6 +36,10 @@ export function Home() {
         getPdb(setPdb)
         getRailway(null, setRailway)
         getPk(null, setPk)
+        axios.get(`${api}user/getMe`, config)
+        .then((res) => {
+            setGetme(res.data.body);
+        })
     }, []);
 
     const handleKmButtonClick = (index) => setSelectedKmIndex(index);
@@ -62,6 +68,7 @@ export function Home() {
                                     key={item.id}
                                     onClick={() => {
                                         setFirstNamePdb(item)
+                                        console.log(item);
                                         getRailway(item.id, setRailway)
                                     }}
                                     className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md">
@@ -75,32 +82,28 @@ export function Home() {
                     </div>
                 </CardHeader>
                 <div className="px-6 flex bg-gray-300 justify-center items-center gap-3 md:justify-end">
-                    <h1 className="text-4xl font-semibold text-black">PD-1</h1>
+                    <h1 className="text-4xl font-semibold text-black">                                        {getMe ? getMe.pdName : "PD"}
+</h1>
                     <div class="overflow-x-auto">
                         <table class="w-full min-w-max table-auto text-left">
                             <tbody>
                                 <tr>
                                     <td class="text-black font-medium border-r-2 border-b-2 border-black border-solid px-1 text-xl">
-                                        PD
+                                        {getMe ? getMe.pdName : "PD"}
                                     </td>
                                     <td class="px-1 text-xl text-black font-medium border-b-2 border-solid border-black">
-                                        S.Nurmuhammedov
+                                    {getMe ? getMe.firstName : "name"}{" "}
+                                    {getMe ? getMe.lastName : ""}
+
                                     </td>
                                 </tr>
+                               
                                 <tr>
                                     <td class="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
-                                        <span class="sm:hidden">PDB:</span>
+                                        <span class="hidden sm:inline">{firstNamePdb ? firstNamePdb.name : "Malumot yo'q"}</span>
                                     </td>
                                     <td class="text-black font-medium border-black border-solid px-1 text-xl">
-                                        <span class="sm:hidden">User:</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
-                                        <span class="hidden sm:inline">PDB yo'q</span>
-                                    </td>
-                                    <td class="text-black font-medium border-black border-solid px-1 text-xl">
-                                        <span class="hidden sm:inline">User yo'q</span>
+                                        <span class="hidden sm:inline">{firstNamePdb ? firstNamePdb.userFullName : "Malumot yo'q"}</span>
                                     </td>
                                 </tr>
                             </tbody>
