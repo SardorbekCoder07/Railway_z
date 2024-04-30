@@ -6,6 +6,7 @@ import {
     Button,
     Dialog,
     DialogBody,
+    Typography,
 } from "@material-tailwind/react";
 import { StatisticsCard } from "@/admin/widgets/cards";
 import { getPdb, getPk, getRailway } from "@/admin/admin/apiFunction.jsx";
@@ -127,11 +128,11 @@ export function Home() {
                                 Topilmadi
                             </Button>
                         )) : (
-                            <Button
+                            <Typography
                                 onClick={() => setPk(null)}
-                                className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105`}>
-                                Topilmadi
-                            </Button>
+                                className={` text-2xl `}>
+                                Biror bir  PDB tanlang !!!
+                            </Typography>
                         )
                     }
                 </CardBody>

@@ -127,9 +127,8 @@ export function TabsWithWork({ pk, onClose }) {
       axios.post(`${api}day/plan`, dataObj, config)
         .then((res) => {
           toast.success("Hisobot muvaffaqiyatli saqlandi✔")
-          onClose(
-
-          )
+          onClose()
+          
         }).catch((error) => {
           alert("Malumotlarni saqlashda xatolik yuz berdi❌")
           console.log(dataObj);
