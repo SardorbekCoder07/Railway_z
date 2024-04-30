@@ -17,6 +17,7 @@ import { CheckCircleIcon, UserPlusIcon, TrashIcon, XMarkIcon } from "@heroicons/
 import { api, config, setConfig } from "@/api/api";
 import axios from "axios";
 import { getDayPlan, getPdb, getPk, getRailway } from "./apiFunction";
+import Download from "@/superAdmin/dashboard/download";
 
 export function Hisobot() {
   const [elseModal, setElseModal] = useState(false);
@@ -27,6 +28,8 @@ export function Hisobot() {
   const [pdb, setPdb] = useState(null)
   const [Pk, setPk] = useState(null)
   const [railway, setRailway] = useState(null)
+  const [isModalDown, setIsModalDown] = useState(false);
+
 
   useEffect(() => {
     setConfig()
@@ -34,6 +37,8 @@ export function Hisobot() {
   }, [])
 
 
+  const openDown = () => setIsModalDown(true)
+  const closeDown = () => setIsModalDown(false)
 
   const openElseModal = () => {
     setElseModal(true);
@@ -75,6 +80,7 @@ export function Hisobot() {
             <Typography variant="h6" color="white">
               Dashboard
             </Typography>
+            <Button onClick={openDown} variant={`gradient`} color={`green`}>Yuklash</Button>
 
           </CardHeader>
           <CardBody className="">
@@ -204,6 +210,9 @@ export function Hisobot() {
             </div>
           </CardBody>
         </Card>
+
+    <Download isModalDown={isModalDown} closeDown={closeDown} />
+
         {/* <div className="mt-8 w-full flex justify-center items-center">
           <CircularPagination />
         </div> */}
