@@ -26,44 +26,6 @@ export function StatisticsCard() {
       .catch((err) => {
       })
   }
-  // const statisticsCardsData = [
-  //   {
-  //     title: "Jami ishchilar soni",
-  //     color: "transparent",
-  //     icon: UserGroupIcon,
-  //     value: getAdminStatistic.employeeCount,
-  //   },
-  //   {
-  //     title: "Hodimlar Soni",
-  //     color: "transparent",
-  //     icon: UserGroupIcon,
-  //     value: getAdminStatistic.employeeCount,
-  //   },
-  //   {
-  //     title: "Ta'tildagilar soni",
-  //     color: "transparent",
-  //     icon: UserIcon,
-  //     value: getAdminStatistic.employeeCount,
-  //   },
-  //   {
-  //     title: "Kasallar soni",
-  //     color: "transparent",
-  //     icon: UserGroupIcon,
-  //     value: getAdminStatistic.employeeCount,
-  //   },
-  //   {
-  //     title: "Dam olayotganlar soni",
-  //     color: "transparent",
-  //     icon: UserGroupIcon,
-  //     value: getAdminStatistic.employeeCount,
-  //   },
-  //   {
-  //     title: "Sayohatdagilar soni",
-  //     color: "transparent",
-  //     icon: UserGroupIcon,
-  //     value: getAdminStatistic.employeeCount,
-  //   }
-  // ]
   return (
     <>
       <Card // Don't forget to add a unique key when mapping over an array
