@@ -12,7 +12,6 @@ import {
   Input,
   Select,
   Option,
-  CircularProgress,
 } from "@material-tailwind/react";
 import { MapPinIcon,XMarkIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
@@ -20,15 +19,16 @@ import { api, byId, config, setConfig } from "@/api/api";
 import toast from "react-hot-toast";
 
 export function AddLocation() {
-  const [km, setkm] = useState(null)
-  const [users, setUsers] = useState(null)
-  const [pdbId, setPDBid] = useState(null)
-  const [kmData, setkmData] = useState(null)
-  const [editModal, setEditModal] = useState(false)
-  // const [deleteModal, setDeleteModal] = useState(false)
-  const [addModal, setAddModal] = useState(false)
-  const [regex, setRegex] = useState(true)
+  const [km, setkm] = useState(null);
+  const [users, setUsers] = useState(null);
+  const [pdbId, setPDBid] = useState(null);
+  const [kmData, setkmData] = useState(null);
+  const [editModal, setEditModal] = useState(false);
+  const [addModal, setAddModal] = useState(false);
+  const [regex, setRegex] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [editLoading, setEditLoading] = useState(false);
+  const [addLoading, setAddLoading] = useState(false);
 
 
 
@@ -87,27 +87,27 @@ export function AddLocation() {
   // *******************ADD USER **********************
 
   const addkm = () => {
-    setLoading(true)
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
+    setAddLoading(true);
     const addData = {
       km: byId("addkm"),
-      pdbId: pdbId
-    }
-    axios.post(`${api}railway`, addData, config)
+      pdbId: pdbId,
+    };
+    axios
+      .post(`${api}railway`, addData, config)
       .then((res) => {
-        closeAddModal()
-        getkm()
-        toast.success("Manzil muoffaqqiyatli qo'shildi!👌")
+        closeAddModal();
+        getkm();
+        toast.success("Manzil muoffaqqiyatli qo'shildi!👌");
       })
       .catch((err) => {
-        closeAddModal()
-        toast.error("Manzil qo'shilmadi❌")
-
+        closeAddModal();
+        toast.error("Manzil qo'shilmadi❌");
         console.log(err);
       })
-  }
+      .finally(() => {
+        setAddLoading(false);
+      });
+  };
 
 
 
@@ -115,24 +115,27 @@ export function AddLocation() {
 
 
   const editkm = () => {
+    setEditLoading(true);
     const editData = {
       km: byId("editkm"),
-      pdbId: pdbId
-    }
-    axios.put(`${api}railway?id=${kmData ? kmData.id : 0}`, editData, config)
+      pdbId: pdbId,
+    };
+    axios
+      .put(`${api}railway?id=${kmData ? kmData.id : 0}`, editData, config)
       .then((res) => {
-        closeEditModal()
-        getkm()
-        toast.success("Ish quroli muvoffaqqiyatli tahrirlandi!👌")
-
+        closeEditModal();
+        getkm();
+        toast.success("Ish quroli muvoffaqqiyatli tahrirlandi!👌");
       })
       .catch((err) => {
-        toast.error("Ish quroli tahrirlanmadi❌")
-        console.log(err)
-        closeEditModal()
+        toast.error("Ish quroli tahrirlanmadi❌");
+        console.log(err);
+        closeEditModal();
       })
-  }
-
+      .finally(() => {
+        setEditLoading(false);
+      });
+  };
   // *******************DELETE USER **********************
 
   // const deletekm = () => {
@@ -375,10 +378,9 @@ export function AddLocation() {
               <span>Orqaga</span>
             </Button>
             <span className={`${regex ? "cursor-not-allowed" : ""}`}>
-              <Button disabled={regex} onClick={addkm} variant="gradient" color="gray">
+              <Button disabled={regex} onClick={addkm }  variant="gradient" color="gray">
                 <span>Qo'shish</span>
               </Button>
-              {loading && <CircularProgress />}
             </span>
           </DialogFooter>
         </Dialog>
