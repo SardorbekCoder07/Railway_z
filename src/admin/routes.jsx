@@ -1,7 +1,7 @@
 import {
   HomeIcon,
   InformationCircleIcon,
-  GlobeAltIcon,
+  DocumentCheckIcon,
   UsersIcon,
   DocumentDuplicateIcon,
   WrenchScrewdriverIcon,
@@ -28,7 +28,7 @@ export const routes = [
         element: <Home />,
       },
       {
-        icon: <HomeIcon {...icon} />,
+        icon: <DocumentCheckIcon {...icon} />,
         name: "Hisobot",
         path: "/report",
         element: <Hisobot />,

@@ -30,3 +30,13 @@ export const getPk = (id, setPk) => {
         })
         .catch(err => console.log(err))
 }
+
+// get pk
+export const getDayPlan = (id, setDayPlan) => {
+    axios.get(`${api}day/plan?pkId=${id}`, config)
+        .then(res => {
+            if (res.data.success === true) setDayPlan(res.data.body)
+            else setDayPlan(null)
+        })
+        .catch(err => console.log(err))
+}
