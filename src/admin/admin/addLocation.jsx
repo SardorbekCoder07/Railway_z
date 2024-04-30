@@ -12,6 +12,7 @@ import {
   Input,
   Select,
   Option,
+  CircularProgress,
 } from "@material-tailwind/react";
 import { MapPinIcon,XMarkIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
@@ -27,6 +28,8 @@ export function AddLocation() {
   // const [deleteModal, setDeleteModal] = useState(false)
   const [addModal, setAddModal] = useState(false)
   const [regex, setRegex] = useState(true)
+  const [loading, setLoading] = useState(false);
+
 
 
 
@@ -84,6 +87,10 @@ export function AddLocation() {
   // *******************ADD USER **********************
 
   const addkm = () => {
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
     const addData = {
       km: byId("addkm"),
       pdbId: pdbId
@@ -92,11 +99,11 @@ export function AddLocation() {
       .then((res) => {
         closeAddModal()
         getkm()
-        toast.success("Ish quroli muoffaqqiyatli qo'shildi!👌")
+        toast.success("Manzil muoffaqqiyatli qo'shildi!👌")
       })
       .catch((err) => {
         closeAddModal()
-        toast.error("Ish quroli qo'shilmadi❌")
+        toast.error("Manzil qo'shilmadi❌")
 
         console.log(err);
       })
@@ -169,6 +176,15 @@ export function AddLocation() {
       setRegex(true)
     }
   }
+
+
+  const loaderBtn = () => {
+    setLoading(true);
+    // Your edit logic here
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000); // Assuming your edit operation takes 2 seconds
+  };
 
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12 ">
@@ -315,9 +331,9 @@ export function AddLocation() {
             </Button>
             <span className={`${regex ? "cursor-not-allowed" : ""}`}>
 
-              <Button disabled={regex} onClick={editkm} variant="gradient" color="gray">
-                <span>Tahrirlash</span>
-              </Button>
+                <Button disabled={regex} onClick={editkm} variant="gradient" color="gray">
+                  <span>Tahrirlash</span>
+                </Button>
             </span>
           </DialogFooter>
         </Dialog>
@@ -362,6 +378,7 @@ export function AddLocation() {
               <Button disabled={regex} onClick={addkm} variant="gradient" color="gray">
                 <span>Qo'shish</span>
               </Button>
+              {loading && <CircularProgress />}
             </span>
           </DialogFooter>
         </Dialog>
