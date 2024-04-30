@@ -97,7 +97,6 @@ export function SignIn() {
                             </Button>
                             <Input
                                 onKeyDown={checkKeyPress}
-                                required
                                 type={passwordVisible ? "text" : "password"} // Toggle between text and password type
                                 id="password"
                                 placeholder="*******"
