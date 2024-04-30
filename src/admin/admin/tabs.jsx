@@ -19,7 +19,7 @@ export function TabsWithWork({ pk, onClose }) {
   const [tool, setTool] = useState([]);
   const [toolId, setToolId] = useState([]);
   const [results, setResults] = useState(true);
-  
+
 
 
 
@@ -36,6 +36,15 @@ export function TabsWithWork({ pk, onClose }) {
   const today = new Date();
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
   const todayDate = today.toLocaleDateString('uz-UZ', options);
+
+  var hozir = new Date();
+  var yil = hozir.getFullYear();
+  var oy = hozir.getMonth() + 1;
+  var kun = hozir.getDate();
+
+  // Oy va kun uchun ikki raqamli formatni ta'minlash
+  oy = oy < 10 ? '0' + oy : oy;
+  kun = kun < 10 ? '0' + kun : kun;
 
 
 
@@ -96,7 +105,7 @@ export function TabsWithWork({ pk, onClose }) {
       pkIds: pk,
       todayPlan: byId("todayPlanID"),
       tomorrowPlan: byId("tomorrowPlan"),
-      date: todayDate,
+      date: `${yil}-${oy}-${kun}`,
       employeeCount: +byId("employeeCount"),
       vacationCount: +byId("vacationCount"),
       sickCount: +byId("sickCount"),
@@ -111,7 +120,7 @@ export function TabsWithWork({ pk, onClose }) {
     }
     let result = todayPlanInfo(dataObj);
 
-    
+
 
 
     if (result) {
@@ -119,13 +128,15 @@ export function TabsWithWork({ pk, onClose }) {
         .then((res) => {
           toast.success("Hisobot muvaffaqiyatli saqlandi✔")
           onClose(
-            
+
           )
         }).catch((error) => {
           alert("Malumotlarni saqlashda xatolik yuz berdi❌")
+          console.log(dataObj);
         })
     } else {
       alert("Malumotlar to'liq emas❌")
+      console.log(dataObj);
 
     }
   };
