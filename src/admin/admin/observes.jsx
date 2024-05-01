@@ -52,7 +52,7 @@ export function Observes() {
 
   useEffect(() => {
     setConfig()
-    getkm()
+    getObservers()
     getUser()
   }, [])
 
@@ -74,8 +74,8 @@ export function Observes() {
   // *******************GET USER **********************
 
 
-  const getkm = () => {
-    axios.get(`${api}railway/list/in/pd`, config)
+  const getObservers = () => {
+    axios.get(`${api}observers`, config)
       .then((res) => {
         setkm(res.data.body);
       })
@@ -84,22 +84,23 @@ export function Observes() {
 
   // *******************ADD USER **********************
 
-  const addkm = () => {
+  const addObservers = () => {
     setAddLoading(true);
     const addData = {
-      km: byId("addkm"),
+      km: byId("addKm"),
+      userFullName: byId("addObservers"),
       pdbId: pdbId,
     };
     axios
       .post(`${api}railway`, addData, config)
       .then((res) => {
         closeAddModal();
-        getkm();
-        toast.success("Manzil muoffaqqiyatli qo'shildi!👌");
+        getObservers();
+        toast.success("Kuzatuvchi muoffaqqiyatli qo'shildi!👌");
       })
       .catch((err) => {
         closeAddModal();
-        toast.error("Manzil qo'shilmadi❌");
+        toast.error("Kuzatuvchi qo'shilmadi❌");
         ;
       })
       .finally(() => {
@@ -112,26 +113,24 @@ export function Observes() {
   // *******************EDIT USER **********************
 
 
-  const editkm = () => {
-    setEditLoading(true);
+  const editObservers = () => {
+    setLoading(true);
     const editData = {
-      km: byId("editkm"),
+      km: byId("editKm"),
+      userFullName: byId("editObservers"),
       pdbId: pdbId,
     };
     axios
       .put(`${api}railway?id=${kmData ? kmData.id : 0}`, editData, config)
       .then((res) => {
         closeEditModal();
-        getkm();
-        toast.success("Ish quroli muvoffaqqiyatli tahrirlandi!👌");
+        getObservers();
+        toast.success("Kuzatuvchi muvoffaqqiyatli tahrirlandi!👌");
       })
       .catch((err) => {
-        toast.error("Ish quroli tahrirlanmadi❌");
+        toast.error("Kuzatuvchi tahrirlanmadi❌");
         closeEditModal();
       })
-      .finally(() => {
-        setEditLoading(false);
-      });
   };
   // *******************DELETE USER **********************
 
@@ -140,7 +139,8 @@ export function Observes() {
 
   const addRegex = () => {
     if (
-      byId("addkm") !== ""
+      byId("addObservers") !== "" &&
+      byId("addKm")
     ) {
       setRegex(false)
     }
@@ -151,7 +151,8 @@ export function Observes() {
 
   const editRegex = () => {
     if (
-      byId("editkm") !== ""
+      byId("editObservers") !== "" &&
+      byId("editKm")
     ) {
       setRegex(false)
     }
@@ -160,14 +161,6 @@ export function Observes() {
     }
   }
 
-
-  const loaderBtn = () => {
-    setLoading(true);
-    // Your edit logic here
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000); // Assuming your edit operation takes 2 seconds
-  };
 
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12 ">
@@ -288,13 +281,27 @@ export function Observes() {
             <XMarkIcon className="cursor-pointer" onClick={closeEditModal} width={20} />
           </DialogHeader>
           <DialogBody>
-            <div className="flex justify-center flex-col items-center gap-7">
+          <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
-                <Input type="number" onChange={editRegex} required defaultValue={kmData ? kmData.km : "Ma'lumot yo'q"} id="editkm" label="km nomi" />
+                <Input type="text" onChange={addRegex} required id="addObservers" label="Ism va familiya" />
               </div>
               <div className="w-full max-w-[24rem]">
-                
+                <Input type="text" onChange={addRegex} required id="addKm" label="KM" />
               </div>
+              <div className="w-full max-w-[24rem]">
+                <Select onChange={(e) => {
+                  setPDBid(e)
+                  addRegex()
+                }} label="PDB">
+                  {
+                    users && users.length !== 0 ? users.map((item, i) =>
+                      <Option key={i} value={item.id}>{item.name} {item.lastName}</Option>
+                    ) : 
+                    <Option>Malumot yo'q</Option>
+
+                  }
+                </Select>
+                </div>
             </div>
           </DialogBody>
           <DialogFooter>
@@ -308,7 +315,7 @@ export function Observes() {
             </Button>
             <span className={`${regex ? "cursor-not-allowed" : ""}`}>
 
-              <Button disabled={regex} onClick={editkm} variant="gradient" color="gray">
+              <Button disabled={regex} onClick={editObservers} variant="gradient" color="gray">
                 <span>Tahrirlash</span>
               </Button>
             </span>
@@ -326,11 +333,25 @@ export function Observes() {
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
-                <Input type="number" onChange={addRegex} required id="addkm" label="KM" />
+                <Input type="text" onChange={addRegex} required id="addObservers" label="Ism va familiya" />
               </div>
               <div className="w-full max-w-[24rem]">
-               
+                <Input type="text" onChange={addRegex} required id="addKm" label="KM" />
               </div>
+              <div className="w-full max-w-[24rem]">
+                <Select onChange={(e) => {
+                  setPDBid(e)
+                  addRegex()
+                }} label="PDB">
+                  {
+                    users && users.length !== 0 ? users.map((item, i) =>
+                      <Option key={i} value={item.id}>{item.name} {item.lastName}</Option>
+                    ) : 
+                    <Option>Malumot yo'q</Option>
+
+                  }
+                </Select>
+                </div>
             </div>
           </DialogBody>
           <DialogFooter>
@@ -343,7 +364,7 @@ export function Observes() {
               <span>Orqaga</span>
             </Button>
             <span className={`${regex ? "cursor-not-allowed" : ""}`}>
-              <Button disabled={regex} onClick={addkm} variant="gradient" color="gray">
+              <Button disabled={regex} onClick={addObservers} variant="gradient" color="gray">
                 <span>Qo'shish</span>
               </Button>
             </span>
