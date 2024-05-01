@@ -31,10 +31,6 @@ export function Tables() {
   const [regex, setRegex] = useState(true)
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-
-
-
-
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -57,8 +53,6 @@ export function Tables() {
     getNoPDUser()
   }, [])
 
-
-
   // *******************GET USER **********************
 
 
@@ -67,7 +61,7 @@ export function Tables() {
       .then((res) => {
         setUsers(res.data);
       })
-      .catch((err) => {})
+      .catch((err) => { })
   }
 
   // ********************get no pd user **************
@@ -77,11 +71,10 @@ export function Tables() {
       .then((res) => {
         setNoPdUsers(res.data.body);
       })
-      .catch((err) => {})
+      .catch((err) => { })
   }
 
   // *******************ADD USER **********************
-
 
   const addUser = () => {
     const addData = {
@@ -100,11 +93,9 @@ export function Tables() {
       .catch((err) => {
         closeAddModal()
         toast.error("xato")
-        {};
+        { };
       })
   }
-
-
 
   // *******************EDIT USER **********************
 
@@ -124,7 +115,7 @@ export function Tables() {
 
       })
       .catch((err) => {
-        {}
+        { }
         closeEditModal()
       })
   }
@@ -140,7 +131,7 @@ export function Tables() {
 
       })
       .catch((err) => {
-        {};
+        { };
         closeDeleteModal()
       })
 
@@ -197,7 +188,7 @@ export function Tables() {
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["#","First name", "Last name", "Phone number", "Actions"].map((el) => (
+                {["#", "First name", "Last name", "Phone number", "Actions"].map((el) => (
                   <th
                     key={el}
                     className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -223,17 +214,17 @@ export function Tables() {
 
                   <tr key={i}>
                     <td className={className}>
-                        <div className="flex items-center gap-4">
-                          <div>
-                            <Typography
-                              variant="small"
-                              className="font-semibold text-blue-gray-600"
-                            >
-                              {i+1}
-                            </Typography>
-                          </div>
+                      <div className="flex items-center gap-4">
+                        <div>
+                          <Typography
+                            variant="small"
+                            className="font-semibold text-blue-gray-600"
+                          >
+                            {i + 1}
+                          </Typography>
                         </div>
-                      </td>
+                      </div>
+                    </td>
                     <td className={className}>
                       <div className="flex items-center gap-4">
                         <div>
@@ -280,13 +271,11 @@ export function Tables() {
                   <td></td>
                   <td></td>
                   <td className="">
-                  <Typography  className=" cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
-                  Malumot yo'q
-                </Typography></td>
-              <td></td>
-              <td></td>
-
-
+                    <Typography className=" cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
+                      Malumot yo'q
+                    </Typography></td>
+                  <td></td>
+                  <td></td>
                 </tr>
               )}
 
@@ -294,9 +283,6 @@ export function Tables() {
           </table>
         </CardBody>
       </Card>
-      {/* <div className="w-full flex justify-center items-center">
-      <CircularPagination/>
-      </div> */}
       <div>
 
         {/* edit modal */}
@@ -445,10 +431,10 @@ export function Tables() {
                   userData && userData.pdName !== null ? (
                     <div className="w-full max-w-[24rem]">
                       <Typography
-                variant="large"
-                className=" mb-3 font-bold uppercase text-blue-gray-400">
-                  {`Bu hodimni o'chirish uchun `} <span className="text-black">{userData ? userData.pdName : "PD"}</span> {` ning o'rniga yangi admin tayinlashingiz kerak.`}
-                </Typography>
+                        variant="large"
+                        className=" mb-3 font-bold uppercase text-blue-gray-400">
+                        {`Bu hodimni o'chirish uchun `} <span className="text-black">{userData ? userData.pdName : "PD"}</span> {` ning o'rniga yangi admin tayinlashingiz kerak.`}
+                      </Typography>
                       <Select onChange={(e) => {
                         setNewAdmin(e)
                       }} label="New Admin">
