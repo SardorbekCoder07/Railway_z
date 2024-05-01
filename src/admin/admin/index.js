@@ -6,3 +6,4 @@ export * from "@/admin/admin/tools";
 export * from "@/admin/admin/tabs";
 export * from "@/admin/admin/addLocation";
 export * from "@/admin/admin/hisobot";
+export * from "@/admin/admin/observes";
