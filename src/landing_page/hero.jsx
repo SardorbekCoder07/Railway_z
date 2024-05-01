@@ -1,6 +1,5 @@
 import { Button, Carousel } from '@material-tailwind/react';
 import React from 'react';
-import backgroundImage from '../../public/img/bacground/no-image.jpg';
 
 const Hero = () => {
     return (
