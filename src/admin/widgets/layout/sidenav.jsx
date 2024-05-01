@@ -24,7 +24,7 @@ export function Sidenav({routes}) {
         getUsergetme()
     },[])
 
-    const getUsergetme=()=>{
+    const getUsergetme=()=>{r
         axios.get(`${api}user/getMe`,config)
         .then((res)=>{
             setUserGetMe(res.data.body)

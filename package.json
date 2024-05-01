@@ -11,7 +11,7 @@
   "dependencies": {
     "@heroicons/react": "2.0.18",
     "@material-tailwind/react": "2.1.4",
-     "apexcharts": "3.44.0",
+    "apexcharts": "3.44.0",
     "axios": "^1.6.8",
     "date-fns": "^3.6.0",
     "prop-types": "15.8.1",
@@ -19,6 +19,7 @@
     "react-apexcharts": "1.4.1",
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.1",
+    "react-loader-spinner": "^6.1.6",
     "react-router-dom": "6.17.0"
   },
   "devDependencies": {

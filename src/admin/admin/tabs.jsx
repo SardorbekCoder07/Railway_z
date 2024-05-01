@@ -33,6 +33,9 @@ export function TabsWithWork({ pk, onClose }) {
     else setProducts(products.filter((product) => product.productId !== item.productId));
   }
 
+  const today = new Date();
+  const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+  const todayDate = today.toLocaleDateString('uz-UZ', options);
 
   var hozir = new Date();
   var yil = hozir.getFullYear();
@@ -90,7 +93,7 @@ export function TabsWithWork({ pk, onClose }) {
     function todayPlanInfo(obj) {
 
       for (let key in obj) {
-        if (obj[key] === undefined || obj[key] === null || obj[key] === false || obj[key] === NaN || obj[key] === '') {
+        if (obj[key] === undefined || obj[key] === null || obj[key] === false || obj[key] === "NaN" || obj[key] === '') {
           return false;
           // Agar inputlardan birortasi bulsa xam (undefined, null, false, 0, NaN, ''), false qaytariladi
         }
