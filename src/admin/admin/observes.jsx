@@ -13,12 +13,12 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
-import { MapPinIcon,XMarkIcon } from "@heroicons/react/24/solid";
+import { MapPinIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { api, byId, config, setConfig } from "@/api/api";
 import toast from "react-hot-toast";
 
-export function AddLocation() {
+export function Observes() {
   const [km, setkm] = useState(null);
   const [users, setUsers] = useState(null);
   const [pdbId, setPDBid] = useState(null);
@@ -27,8 +27,6 @@ export function AddLocation() {
   const [addModal, setAddModal] = useState(false);
   const [regex, setRegex] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [editLoading, setEditLoading] = useState(false);
-  const [addLoading, setAddLoading] = useState(false);
 
 
 
@@ -69,7 +67,7 @@ export function AddLocation() {
       .then((res) => {
         setUsers(res.data.body);
       })
-      .catch((err) => {})
+      .catch((err) => { })
   }
 
 
@@ -81,7 +79,7 @@ export function AddLocation() {
       .then((res) => {
         setkm(res.data.body);
       })
-      .catch((err) => {})
+      .catch((err) => { })
   }
 
   // *******************ADD USER **********************
@@ -189,7 +187,7 @@ export function AddLocation() {
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["#","KM", "PDB", "Harakatlar"].map((el) => (
+                {["#", "KM", "PDB", "Harakatlar"].map((el) => (
                   <th
                     key={el}
                     className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -215,17 +213,17 @@ export function AddLocation() {
 
                   <tr key={i}>
                     <td className={className}>
-                        <div className="flex items-center gap-4">
-                          <div>
-                            <Typography
-                              variant="small"
-                              className="font-semibold text-blue-gray-600"
-                            >
-                              {i+1}
-                            </Typography>
-                          </div>
+                      <div className="flex items-center gap-4">
+                        <div>
+                          <Typography
+                            variant="small"
+                            className="font-semibold text-blue-gray-600"
+                          >
+                            {i + 1}
+                          </Typography>
                         </div>
-                      </td>
+                      </div>
+                    </td>
                     <td className={className}>
                       <div className="flex items-center gap-4">
                         <div>
@@ -269,10 +267,10 @@ export function AddLocation() {
                   <td></td>
                   <td></td>
                   <td className="">
-                  <Typography  className=" cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
-                  Malumot yo'q
-                </Typography></td>
-              <td></td>
+                    <Typography className=" cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
+                      Malumot yo'q
+                    </Typography></td>
+                  <td></td>
 
                 </tr>}
             </tbody>
@@ -287,26 +285,15 @@ export function AddLocation() {
         {/* edit modal */}
         <Dialog open={editModal} handler={closeEditModal}>
           <DialogHeader className="flex items-center justify-between">Tahrirlash
-          <XMarkIcon className="cursor-pointer" onClick={closeEditModal} width={20}/>
-</DialogHeader>
+            <XMarkIcon className="cursor-pointer" onClick={closeEditModal} width={20} />
+          </DialogHeader>
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
                 <Input type="number" onChange={editRegex} required defaultValue={kmData ? kmData.km : "Ma'lumot yo'q"} id="editkm" label="km nomi" />
               </div>
               <div className="w-full max-w-[24rem]">
-              <Select onChange={(e) => {
-                  setPDBid(e)
-                  editRegex()
-                }} label="PDB">
-                  {
-                    users && users.length !== 0 ? users.map((item, i) =>
-                      <Option key={i} value={item.id}>{item.name} {item.lastName}</Option>
-                    ) : 
-                    <Option>Malumot yo'q</Option>
-
-                  }
-                </Select>
+                
               </div>
             </div>
           </DialogBody>
@@ -321,9 +308,9 @@ export function AddLocation() {
             </Button>
             <span className={`${regex ? "cursor-not-allowed" : ""}`}>
 
-                <Button disabled={regex} onClick={editkm} variant="gradient" color="gray">
-                  <span>Tahrirlash</span>
-                </Button>
+              <Button disabled={regex} onClick={editkm} variant="gradient" color="gray">
+                <span>Tahrirlash</span>
+              </Button>
             </span>
           </DialogFooter>
         </Dialog>
@@ -334,26 +321,15 @@ export function AddLocation() {
 
         <Dialog open={addModal} handler={closeAddModal}>
           <DialogHeader className="flex -items-center justify-between">KM qo'shish
-          <XMarkIcon className="cursor-pointer" onClick={closeAddModal} width={20}/>
-</DialogHeader>
+            <XMarkIcon className="cursor-pointer" onClick={closeAddModal} width={20} />
+          </DialogHeader>
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
                 <Input type="number" onChange={addRegex} required id="addkm" label="KM" />
               </div>
               <div className="w-full max-w-[24rem]">
-                <Select onChange={(e) => {
-                  setPDBid(e)
-                  addRegex()
-                }} label="PDB">
-                  {
-                    users && users.length !== 0 ? users.map((item, i) =>
-                      <Option key={i} value={item.id}>{item.name} {item.lastName}</Option>
-                    ) : 
-                    <Option>Malumot yo'q</Option>
-
-                  }
-                </Select>
+               
               </div>
             </div>
           </DialogBody>
@@ -367,7 +343,7 @@ export function AddLocation() {
               <span>Orqaga</span>
             </Button>
             <span className={`${regex ? "cursor-not-allowed" : ""}`}>
-              <Button disabled={regex} onClick={addkm }  variant="gradient" color="gray">
+              <Button disabled={regex} onClick={addkm} variant="gradient" color="gray">
                 <span>Qo'shish</span>
               </Button>
             </span>

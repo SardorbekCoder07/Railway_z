@@ -7,7 +7,7 @@ import {
   WrenchScrewdriverIcon,
   MapPinIcon,
 } from "@heroicons/react/24/solid";
-import { Home,Tables, Works, Tools, AddLocation, Hisobot } from "@/admin/admin";
+import { Home, Tables, Works, Tools, AddLocation, Hisobot, Observes } from "@/admin/admin";
 import { SignIn, SignUp } from "@/auth";
 
 const icon = {
@@ -40,7 +40,13 @@ export const routes = [
         path: "/tables",
         element: <Tables />,
       },
-
+      // sa
+      {
+        icon: <UsersIcon {...icon} />,
+        name: "Kuzatuvchilar ro'yxati",
+        path: "/observes",
+        element: <Observes />,
+      },
 
       {
         icon: <WrenchScrewdriverIcon {...icon} />,
