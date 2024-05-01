@@ -33,10 +33,6 @@ export function TabsWithWork({ pk, onClose }) {
     else setProducts(products.filter((product) => product.productId !== item.productId));
   }
 
-  const today = new Date();
-  const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-  const todayDate = today.toLocaleDateString('uz-UZ', options);
-
   var hozir = new Date();
   var yil = hozir.getFullYear();
   var oy = hozir.getMonth() + 1;
@@ -45,9 +41,6 @@ export function TabsWithWork({ pk, onClose }) {
   // Oy va kun uchun ikki raqamli formatni ta'minlash
   oy = oy < 10 ? '0' + oy : oy;
   kun = kun < 10 ? '0' + kun : kun;
-
-
-
 
 
   const handleInputChange = (value, item) => {
