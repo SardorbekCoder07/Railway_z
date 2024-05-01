@@ -93,7 +93,7 @@ export function TabsWithWork({ pk, onClose }) {
     function todayPlanInfo(obj) {
 
       for (let key in obj) {
-        if (!obj[key]) {
+        if (obj[key] === undefined || obj[key] === null || obj[key] === false || obj[key] === NaN || obj[key] === '') {
           return false;
           // Agar inputlardan birortasi bulsa xam (undefined, null, false, 0, NaN, ''), false qaytariladi
         }
@@ -258,8 +258,8 @@ export function TabsWithWork({ pk, onClose }) {
         <Input required type="number" id="onTrainingCount" label="Odkul" />
         <Input type="text" id="protectionStackST" label="Rels ulagichlari ST." />
         <Input type="text" id="protectionStackPR" label="Rels ulagichlari PR." />
-        <Input type="number" id="relayConnectorsST" label="Himoya stiklari ishchilari soni ST." />
-        <Input type="number" id="relayConnectorsPR" label="Hiimoya stiklari ishchilari soni PR." />
+        <Input type="text" id="relayConnectorsST" label="Himoya stiklari ishchilari soni ST." />
+        <Input type="text" id="relayConnectorsPR" label="Hiimoya stiklari ishchilari soni PR." />
       </div>
       <Tabs id="custom-animation" value={selectedTab}>
         <TabsHeader>
