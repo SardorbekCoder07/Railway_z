@@ -172,7 +172,7 @@ export function PdUsers() {
       <Card>
         <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
           <Typography variant="h6" color="white">
-            Hodimlar jadvali
+            PD lar jadvali
           </Typography>
           <Button
             onClick={openAddModal}
