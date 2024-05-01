@@ -18,10 +18,8 @@ const NavbarComponent = () => {
 
 
 
-  const goLink = ()=> {document.getElementById('#sign').click()}
   return (
     <div className='flex items-center justify-center mt-16'>
-      <Link id="sign" to="/auth/log-in"></Link>
 
       <Navbar className=" fixed z-20 mx-auto max-w-screen-xl       ">
         <div className=" container mx-auto flex items-center justify-between text-blue-gray-900">
@@ -31,14 +29,16 @@ const NavbarComponent = () => {
             </Typography>
           </div>
            <div className="flex items-center gap-x-1">
+      <Link id="sign" to="/auth/log-in">
+
 
               <Button
                 variant="gradient"
                 size="sm"
-                 onClick={goLink()}
               >
                 <span>Kirish</span>
               </Button>
+      </Link>
 
           </div>
 

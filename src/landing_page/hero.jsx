@@ -1,6 +1,6 @@
 import { Button, Carousel } from '@material-tailwind/react';
 import React from 'react';
-
+ 
 const Hero = () => {
     return (
         <div className="relative">

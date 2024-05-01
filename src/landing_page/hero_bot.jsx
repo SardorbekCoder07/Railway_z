@@ -2,7 +2,7 @@ import { Typography } from '@material-tailwind/react'
 import React from 'react'
 export const Hero_bot = () => {
   return (
-    <div className='flex items-center justify-between px-20 mt-36 w-[100%]'>
+    <div className='flex items-center justify-between px-20 mt-36 w-[100%] sm:flex-col md:flex-col'>
      {/* img */}
      <div>
      <figure className="relative h-96 w-full">
