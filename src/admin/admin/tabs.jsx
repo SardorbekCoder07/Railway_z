@@ -33,9 +33,6 @@ export function TabsWithWork({ pk, onClose }) {
     else setProducts(products.filter((product) => product.productId !== item.productId));
   }
 
-  const today = new Date();
-  const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-  const todayDate = today.toLocaleDateString('uz-UZ', options);
 
   var hozir = new Date();
   var yil = hozir.getFullYear();
