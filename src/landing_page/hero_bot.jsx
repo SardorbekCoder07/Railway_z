@@ -2,7 +2,9 @@ import { Typography } from '@material-tailwind/react'
 import React from 'react'
 export const Hero_bot = () => {
   return (
-    <div className='flex items-center justify-between px-20 mt-36 w-[100%] sm:flex-col md:flex-col'>
+    <div className='max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl'>
+    <div>
+
      {/* img */}
      <div>
      <figure className="relative h-96 w-full">
@@ -27,6 +29,7 @@ export const Hero_bot = () => {
     </figure>
      </div>
      {/* text */}
+    </div>
      <div className='w-[40%]'>
       <Typography>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, ipsam. Illo eaque qui odit error sequi enim dolores ea cum ipsum totam, necessitatibus sapiente voluptate dicta maiores incidunt voluptas culpa dignissimos quasi nemo maxime officiis saepe adipisci aliquid soluta. In vel ipsa expedita quisquam quas voluptas, exercitationem iusto porro corporis quis necessitatibus eius optio quidem odit molestias tempora assumenda consequuntur atque, odio voluptatibus quia, eligendi temporibus culpa vero. Ex dolor reprehenderit repudiandae voluptates quidem obcaecati similique ab sit. Commodi laboriosam eius debitis ducimus rem incidunt quam laudantium id dolores, aspernatur dolor neque. Vel voluptatum dolorum illum delectus! Aut, autem odio.

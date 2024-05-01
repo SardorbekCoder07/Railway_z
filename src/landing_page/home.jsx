@@ -7,7 +7,7 @@ import Timelineb from './timeline';
 const HomePage = () => {
 
 return(
-  <div className='flex flex-col'>
+  <div className='flex flex-col gap-6 items-center  justify-center'>
     {/* Navbar */}
 
       <Navbar/>
