@@ -19,12 +19,13 @@ import { api, byId, config, setConfig } from "@/api/api";
 import toast from "react-hot-toast";
 
 export function Observes() {
-  const [km, setkm] = useState(null);
+  const [observers, setObservers] = useState(null);
   const [users, setUsers] = useState(null);
   const [pdbId, setPDBid] = useState(null);
-  const [kmData, setkmData] = useState(null);
+  const [observersData, setObserversData] = useState(null);
   const [editModal, setEditModal] = useState(false);
   const [addModal, setAddModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
   const [regex, setRegex] = useState(true);
   const [loading, setLoading] = useState(false);
 
@@ -42,8 +43,8 @@ export function Observes() {
     setEditModal(false)
     setRegex(true)
   }
-  // const openDeleteModal = () => setDeleteModal(true)
-  // const closeDeleteModal = () => setDeleteModal(false)
+  const openDeleteModal = () => setDeleteModal(true)
+  const closeDeleteModal = () => setDeleteModal(false)
   const openAddModal = () => setAddModal(true)
   const closeAddModal = () => {
     setAddModal(false)
@@ -77,7 +78,7 @@ export function Observes() {
   const getObservers = () => {
     axios.get(`${api}observers`, config)
       .then((res) => {
-        setkm(res.data.body);
+        setObservers(res.data.body);
       })
       .catch((err) => { })
   }
@@ -85,26 +86,28 @@ export function Observes() {
   // *******************ADD USER **********************
 
   const addObservers = () => {
-    setAddLoading(true);
+    setLoading(true);
     const addData = {
       km: byId("addKm"),
       userFullName: byId("addObservers"),
       pdbId: pdbId,
     };
     axios
-      .post(`${api}railway`, addData, config)
-      .then((res) => {
+      .post(`${api}observers`, addData, config)
+      .then(() => {
         closeAddModal();
         getObservers();
-        toast.success("Kuzatuvchi muoffaqqiyatli qo'shildi!👌");
+    setLoading(true);
+    toast.success("Kuzatuvchi muoffaqqiyatli qo'shildi!👌");
       })
       .catch((err) => {
         closeAddModal();
-        toast.error("Kuzatuvchi qo'shilmadi❌");
+    setLoading(false);
+    toast.error("Kuzatuvchi qo'shilmadi❌");
         ;
       })
       .finally(() => {
-        setAddLoading(false);
+        setLoading(false);
       });
   };
 
@@ -121,26 +124,44 @@ export function Observes() {
       pdbId: pdbId,
     };
     axios
-      .put(`${api}railway?id=${kmData ? kmData.id : 0}`, editData, config)
-      .then((res) => {
+      .put(`${api}observers?id=${observersData ? observersData.id : 0}`, editData, config)
+      .then(() => {
         closeEditModal();
-        getObservers();
+    setLoading(false);
+    getObservers();
         toast.success("Kuzatuvchi muvoffaqqiyatli tahrirlandi!👌");
       })
       .catch((err) => {
         toast.error("Kuzatuvchi tahrirlanmadi❌");
-        closeEditModal();
+    setLoading(false);
+    closeEditModal();
       })
   };
   // *******************DELETE USER **********************
 
+  const deleteObservers = () => {
+    axios.delete(`${api}observers?id=${observersData ? observersData.id : 0}`, config)
+      .then(() => {
+        closeDeleteModal()
+    setLoading(false);
+    getObservers()
+        toast.success("Kuzatuvchi muvoffaqqiyatli o'chirildi!👌")
+
+      })
+      .catch((err) => {
+    setLoading(false);
+    toast.error("Kuzatuvchi o'chirilmadi")
+        closeDeleteModal()
+      })
+
+  }
 
   // ******************* REGEX **********************
 
   const addRegex = () => {
     if (
-      byId("addObservers") !== "" &&
-      byId("addKm")
+      byId("addKm") !== "" &&
+      byId("addObservers")
     ) {
       setRegex(false)
     }
@@ -151,8 +172,8 @@ export function Observes() {
 
   const editRegex = () => {
     if (
-      byId("editObservers") !== "" &&
-      byId("editKm")
+      byId("editKm") !== "" &&
+      byId("addObservers")
     ) {
       setRegex(false)
     }
@@ -167,7 +188,7 @@ export function Observes() {
       <Card>
         <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
           <Typography variant="h6" color="white">
-            Km Jadvali
+            observers Jadvali
           </Typography>
           <Button
             onClick={openAddModal}
@@ -180,7 +201,7 @@ export function Observes() {
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["#", "KM", "PDB", "Harakatlar"].map((el) => (
+                {["#", "Ism familiyasi", "Km", "Harakatlar"].map((el) => (
                   <th
                     key={el}
                     className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -197,8 +218,8 @@ export function Observes() {
             </thead>
             <tbody>
 
-              {km ? km.map((item, i) => {
-                const className = `py-3 px-5  ${i === km && km.length - 1
+              {observers ? observers.map((item, i) => {
+                const className = `py-3 px-5  ${i === observers && observers.length - 1
                   ? ""
                   : "border-b border-blue-gray-50"
                   }`
@@ -225,7 +246,7 @@ export function Observes() {
                             color="blue-gray"
                             className="font-semibold"
                           >
-                            {item.km}
+                            {item.userFullName}
                           </Typography>
                         </div>
                       </div>
@@ -238,7 +259,7 @@ export function Observes() {
                             color="blue-gray"
                             className="font-semibold"
                           >
-                            {item.pdbName}
+                            {item.km}
                           </Typography>
                         </div>
                       </div>
@@ -247,11 +268,18 @@ export function Observes() {
                     <td className={`${className} flex py-5 gap-3`}>
                       <Typography onClick={() => {
                         openEditModal()
-                        setkmData(item)
+                        setObserversData(item)
                       }} className=" cursor-pointer text-xs font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
                         Tahrirlash
                       </Typography>
+                      <Typography onClick={() => {
+                        setObserversData(item)
+                        openDeleteModal()
+                      }} className=" cursor-pointer text-xs font-semibold hover:text-red-300 duration-150 ease-in-out   text-blue-gray-600">
+                        O'chirish
+                      </Typography>
                     </td>
+                    
                   </tr>
                 )
               }
@@ -283,10 +311,10 @@ export function Observes() {
           <DialogBody>
           <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
-                <Input type="text" onChange={addRegex} required id="addObservers" label="Ism va familiya" />
+                <Input defaultValue={observersData ? observersData.userFullName : "Malumot yo'q"} type="text" onChange={addRegex} required id="editObservers" label="Ism va familiya" />
               </div>
               <div className="w-full max-w-[24rem]">
-                <Input type="text" onChange={addRegex} required id="addKm" label="KM" />
+                <Input defaultValue={observersData ? observersData.km : "Malumot yo'q"} type="text" onChange={addRegex} required id="editKm" label="Km" />
               </div>
               <div className="w-full max-w-[24rem]">
                 <Select onChange={(e) => {
@@ -327,7 +355,7 @@ export function Observes() {
         {/* add modal */}
 
         <Dialog open={addModal} handler={closeAddModal}>
-          <DialogHeader className="flex -items-center justify-between">KM qo'shish
+          <DialogHeader className="flex -items-center justify-between">Kuzatuvchi qo'shish
             <XMarkIcon className="cursor-pointer" onClick={closeAddModal} width={20} />
           </DialogHeader>
           <DialogBody>
@@ -336,7 +364,7 @@ export function Observes() {
                 <Input type="text" onChange={addRegex} required id="addObservers" label="Ism va familiya" />
               </div>
               <div className="w-full max-w-[24rem]">
-                <Input type="text" onChange={addRegex} required id="addKm" label="KM" />
+                <Input type="text" onChange={addRegex} required id="addKm" label="Km" />
               </div>
               <div className="w-full max-w-[24rem]">
                 <Select onChange={(e) => {
@@ -371,6 +399,36 @@ export function Observes() {
           </DialogFooter>
         </Dialog>
       </div>
+{/* delete */}
+      <div>
+        <Dialog open={deleteModal} handler={closeDeleteModal}>
+          <DialogHeader>O'chirish</DialogHeader>
+          <DialogBody>
+            <div className="flex justify-center">
+              <Typography
+                variant="large"
+                className=" font-bold uppercase text-blue-gray-400">
+                Bu kuzatuvchini o'chirishingizga ishonchingiz komilmi?
+              </Typography>
+            </div>
+          </DialogBody>
+          <DialogFooter>
+            <Button
+              variant="text"
+              color="red"
+              onClick={closeDeleteModal}
+              className="mr-1"
+            >
+              <span>Yo'q</span>
+            </Button>
+            <Button
+            onClick={deleteObservers}
+            variant="gradient" color="gray">
+              <span>Ha</span>
+            </Button>
+          </DialogFooter>
+        </Dialog>
+        </div>
     </div>
   );
 }
