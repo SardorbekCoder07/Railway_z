@@ -9,6 +9,7 @@ const HomePage = () => {
 return(
   <div className='flex flex-col'>
     {/* Navbar */}
+
       <Navbar/>
       <Hero/>
       <Hero_bot/>
