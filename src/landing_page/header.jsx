@@ -1,74 +1,189 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import {
+    Navbar,
+    MobileNav,
+    Typography,
+    Button,
+    IconButton,
+    Card,
+} from "@material-tailwind/react";
 
-function Header() {
+const Header = () => {
+    const [openNav, setOpenNav] = React.useState(false);
+    React.useEffect(() => {
+        window.addEventListener(
+            "resize",
+            () => window.innerWidth >= 960 && setOpenNav(false),
+        );
+    }, []);
 
-  const [top, setTop] = useState(true);
-
-  // detect whether user has scrolled the page down by 10px
-  useEffect(() => {
-    const scrollHandler = () => {
-      window.pageYOffset > 10 ? setTop(false) : setTop(true)
-    };
-    window.addEventListener('scroll', scrollHandler);
-    return () => window.removeEventListener('scroll', scrollHandler);
-  }, [top]);
-
-  return (
-    <header className={`fixed w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${!top && 'bg-white blur shadow-lg'}`}>
-      <div className="max-w-6xl mx-auto px-5 sm:px-6">
-        <div className="flex items-center justify-between h-16 md:h-20">
-
-          {/* Site branding */}
-          <div className="flex items-center  mr-4">
-            {/* Logo */}
-            <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                  width="60pt" height="60pt" viewBox="0 0 172.000000 135.000000"
-                  preserveAspectRatio="xMidYMid meet">
-                  <metadata>
-                  Created by potrace 1.16, written by Peter Selinger 2001-2019
-                  </metadata>
-                  <g transform="translate(0.000000,135.000000) scale(0.100000,-0.100000)"
-                  fill="#000000" stroke="none">
-                  <path d="M683 1166 c-285 -69 -478 -368 -420 -651 48 -232 217 -403 447 -451
-                  181 -38 369 21 505 160 163 165 207 395 119 615 -9 22 -20 41 -25 41 -5 0 -18
-                  -18 -29 -39 -16 -31 -18 -46 -10 -66 6 -15 15 -57 21 -94 34 -222 -113 -454
-                  -332 -522 -118 -37 -276 -21 -379 39 -195 112 -287 348 -220 563 65 210 282
-                  357 496 335 79 -8 163 -37 220 -76 42 -28 48 -29 90 -19 24 6 44 13 44 15 0 3
-                  -15 18 -32 34 -43 40 -179 105 -246 119 -69 14 -183 13 -249 -3z"/>
-                  <path d="M661 918 c-112 -75 -208 -141 -212 -145 -8 -9 4 -370 14 -379 3 -3
-                  98 56 211 132 l206 137 -1 141 c-1 78 -4 166 -8 196 l-6 55 -204 -137z"/>
-                  <path d="M1161 974 c-91 -24 -167 -46 -169 -49 -2 -2 18 -15 45 -28 73 -37 89
-                  -56 113 -129 12 -38 25 -68 28 -68 7 0 162 303 162 315 0 8 -3 7 -179 -41z"/>
-                  <path d="M687 501 l-208 -138 166 -72 c92 -40 173 -70 180 -67 39 14 406 269
-                  399 276 -10 9 -311 140 -322 140 -4 0 -101 -62 -215 -139z"/>
-                  </g>
-                  </svg>
-                  <p className='text-xl'>Railway Plan</p>
-           </div>
-
-          {/* Site navigation */}
-          <nav className="flex flex-grow">
-            <ul className="flex flex-grow justify-end flex-wrap items-center">
-              <li>
-               </li>
-               <Link to={"/auth/log-in"} >
-
-              <li className='flex items-center bg-black text-white p-2 rounded-lg cursor-pointer'>
-                   <span>Kirish</span>
-                  <svg className="w-3 h-3 fill-current text-gray-400 flex-shrink-0 ml-2 -mr-1" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z" fillRule="nonzero" />
-                  </svg>
-               </li>
-               </Link>
-            </ul>
-
-          </nav>
-
-        </div>
-      </div>
-    </header>
-  );
-}
+    const navList = (
+        <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="p-1 font-normal"
+            >
+                <a href="#landing_page_hero_home" className="flex items-center">
+                    <Button
+                        variant="text"
+                        size="sm"
+                    >
+                        <span>Home</span>
+                    </Button>
+                </a>
+            </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="p-1 font-normal"
+            >
+                <a href="#landing_page_info" className="flex items-center">
+                    <Button
+                        variant="text"
+                        size="sm"
+                    >
+                        <span>About</span>
+                    </Button>
+                </a>
+            </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="p-1 font-normal"
+            >
+                <a href="#landing-page-features-info" className="flex items-center">
+                    <Button
+                        variant="text"
+                        size="sm"
+                    >
+                        <span>Info</span>
+                    </Button>
+                </a>
+            </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="p-1 font-normal"
+            >
+                <a href="#landing_page_statistics" className="flex items-center">
+                    <Button
+                        variant="text"
+                        size="sm"
+                    >
+                        <span>Statistics</span>
+                    </Button>
+                </a>
+            </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="p-1 font-normal"
+            >
+                <a href="#landing-page-our-services" className="flex items-center">
+                    <Button
+                        variant="text"
+                        size="sm"
+                    >
+                        <span>Services</span>
+                    </Button>
+                </a>
+            </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="p-1 font-normal"
+            >
+                <a href="#landing_page_project" className="flex items-center">
+                    <Button
+                        variant="text"
+                        size="sm"
+                    >
+                        <span>Projects</span>
+                    </Button>
+                </a>
+            </Typography>
+        </ul>
+    );
+    return (
+        <Navbar className="fixed z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4">
+            <div className="flex items-center justify-between text-blue-gray-900">
+                <Typography
+                    as="a"
+                    href="#"
+                    className="mr-4 cursor-pointer py-1.5 font-medium"
+                >
+                    LOGO
+                </Typography>
+                <div className="flex items-center gap-4">
+                    <div className="mr-4 hidden lg:block">{navList}</div>
+                    {/*<div className="flex items-center gap-x-1">*/}
+                    {/*    <Button*/}
+                    {/*        variant="gradient"*/}
+                    {/*        size="sm"*/}
+                    {/*        className="hidden lg:inline-block"*/}
+                    {/*    >*/}
+                    {/*        <span>Sign in</span>*/}
+                    {/*    </Button>*/}
+                    {/*</div>*/}
+                    <IconButton
+                        variant="text"
+                        className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+                        ripple={false}
+                        onClick={() => setOpenNav(!openNav)}
+                    >
+                        {openNav ? (
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                className="h-6 w-6"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={2}
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M6 18L18 6M6 6l12 12"
+                                />
+                            </svg>
+                        ) : (
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth={2}
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M4 6h16M4 12h16M4 18h16"
+                                />
+                            </svg>
+                        )}
+                    </IconButton>
+                </div>
+            </div>
+            <MobileNav open={openNav}>
+                {navList}
+                {/*<div className="flex items-center gap-x-1">*/}
+                {/*    <Button fullWidth variant="text" size="sm" className="">*/}
+                {/*        <span>Log In</span>*/}
+                {/*    </Button>*/}
+                {/*    <Button fullWidth variant="gradient" size="sm" className="">*/}
+                {/*        <span>Sign in</span>*/}
+                {/*    </Button>*/}
+                {/*</div>*/}
+            </MobileNav>
+        </Navbar>
+    );
+};
 
 export default Header;
