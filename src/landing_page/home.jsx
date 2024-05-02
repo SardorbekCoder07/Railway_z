@@ -1,21 +1,37 @@
-import Contact from './contact';
-import Hero from './hero';
-import { Hero_bot } from './hero_bot';
-  import Navbar from './navbar';
-import Timelineb from './timeline';
+import React from 'https://cdn.skypack.dev/react';
 
-const HomePage = () => {
+import Header from './header';
+import HeroHome from './herohome';
+import FeaturesHome from './fauteres';
+import FeaturesBlocks from './fatureBlock';
+import Testimonials from './testmonotion';
+import Newsletter from './Nwesletter';
+import Footer from './footer';
 
-return(
-  <div className='flex flex-col gap-6 items-center  justify-center'>
-    {/* Navbar */}
+function HomePage() {
+  return (
+    <div className="flex flex-col min-h-screen overflow-hidden">
 
-      <Navbar/>
-      <Hero/>
-      <Hero_bot/>
-      <Timelineb/>
-      <Contact/>
-  </div>
-)
+      {/*  Site header */}
+      <Header />
+
+      {/*  Page content */}
+      <main className="flex-grow">
+
+        {/*  Page sections */}
+        <HeroHome />
+        <FeaturesHome />
+        <FeaturesBlocks />
+        <Testimonials />
+        <Newsletter />
+
+      </main>
+
+      {/*  Site footer */}
+      <Footer />
+
+    </div>
+  );
 }
-export default HomePage
+
+export default HomePage;

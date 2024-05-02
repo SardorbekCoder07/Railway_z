@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Dashboard, Auth } from "@/admin/layouts";
 import { SuperDashboard } from "@/superAdmin/layouts";
-import HomePage from "./landing_page/home";
+import HomePage from "@/landing_page/home";
 
 function App() {
   return (
