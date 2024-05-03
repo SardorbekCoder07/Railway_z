@@ -31,7 +31,7 @@ const Download = ({isModalDown, closeDown}) => {
 
     return (
         <Dialog open={isModalDown} onClose={closeDown}>
-            <DialogHeader>Excel file yuklash</DialogHeader>
+            <DialogHeader>Excel fayl yuklash</DialogHeader>
             <DialogBody>
                 <div className="relative h-10 w-full min-w-[200px]">
                     <input
