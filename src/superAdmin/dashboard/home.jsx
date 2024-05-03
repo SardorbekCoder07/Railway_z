@@ -97,7 +97,7 @@ export function Home() {
         .then(res => {
           if (res.data.success === true) {
             setDayPlan(res.data.body)
-            
+
           } else setDayPlan(null)
         })
     }
@@ -105,13 +105,13 @@ export function Home() {
 
   return (<div className="mt-12">
     <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
-     <StatisticsCard />
+      <StatisticsCard />
     </div>
     <div className="mb-6 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
       <Card>
         <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
           <Typography variant="h6" color="white">
-            Dashboard
+            Boshqaruv paneli
           </Typography>
           <Button onClick={openDown} variant={`gradient`} color={`green`}>Yuklash</Button>
         </CardHeader>
@@ -242,146 +242,146 @@ export function Home() {
 
     {/* TODAY PLAN */}
     <Dialog open={todayModal} onClose={handleCloseTodayModal}>
-        <DialogHeader>Bugungi ishlar</DialogHeader>
-        <DialogBody>
-          <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">{dayPlan ? dayPlan.todayPlan : "Malumot mavjud emas"}</Typography>
-        </DialogBody>
-        <DialogFooter>
-          <Button onClick={handleCloseTodayModal}>Close Modal</Button>
-        </DialogFooter>
-      </Dialog>
+      <DialogHeader>Bugungi ishlar</DialogHeader>
+      <DialogBody>
+        <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">{dayPlan ? dayPlan.todayPlan : "Malumot mavjud emas"}</Typography>
+      </DialogBody>
+      <DialogFooter>
+        <Button onClick={handleCloseTodayModal}>Close Modal</Button>
+      </DialogFooter>
+    </Dialog>
 
-      {/* TOMORROW PLAN */}
-      <Dialog open={tomorrowModal} onClose={handleCloseTomorrowModal}>
-        <DialogHeader>Ertangi ishlar</DialogHeader>
-        <DialogBody>
-          <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">{dayPlan ? dayPlan.tomorrowPlan : "Malumot mavjud emas"}</Typography>
-        </DialogBody>
-        <DialogFooter>
-          <Button onClick={handleCloseTomorrowModal}>Close Modal</Button>
-        </DialogFooter>
-      </Dialog>
+    {/* TOMORROW PLAN */}
+    <Dialog open={tomorrowModal} onClose={handleCloseTomorrowModal}>
+      <DialogHeader>Ertangi ishlar</DialogHeader>
+      <DialogBody>
+        <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">{dayPlan ? dayPlan.tomorrowPlan : "Malumot mavjud emas"}</Typography>
+      </DialogBody>
+      <DialogFooter>
+        <Button onClick={handleCloseTomorrowModal}>Close Modal</Button>
+      </DialogFooter>
+    </Dialog>
 
-      {/* TOOLS */}
-      <Dialog open={toolModal} onClose={closeToolModal}>
-        <DialogHeader>Ish qurollari</DialogHeader>
-        <DialogBody>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-4">
-            {
-              dayPlan && dayPlan.resDayTools.length !== 0 && dayPlan.resDayTools.map((item, i) =>
-                <div className="flex justify-between">
-                  <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
-                    {item.resWorkToolNamd}
-                  </Typography>
-                  <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
-                    {item.count}
-                  </Typography>
-                </div>
-              )
-            }
-          </div>
-        </DialogBody>
-        <DialogFooter>
-          <Button onClick={closeToolModal}>Close Modal</Button>
-        </DialogFooter>
-      </Dialog>
+    {/* TOOLS */}
+    <Dialog open={toolModal} onClose={closeToolModal}>
+      <DialogHeader>Ish qurollari</DialogHeader>
+      <DialogBody>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-4">
+          {
+            dayPlan && dayPlan.resDayTools.length !== 0 && dayPlan.resDayTools.map((item, i) =>
+              <div className="flex justify-between">
+                <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
+                  {item.resWorkToolNamd}
+                </Typography>
+                <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
+                  {item.count}
+                </Typography>
+              </div>
+            )
+          }
+        </div>
+      </DialogBody>
+      <DialogFooter>
+        <Button onClick={closeToolModal}>Close Modal</Button>
+      </DialogFooter>
+    </Dialog>
 
-      {/* ELSE PLAN */}
-      <Dialog size="lg" open={elseModal} onClose={closeElseModal}>
-        <DialogHeader>Qo'shimcha malumotlar</DialogHeader>
-        <DialogBody className="">
-          <div className="overflow-y-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-4">
-              <div className="flex justify-between">
-                <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
-                  Ishchilar soni:
-                </Typography>
-                <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
-                  {dayPlan ? dayPlan.employeeCount : "Malumot yo'q"}
-                </Typography>
-              </div>
-              <div className="flex justify-between">
-                <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
-                  Bemorlar soni:
-                </Typography>
-                <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
-                  {dayPlan ? dayPlan.sickCount : "Malumot yo'q"}
-                </Typography>
-              </div>
-              <div className="flex justify-between">
-                <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
-                  Ishdan javob olganlar soni:
-                </Typography>
-                <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
-                  {dayPlan ? dayPlan.restCount : "Malumot yo'q"}
-                </Typography>
-              </div>
-              <div className="flex justify-between">
-                <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
-                  Komandirofkadagilar soni:
-                </Typography>
-                <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
-                  {dayPlan ? dayPlan.tripCount : "Malumot yo'q"}
-                </Typography>
-              </div>
-              <div className="flex justify-between">
-                <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
-                  Dam oluvchilar soni:
-                </Typography>
-                <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
-                  {dayPlan ? dayPlan.vacationCount : "Malumot yo'q"}
-                </Typography>
-              </div>
-              <div className="flex justify-between">
-                <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
-                  Malaka oshirishdagilar soni:
-                </Typography>
-                <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
-                  {dayPlan ? dayPlan.onTrainingCount : "Malumot yo'q"}
-                </Typography>
-              </div>
+    {/* ELSE PLAN */}
+    <Dialog size="lg" open={elseModal} onClose={closeElseModal}>
+      <DialogHeader>Qo'shimcha malumotlar</DialogHeader>
+      <DialogBody className="">
+        <div className="overflow-y-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-4">
+            <div className="flex justify-between">
+              <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
+                Ishchilar soni:
+              </Typography>
+              <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
+                {dayPlan ? dayPlan.employeeCount : "Malumot yo'q"}
+              </Typography>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-4 mt-4">
-              <div className="flex justify-between">
-                <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
-                  Rels uzatgichlari ST:
-                </Typography>
-                <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
-                  {dayPlan ? dayPlan.relayConnectorsST : "Malumot yo'q"}
-                </Typography>
-              </div>
-              <div className="flex justify-between">
-                <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
-                  Rels uzatgichlari PR:
-                </Typography>
-                <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
-                  {dayPlan ? dayPlan.relayConnectorsPR : "Malumot yo'q"}
-                </Typography>
-              </div>
-              <div className="flex justify-between">
-                <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
-                  Ximoya sticklari ST:
-                </Typography>
-                <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
-                  {dayPlan ? dayPlan.protectionStackST : "Malumot yo'q"}
-                </Typography>
-              </div>
-              <div className="flex justify-between">
-                <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
-                  Ximoya sticklari PR:
-                </Typography>
-                <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
-                  {dayPlan ? dayPlan.protectionStackPR : "Malumot yo'q"}
-                </Typography>
-              </div>
+            <div className="flex justify-between">
+              <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
+                Bemorlar soni:
+              </Typography>
+              <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
+                {dayPlan ? dayPlan.sickCount : "Malumot yo'q"}
+              </Typography>
+            </div>
+            <div className="flex justify-between">
+              <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
+                Ishdan javob olganlar soni:
+              </Typography>
+              <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
+                {dayPlan ? dayPlan.restCount : "Malumot yo'q"}
+              </Typography>
+            </div>
+            <div className="flex justify-between">
+              <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
+                Komandirofkadagilar soni:
+              </Typography>
+              <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
+                {dayPlan ? dayPlan.tripCount : "Malumot yo'q"}
+              </Typography>
+            </div>
+            <div className="flex justify-between">
+              <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
+                Dam oluvchilar soni:
+              </Typography>
+              <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
+                {dayPlan ? dayPlan.vacationCount : "Malumot yo'q"}
+              </Typography>
+            </div>
+            <div className="flex justify-between">
+              <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
+                Malaka oshirishdagilar soni:
+              </Typography>
+              <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
+                {dayPlan ? dayPlan.onTrainingCount : "Malumot yo'q"}
+              </Typography>
             </div>
           </div>
-        </DialogBody>
-        <DialogFooter>
-          <Button onClick={closeElseModal}>Close Modal</Button>
-        </DialogFooter>
-      </Dialog>
-  
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-4 mt-4">
+            <div className="flex justify-between">
+              <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
+                Rels uzatgichlari ST:
+              </Typography>
+              <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
+                {dayPlan ? dayPlan.relayConnectorsST : "Malumot yo'q"}
+              </Typography>
+            </div>
+            <div className="flex justify-between">
+              <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
+                Rels uzatgichlari PR:
+              </Typography>
+              <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
+                {dayPlan ? dayPlan.relayConnectorsPR : "Malumot yo'q"}
+              </Typography>
+            </div>
+            <div className="flex justify-between">
+              <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
+                Ximoya sticklari ST:
+              </Typography>
+              <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
+                {dayPlan ? dayPlan.protectionStackST : "Malumot yo'q"}
+              </Typography>
+            </div>
+            <div className="flex justify-between">
+              <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">
+                Ximoya sticklari PR:
+              </Typography>
+              <Typography variant="small" className="text-sm text-center font-bold uppercase text-blue-gray-500">
+                {dayPlan ? dayPlan.protectionStackPR : "Malumot yo'q"}
+              </Typography>
+            </div>
+          </div>
+        </div>
+      </DialogBody>
+      <DialogFooter>
+        <Button onClick={closeElseModal}>Close Modal</Button>
+      </DialogFooter>
+    </Dialog>
+
 
   </div>);
 }
