@@ -78,7 +78,7 @@ export function Hisobot() {
         <Card>
           <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
             <Typography variant="h6" color="white">
-              Dashboard
+              Bosh Sahifa
             </Typography>
             <Button onClick={openDown} variant={`gradient`} color={`green`}>Yuklash</Button>
 

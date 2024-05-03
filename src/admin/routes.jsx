@@ -23,14 +23,14 @@ export const routes = [
     pages: [
       {
         icon: <HomeIcon {...icon} />,
-        name: "Dashboard",
-        path: "/home",
+        name: "Bosh Sahifa",
+        path: "/bosh-sahifa",
         element: <Home />,
       },
       {
         icon: <DocumentCheckIcon {...icon} />,
         name: "Hisobot",
-        path: "/report",
+        path: "/hisobot",
         element: <Hisobot />,
       },
       // sa
