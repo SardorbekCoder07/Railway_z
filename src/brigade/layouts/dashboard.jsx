@@ -30,7 +30,7 @@ export function Brigade() {
         <Routes>
           {routes.map(
             ({ layout, pages }) =>
-              layout === "brigade" &&
+              layout === "brigada" &&
               pages.map(({ path, element }) => (
                 <Route exact path={path} element={element} />
               ))

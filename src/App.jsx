@@ -9,7 +9,7 @@ function App() {
     <Routes>
       <Route path="/admin/*" element={<Dashboard />} />
       <Route path="/super-admin/*" element={<SuperDashboard />} />
-      <Route path="/brigade/*" element={<Brigade />} />
+      <Route path="/brigada/*" element={<Brigade />} />
       <Route path="/home/*" element={<HomePage />} />
       <Route path="/auth/*" element={<Auth />} />
       <Route path="*" element={<Navigate to="/auth/log-in" replace />} />

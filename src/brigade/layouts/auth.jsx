@@ -12,12 +12,12 @@ export function Auth() {
   const navbarRoutes = [
     {
       name: "dashboard",
-      path: "/brigade/home",
+      path: "/brigada/home",
       icon: ChartPieIcon,
     },
     {
       name: "profile",
-      path: "/brigade/home",
+      path: "/brigada/home",
       icon: UserIcon,
     },
     {
