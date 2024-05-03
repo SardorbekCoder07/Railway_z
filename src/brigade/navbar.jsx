@@ -1,64 +1,183 @@
-import React, { useState } from 'react';
-import { AppBar, Toolbar, Button, DialogHeader, DialogFooter } from '@material-tailwind/react';
-import { Typography } from '@material-tailwind/react';
-import { ArrowRightIcon } from '@heroicons/react/24/solid';
-import { Dialog } from '@material-tailwind/react';
+import React, { useEffect, useState } from "react";
+import {
+    Card,
+    CardHeader,
+    CardBody,
+    Button,
+    Dialog,
+    DialogBody,
+    Typography,
+} from "@material-tailwind/react";
+import { StatisticsCard } from "@/admin/widgets/cards";
+import { getPdb, getPk, getRailway } from "@/admin/admin/apiFunction.jsx";
+import { api, config, setConfig } from "@/api/api.jsx";
+// import { TabsWithWork } from './tabs';
+import { Checkbox } from "@material-tailwind/react";
+import axios from "axios";
+import { TabsWithWork } from "@/admin/admin";
 
-const NavList = () => {
-  const [deleteModal, setDeleteModal] = useState(false);
+export function Home() {
+    const [pdModal, setPdModal] = useState(false);
+    const [selectedKmIndex, setSelectedKmIndex] = useState(null);
+    const [firstNamePdb, setFirstNamePdb] = useState('');
+    const [pdb, setPdb] = useState(null);
+    const [railway, setRailway] = useState(null)
+    const [getMe, setGetme] = useState(null)
+    const [pk, setPk] = useState(null);
+    const today = new Date();
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    const todayDate = today.toLocaleDateString('uz-UZ', options);
+    const [pkId, setPkId] = useState([]);
 
-  const openDeleteModal = () => setDeleteModal(true);
-  const closeDeleteModal = () => setDeleteModal(false);
+    const closePdModal = () => setPdModal(false);
+    const openPdModal = () => setPdModal(true);
 
-  return (
-    <div className='flex items-center justify-between '>
-      {/* logo */}
-      <div className='flex items-center'>
-        <div>
-          <svg
-            version="1.0"
-            xmlns="http://www.w3.org/2000/svg"
-            width="60pt"
-            height="60pt"
-            viewBox="0 0 172.000000 135.000000"
-            preserveAspectRatio="xMidYMid meet"
-          >
-            <metadata>
-              Created by potrace 1.16, written by Peter Selinger 2001-2019
-            </metadata>
-            <g transform="translate(0.000000,135.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
-              <path d="M683 1166 c-285 -69 -478 -368 -420 -651 48 -232 217 -403 447 -451
-                181 -38 369 21 505 160 163 165 207 395 119 615 -9 22 -20 41 -25 41 -5 0 -18
-                -18 -29 -39 -16 -31 -18 -46 -10 -66 6 -15 15 -57 21 -94 34 -222 -113 -454
-                -332 -522 -118 -37 -276 -21 -379 39 -195 112 -287 348 -220 563 65 210 282
-                357 496 335 79 -8 163 -37 220 -76 42 -28 48 -29 90 -19 24 6 44 13 44 15 0 3
-                -15 18 -32 34 -43 40 -179 105 -246 119 -69 14 -183 13 -249 -3z"/>
-              <path d="M661 918 c-112 -75 -208 -141 -212 -145 -8 -9 4 -370 14 -379 3 -3
-                98 56 211 132 l206 137 -1 141 c-1 78 -4 166 -8 196 l-6 55 -204 -137z"/>
-              <path d="M1161 974 c-91 -24 -167 -46 -169 -49 -2 -2 18 -15 45 -28 73 -37 89
-                -56 113 -129 12 -38 25 -68 28 -68 7 0 162 303 162 315 0 8 -3 7 -179 -41z"/>
-              <path d="M687 501 l-208 -138 166 -72 c92 -40 173 -70 180 -67 39 14 406 269
-                399 276 -10 9 -311 140 -322 140 -4 0 -101 -62 -215 -139z"/>
-            </g>
-          </svg>
+    useEffect(() => {
+        setConfig()
+        getPdb(setPdb)
+        getRailway(null, setRailway)
+        getPk(null, setPk)
+        axios.get(`${api}user/getMe`, config)
+            .then((res) => {
+                setGetme(res.data.body);
+            })
+    }, []);
+
+    const handleKmButtonClick = (index) => setSelectedKmIndex(index);
+
+    function addProductIds(checked, item) {
+        const uniqueNumbers = Array.from(new Set(pkId));
+        if (checked) setPkId([...uniqueNumbers, item.id])
+        else setPkId(uniqueNumbers.filter((num) => num !== item.id))
+    }
+
+    return (<div className="mt-12">
+        <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
+            <StatisticsCard />
         </div>
-        <Typography className='text-xl font-bold'>Railway PLan</Typography>
-      </div>
-      {/* text */}
-      <div>
-        <Button color='red'  onClick={openDeleteModal} className='flex items-center gap-2 '>Chiqish
-          <ArrowRightIcon width={20}/>
-        </Button>
-      </div>
-      <Dialog open={deleteModal} onClose={closeDeleteModal} className='p-4'>
-        <DialogHeader>Tizimdan Chiqaszmi ?</DialogHeader>
-        <DialogFooter className='flex items-center gap-3'>
-          <Button  variant="outlined" onClick={closeDeleteModal}>Ha</Button>
-          <Button onClick={closeDeleteModal}>Yo'q</Button>
-        </DialogFooter>
-      </Dialog>
-    </div>
-  );
-};
+        <div className="mb-6 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
+            <Card>
+                <CardHeader
+                    variant="gradient"
+                    color="gray"
+                    className="mb-8 flex items-center justify-between p-6"
+                >
+                    <div className="flex gap-5">
+                        {pdb && pdb.length !== 0 ?
+                            pdb.map(item =>
+                                <Button
+                                    key={item.id}
+                                    onClick={() => {
+                                        setFirstNamePdb(item)
+                                        getRailway(item.id, setRailway)
+                                    }}
+                                    className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md">
+                                    {item.name}
+                                </Button>
+                            )
+                            : <Button className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md">
+                                PDB Yo&apos;q
+                            </Button>
+                        }
+                    </div>
+                </CardHeader>
+                <div className="px-6 flex bg-gray-300 justify-center items-center gap-3 md:justify-end">
+                    <h1 className="text-4xl font-semibold text-black">{getMe ? getMe.pdName : "PD"}
+                    </h1>
+                    <div class="overflow-x-auto">
+                        <table class="w-full min-w-max table-auto text-left">
+                            <tbody>
+                                <tr>
+                                    <td class="text-black font-medium border-r-2 border-b-2 border-black border-solid px-1 text-xl">
+                                        {getMe ? getMe.pdName : "PD"}
+                                    </td>
+                                    <td class="px-1 text-xl text-black font-medium border-b-2 border-solid border-black">
+                                        {getMe ? getMe.firstName : "Hodim"}{" "}
+                                        {getMe ? getMe.lastName : ""}
 
-export default NavList;
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-black font-medium border-r-2 border-black border-solid px-1 text-xl">
+                                        <span class="hidden sm:inline">{firstNamePdb ? firstNamePdb.name : "Malumot yo'q"}</span>
+                                    </td>
+                                    <td class="text-black font-medium border-black border-solid px-1 text-xl">
+                                        <span class="hidden sm:inline">{firstNamePdb ? firstNamePdb.userFullName : "Malumot yo'q"}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <CardBody className="md:overflow-x-auto flex gap-3 flex-wrap">
+                    {railway ?
+                        (railway.length !== 0 ? (
+                            railway.map((item, index) => (
+                                <Button
+                                    onClick={() => {
+                                        getPk(item.id, setPk)
+                                        handleKmButtonClick(index)
+                                    }}
+                                    className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105 ${selectedKmIndex === index ? "bg-gray-500" : ""}`}
+                                >
+                                    {item['km']} km
+                                </Button>
+                            ))) : (
+                            <Button
+                                onClick={() => setPk(null)}
+                                className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105`}>
+                                Topilmadi
+                            </Button>
+                        )) : (
+                            <Typography
+                                onClick={() => setPk(null)}
+                                className={` text-2xl `}>
+                                Biror bir  PDB tanlang !!!
+                            </Typography>
+                        )
+                    }
+                </CardBody>
+            </Card>
+            {/* New Table */}
+            <table>
+                <CardBody className="md:overflow-x-auto flex gap-3 flex-wrap">
+                    {pk ? (
+                        pk.map(item => (
+                            <Button
+                                key={item.id}
+                                className={`bg-[#fff] flex items-center flex-wrap text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105`}
+                                disabled={item.dayPlanIsActive === true}
+                            >
+                                <Checkbox
+                                    onClick={(e) => addProductIds(e.target.checked, item)}
+                                    defaultChecked={item.dayPlanIsActive === true ? true : false} />
+                                {item.name}
+                            </Button>
+                        ))
+                    ) : (
+                        <p>PK lar mavjud emas!!!</p>
+                    )}
+                    <Button
+                        className={` ${pkId.length == 0 ? "hidden" : ""} `}
+                        onClick={() => openPdModal()}>
+                        Submit
+                    </Button>
+                </CardBody>
+            </table>
+        </div>
+        <div>
+
+            <Dialog open={pdModal} handler={closePdModal}>
+                <Dialog open={pdModal} handler={closePdModal}>
+                    <DialogBody className="sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl overflow-y-auto max-h-screen">
+                        <TabsWithWork pk={pkId} onClose={closePdModal} />
+                    </DialogBody>
+                </Dialog>
+            </Dialog>
+        </div>
+    </div>);
+}
+
+export default Home;
