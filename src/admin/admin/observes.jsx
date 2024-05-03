@@ -188,7 +188,7 @@ export function Observes() {
       <Card>
         <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
           <Typography variant="h6" color="white">
-            observers Jadvali
+            Kuzatuv Jadvali
           </Typography>
           <Button
             onClick={openAddModal}
@@ -279,7 +279,7 @@ export function Observes() {
                         O'chirish
                       </Typography>
                     </td>
-                    
+
                   </tr>
                 )
               }
@@ -324,7 +324,7 @@ export function Observes() {
                   {
                     users && users.length !== 0 ? users.map((item, i) =>
                       <Option key={i} value={item.id}>{item.name} {item.lastName}</Option>
-                    ) : 
+                    ) :
                     <Option>Malumot yo'q</Option>
 
                   }
@@ -374,7 +374,7 @@ export function Observes() {
                   {
                     users && users.length !== 0 ? users.map((item, i) =>
                       <Option key={i} value={item.id}>{item.name} {item.lastName}</Option>
-                    ) : 
+                    ) :
                     <Option>Malumot yo'q</Option>
 
                   }
