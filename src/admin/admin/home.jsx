@@ -91,7 +91,7 @@ export function Home() {
                                         {getMe ? getMe.pdName : "PD"}
                                     </td>
                                     <td class="px-1 text-xl text-black font-medium border-b-2 border-solid border-black">
-                                        {getMe ? getMe.firstName : "name"}{" "}
+                                        {getMe ? getMe.firstName : "Hodim"}{" "}
                                         {getMe ? getMe.lastName : ""}
 
                                     </td>

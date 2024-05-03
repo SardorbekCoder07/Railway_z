@@ -23,41 +23,41 @@ export const routes = [
     pages: [
       {
         icon: <HomeIcon {...icon} />,
-        name: "Dashboard",
-        path: "/home",
+        name: "Bosh Sahifa",
+        path: "/bosh-sahifa",
         element: <Home />,
       },
       {
         icon: <DocumentCheckIcon {...icon} />,
         name: "Hisobot",
-        path: "/report",
+        path: "/hisobot",
         element: <Hisobot />,
       },
       // sa
       {
         icon: <UsersIcon {...icon} />,
         name: "PDB lar ro'yxati",
-        path: "/tables",
+        path: "/jadval",
         element: <Tables />,
       },
       // sa
       {
         icon: <UsersIcon {...icon} />,
         name: "Kuzatuvchilar ro'yxati",
-        path: "/observes",
+        path: "/kuzatuv",
         element: <Observes />,
       },
 
       {
         icon: <WrenchScrewdriverIcon {...icon} />,
         name: "Ish qurollar",
-        path: "/tools",
+        path: "/asboblar",
         element: <Tools />,
       },
       {
         icon: <MapPinIcon {...icon} />,
         name: "Manzil",
-        path: "/add-km",
+        path: "/Manzil",
         element: <AddLocation />,
       },
 

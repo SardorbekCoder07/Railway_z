@@ -255,7 +255,7 @@ export function PdUsers() {
                         openDeleteModal()
                         setUserData(item)
                       }} className=" cursor-pointer text-xs font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
-                        Delete
+                        O'chirish
                       </Typography>
                     </td>
                   </tr>

@@ -254,13 +254,13 @@ export function Tables() {
                         openEditModal()
                         setUserData(item)
                       }} className=" cursor-pointer text-xs font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
-                        Edit
+                        Tahrirlash
                       </Typography>
                       <Typography onClick={() => {
                         openDeleteModal()
                         setUserData(item)
                       }} className=" cursor-pointer text-xs font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
-                        Delete
+                        O'chirish
                       </Typography>
                     </td>
                   </tr>
@@ -378,23 +378,6 @@ export function Tables() {
               <div className="w-full max-w-[24rem]">
                 <Input type="password" onChange={addRegex} id="addpassword" label="Parol" />
               </div>
-              {/* <div className="relative flex w-full max-w-[24rem]">
-  <Button
-    size="sm"
-    className="!absolute right-1 top-1 rounded z-50"
-    onClick={togglePasswordVisibility}
-  >
-    {passwordVisible ? <EyeSlashIcon className="h-4 w-4 text-white" /> : <EyeIcon className="h-4 w-4 text-white" />}
-  </Button>
-  <Input
-    onChange={editRegex}
-    defaultValue={""}
-    
-    type={passwordVisible ? "text" : "password"} // Toggle between text and password type
-    id="addpassword"
-    label="Parol"
-  />
-</div> */}
             </div>
           </DialogBody>
           <DialogFooter>
