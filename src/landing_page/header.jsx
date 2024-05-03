@@ -28,7 +28,7 @@ const Header = () => {
             color="blue-gray"
             className="p-1 font-normal"
         >
-            <a href="#landing_page_info" className="flex items-center">
+            <a href="#landing_page_history" className="flex items-center">
                 <Button variant="text" className={'lg:text-[1rem]'}>
                     <span>Tarixi</span>
                 </Button>
@@ -39,7 +39,7 @@ const Header = () => {
             color="blue-gray"
             className="p-1 font-normal"
         >
-            <a href="#landing-page-features-info" className="flex items-center">
+            <a href="#landing_page_features_info" className="flex items-center">
                 <Button variant="text" className={'lg:text-[1rem]'}>
                     <span>Vazifa</span>
                 </Button>
@@ -52,7 +52,7 @@ const Header = () => {
         >
             <a href="#landing_page_rahbariyat" className="flex items-center">
                 <Button variant="text" className={'lg:text-[1rem]'}>
-                    <span>Raxbariyat</span>
+                    <span>Rahbariyat</span>
                 </Button>
             </a>
         </Typography>

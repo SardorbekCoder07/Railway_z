@@ -20,7 +20,7 @@ const HorizontalCard = () => {
                             <CardHeader
                                 shadow={false}
                                 floated={false}
-                                className="m-0 w-2/5 h-72 shrink-0 rounded-r-none"
+                                className="m-0 w-2/5 h-60 shrink-0 rounded-r-none"
                             >
                                 <img
                                     src={item.img}
@@ -44,16 +44,6 @@ const HorizontalCard = () => {
                                 <Typography color="gray" className="mb-4 font-normal">
                                     {item.description_3}
                                 </Typography>
-                                <a className="inline-block">
-                                    <Button variant="gradient" color="blue" className="flex items-center gap-2">
-                                        {item.btn_1}
-                                    </Button>
-                                </a>
-                                <a className="inline-block ms-3">
-                                    <Button variant="gradient" color="blue" className="flex items-center gap-2">
-                                        {item.btn_2}
-                                    </Button>
-                                </a>
                             </CardBody>
                         </Card>
                     ))}
@@ -73,8 +63,6 @@ const data = [
         description_1: 'Bog‘lanish uchun telefon: .....?',
         description_2: 'E-mail: .....?',
         description_3: 'Qabul kunlari: .....?',
-        btn_1: 'Tarjimai hol',
-        btn_2: 'Majburiyatlari'
     },
     {
         id: 2,
@@ -84,29 +72,23 @@ const data = [
         description_1: 'Bog‘lanish uchun telefon: .....?',
         description_2: 'E-mail: .....?',
         description_3: 'Qabul kunlari: .....?',
-        btn_1: 'Tarjimai hol',
-        btn_2: 'Majburiyatlari'
     },
     {
         id: 3,
         img: "",
-        title: "Boshliq muovini",
+        title: "Boshliq o'rinbosari",
         name: 'Toxirov A',
         description_1: 'Bog‘lanish uchun telefon: .....?',
         description_2: 'E-mail: .....?',
         description_3: 'Qabul kunlari: .....?',
-        btn_1: 'Tarjimai hol',
-        btn_2: 'Majburiyatlari'
     },{
         id: 4,
         img: "",
-        title: "Boshliq muovini",
+        title: "Boshliq o'rinbosari",
         name: 'Xidirnazarov G',
         description_1: 'Bog‘lanish uchun telefon: .....?',
         description_2: 'E-mail: .....?',
         description_3: 'Qabul kunlari: .....?',
-        btn_1: 'Tarjimai hol',
-        btn_2: 'Majburiyatlari'
     },
     {
         id: 5,
@@ -116,40 +98,14 @@ const data = [
         description_1: 'Bog‘lanish uchun telefon: .....?',
         description_2: 'E-mail: .....?',
         description_3: 'Qabul kunlari: .....?',
-        btn_1: 'Tarjimai hol',
-        btn_2: 'Majburiyatlari'
     },
     {
         id: 6,
-        img: "",
-        title: "Iqtisodchi",
-        name: "Jo'rayev B",
-        description_1: 'Bog‘lanish uchun telefon: .....?',
-        description_2: 'E-mail: .....?',
-        description_3: 'Qabul kunlari: .....?',
-        btn_1: 'Tarjimai hol',
-        btn_2: 'Majburiyatlari'
-    },
-    {
-        id: 7,
         img: bolimBoshligi,
         title: "Hodimlar bo'limi boshlig'i",
         name: "Yo'ldoshev A",
         description_1: 'Bog‘lanish uchun telefon: .....?',
         description_2: 'E-mail: .....?',
         description_3: 'Qabul kunlari: .....?',
-        btn_1: 'Tarjimai hol',
-        btn_2: 'Majburiyatlari'
-    },
-    {
-        id: 8,
-        img: "",
-        title: "Texnik bo'lim katta muxandisi",
-        name: 'Normatov B',
-        description_1: 'Bog‘lanish uchun telefon: .....?',
-        description_2: 'E-mail: .....?',
-        description_3: 'Qabul kunlari: .....?',
-        btn_1: 'Tarjimai hol',
-        btn_2: 'Majburiyatlari'
     }
 ]
