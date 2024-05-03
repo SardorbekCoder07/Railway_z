@@ -8,6 +8,7 @@ import {
     IconButton,
     Card,
 } from "@material-tailwind/react";
+import logo from './images/logo.png'
 
 const Header = () => {
     const [openNav, setOpenNav] = React.useState(false);
@@ -22,96 +23,72 @@ const Header = () => {
         <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
             <Typography
                 as="li"
-                variant="small"
                 color="blue-gray"
                 className="p-1 font-normal"
             >
                 <a href="#landing_page_hero_home" className="flex items-center">
-                    <Button
-                        variant="text"
-                        size="sm"
-                    >
-                        <span>Home</span>
+                    <Button variant="text" className={'lg:text-[1rem]'}>
+                        <span>Bosh sahifa</span>
                     </Button>
                 </a>
             </Typography>
             <Typography
                 as="li"
-                variant="small"
                 color="blue-gray"
                 className="p-1 font-normal"
             >
                 <a href="#landing_page_info" className="flex items-center">
-                    <Button
-                        variant="text"
-                        size="sm"
-                    >
-                        <span>About</span>
+                    <Button variant="text" className={'lg:text-[1rem]'}>
+                        <span>Tarixi</span>
                     </Button>
                 </a>
             </Typography>
             <Typography
                 as="li"
-                variant="small"
                 color="blue-gray"
                 className="p-1 font-normal"
             >
                 <a href="#landing-page-features-info" className="flex items-center">
-                    <Button
-                        variant="text"
-                        size="sm"
-                    >
-                        <span>Info</span>
+                    <Button variant="text" className={'lg:text-[1rem]'}>
+                        <span>Vazifa</span>
                     </Button>
                 </a>
             </Typography>
             <Typography
                 as="li"
-                variant="small"
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <a href="#landing_page_statistics" className="flex items-center">
-                    <Button
-                        variant="text"
-                        size="sm"
-                    >
-                        <span>Statistics</span>
+                <a href="#landing_page_rahbariyat" className="flex items-center">
+                    <Button variant="text" className={'lg:text-[1rem]'}>
+                        <span>Raxbariyat</span>
                     </Button>
                 </a>
             </Typography>
             <Typography
                 as="li"
-                variant="small"
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <a href="#landing-page-our-services" className="flex items-center">
-                    <Button
-                        variant="text"
-                        size="sm"
-                    >
-                        <span>Services</span>
+                <a href="#landing_page_contact" className="flex items-center">
+                    <Button variant="text" className={'lg:text-[1rem]'}>
+                        <span>Bog'lanish</span>
                     </Button>
                 </a>
             </Typography>
-            <Typography
-                as="li"
-                variant="small"
-                color="blue-gray"
-                className="p-1 font-normal"
-            >
-                <a href="#landing_page_project" className="flex items-center">
-                    <Button
-                        variant="text"
-                        size="sm"
-                    >
-                        <span>Projects</span>
-                    </Button>
-                </a>
-            </Typography>
-            <Link to={"/auth/log-in"}>
-                <Button>Kirish</Button>
+            <Link to={"/auth/log-in"} className={'lg:hidden'}>
+                <Typography
+                    as="li"
+                    variant="small"
+                    color="blue-gray"
+                    className="p-1 font-normal ms-5"
+                >
+                    <a href="#landing_page_contact" className="flex items-center">
+                        <Button variant="gradient">
+                            <span>Kirish</span>
+                        </Button>
+                    </a>
+                </Typography>
             </Link>
         </ul>
     );
@@ -121,9 +98,11 @@ const Header = () => {
                 <Typography
                     as="a"
                     href="#"
-                    className="mr-4 cursor-pointer py-1.5 font-medium"
+                    className="mr-4 cursor-pointer font-bold text-[1.4rem] leading-[25px] text-blue-500"
                 >
-                    LOGO
+                    O'ZBEKISTON <br/>
+                    TEMIR YO'LLARI
+                    {/*<img src={logo} alt="logo" className={`h-14 scale-150`}/>*/}
                 </Typography>
                 <div className="flex items-center gap-4">
                     <div className="mr-4 hidden lg:block">{navList}</div>
@@ -174,6 +153,9 @@ const Header = () => {
                         )}
                     </IconButton>
                 </div>
+                <Link to={"/auth/log-in"} className={`hidden lg:block`}>
+                    <Button>Kirish</Button>
+                </Link>
             </div>
             <MobileNav open={openNav}>
                 {navList}

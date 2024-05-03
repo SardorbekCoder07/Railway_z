@@ -5,10 +5,8 @@ import HeroHome from './herohome';
 import FeaturesHome from './fauteres';
 import FeaturesBlocks from './fatureBlock';
 import Footer from './footer';
-import Statistics from "@/landing_page/statistics.jsx";
-import OurServices from "@/landing_page/our-services.jsx";
-import ProjectCard from "@/landing_page/projects.jsx";
-import Brands from "@/landing_page/brands.jsx";
+import HorizontalCard from "@/landing_page/rahbariyat.jsx";
+import Contact from "@/landing_page/contact.jsx";
 
 function HomePage() {
     return (
@@ -16,12 +14,10 @@ function HomePage() {
             <Header />
             <main className="flex-grow">
                 <HeroHome/>
-                <Brands />
                 <FeaturesHome/>
                 <FeaturesBlocks />
-                <Statistics/>
-                <OurServices />
-                <ProjectCard />
+                <HorizontalCard />
+                <Contact />
             </main>
             <Footer/>
         </div>
