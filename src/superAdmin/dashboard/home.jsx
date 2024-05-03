@@ -121,7 +121,7 @@ export function Home() {
             <div className="w-52">
               <Select
                 onChange={id => getPDB(id)}
-                label="PD list">
+                label="PD ro'yxat">
                 {adminUsers && adminUsers.length !== 0 ?
                   adminUsers.map(item => (
                     <Option value={item.id}>{item.name}</Option>

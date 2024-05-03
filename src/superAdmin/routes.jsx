@@ -24,15 +24,15 @@ export const routes = [
     pages: [
       {
         icon: <HomeIcon {...icon} />,
-        name: "dashboard",
-        path: "/home",
+        name: "Bosh Sahifa",
+        path: "/bosh-Sahifa",
         element: <Home />,
       },
       // sa
       {
         icon: <TableCellsIcon {...icon} />,
         name: "Adminlar",
-        path: "/tables",
+        path: "/hodimlar",
         element: <Tables />,
       },
       {
