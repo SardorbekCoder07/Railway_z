@@ -13,6 +13,7 @@ function App() {
       <Route path="/home/*" element={<HomePage />} />
       <Route path="/auth/*" element={<Auth />} />
       <Route path="*" element={<Navigate to="/auth/log-in" replace />} />
+      {/*  */}
     </Routes>
   );
 }
