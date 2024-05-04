@@ -17,6 +17,8 @@ import { MapPinIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { api, byId, config, setConfig } from "@/api/api";
 import toast from "react-hot-toast";
+import {MdDelete} from "react-icons/md";
+import {FaEdit} from "react-icons/fa";
 
 export function Observes() {
   const [observers, setObservers] = useState(null);
@@ -269,14 +271,14 @@ export function Observes() {
                       <Typography onClick={() => {
                         openEditModal()
                         setObserversData(item)
-                      }} className=" cursor-pointer text-xs font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
-                        Tahrirlash
+                      }} className=" cursor-pointer text-[1.2rem] font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
+                        <FaEdit/>
                       </Typography>
                       <Typography onClick={() => {
                         setObserversData(item)
                         openDeleteModal()
-                      }} className=" cursor-pointer text-xs font-semibold hover:text-red-300 duration-150 ease-in-out   text-blue-gray-600">
-                        O'chirish
+                      }} className=" cursor-pointer text-[1.2rem] font-semibold hover:text-red-300 duration-150 ease-in-out   text-blue-gray-600">
+                        <MdDelete/>
                       </Typography>
                     </td>
 

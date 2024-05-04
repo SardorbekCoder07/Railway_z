@@ -17,6 +17,8 @@ import { MapPinIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { api, byId, config, setConfig } from "@/api/api";
 import toast from "react-hot-toast";
+import {MdDelete} from "react-icons/md";
+import {FaEdit} from "react-icons/fa";
 
 export function AddLocation() {
   const [km, setkm] = useState(null);
@@ -169,10 +171,11 @@ export function AddLocation() {
           </Button>
         </CardHeader>
         <CardBody className=" px-0 pt-0 pb-2">
-          <div className="w-full flex justify-center items-center gap-5">
-            <Typography variant="h6" color="black">
+            <Typography variant="h6" color="gray" className="ml-10 mb-3">
               KM ma'lumotini olish uchun
             </Typography>
+          <div className="w-full flex justify-center items-center gap-5">
+
             <div className="w-full max-w-[24rem]">
               <Select onChange={(e) => {
                 getUser(e)
@@ -253,14 +256,14 @@ export function AddLocation() {
                         </div>
                       </div>
                     </td>
-                   
+
 
                     <td className={`${className} flex py-5 gap-3`}>
                       <Typography onClick={() => {
                         openEditModal()
                         setkmData(item)
-                      }} className=" cursor-pointer text-xs font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
-                        Tahrirlash
+                      }} className=" cursor-pointer text-[1.2rem] font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
+                        <FaEdit/>
                       </Typography>
                     </td>
                   </tr>

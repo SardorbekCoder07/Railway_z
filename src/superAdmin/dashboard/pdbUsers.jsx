@@ -17,6 +17,8 @@ import { UserPlusIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { api, byId, config, setConfig } from "@/api/api";
 import axios from "axios";
 import toast from "react-hot-toast";
+import {MdDelete} from "react-icons/md";
+import {FaEdit} from "react-icons/fa";
 
 export function PDBusers() {
   const [editModal, setEditModal] = useState(false)
@@ -128,10 +130,10 @@ export function PDBusers() {
           </Button>
         </CardHeader>
         <CardBody className=" px-0 pt-0 pb-2">
-          <div className="w-full flex justify-center items-center gap-5">
-          <Typography variant="h6" color="black">
+          <Typography variant="h6" color="gray" className="flex items-center justify-center mb-2 ">
             PD tanlang
           </Typography>
+          <div className="w-full flex justify-center items-center gap-5">
             <div className="w-full max-w-[24rem]">
               <Select onChange={(e) => {
                 getPDBuser(e)
@@ -208,8 +210,8 @@ export function PDBusers() {
                         <Typography onClick={() => {
                           openEditModal()
                           setpdbdata(item)
-                        }} className=" cursor-pointer text-xs font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
-                          Edit
+                        }} className=" cursor-pointer text-[1.2rem] font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
+                          <FaEdit/>
                         </Typography>
 
                       </td>
@@ -249,7 +251,7 @@ export function PDBusers() {
               <div className="w-full max-w-[24rem]">
                 <Input defaultValue={pdbData ? pdbData.userFullName : "Ma'lumot yo'q"} id="editlastname" label="Admin Ism familya" />
               </div>
-              
+
             </div>
           </DialogBody>
           <DialogFooter>
