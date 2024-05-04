@@ -26,6 +26,7 @@ export function PDBusers() {
   const [pdUsers, setPdUsers] = useState(null)
   const [pdbData, setpdbdata] = useState(null)
   const [pdId, setpdId] = useState(null)
+  const [mainpdId, setmainpdId] = useState(null)
 
 
   const openEditModal = () => setEditModal(true)
@@ -37,7 +38,6 @@ export function PDBusers() {
 
   useEffect(() => {
     setConfig()
-    getPDBuser();
     getPD()
   }, [])
 
@@ -52,10 +52,10 @@ export function PDBusers() {
       .catch((err) => { })
   }
 
-  const getPDBuser = () => {
-    axios.get(`${api}pdb`, config)
+  const getPDBuser = (id) => {
+    axios.get(`${api}pdb/list?pdId=${id}`, config)
       .then((res) => {
-        setPdbaUsers(res.data.body)
+        setPdbaUsers(res.data)
         console.log(res.data);
       })
       .catch((err) => {
@@ -124,6 +124,7 @@ export function PDBusers() {
           <Typography variant="h6" color="white">
             PDB lar jadvali
           </Typography>
+
           <Button
             onClick={openAddModal}
             className="bg-[#fff] text-black px-3 py-2 rounded-md"
@@ -131,7 +132,25 @@ export function PDBusers() {
             <UserPlusIcon className="h-6 w-6 text-black" />
           </Button>
         </CardHeader>
-        <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
+        <CardBody className=" px-0 pt-0 pb-2">
+          <div className="w-full flex justify-center items-center gap-5">
+          <Typography variant="h6" color="black">
+            PD tanlang
+          </Typography>
+            <div className="w-full max-w-[24rem]">
+              <Select onChange={(e) => {
+                setmainpdId(e)
+              }} label="PD tanlang">
+                {
+                  pdUsers ? pdUsers.map((item, i) =>
+                    <Option key={i} value={item.id}>{item.name}</Option>
+                  ) : (
+                    <Option>Malumot yo</Option>
+                  )
+                }
+              </Select>
+            </div>
+          </div>
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>

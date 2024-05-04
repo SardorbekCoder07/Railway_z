@@ -13,7 +13,7 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
-import { MapPinIcon,XMarkIcon } from "@heroicons/react/24/solid";
+import { MapPinIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { api, byId, config, setConfig } from "@/api/api";
 import toast from "react-hot-toast";
@@ -26,26 +26,14 @@ export function AddLocation() {
   const [editModal, setEditModal] = useState(false);
   const [addModal, setAddModal] = useState(false);
   const [regex, setRegex] = useState(true);
-  const [loading, setLoading] = useState(false);
-  const [editLoading, setEditLoading] = useState(false);
-  const [addLoading, setAddLoading] = useState(false);
+  const [pdUsers, setPdUsers] = useState(null);
 
-
-
-
-  const logoAdd = () => {
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
-      <path fill-rule="evenodd" d="m7.539 14.841.003.003.002.002a.755.755 0 0 0 .912 0l.002-.002.003-.003.012-.009a5.57 5.57 0 0 0 .19-.153 15.588 15.588 0 0 0 2.046-2.082c1.101-1.362 2.291-3.342 2.291-5.597A5 5 0 0 0 3 7c0 2.255 1.19 4.235 2.292 5.597a15.591 15.591 0 0 0 2.046 2.082 8.916 8.916 0 0 0 .189.153l.012.01ZM8 8.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" clip-rule="evenodd" />
-    </svg>
-  }
 
   const openEditModal = () => setEditModal(true)
   const closeEditModal = () => {
     setEditModal(false)
     setRegex(true)
   }
-  // const openDeleteModal = () => setDeleteModal(true)
-  // const closeDeleteModal = () => setDeleteModal(false)
   const openAddModal = () => setAddModal(true)
   const closeAddModal = () => {
     setAddModal(false)
@@ -54,40 +42,48 @@ export function AddLocation() {
 
   useEffect(() => {
     setConfig()
-    getkm()
-    getUser()
+    // getkm()
+    getPD()
   }, [])
 
 
 
 
+  const getPD = () => {
+    axios.get(`${api}pd/all`, config)
+      .then((res) => {
+        setPdUsers(res.data.body);
+      })
+      .catch((err) => { })
+  }
+
+
   // *******************GET PDB **********************
 
 
-  const getUser = () => {
-    axios.get(`${api}pdb`, config)
+  const getUser = (id) => {
+    axios.get(`${api}pdb/list?pdId=${id}`, config)
       .then((res) => {
-        setUsers(res.data.body);
+        setUsers(res.data.body)
       })
-      .catch((err) => {})
+      .catch((err) => {
+      })
   }
-
 
   // *******************GET USER **********************
 
 
-  const getkm = () => {
-    axios.get(`${api}railway/list/in/pd`, config)
+  const getkm = (id) => {
+    axios.get(`${api}railway/list?pdbId=${id}`, config)
       .then((res) => {
         setkm(res.data.body);
       })
-      .catch((err) => {})
+      .catch((err) => { })
   }
 
   // *******************ADD USER **********************
 
   const addkm = () => {
-    setAddLoading(true);
     const addData = {
       km: byId("addkm"),
       pdbId: pdbId,
@@ -96,7 +92,7 @@ export function AddLocation() {
       .post(`${api}railway`, addData, config)
       .then((res) => {
         closeAddModal();
-        getkm();
+        getkm(1);
         toast.success("Manzil muoffaqqiyatli qo'shildi!👌");
       })
       .catch((err) => {
@@ -105,17 +101,14 @@ export function AddLocation() {
         ;
       })
       .finally(() => {
-        setAddLoading(false);
       });
   };
-
 
 
   // *******************EDIT USER **********************
 
 
   const editkm = () => {
-    setEditLoading(true);
     const editData = {
       km: byId("editkm"),
       pdbId: pdbId,
@@ -124,7 +117,7 @@ export function AddLocation() {
       .put(`${api}railway?id=${kmData ? kmData.id : 0}`, editData, config)
       .then((res) => {
         closeEditModal();
-        getkm();
+        getkm(1);
         toast.success("Ish quroli muvoffaqqiyatli tahrirlandi!👌");
       })
       .catch((err) => {
@@ -132,10 +125,8 @@ export function AddLocation() {
         closeEditModal();
       })
       .finally(() => {
-        setEditLoading(false);
       });
   };
-  // *******************DELETE USER **********************
 
 
   // ******************* REGEX **********************
@@ -163,14 +154,6 @@ export function AddLocation() {
   }
 
 
-  const loaderBtn = () => {
-    setLoading(true);
-    // Your edit logic here
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000); // Assuming your edit operation takes 2 seconds
-  };
-
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12 ">
       <Card>
@@ -185,11 +168,42 @@ export function AddLocation() {
             <MapPinIcon className="h-6 w-6 text-black inline-block" /> +
           </Button>
         </CardHeader>
-        <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
+        <CardBody className=" px-0 pt-0 pb-2">
+          <div className="w-full flex justify-center items-center gap-5">
+            <Typography variant="h6" color="black">
+              PD tanlang
+            </Typography>
+            <div className="w-full max-w-[24rem]">
+              <Select onChange={(e) => {
+                getUser(e)
+              }} label="PD tanlang">
+                {
+                  pdUsers ? pdUsers.map((item, i) =>
+                    <Option key={i} value={item.id}>{item.name}</Option>
+                  ) : (
+                    <Option>Malumot yo'q</Option>
+                  )
+                }
+              </Select>
+            </div>
+            <div className="w-full max-w-[24rem]">
+              <Select onChange={(e) => {
+                getkm(e)
+              }} label="PD tanlang">
+                {
+                  users ? users.map((item, i) =>
+                    <Option key={i} value={item.id}>{item.name}</Option>
+                  ) : (
+                    <Option>Malumot yo'q</Option>
+                  )
+                }
+              </Select>
+            </div>
+          </div>
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["#","KM", "PDB", "Harakatlar"].map((el) => (
+                {["#", "KM", "Harakatlar"].map((el) => (
                   <th
                     key={el}
                     className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -215,17 +229,17 @@ export function AddLocation() {
 
                   <tr key={i}>
                     <td className={className}>
-                        <div className="flex items-center gap-4">
-                          <div>
-                            <Typography
-                              variant="small"
-                              className="font-semibold text-blue-gray-600"
-                            >
-                              {i+1}
-                            </Typography>
-                          </div>
+                      <div className="flex items-center gap-4">
+                        <div>
+                          <Typography
+                            variant="small"
+                            className="font-semibold text-blue-gray-600"
+                          >
+                            {i + 1}
+                          </Typography>
                         </div>
-                      </td>
+                      </div>
+                    </td>
                     <td className={className}>
                       <div className="flex items-center gap-4">
                         <div>
@@ -239,19 +253,7 @@ export function AddLocation() {
                         </div>
                       </div>
                     </td>
-                    <td className={className}>
-                      <div className="flex items-center gap-4">
-                        <div>
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-semibold"
-                          >
-                            {item.pdbName}
-                          </Typography>
-                        </div>
-                      </div>
-                    </td>
+                   
 
                     <td className={`${className} flex py-5 gap-3`}>
                       <Typography onClick={() => {
@@ -269,42 +271,51 @@ export function AddLocation() {
                   <td></td>
                   <td></td>
                   <td className="">
-                  <Typography  className=" cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
-                  Malumot yo'q
-                </Typography></td>
-              <td></td>
+                    <Typography className=" cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
+                      Malumot yo'q
+                    </Typography></td>
+                  <td></td>
 
                 </tr>}
             </tbody>
           </table>
         </CardBody>
       </Card>
-      {/* <div className="w-full flex justify-center items-center">
-      <CircularPagination/>
-      </div> */}
       <div>
 
         {/* edit modal */}
         <Dialog open={editModal} handler={closeEditModal}>
           <DialogHeader className="flex items-center justify-between">Tahrirlash
-          <XMarkIcon className="cursor-pointer" onClick={closeEditModal} width={20}/>
-</DialogHeader>
+            <XMarkIcon className="cursor-pointer" onClick={closeEditModal} width={20} />
+          </DialogHeader>
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
                 <Input type="number" onChange={editRegex} required defaultValue={kmData ? kmData.km : "Ma'lumot yo'q"} id="editkm" label="km nomi" />
               </div>
               <div className="w-full max-w-[24rem]">
-              <Select onChange={(e) => {
-                  setPDBid(e)
-                  editRegex()
-                }} label="PDB">
+                <Select onChange={(e) => {
+                  getUser(e)
+                }} label="PD tanlang">
                   {
-                    users && users.length !== 0 ? users.map((item, i) =>
-                      <Option key={i} value={item.id}>{item.name} {item.lastName}</Option>
-                    ) : 
-                    <Option>Malumot yo'q</Option>
-
+                    pdUsers ? pdUsers.map((item, i) =>
+                      <Option key={i} value={item.id}>{item.name}</Option>
+                    ) : (
+                      <Option>Malumot yo'q</Option>
+                    )
+                  }
+                </Select>
+              </div>
+              <div className="w-full max-w-[24rem]">
+                <Select onChange={(e) => {
+                  setPDBid(e)
+                }} label="PDB tanlang">
+                  {
+                    users ? users.map((item, i) =>
+                      <Option key={i} value={item.id}>{item.name}</Option>
+                    ) : (
+                      <Option>Malumot yo'q</Option>
+                    )
                   }
                 </Select>
               </div>
@@ -321,9 +332,9 @@ export function AddLocation() {
             </Button>
             <span className={`${regex ? "cursor-not-allowed" : ""}`}>
 
-                <Button disabled={regex} onClick={editkm} variant="gradient" color="gray">
-                  <span>Tahrirlash</span>
-                </Button>
+              <Button disabled={regex} onClick={editkm} variant="gradient" color="gray">
+                <span>Tahrirlash</span>
+              </Button>
             </span>
           </DialogFooter>
         </Dialog>
@@ -334,26 +345,38 @@ export function AddLocation() {
 
         <Dialog open={addModal} handler={closeAddModal}>
           <DialogHeader className="flex -items-center justify-between">KM qo'shish
-          <XMarkIcon className="cursor-pointer" onClick={closeAddModal} width={20}/>
-</DialogHeader>
+            <XMarkIcon className="cursor-pointer" onClick={closeAddModal} width={20} />
+          </DialogHeader>
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
                 <Input type="number" onChange={addRegex} required id="addkm" label="KM" />
               </div>
               <div className="w-full max-w-[24rem]">
-                <Select onChange={(e) => {
-                  setPDBid(e)
-                  addRegex()
-                }} label="PDB">
-                  {
-                    users && users.length !== 0 ? users.map((item, i) =>
-                      <Option key={i} value={item.id}>{item.name} {item.lastName}</Option>
-                    ) : 
+              <Select onChange={(e) => {
+                getUser(e)
+              }} label="PD tanlang">
+                {
+                  pdUsers ? pdUsers.map((item, i) =>
+                    <Option key={i} value={item.id}>{item.name}</Option>
+                  ) : (
                     <Option>Malumot yo'q</Option>
-
-                  }
-                </Select>
+                  )
+                }
+              </Select>
+              </div>
+              <div className="w-full max-w-[24rem]">
+              <Select onChange={(e) => {
+                setPDBid(e)
+              }} label="PDB tanlang">
+                {
+                  users ? users.map((item, i) =>
+                    <Option key={i} value={item.id}>{item.name}</Option>
+                  ) : (
+                    <Option>Malumot yo'q</Option>
+                  )
+                }
+              </Select>
               </div>
             </div>
           </DialogBody>
@@ -367,7 +390,7 @@ export function AddLocation() {
               <span>Orqaga</span>
             </Button>
             <span className={`${regex ? "cursor-not-allowed" : ""}`}>
-              <Button disabled={regex} onClick={addkm }  variant="gradient" color="gray">
+              <Button disabled={regex} onClick={addkm} variant="gradient" color="gray">
                 <span>Qo'shish</span>
               </Button>
             </span>
