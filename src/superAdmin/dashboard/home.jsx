@@ -13,11 +13,12 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
-import { StatisticsCard } from "@/superAdmin/widgets/cards";
+import { StatisticsCardS } from "@/superAdmin/widgets/cards";
 import { CheckCircleIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { api, config, setConfig } from "@/api/api";
 import axios from "axios";
 import Download from "@/superAdmin/dashboard/download.jsx";
+import { StatisticsCard } from "@/admin/widgets/cards";
 
 export function Home() {
   const [elseModal, setElseModal] = useState(false);
@@ -104,8 +105,11 @@ export function Home() {
   }
 
   return (<div className="mt-12">
+    <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
+            <StatisticsCard />
+        </div>
     <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
-      <StatisticsCard />
+      <StatisticsCardS />
     </div>
     <div className="mb-6 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
       <Card>

@@ -10,7 +10,7 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 
-export function StatisticsCard() {
+export function StatisticsCardS() {
   const [adminstatistics, setAdminStatistics] = useState(null)
 
   useEffect(()=>{
@@ -95,12 +95,12 @@ export function StatisticsCard() {
   );
 }
 
-StatisticsCard.defaultProps = {
+StatisticsCardS.defaultProps = {
   color: "blue",
   footer: null,
 };
 
-StatisticsCard.propTypes = {
+StatisticsCardS.propTypes = {
   color: PropTypes.oneOf([
     "white",
     "blue-gray",
@@ -129,6 +129,6 @@ StatisticsCard.propTypes = {
   footer: PropTypes.node,
 };
 
-StatisticsCard.displayName = "/src/widgets/cards/statistics-card.jsx";
+StatisticsCardS.displayName = "/src/widgets/cards/statistics-card.jsx";
 
-export default StatisticsCard;
+export default StatisticsCardS;
