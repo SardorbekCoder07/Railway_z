@@ -55,7 +55,7 @@ export function Tools() {
 
 
   const getUser = () => {
-    axios.get(`${api}user/admins`, config)
+    axios.get(`${api}user/leaders`, config)
       .then((res) => {
         setUsers(res.data);
       })
