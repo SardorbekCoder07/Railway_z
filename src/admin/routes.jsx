@@ -16,12 +16,7 @@ export const routes = [
   {
     layout: "admin",
     pages: [
-      {
-        icon: <HomeIcon {...icon} />,
-        name: "Boshqaruv Paneli",
-        path: "/boshqaruv-paneli",
-        element: <Home />,
-      },
+     
       {
         icon: <DocumentCheckIcon {...icon} />,
         name: "Hisobot",

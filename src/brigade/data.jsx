@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Button, DialogHeader, DialogFooter } from '@material-t
 import { Typography } from '@material-tailwind/react';
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
 import { Dialog } from '@material-tailwind/react';
+import { Link } from 'react-router-dom';
 
 const NavList = () => {
   const [deleteModal, setDeleteModal] = useState(false);
@@ -54,8 +55,12 @@ const NavList = () => {
       <Dialog open={deleteModal} onClose={closeDeleteModal} className='p-4'>
         <DialogHeader>Tizimdan Chiqaszmi ?</DialogHeader>
         <DialogFooter className='flex items-center gap-3'>
-          <Button  variant="outlined" onClick={closeDeleteModal}>Ha</Button>
           <Button onClick={closeDeleteModal}>Yo'q</Button>
+          <Link to="/auth/log-in">
+          <Button  variant="outlined" onClick={() => {
+            closeDeleteModal()
+            sessionStorage.clear()
+          }}>Ha</Button></Link>
         </DialogFooter>
       </Dialog>
     </div>

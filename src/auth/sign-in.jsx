@@ -35,7 +35,7 @@ export function SignIn() {
                         setRole('/super-admin/boshqaruv-paneli');
                         toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
                     } else if (res.data.message === "ROLE_ADMIN") {
-                        setRole('/admin/boshqaruv-paneli');
+                        setRole('/admin/hisobot');
                         toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
                     } else if (res.data.message === "ROLE_LEADER") {
                         setRole('/brigada/boshqaruv-qismi');

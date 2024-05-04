@@ -18,6 +18,7 @@ import { api, config, setConfig } from "@/api/api";
 import axios from "axios";
 import { getDayPlan, getPdb, getPk, getRailway } from "../../superAdmin/dashboard/apiFunction";
 import Download from "@/superAdmin/dashboard/download";
+import { StatisticsCard } from "../widgets/cards";
 
 export function Hisobot() {
   const [elseModal, setElseModal] = useState(false);
@@ -73,7 +74,9 @@ export function Hisobot() {
 
   return (
     <div className="mt-12">
-
+ <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
+            <StatisticsCard />
+        </div>
       <div className="mb-6 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
         <Card>
           <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
