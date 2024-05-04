@@ -43,7 +43,7 @@ export function Observes() {
   }
   const openDeleteModal = () => setDeleteModal(true)
   const closeDeleteModal = () => {
-    setTextError(true)
+    setTextError(false)
     setDeleteModal(false)
   }
 
@@ -144,7 +144,7 @@ export function Observes() {
             toast.error("Kuzatuvchi o'chirilmadi")
             closeDeleteModal()
           })
-    } else setTextError(true)
+    } else setTextError(false)
   }
 
   return (
