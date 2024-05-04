@@ -10,6 +10,8 @@ import {
   DialogFooter,
   Button,
   Input,
+  Option,
+  Select,
 } from "@material-tailwind/react";
 import { UserPlusIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { api, byId, config, setConfig } from "@/api/api";
@@ -21,8 +23,9 @@ export function PDBusers() {
   const [deleteModal, setDeleteModal] = useState(false)
   const [addModal, setAddModal] = useState(false)
   const [pdbUsers, setPdbaUsers] = useState(null)
+  const [pdUsers, setPdUsers] = useState(null)
   const [pdbData, setpdbdata] = useState(null)
-  const [PdUser, setpdUsers] = useState(null)
+  const [pdId, setpdId] = useState(null)
 
 
   const openEditModal = () => setEditModal(true)
@@ -38,21 +41,22 @@ export function PDBusers() {
     getPD()
   }, [])
 
-    // *******************GET USER **********************
+  // *******************GET USER **********************
 
 
-    const getPD = () => {
-      axios.get(`${api}pd/all`, config)
-        .then((res) => {
-          setpdUsers(res.data.body);
-        })
-        .catch((err) => {})
-    }
+  const getPD = () => {
+    axios.get(`${api}pd/all`, config)
+      .then((res) => {
+        setPdUsers(res.data.body);
+      })
+      .catch((err) => { })
+  }
 
   const getPDBuser = () => {
     axios.get(`${api}pdb`, config)
       .then((res) => {
         setPdbaUsers(res.data.body)
+        console.log(res.data);
       })
       .catch((err) => {
       })
@@ -61,6 +65,7 @@ export function PDBusers() {
   // ----------PDB add------------
   const addPdb = () => {
     const addPDBdata = {
+      pdId: pdId ? pdId : 0,
       name: byId("addname"),
       userFullName: byId("addlastname"),
     }
@@ -79,10 +84,11 @@ export function PDBusers() {
   // ----------PDB edit------------
   const editPDB = () => {
     const editPDbdata = {
+      pdId: pdId ? pdId : 0,
       name: byId("editName"),
       userFullName: byId("editlastname"),
     }
-    axios.put(`${api}pdb?id=${pdbData ? pdbData.id:0}`, editPDbdata, config)
+    axios.put(`${api}pdb?id=${pdbData ? pdbData.id : 0}`, editPDbdata, config)
       .then((res) => {
         closeEditModal();
         getPDBuser()
@@ -94,22 +100,22 @@ export function PDBusers() {
       })
   }
 
-    // *******************DELETE USER **********************
+  // *******************DELETE USER **********************
 
-    // const deletePDB = () => {
-    //   axios.delete(`${api}pdb/delete?id=${pdbData ? pdbData.id : 0}`,config)
-    //     .then((res) => {
-    //       closeDeleteModal()
-    //       getPDBuser()
-    //       toast.success("PDB muvoffaqqiyatli o'chirildi!👌")
+  // const deletePDB = () => {
+  //   axios.delete(`${api}pdb/delete?id=${pdbData ? pdbData.id : 0}`,config)
+  //     .then((res) => {
+  //       closeDeleteModal()
+  //       getPDBuser()
+  //       toast.success("PDB muvoffaqqiyatli o'chirildi!👌")
 
-    //     })
-    //     .catch((err) => {
-    //       closeDeleteModal()
-    //       toast.error("PDB o'chirilmadi!❌")
-    //     })
+  //     })
+  //     .catch((err) => {
+  //       closeDeleteModal()
+  //       toast.error("PDB o'chirilmadi!❌")
+  //     })
 
-    // }
+  // }
 
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12 ">
@@ -160,7 +166,7 @@ export function PDBusers() {
                               variant="small"
                               className="font-semibold text-blue-gray-600"
                             >
-                              {i+1}
+                              {i + 1}
                             </Typography>
                           </div>
                         </div>
@@ -201,10 +207,10 @@ export function PDBusers() {
                   <td></td>
                   <td></td>
                   <td className="">
-                  <Typography  className=" cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
-                  Malumot yo'q
-                </Typography></td>
-              <td></td>
+                    <Typography className=" cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
+                      Malumot yo'q
+                    </Typography></td>
+                  <td></td>
 
                 </tr>
               )}
@@ -215,12 +221,12 @@ export function PDBusers() {
       {/* Edit pdb  */}
       <div>
         <Dialog open={editModal} handler={closeEditModal}>
-        <div>
+          <div>
 
-          <DialogHeader className="flex items-center justify-between">Tahrirlash
-          <XMarkIcon className="cursor-pointer" onClick={closeEditModal} width={20}/>
-</DialogHeader>
-        </div>
+            <DialogHeader className="flex items-center justify-between">Tahrirlash
+              <XMarkIcon className="cursor-pointer" onClick={closeEditModal} width={20} />
+            </DialogHeader>
+          </div>
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
@@ -228,6 +234,19 @@ export function PDBusers() {
               </div>
               <div className="w-full max-w-[24rem]">
                 <Input defaultValue={pdbData ? pdbData.userFullName : "Ma'lumot yo'q"} id="editlastname" label="Admin Ism familya" />
+              </div>
+              <div className="w-full max-w-[24rem]">
+                <Select onChange={(e) => {
+                  setpdId(e)
+                }} label="PD tanlang">
+                  {
+                    pdUsers ? pdUsers.map((item, i) =>
+                      <Option key={i} value={item.id}>{item.name}</Option>
+                    ) : (
+                      <Option>Malumot yo</Option>
+                    )
+                  }
+                </Select>
               </div>
             </div>
           </DialogBody>
@@ -252,7 +271,7 @@ export function PDBusers() {
       <div>
         <Dialog open={addModal} handler={closeAddModal}>
           <DialogHeader className="flex items-center justify-between">PDB qo'shish
-          <XMarkIcon className="cursor-pointer" onClick={closeAddModal} width={20}/>
+            <XMarkIcon className="cursor-pointer" onClick={closeAddModal} width={20} />
           </DialogHeader>
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
@@ -261,6 +280,19 @@ export function PDBusers() {
               </div>
               <div className="w-full max-w-[24rem]">
                 <Input id="addlastname" label="Admin Ism , familya" />
+              </div>
+              <div className="w-full max-w-[24rem]">
+                <Select onChange={(e) => {
+                  setpdId(e)
+                }} label="PD tanlang">
+                  {
+                    pdUsers ? pdUsers.map((item, i) =>
+                      <Option key={i} value={item.id}>{item.name}</Option>
+                    ) : (
+                      <Option>Malumot yo</Option>
+                    )
+                  }
+                </Select>
               </div>
             </div>
           </DialogBody>
