@@ -1,13 +1,12 @@
 import {
   HomeIcon,
-  UserCircleIcon,
   TableCellsIcon,
-  InformationCircleIcon,
-  ServerStackIcon,
-  RectangleStackIcon,
   GlobeAltIcon,
+  UsersIcon,
+  MapPinIcon,
+  WrenchScrewdriverIcon,
 } from "@heroicons/react/24/solid";
-import { Home, Profile, Tables, Notifications } from "@/superAdmin/dashboard";
+import { Home, Tables, PDBusers, Observes, Tools, AddLocation } from "@/superAdmin/dashboard";
 import { SignIn, SignUp } from "@/auth";
 import { PdUsers } from "./dashboard/pdUsers";
 
@@ -24,8 +23,8 @@ export const routes = [
     pages: [
       {
         icon: <HomeIcon {...icon} />,
-        name: "Bosh Sahifa",
-        path: "/bosh-Sahifa",
+        name: "Boshqaruv Paneli",
+        path: "/boshqaruv-paneli",
         element: <Home />,
       },
       // sa
@@ -41,6 +40,33 @@ export const routes = [
         path: "/pd",
         element: <PdUsers />,
       },
+      {
+        icon: <UsersIcon {...icon} />,
+        name: "PDB lar ro'yxati",
+        path: "/jadval",
+        element: <PDBusers />,
+      },
+      // sa
+      {
+        icon: <UsersIcon {...icon} />,
+        name: "Kuzatuvchilar ro'yxati",
+        path: "/kuzatuv",
+        element: <Observes />,
+      },
+
+      {
+        icon: <WrenchScrewdriverIcon {...icon} />,
+        name: "Ish qurollar",
+        path: "/asboblar",
+        element: <Tools />,
+      },
+      {
+        icon: <MapPinIcon {...icon} />,
+        name: "Manzil",
+        path: "/Manzil",
+        element: <AddLocation />,
+      },
+
 ],
   },
   {

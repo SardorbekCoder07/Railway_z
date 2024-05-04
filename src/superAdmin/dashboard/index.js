@@ -2,3 +2,8 @@ export * from "@/superAdmin/dashboard/home";
 export * from "@/superAdmin/dashboard/profile";
 export * from "@/superAdmin/dashboard/tables";
 export * from "@/superAdmin/dashboard/notifications";
+export * from "@/superAdmin/dashboard/addLocation";
+export * from "@/superAdmin/dashboard/apiFunction";
+export * from "@/superAdmin/dashboard/observes";
+export * from "@/superAdmin/dashboard/pdbUsers";
+export * from "@/superAdmin/dashboard/tools";

@@ -16,7 +16,7 @@ import { api, byId, config, setConfig } from "@/api/api";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-export function Tables() {
+export function PDBusers() {
   const [editModal, setEditModal] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false)
   const [addModal, setAddModal] = useState(false)

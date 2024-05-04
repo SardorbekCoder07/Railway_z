@@ -32,10 +32,10 @@ export function SignIn() {
                 .then(res => {
                     sessionStorage.setItem('jwtTokin', "Bearer " + res.data.body);
                     if (res.data.message === "ROLE_SUPER_ADMIN") {
-                        setRole('/super-admin/home');
+                        setRole('/super-admin/boshqaruv-paneli');
                         toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
                     } else if (res.data.message === "ROLE_ADMIN") {
-                        setRole('/admin/home');
+                        setRole('/admin/boshqaruv-paneli');
                         toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
                     }
                 })
