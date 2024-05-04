@@ -171,7 +171,7 @@ export function AddLocation() {
         <CardBody className=" px-0 pt-0 pb-2">
           <div className="w-full flex justify-center items-center gap-5">
             <Typography variant="h6" color="black">
-              PD tanlang
+              KM ma'lumotini olish uchun
             </Typography>
             <div className="w-full max-w-[24rem]">
               <Select onChange={(e) => {
@@ -189,7 +189,7 @@ export function AddLocation() {
             <div className="w-full max-w-[24rem]">
               <Select onChange={(e) => {
                 getkm(e)
-              }} label="PD tanlang">
+              }} label="PDB tanlang">
                 {
                   users ? users.map((item, i) =>
                     <Option key={i} value={item.id}>{item.name}</Option>

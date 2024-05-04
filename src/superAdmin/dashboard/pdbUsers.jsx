@@ -20,19 +20,15 @@ import toast from "react-hot-toast";
 
 export function PDBusers() {
   const [editModal, setEditModal] = useState(false)
-  const [deleteModal, setDeleteModal] = useState(false)
   const [addModal, setAddModal] = useState(false)
   const [pdbUsers, setPdbaUsers] = useState(null)
   const [pdUsers, setPdUsers] = useState(null)
   const [pdbData, setpdbdata] = useState(null)
   const [pdId, setpdId] = useState(null)
-  const [mainpdId, setmainpdId] = useState(null)
 
 
   const openEditModal = () => setEditModal(true)
   const closeEditModal = () => setEditModal(false)
-  const openDeleteModal = () => setDeleteModal(true)
-  const closeDeleteModal = () => setDeleteModal(false)
   const openAddModal = () => setAddModal(true)
   const closeAddModal = () => setAddModal(false)
 
@@ -55,8 +51,7 @@ export function PDBusers() {
   const getPDBuser = (id) => {
     axios.get(`${api}pdb/list?pdId=${id}`, config)
       .then((res) => {
-        setPdbaUsers(res.data)
-        console.log(res.data);
+        setPdbaUsers(res.data.body)
       })
       .catch((err) => {
       })
@@ -139,7 +134,7 @@ export function PDBusers() {
           </Typography>
             <div className="w-full max-w-[24rem]">
               <Select onChange={(e) => {
-                setmainpdId(e)
+                getPDBuser(e)
               }} label="PD tanlang">
                 {
                   pdUsers ? pdUsers.map((item, i) =>
