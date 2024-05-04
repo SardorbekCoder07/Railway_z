@@ -82,7 +82,7 @@ export function PdUsers() {
     const addData = {
       name: byId("addPD"),
       employeeCount: byId("addemployeeCount"),
-      userId: userID
+      userId: userID ? userID :0
     }
     axios.post(`${api}pd/add`, addData, config)
       .then((res) => {
@@ -106,7 +106,7 @@ export function PdUsers() {
     const editData = {
       name: byId("editPD"),
       employeeCount: byId("editemployeeCount"),
-      userId: userID
+      userId: userID ? userID :0
     }
     axios.put(`${api}pd/update?id=${userData ? userData.id : 0}`, editData, config)
       .then((res) => {
@@ -298,8 +298,11 @@ export function PdUsers() {
                   editRegex()
                 }} label="PD admini" >
                   {
-                    users && users.map((item, i) =>
+                    users ? users.map((item, i) =>
                       <Option key={i} value={item.id}>{item.firstName} {item.lastName}</Option>
+                    ) :(
+                      <Option>Malumot yo'q</Option>
+
                     )
                   }
                 </Select>
@@ -344,8 +347,11 @@ export function PdUsers() {
                   addRegex()
                 }} label="PD admini">
                   {
-                    users && users.map((item, i) =>
+                    users ? users.map((item, i) =>
                       <Option key={i} value={item.id}>{item.firstName} {item.lastName}</Option>
+                    ) :(
+                      <Option>Malumot yo'q</Option>
+
                     )
                   }
                 </Select>

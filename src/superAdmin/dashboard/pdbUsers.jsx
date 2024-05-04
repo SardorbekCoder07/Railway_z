@@ -22,6 +22,7 @@ export function PDBusers() {
   const [addModal, setAddModal] = useState(false)
   const [pdbUsers, setPdbaUsers] = useState(null)
   const [pdbData, setpdbdata] = useState(null)
+  const [PdUser, setpdUsers] = useState(null)
 
 
   const openEditModal = () => setEditModal(true)
@@ -34,7 +35,19 @@ export function PDBusers() {
   useEffect(() => {
     setConfig()
     getPDBuser();
+    getPD()
   }, [])
+
+    // *******************GET USER **********************
+
+
+    const getPD = () => {
+      axios.get(`${api}pd/all`, config)
+        .then((res) => {
+          setpdUsers(res.data.body);
+        })
+        .catch((err) => {})
+    }
 
   const getPDBuser = () => {
     axios.get(`${api}pdb`, config)
