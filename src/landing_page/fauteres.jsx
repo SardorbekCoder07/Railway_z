@@ -1,5 +1,11 @@
 import React, {useState, useRef, useEffect} from 'react';
 import Transition from './utils/transitoin';
+import img1_1 from './images/servis/section1.jpg'
+import img1_2 from './images/servis/section2.jpg'
+import img2_1 from './images/servis/section3.jpg'
+import img2_2 from './images/servis/section4.jpg'
+import img3_1 from './images/servis/section5.jpg'
+import img3_2 from './images/servis/section6.jpg'
 
 function Features() {
     const [tab, setTab] = useState(1);
@@ -143,12 +149,12 @@ function Features() {
                                     <div className="relative inline-flex flex-col">
                                         <img
                                             className="md:max-w-none mx-auto rounded h-60 object-cover"
-                                            src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
+                                            src={img1_1}
                                             width="500"
                                             height="462" alt="Features bg"/>
                                         <img
-                                            className="md:max-w-none rounded mt-28 absolute w-full h-60 object-cover left-0 top-36 transform animate-float"
-                                            src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
+                                            className="md:max-w-none rounded mt-28 absolute w-full h-60 object-cover object-bottom left-0 top-36 transform animate-float"
+                                            src={img1_2}
                                             width="500"
                                             alt="Element"/>
                                     </div>
@@ -168,13 +174,13 @@ function Features() {
                                     <div className="relative inline-flex flex-col">
                                         <img
                                             className="md:max-w-none mx-auto rounded h-60 object-cover"
-                                            src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
+                                            src={img2_1}
                                             width="500"
                                             height="462"
                                             alt="Features bg"/>
                                         <img
                                             className="md:max-w-none rounded mt-28 absolute w-full h-60 object-cover left-0 top-36 transform animate-float"
-                                            src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
+                                            src={img2_2}
                                             width="500"
                                             alt="Element"/>
                                     </div>
@@ -194,13 +200,13 @@ function Features() {
                                     <div className="relative inline-flex flex-col">
                                         <img
                                             className="md:max-w-none mx-auto rounded h-60 object-cover"
-                                            src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
+                                            src={img3_1}
                                             width="500"
                                             alt="Features bg"/>
                                         {/* Remove unnecessary background image */}
                                         <img
                                             className="md:max-w-none rounded mt-28 absolute w-full h-60 object-cover left-0 top-36 transform animate-float"
-                                            src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
+                                            src={img3_2}
                                             width="500"
                                             alt="Element"/>
                                     </div>
