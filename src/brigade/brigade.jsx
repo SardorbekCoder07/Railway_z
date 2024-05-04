@@ -1,5 +1,5 @@
 import React from 'react'
-import NavList from './navbar'
+import NavList from './home'
 import Data from './data'
 import ReportBrig from './reportBrig'
 

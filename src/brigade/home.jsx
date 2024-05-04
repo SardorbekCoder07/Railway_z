@@ -8,13 +8,13 @@ import {
     DialogBody,
     Typography,
 } from "@material-tailwind/react";
-import { StatisticsCard } from "@/admin/widgets/cards";
 import { getPdb, getPk, getRailway } from "@/superAdmin/dashboard/apiFunction.jsx";
 import { api, config, setConfig } from "@/api/api.jsx";
 // import { TabsWithWork } from './tabs';
 import { Checkbox } from "@material-tailwind/react";
 import axios from "axios";
 import { TabsWithWork } from "@/admin/admin";
+import StatisticsCard from "./statistics-card";
 
 export function Home() {
     const [pdModal, setPdModal] = useState(false);

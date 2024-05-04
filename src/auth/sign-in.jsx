@@ -37,6 +37,9 @@ export function SignIn() {
                     } else if (res.data.message === "ROLE_ADMIN") {
                         setRole('/admin/boshqaruv-paneli');
                         toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
+                    } else if (res.data.message === "ROLE_LEADER") {
+                        setRole('/brigada/boshqaruv-qismi');
+                        toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
                     }
                 })
                 .catch((err) => {

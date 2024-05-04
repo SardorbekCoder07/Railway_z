@@ -7,7 +7,7 @@ import {
   RectangleStackIcon,
   GlobeAltIcon,
 } from "@heroicons/react/24/solid";
-import { Home, Profile, Tables, Notifications } from "@/brigade/dashboard";
+import { Home, Tables} from "@/brigade/dashboard";
 import { SignIn, SignUp } from "@/auth";
 import { PdUsers } from "./dashboard/pdUsers";
 
@@ -25,7 +25,7 @@ export const routes = [
       {
         icon: <HomeIcon {...icon} />,
         name: "Bosh Sahifa",
-        path: "/bosh-Sahifa",
+        path: "/boshqaruv-qismi",
         element: <Home />,
       },
       // sa
