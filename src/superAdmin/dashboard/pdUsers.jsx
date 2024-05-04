@@ -13,6 +13,8 @@ import {
     Select,
     Option,
 } from "@material-tailwind/react";
+import {MdDelete} from "react-icons/md";
+import {FaEdit} from "react-icons/fa";
 import {authorsTableData} from "@/superAdmin/data";
 import {CircularPagination} from "@/superAdmin/widgets/layout/circlePagination";
 import {UserPlusIcon} from "@heroicons/react/24/solid";
@@ -245,15 +247,15 @@ export function PdUsers() {
                                                 openEditModal()
                                                 setUserData(item)
                                             }}
-                                                        className=" cursor-pointer text-xs font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
-                                                Edit
+                                                        className=" cursor-pointer text-[1.2rem] font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
+                                                <FaEdit/>
                                             </Typography>
                                             <Typography onClick={() => {
                                                 openDeleteModal()
                                                 setUserData(item)
                                             }}
-                                                        className=" cursor-pointer text-xs font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
-                                                O'chirish
+                                                        className=" cursor-pointer text-[1.2rem] font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
+                                                <MdDelete/>
                                             </Typography>
                                         </td>
                                     </tr>
