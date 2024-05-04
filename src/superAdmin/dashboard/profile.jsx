@@ -1,8 +1,6 @@
 import {
   Card,
   CardBody,
-  CardHeader,
-  CardFooter,
   Avatar,
   Typography,
   Tabs,
@@ -139,7 +137,6 @@ export function Profile() {
               </ul>
             </div>
           </div>
-
         </CardBody>
       </Card>
     </>
