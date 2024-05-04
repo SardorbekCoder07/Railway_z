@@ -50,6 +50,7 @@ const NavList = () => {
           <ArrowRightIcon width={20}/>
         </Button>
       </div>
+      {/* man pull qilolmadm shunga commit qilish uchun uzgarish kiritdm */}
       <Dialog open={deleteModal} onClose={closeDeleteModal} className='p-4'>
         <DialogHeader>Tizimdan Chiqaszmi ?</DialogHeader>
         <DialogFooter className='flex items-center gap-3'>
