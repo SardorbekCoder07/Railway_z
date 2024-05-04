@@ -117,7 +117,7 @@ export function Home() {
         </CardHeader>
         <CardBody className="md:overflow-x-scroll">
           {/*select*/}
-          <div className={`mb-6 flex gap-5 justify-start items-center`}>
+          <div className="mb-6 flex flex-col md:flex-row md:gap-5 gap-5">
             <div className="w-52">
               <Select
                 onChange={id => getPDB(id)}
