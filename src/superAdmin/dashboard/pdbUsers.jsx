@@ -79,7 +79,7 @@ export function PDBusers() {
   // ----------PDB edit------------
   const editPDB = () => {
     const editPDbdata = {
-      pdId: pdId ? pdId : 0,
+      pdId: 0,
       name: byId("editName"),
       userFullName: byId("editlastname"),
     }
@@ -249,19 +249,7 @@ export function PDBusers() {
               <div className="w-full max-w-[24rem]">
                 <Input defaultValue={pdbData ? pdbData.userFullName : "Ma'lumot yo'q"} id="editlastname" label="Admin Ism familya" />
               </div>
-              <div className="w-full max-w-[24rem]">
-                <Select onChange={(e) => {
-                  setpdId(e)
-                }} label="PD tanlang">
-                  {
-                    pdUsers ? pdUsers.map((item, i) =>
-                      <Option key={i} value={item.id}>{item.name}</Option>
-                    ) : (
-                      <Option>Malumot yo</Option>
-                    )
-                  }
-                </Select>
-              </div>
+              
             </div>
           </DialogBody>
           <DialogFooter>
