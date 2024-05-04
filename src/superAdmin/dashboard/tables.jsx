@@ -44,14 +44,13 @@ export function Tables() {
         axios.get(`${api}user/leaders`, config)
             .then((res) => {
                 setUsers(res.data.body);
-                console.log(res.data.body);
-            })
-            .catch(() => console.log('get qilishda xatolik'))
+             })
+            .catch(() =>  {})
     }
     const getNoPDUser = () => {
         axios.get(`${api}user/leader/no/pd`, config)
             .then((res) => setNoPdUsers(res.data.body))
-            .catch(() => console.log('get qilishda xatolik'))
+            .catch(() =>  {})
     }
 
     // *******************ADD USER **********************
@@ -71,7 +70,7 @@ export function Tables() {
             .catch((err) => {
                 closeAddModal()
                 toast.error("xato")
-                console.log(err)
+                 {}
             })
     }
 
@@ -91,7 +90,7 @@ export function Tables() {
             })
             .catch((err) => {
                 closeEditModal()
-                console.log(err)
+                {}
             })
     }
 
@@ -105,7 +104,7 @@ export function Tables() {
             })
             .catch((err) => {
                 closeDeleteModal()
-                console.log(err)
+                 {}
             })
     }
 

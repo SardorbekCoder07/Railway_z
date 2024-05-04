@@ -56,8 +56,7 @@ export function PdUsers() {
     const getUser = () => {
         axios.get(`${api}user/leader/no/pd`, config)
             .then((res) => {
-                console.log(res)
-                setUsers(res.data.body);
+                 setUsers(res.data.body);
             })
             .catch((err) => {
             })
@@ -164,8 +163,7 @@ export function PdUsers() {
             setRegex(true)
         }
     }
-    console.log(users)
-    return (
+     return (
         <div className="mt-12 mb-8 flex flex-col gap-12 ">
             <Card>
                 <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">

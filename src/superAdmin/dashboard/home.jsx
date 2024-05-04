@@ -53,7 +53,7 @@ export function Home() {
       .then(res => {
         if (res.status === 200) setAdminUsers(res.data.body)
         else setAdminUsers(null)
-      }).catch(err => console.log(err))
+      }).catch(err =>  {})
   }
 
   // get pdb
@@ -63,7 +63,7 @@ export function Home() {
         .then(res => {
           if (res.status === 200) setPdbList(res.data.body)
           else setPdbList(null)
-        }).catch(err => console.log(err))
+        }).catch(err =>  {})
     } else setPdbList(null)
   }
 
@@ -74,7 +74,7 @@ export function Home() {
         .then(res => {
           if (res.status === 200) setRailwayList(res.data.body)
           else setRailwayList(null)
-        }).catch(err => console.log(err))
+        }).catch(err =>  {})
     } else setRailwayList(null)
   }
 
@@ -85,14 +85,14 @@ export function Home() {
         .then(res => {
           if (res.status === 200) setPkList(res.data.body)
           else setPkList(null)
-        }).catch(err => console.log(err))
+        }).catch(err =>  {})
     } else setPkList(null)
   }
 
   // get day plan
   const getDayPlan = (id) => {
     if (id) {
-      console.log(id)
+
       axios.get(`${api}day/plan?pkId=${id}`, config)
         .then(res => {
           if (res.data.success === true) {
@@ -202,8 +202,7 @@ export function Home() {
                         }} disabled={!item.dayPlanIsActive} >Ertangi</Button>
                         <Button onClick={() => {
                           getDayPlan(item.id)
-                          console.log(dayPlan);
-                          openToolModal()
+                           openToolModal()
                         }} disabled={!item.dayPlanIsActive} >Ish qurollar</Button>
                         <Button onClick={() => {
                           getDayPlan(item.id)
