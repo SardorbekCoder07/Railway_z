@@ -13,7 +13,7 @@ const Contact = () => {
                 </Typography>
                 <div className="grid grid-cols-1 gap-x-12 gap-y-6 lg:grid-cols-2 items-start">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d99419.98976595573!2d65.70939650097358!3d38.85822555153277!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f4ea63944a8e4c1%3A0x694369ac2037509d!2sQarshi%2C%20Qashqadaryo%20Viloyati%2C%20O%60zbekiston!5e0!3m2!1suz!2s!4v1714740919305!5m2!1suz!2s"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9658.978393009786!2d65.77603566763352!3d38.856112223647436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f4ea70e02b0999b%3A0x2c13ab85fac89ee9!2sQarshi%20mintaqaviy%20temir%20yo&#39;l%20uzeli%20unitar%20korxonasi!5e0!3m2!1suz!2s!4v1714800901700!5m2!1suz!2s"
                         height="450"
                         allowFullScreen=""
                         className={'rounded w-full'}
@@ -64,7 +64,7 @@ const data = [
             </svg>
         ),
         name: 'Ishonch telefoni',
-        description: '752270125'
+        description: '75 227 01 25'
     },
     // {
     //     id: 3,
