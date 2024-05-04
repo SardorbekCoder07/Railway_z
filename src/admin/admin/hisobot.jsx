@@ -16,7 +16,7 @@ import {
 import { CheckCircleIcon, UserPlusIcon, TrashIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { api, config, setConfig } from "@/api/api";
 import axios from "axios";
-import { getDayPlan, getPdb, getPk, getRailway } from "./apiFunction";
+import { getDayPlan, getPdb, getPk, getRailway } from "../../superAdmin/dashboard/apiFunction";
 import Download from "@/superAdmin/dashboard/download";
 
 export function Hisobot() {

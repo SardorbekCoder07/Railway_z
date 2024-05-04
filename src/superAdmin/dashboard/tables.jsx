@@ -22,6 +22,7 @@ import toast from "react-hot-toast";
 
 export function Tables() {
   const [users, setUsers] = useState(null)
+  const [role, setRole] = useState(null)
   const [noPdUsers, setNoPdUsers] = useState(null)
   const [userData, setUserData] = useState(null)
   const [newAdmin, setNewAdmin] = useState(null)
@@ -57,9 +58,10 @@ export function Tables() {
 
 
   const getUser = () => {
-    axios.get(`${api}user/admins`, config)
+    axios.get(`${api}user/leaders`, config)
       .then((res) => {
         setUsers(res.data);
+        console.log(res.data);
       })
       .catch((err) => { })
   }
@@ -67,7 +69,7 @@ export function Tables() {
   // ********************get no pd user **************
 
   const getNoPDUser = () => {
-    axios.get(`${api}user/admins/no/pd`, config)
+    axios.get(`${api}user/leaders/no/pd`, config)
       .then((res) => {
         setNoPdUsers(res.data.body);
       })
@@ -84,7 +86,7 @@ export function Tables() {
       phoneNumber: byId("addphone")
 
     }
-    axios.post(`${api}auth/register`, addData, config)
+    axios.post(`${api}auth/register?ROLE=${role}`, addData, config)
       .then((res) => {
         closeAddModal()
         getUser()
@@ -355,6 +357,7 @@ export function Tables() {
               <div className="w-full max-w-[24rem]">
                 <Input onChange={addRegex} id="addlastname" label="Familya" />
               </div>
+
               <div className="relative flex w-full max-w-[24rem]">
                 <Button
                   disabled
@@ -373,10 +376,17 @@ export function Tables() {
                     className: "min-w-0",
                   }}
                 />
-
               </div>
               <div className="w-full max-w-[24rem]">
                 <Input type="password" onChange={addRegex} id="addpassword" label="Parol" />
+              </div>
+              <div className="w-full max-w-[24rem]">
+              <Select onChange={(e) => {
+                  setRole(e)
+                }} label="Hodimning lavozimini tanlang">
+                      <Option value="ROLE_ADMIN">Admin</Option>
+                      <Option value="ROLE_LEADER">Leder</Option>
+                </Select>
               </div>
             </div>
           </DialogBody>
@@ -420,7 +430,7 @@ export function Tables() {
                       </Typography>
                       <Select onChange={(e) => {
                         setNewAdmin(e)
-                      }} label="New Admin">
+                      }} label="Yangi admin">
                         {
                           noPdUsers && noPdUsers.map((item, i) =>
                             <Option key={i} value={item.id}>{item.firstName} {item.lastName}</Option>

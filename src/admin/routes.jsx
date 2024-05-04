@@ -1,13 +1,8 @@
 import {
   HomeIcon,
-  InformationCircleIcon,
   DocumentCheckIcon,
-  UsersIcon,
-  DocumentDuplicateIcon,
-  WrenchScrewdriverIcon,
-  MapPinIcon,
 } from "@heroicons/react/24/solid";
-import { Home, Tables, Works, Tools, AddLocation, Hisobot, Observes } from "@/admin/admin";
+import { Home, Hisobot } from "@/admin/admin";
 import { SignIn, SignUp } from "@/auth";
 
 const icon = {
@@ -23,8 +18,8 @@ export const routes = [
     pages: [
       {
         icon: <HomeIcon {...icon} />,
-        name: "Bosh Sahifa",
-        path: "/bosh-sahifa",
+        name: "Boshqaruv Paneli",
+        path: "/boshqaruv-paneli",
         element: <Home />,
       },
       {
@@ -34,33 +29,7 @@ export const routes = [
         element: <Hisobot />,
       },
       // sa
-      {
-        icon: <UsersIcon {...icon} />,
-        name: "PDB lar ro'yxati",
-        path: "/jadval",
-        element: <Tables />,
-      },
-      // sa
-      {
-        icon: <UsersIcon {...icon} />,
-        name: "Kuzatuvchilar ro'yxati",
-        path: "/kuzatuv",
-        element: <Observes />,
-      },
-
-      {
-        icon: <WrenchScrewdriverIcon {...icon} />,
-        name: "Ish qurollar",
-        path: "/asboblar",
-        element: <Tools />,
-      },
-      {
-        icon: <MapPinIcon {...icon} />,
-        name: "Manzil",
-        path: "/Manzil",
-        element: <AddLocation />,
-      },
-
+ 
     ],
   },
   {

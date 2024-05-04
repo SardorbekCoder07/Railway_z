@@ -9,7 +9,7 @@ import {
     Typography,
 } from "@material-tailwind/react";
 import { StatisticsCard } from "@/admin/widgets/cards";
-import { getPdb, getPk, getRailway } from "@/admin/admin/apiFunction.jsx";
+import { getPdb, getPk, getRailway } from "@/superAdmin/dashboard/apiFunction.jsx";
 import { api, config, setConfig } from "@/api/api.jsx";
 import { TabsWithWork } from './tabs';
 import { Checkbox } from "@material-tailwind/react";

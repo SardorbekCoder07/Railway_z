@@ -14,8 +14,8 @@ function HomePage() {
             <Header />
             <main className="flex-grow">
                 <HeroHome/>
-                <FeaturesHome/>
                 <FeaturesBlocks />
+                <FeaturesHome/>
                 <HorizontalCard />
                 <Contact />
             </main>

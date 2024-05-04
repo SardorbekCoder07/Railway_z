@@ -14,10 +14,9 @@ const Contact = () => {
                 <div className="grid grid-cols-1 gap-x-12 gap-y-6 lg:grid-cols-2 items-start">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d99419.98976595573!2d65.70939650097358!3d38.85822555153277!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f4ea63944a8e4c1%3A0x694369ac2037509d!2sQarshi%2C%20Qashqadaryo%20Viloyati%2C%20O%60zbekiston!5e0!3m2!1suz!2s!4v1714740919305!5m2!1suz!2s"
-                        width="600"
                         height="450"
                         allowFullScreen=""
-                        className={'rounded'}
+                        className={'rounded w-full'}
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"></iframe>
                     <div className={'grid grid-cols-1 gap-y-7'}>
@@ -53,7 +52,7 @@ const data = [
             </svg>
         ),
         name: 'Manzil',
-        description: '“Qarshi mintaqaviy temir yo\'l uzeli” UK I.Karimov ko\'chasi-8, Qarshi 180106'
+        description: 'Qashqadaryo viloyati, Qarshi shahri, Shayxali qo‘rg‘onchasi, 27-uy.'
     },
     {
         id: 2,
@@ -65,20 +64,20 @@ const data = [
             </svg>
         ),
         name: 'Ishonch telefoni',
-        description: '(375) 227-10-26, 220-08-80'
+        description: '752270125'
     },
-    {
-        id: 3,
-        icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" fill="blue" className="bi bi-envelope"
-                 viewBox="0 0 16 16">
-                <path
-                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
-            </svg>
-        ),
-        name: 'E-mail',
-        description: 'rju-5@railway.uz'
-    },
+    // {
+    //     id: 3,
+    //     icon: (
+    //         <svg xmlns="http://www.w3.org/2000/svg" width="30" fill="blue" className="bi bi-envelope"
+    //              viewBox="0 0 16 16">
+    //             <path
+    //                 d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
+    //         </svg>
+    //     ),
+    //     name: 'E-mail',
+    //     description: 'rju-5@railway.uz'
+    // },
     {
         id: 4,
         icon: (

@@ -15,7 +15,7 @@ function Features() {
     }, [tab])
 
     return (
-        <section className="relative pb-40 bg-[#F5F5F5]" id={`landing_page_info`}>
+        <section className="relative pb-40 md:pb-20 bg-[#F5F5F5]" id={`landing_page_features_info`}>
             {/* Section background (needs .relative class on parent and next sibling elements) */}
             <div className="absolute inset-0 bg-gray-100 pointer-events-none mb-16" aria-hidden="true"></div>
             <div className="absolute left-0 right-0 m-auto w-px p-px h-20 bg-gray-200 transform -translate-y-1/2"></div>
@@ -23,9 +23,9 @@ function Features() {
                 <div className="pt-12 md:pt-20">
                     {/* Section header */}
                     <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-                        <h1 className={`text-[#FD972E] text-[1.5rem] h2 mb-4`}>OUR SERVICES</h1>
+                        <h1 className={`text-[#FD972E] text-[1.5rem] h2 mb-4`}>Xizmatlari, Vazifalari</h1>
                         <p className="text-xl text-gray-600">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing.
+                            Bizning xaizmatlarimiz va vazifalarimiz bilan tanishishingiz mumkin
                         </p>
                     </div>
                     {/* Section content */}
@@ -34,12 +34,15 @@ function Features() {
                         <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6 md:mt-6"
                              data-aos="fade-right">
                             <div className="md:pr-4 lg:pr-12 xl:pr-16 mb-8">
-                                <h3 className="h3 mb-3">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem, tempora?
+                                <h3 className="text-2xl mb-3">
+                                    Korxonaning asosiy ish faoliyati:
                                 </h3>
-                                <p className="text-xl text-gray-600">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam in, laborum nesciunt
-                                    non perspiciatis quam sed. Laudantium, nisi, quia?
+                                <p className="text-lg text-gray-600">
+                                    Qashqadaryo temir yo‘l ta’mirlash korxonasi Qarshi Mintaqaviy temir yo‘l uzeli shu’ba
+                                    korxonasining tarkibiy bo‘linmasi hisoblanadi va o‘z xo‘jalik faoliyati natijalari uchun,
+                                    o‘zaro tuzilgan shartnomalar asosida olingan majburiyatlar bo‘yicha iste’molchilar oldida,
+                                    davlat budjeti, bank, korxona jamoasi oldida qonunchilikka asosan mustaqil ravishda
+                                    to‘laligicha javobgardir.
                                 </p>
                             </div>
                             {/* Tabs buttons */}
@@ -53,11 +56,9 @@ function Features() {
                                     }}
                                 >
                                     <div>
-                                        <div className="font-bold leading-snug tracking-tight mb-1">Building the Simple
-                                            ecosystem
-                                        </div>
-                                        <div className="text-gray-600">Take collaboration to the next level with security and
-                                            administrative features built for teams.
+                                        <div className="text-gray-600">
+                                            O‘ziga biriktirilgan temir yo‘llarning texnik sozligini va ulardan samarali
+                                            foydalanishni ta’minlash.
                                         </div>
                                     </div>
                                     <div
@@ -78,11 +79,10 @@ function Features() {
                                     }}
                                 >
                                     <div>
-                                        <div className="font-bold leading-snug tracking-tight mb-1">Building the Simple
-                                            ecosystem
-                                        </div>
-                                        <div className="text-gray-600">Take collaboration to the next level with security and
-                                            administrative features built for teams.
+                                        <div className="text-gray-600">
+                                            Poyezdlar harakat havfsizligini ta’minlash harakat havfsizligi buzilishi hollari
+                                            oldini olish, bu ishda halokatlar, nuqsonlar va nosozliklarga yo‘l qo‘ymaslik
+                                            choralarini ko‘rish
                                         </div>
                                     </div>
                                     <div
@@ -104,11 +104,10 @@ function Features() {
                                     }}
                                 >
                                     <div>
-                                        <div className="font-bold leading-snug tracking-tight mb-1">Building the Simple
-                                            ecosystem
-                                        </div>
-                                        <div className="text-gray-600">Take collaboration to the next level with security and
-                                            administrative features built for teams.
+                                        <div className="text-gray-600">
+                                            Ishlab chiqarish samaradorligini va rentabelligini oshirish, yog‘ilg‘i moylash
+                                            mahsulotlari, elektr energiyasi va boshqa materiallardan tejamkorlik bilan foydalanish
+                                            choralarini ko‘rish
                                         </div>
                                     </div>
                                     <div
@@ -143,12 +142,12 @@ function Features() {
                                 >
                                     <div className="relative inline-flex flex-col">
                                         <img
-                                            className="md:max-w-none mx-auto rounded h-44 object-cover"
+                                            className="md:max-w-none mx-auto rounded h-60 object-cover"
                                             src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
                                             width="500"
                                             height="462" alt="Features bg"/>
                                         <img
-                                            className="md:max-w-none rounded mt-16 absolute w-full h-44 object-cover left-0 top-36 transform animate-float"
+                                            className="md:max-w-none rounded mt-28 absolute w-full h-60 object-cover left-0 top-36 transform animate-float"
                                             src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
                                             width="500"
                                             alt="Element"/>
@@ -168,13 +167,13 @@ function Features() {
                                 >
                                     <div className="relative inline-flex flex-col">
                                         <img
-                                            className="md:max-w-none mx-auto rounded h-44 object-cover"
+                                            className="md:max-w-none mx-auto rounded h-60 object-cover"
                                             src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
                                             width="500"
                                             height="462"
                                             alt="Features bg"/>
                                         <img
-                                            className="md:max-w-none rounded mt-16 absolute w-full h-44 object-cover left-0 top-36 transform animate-float"
+                                            className="md:max-w-none rounded mt-28 absolute w-full h-60 object-cover left-0 top-36 transform animate-float"
                                             src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
                                             width="500"
                                             alt="Element"/>
@@ -194,13 +193,13 @@ function Features() {
                                 >
                                     <div className="relative inline-flex flex-col">
                                         <img
-                                            className="md:max-w-none mx-auto rounded h-44 object-cover"
+                                            className="md:max-w-none mx-auto rounded h-60 object-cover"
                                             src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
                                             width="500"
                                             alt="Features bg"/>
                                         {/* Remove unnecessary background image */}
                                         <img
-                                            className="md:max-w-none rounded mt-16 absolute w-full h-44 object-cover left-0 top-36 transform animate-float"
+                                            className="md:max-w-none rounded mt-28 absolute w-full h-60 object-cover left-0 top-36 transform animate-float"
                                             src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
                                             width="500"
                                             alt="Element"/>

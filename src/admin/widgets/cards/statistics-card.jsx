@@ -42,7 +42,7 @@ export function StatisticsCard() {
         </CardHeader>
         <CardBody className="p-4 text-right">
           <Typography variant="small" className="font-normal text-blue-gray-600">
-            Jami ishchilar soni
+            Bugungi jami ishchilar soni
           </Typography>
           <Typography variant="h6" color="blue-gray">
           </Typography>
