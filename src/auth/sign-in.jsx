@@ -38,7 +38,7 @@ export function SignIn() {
                         setRole('/admin/hisobot');
                         toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
                     } else if (res.data.message === "ROLE_LEADER") {
-                        setRole('/brigada/boshqaruv-qismi');
+                        setRole('/brigadir/boshqaruv-qismi');
                         toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
                     }
                 })
