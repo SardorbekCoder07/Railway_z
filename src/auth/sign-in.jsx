@@ -44,7 +44,6 @@ export function SignIn() {
                 })
                 .catch((err) => {
                     toast.error('Serverda xatolik yuz berdi❌');
-                    alert(err);
                 })
                 .finally(() => {
                     setLoading(false); // Set loading state to false when request is complete
