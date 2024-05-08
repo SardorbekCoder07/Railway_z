@@ -1,4 +1,4 @@
-export const api = "http://164.92.140.146:8080/";
+export const api = "http://164.92.140.146:8080/api/";
 
 // beautification jwt token
 export const config = {
