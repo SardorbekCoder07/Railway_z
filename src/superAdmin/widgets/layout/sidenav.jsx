@@ -29,7 +29,7 @@ export function Sidenav({ brandImg, brandName, routes }) {
         className={`relative`}
       >
         <Link to="/super-admin/boshqaruv-paneli" className="py-3 px-8 flex justify-center items-center">
-        <img className="object-cover w-4/12" src={RailLogo} alt="" />
+        <img className="object-cover w-3/12" src={RailLogo} alt="" />
           <Typography
             variant="h6"
             color={sidenavType === "dark" ? "white" : "blue-gray"}
@@ -50,7 +50,7 @@ export function Sidenav({ brandImg, brandName, routes }) {
       </div>
       <div className="m-4">
         {routes.map(({ layout, title, pages }, key) => (
-          <ul key={key} className="mb-4 flex flex-col gap-1">
+          <ul key={key} className="flex flex-col">
             {title && (
               <li className="mx-3.5 mt-4 mb-2">
                 <Typography

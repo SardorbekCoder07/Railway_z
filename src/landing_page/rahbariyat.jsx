@@ -8,6 +8,7 @@ import {
 import boshHisobchi from './images/rahbariyat/bosh-hisobchi.jpg'
 import boshliq from './images/rahbariyat/boshliq.jpg'
 import bolimBoshligi from './images/rahbariyat/bolim-boshligi.jpg'
+import avatar from './images/rahbariyat/avatar.jpg'
 
 const HorizontalCard = () => {
     return (
@@ -60,52 +61,52 @@ const data = [
         img: boshliq,
         title: "Korxona boshlig'i",
         name: 'Shodmanov B. B',
-        description_1: 'Bog‘lanish uchun telefon: .....?',
-        description_2: 'E-mail: .....?',
-        description_3: 'Qabul kunlari: .....?',
+        description_1: 'Bog‘lanish uchun telefon: 75 227 01 25',
+        description_2: 'E-mail: pch14@gmail.com',
+        description_3: 'Qabul kunlari: Chorshanba 15.00-16.00',
     },
     {
         id: 2,
-        img: '',
+        img: avatar,
         title: "Bosh muxandis",
         name: 'Rajabov N. T',
-        description_1: 'Bog‘lanish uchun telefon: .....?',
-        description_2: 'E-mail: .....?',
-        description_3: 'Qabul kunlari: .....?',
+        description_1: 'Bog‘lanish uchun telefon: 75 227 01 25',
+        description_2: 'E-mail: pch14@gmail.com',
+        description_3: 'Qabul kunlari: Dushanba 17:00-18:00',
     },
     {
         id: 3,
-        img: "",
+        img: avatar,
         title: "Boshliq o'rinbosari",
         name: 'Toxirov A',
-        description_1: 'Bog‘lanish uchun telefon: .....?',
-        description_2: 'E-mail: .....?',
-        description_3: 'Qabul kunlari: .....?',
+        description_1: 'Bog‘lanish uchun telefon: 75 227 01 25',
+        description_2: 'E-mail: pch14@gmail.com',
+        description_3: 'Qabul kunlari: Seshanba 17:00 – 19:00',
     },{
         id: 4,
-        img: "",
+        img: avatar,
         title: "Boshliq o'rinbosari",
         name: 'Xidirnazarov G',
-        description_1: 'Bog‘lanish uchun telefon: .....?',
-        description_2: 'E-mail: .....?',
-        description_3: 'Qabul kunlari: .....?',
+        description_1: 'Bog‘lanish uchun telefon: 75 227 01 25',
+        description_2: 'E-mail: pch14@gmail.com',
+        description_3: 'Qabul kunlari: Juma 18:00 – 20:00',
     },
     {
         id: 5,
         img: boshHisobchi,
         title: "Bosh hisobchi",
         name: "Jo'rayev N",
-        description_1: 'Bog‘lanish uchun telefon: .....?',
-        description_2: 'E-mail: .....?',
-        description_3: 'Qabul kunlari: .....?',
+        description_1: 'Bog‘lanish uchun telefon: 75 227 01 25',
+        description_2: 'E-mail: pch14@gmail.com',
+        description_3: 'Qabul kunlari: Juma 16:00 – 18:00',
     },
     {
         id: 6,
         img: bolimBoshligi,
         title: "Hodimlar bo'limi boshlig'i",
         name: "Yo'ldoshev A",
-        description_1: 'Bog‘lanish uchun telefon: .....?',
-        description_2: 'E-mail: .....?',
-        description_3: 'Qabul kunlari: .....?',
+        description_1: 'Bog‘lanish uchun telefon: 75 227 01 25',
+        description_2: 'E-mail: pch14@gmail.com',
+        description_3: 'Qabul kunlari: Dushanba 18:00 - 20:00',
     }
 ]

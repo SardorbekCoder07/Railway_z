@@ -100,6 +100,6 @@ const data = [
             </svg>
         ),
         name: 'Ish vaqti',
-        description: 'Ish soati: 09:00 dan 18:00 gacha'
+        description: 'Ish soati: 09:00 dan 20:00 gacha'
     },
 ]
