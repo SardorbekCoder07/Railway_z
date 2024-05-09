@@ -15,6 +15,7 @@ import { Checkbox } from "@material-tailwind/react";
 import axios from "axios";
 import { TabsWithWork } from "@/admin/admin";
 import StatisticsCard from "./statistics-card";
+import { Footer } from "@/admin/widgets/layout";
 
 export function Home() {
     const [pdModal, setPdModal] = useState(false);
@@ -176,6 +177,11 @@ export function Home() {
                     </DialogBody>
                 </Dialog>
             </Dialog>
+        </div>
+        <div className="flex justify-center p-3 ">
+
+
+        <Footer/>
         </div>
     </div>);
 }
