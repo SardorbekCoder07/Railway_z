@@ -188,17 +188,14 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
         tripCount: Number(dataObj.tripCount),
         onTrainingCount: Number(dataObj.onTrainingCount)
       }, config)
-        .then((res) => {
+        .then(() => {
           toast.success("Hisobot muvaffaqiyatli saqlandi✔")
           onClose()
           setPkIdIn(true)
           getAdminStatistics()
-        }).catch((error) => {
+        }).catch(() => {
           alert("Malumotlarni saqlashda xatolik yuz berdi❌")
         })
-    } else {
-      alert("Malumotlar to'liq emas❌")
-
     }
   };
 
