@@ -107,7 +107,7 @@ export function Tables() {
             .then(() => {
                 closeDeleteModal()
                 getUser()
-                toast.success("Bu hodim muvoffaqqiyatli tahrirlandi!👌")
+                toast.success("Bu hodim muvoffaqqiyatli o'chirildi!👌")
             })
             .catch((err) => {
                 closeDeleteModal()
