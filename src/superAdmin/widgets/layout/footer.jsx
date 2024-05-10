@@ -8,14 +8,13 @@ export function Footer({ brandName, brandLink, routes }) {
     <footer className="py-2">
       <div className="flex w-full flex-wrap items-center justify-center gap-6 px-2 md:justify-between">
         <Typography variant="small" className="font-normal text-inherit">
-          © This website created by
+          © {new Date().getFullYear()}
           <a
-            className="text-blue-600 hover:underline mx-1"
-            target={`_blank`}
-            href="https://itca.vercel.app/">
+              className="text-blue-600 hover:underline mx-1"
+              target={`_blank`}
+              href="https://itca.vercel.app/">
             IT City Academy
-          </a>{" "}
-          in {new Date().getFullYear()}
+          </a> barcha huquqlar himoyalangan.
         </Typography>
       </div>
     </footer>
