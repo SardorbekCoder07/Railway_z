@@ -88,7 +88,7 @@ export function PdUsers() {
             })
             .catch((err) => {
                 closeAddModal()
-                toast.error("xato")
+                toast.error("PD qo'shishda xatolik yuzberdi")
                 {
                 }
                 ;
@@ -113,8 +113,7 @@ export function PdUsers() {
 
             })
             .catch((err) => {
-                {
-                }
+                toast.error("PD edit qilishda xatolik yuzberdi")
                 closeEditModal()
             })
     }
@@ -122,17 +121,15 @@ export function PdUsers() {
     // *******************DELETE USER **********************
 
     const deletePD = () => {
-        axios.delete(`${api}pd/delete?id=${userData ? userData.id : 0}`)
+        axios.delete(`${api}pd/delete?id=${userData ? userData.id : 0}`, config)
             .then(() => {
                 closeDeleteModal()
                 getPD()
-                toast.success("Bu hodim muvoffaqqiyatli tahrirlandi!👌")
+                toast.success("Bu PD muvoffaqqiyatli tahrirlandi!👌")
 
             })
             .catch((err) => {
-                {
-                }
-                ;
+               toast.error("PD o'chirishda xatolik yuz berdi")
                 closeDeleteModal()
             })
 

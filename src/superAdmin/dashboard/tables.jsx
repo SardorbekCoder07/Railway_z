@@ -96,13 +96,14 @@ export function Tables() {
             })
             .catch((err) => {
                 closeEditModal()
-                { }
+                toast.success("Bu hodimni tahrirlashda xatolik yuz berdi")
+
             })
     }
 
     // *******************DELETE USER **********************
     const deleteUser = () => {
-        axios.delete(`${api}user/delete?deleteUserId=${userData ? userData.id : 0}&updateUserId=${newAdmin ? newAdmin : 0}`)
+        axios.delete(`${api}user/delete?deleteUserId=${userData ? userData.id : 0}&updateUserId=${newAdmin ? newAdmin : 0}`, config)
             .then(() => {
                 closeDeleteModal()
                 getUser()
