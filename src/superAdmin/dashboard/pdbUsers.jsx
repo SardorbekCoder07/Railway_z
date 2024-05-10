@@ -27,6 +27,7 @@ export function PDBusers() {
   const [pdUsers, setPdUsers] = useState(null)
   const [pdbData, setpdbdata] = useState(null)
   const [pdId, setpdId] = useState(null)
+  const [selectPdId, setSelectPdId] = useState(null)
 
 
   const openEditModal = () => setEditModal(true)
@@ -69,7 +70,7 @@ export function PDBusers() {
     axios.post(`${api}pdb`, addPDBdata, config)
       .then((res) => {
         closeAddModal();
-        getPDBuser()
+        getPDBuser(selectPdId ? selectPdId : 0)
         toast.success("Vazifa muvoffaqqiyatli bajarildi!")
       })
       .catch((err) => {
@@ -88,7 +89,7 @@ export function PDBusers() {
     axios.put(`${api}pdb?id=${pdbData ? pdbData.id : 0}`, editPDbdata, config)
       .then((res) => {
         closeEditModal();
-        getPDBuser()
+        getPDBuser(selectPdId ? selectPdId : 0)
         toast.success("Tahrirlandi!")
       })
       .catch((err) => {
@@ -136,6 +137,7 @@ export function PDBusers() {
           <div className="w-full flex justify-center items-center gap-5">
             <div className="w-full max-w-[24rem]">
               <Select onChange={(e) => {
+                setSelectPdId(e)
                 getPDBuser(e)
               }} label="PD tanlang">
                 {

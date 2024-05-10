@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
     Card, CardHeader, CardBody, Typography, Dialog, DialogHeader, DialogBody, DialogFooter, Button, Input, Select, Option,
 } from "@material-tailwind/react";
-import {UserPlusIcon} from "@heroicons/react/24/solid";
+import { UserPlusIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
-import {api, byId, config, setConfig} from "@/api/api";
+import { api, byId, config, setConfig } from "@/api/api";
 import toast from "react-hot-toast";
-import {MdDelete} from "react-icons/md";
-import {FaEdit} from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 
 export function Tables() {
     const [users, setUsers] = useState(null)
@@ -19,6 +19,7 @@ export function Tables() {
     const [deleteModal, setDeleteModal] = useState(false)
     const [addModal, setAddModal] = useState(false)
     const [regex, setRegex] = useState(true)
+    const [phoneNUmber, setPhoneNUmber] = useState("")
 
     const openAddModal = () => setAddModal(true)
     const closeAddModal = () => {
@@ -44,13 +45,13 @@ export function Tables() {
         axios.get(`${api}user/leaders`, config)
             .then((res) => {
                 setUsers(res.data.body);
-             })
-            .catch(() =>  {})
+            })
+            .catch(() => { })
     }
     const getNoPDUser = () => {
         axios.get(`${api}user/leader/no/pd`, config)
             .then((res) => setNoPdUsers(res.data.body))
-            .catch(() =>  {})
+            .catch(() => { })
     }
 
     // *******************ADD USER **********************
@@ -59,19 +60,25 @@ export function Tables() {
             firstName: byId("addname"),
             lastName: byId("addlastname"),
             password: byId("addpassword"),
-            phoneNumber: byId("addphone")
+            phoneNumber: `+998${byId("addphone")}`
         }
-        axios.post(`${api}auth/register?ROLE=${role}`, addData, config)
-            .then(() => {
-                closeAddModal()
-                getUser()
-                toast.success(`${role === 'ROLE_LEADER' ? 'Leader' : 'Admin'} muoffaqqiyatli qo'shildi✔`)
-            })
-            .catch((err) => {
-                closeAddModal()
-                toast.error("xato")
-                 {}
-            })
+        const newPhoneNUmber = addData.phoneNumber
+        if (newPhoneNUmber.length === 9) {
+            axios.post(`${api}auth/register?ROLE=${role}`, addData, config)
+                .then(() => {
+                    closeAddModal()
+                    getUser()
+                    toast.success(`${role === 'ROLE_LEADER' ? 'Leader' : 'Admin'} muoffaqqiyatli qo'shildi✔`)
+                })
+                .catch((err) => {
+                    closeAddModal()
+                    toast.error("Telefon Raqam hato !")
+                    { }
+                })
+        }else{
+            const inputStyle=document.querySelector('.borderInput')
+            
+        }
     }
 
     // *******************EDIT USER **********************
@@ -80,7 +87,8 @@ export function Tables() {
             firstName: byId("editname"),
             lastName: byId("editlastname"),
             password: byId("editpassword"),
-            phoneNumber: byId("editphone")
+            phoneNumber: `+998${byId("addphone")}`
+
         }
         axios.put(`${api}user/update?id=${userData ? userData.id : 0}`, editData, config)
             .then(() => {
@@ -90,7 +98,7 @@ export function Tables() {
             })
             .catch((err) => {
                 closeEditModal()
-                {}
+                { }
             })
     }
 
@@ -104,15 +112,17 @@ export function Tables() {
             })
             .catch((err) => {
                 closeDeleteModal()
-                 {}
+                { }
             })
     }
 
     // ******************* REGEX **********************
     const addRegex = () => {
-        if (byId("addname") !== "" && byId("addlastname") !== "" && byId("addphone") !== "" && byId("addpassword") !== "") {
+        if (byId("addname") !== "" && byId("addlastname") !== "" && byId("addpassword") !== "") {
             setRegex(false)
-        } else {
+        }
+
+        else {
             setRegex(true)
         }
     }
@@ -134,96 +144,96 @@ export function Tables() {
                     <Button
                         onClick={openAddModal}
                         className="bg-[#fff] text-black px-3 py-2 rounded-md"
-                        // onClick={handleOpenModal} // Attach event handler to open modal
+                    // onClick={handleOpenModal} // Attach event handler to open modal
                     >
-                        <UserPlusIcon className="h-6 w-6 text-black"/>
+                        <UserPlusIcon className="h-6 w-6 text-black" />
                     </Button>
                 </CardHeader>
                 <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
                     <table className="w-full min-w-[640px] table-auto">
                         <thead>
-                        <tr>
-                            {["#", "Ism", "Familya", "Telfon raqami", "Lavozimi", "Harakatlar"].map((el) => (<th
-                                key={el}
-                                className="border-b border-blue-gray-50 py-3 px-5 text-left"
-                            >
-                                <Typography
-                                    variant="small"
-                                    className="text-[11px] font-bold uppercase text-blue-gray-400"
+                            <tr>
+                                {["#", "Ism", "Familya", "Telfon raqami", "Lavozimi", "Harakatlar"].map((el) => (<th
+                                    key={el}
+                                    className="border-b border-blue-gray-50 py-3 px-5 text-left"
                                 >
-                                    {el}
-                                </Typography>
-                            </th>))}
-                        </tr>
+                                    <Typography
+                                        variant="small"
+                                        className="text-[11px] font-bold uppercase text-blue-gray-400"
+                                    >
+                                        {el}
+                                    </Typography>
+                                </th>))}
+                            </tr>
                         </thead>
                         <tbody>
-                        {users ? users.map((item, i) => <tr key={item.id}
-                                                            className={`${i === (users && users.length - 1) ? '' : 'border-b'}`}>
-                            <td className={'py-3 px-5'}>
-                                <div className="flex items-center gap-4">
-                                    <div>
-                                        <Typography
-                                            variant="small"
-                                            className="font-semibold text-blue-gray-600"
-                                        >
-                                            {i + 1}
-                                        </Typography>
+                            {users ? users.map((item, i) => <tr key={item.id}
+                                className={`${i === (users && users.length - 1) ? '' : 'border-b'}`}>
+                                <td className={'py-3 px-5'}>
+                                    <div className="flex items-center gap-4">
+                                        <div>
+                                            <Typography
+                                                variant="small"
+                                                className="font-semibold text-blue-gray-600"
+                                            >
+                                                {i + 1}
+                                            </Typography>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td className={'py-3 px-5'}>
-                                <div className="flex items-center gap-4">
-                                    <div>
-                                        <Typography className="text-xs font-semibold text-blue-gray-600">
-                                            {item.firstName}
-                                        </Typography>
+                                </td>
+                                <td className={'py-3 px-5'}>
+                                    <div className="flex items-center gap-4">
+                                        <div>
+                                            <Typography className="text-xs font-semibold text-blue-gray-600">
+                                                {item.firstName}
+                                            </Typography>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td className={'py-3 px-5'}>
-                                <Typography className="text-xs font-semibold text-blue-gray-600">
-                                    {item.lastName}
-                                </Typography>
-                            </td>
-                            <td className={'py-3 px-5'}>
-                                <Typography className="text-xs font-semibold text-blue-gray-600">
-                                    {item.phoneNumber}
-                                </Typography>
-                            </td>
-                            <td className={'py-3 px-5'}>
-                                <Typography className="text-xs font-semibold text-blue-gray-600">
-                                    {item.roleName === 'ROLE_LEADER' ? 'Leader' : 'Admin'}
-                                </Typography>
-                            </td>
-                            <td className={`flex py-5 px-5 gap-3`}>
-                                <Typography
-                                    onClick={() => {
-                                        openEditModal()
-                                        setUserData(item)
-                                    }}
-                                    className="cursor-pointer text-[1.2rem] duration-200 text-blue-gray-600 hover:text-black">
-                                    <FaEdit/>
-                                </Typography>
-                                <Typography
-                                    onClick={() => {
-                                        openDeleteModal()
-                                        setUserData(item)
-                                    }}
-                                    className="mx-3 cursor-pointer text-[1.2rem] duration-200 text-blue-gray-600 hover:text-black">
-                                    <MdDelete/>
-                                </Typography>
-                            </td>
-                        </tr>) : (<tr>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <Typography
-                                    className="text-md font-semiboldtext-blue-gray-600">
-                                    Malumot yo'q
-                                </Typography></td>
-                            <td></td>
-                            <td></td>
-                        </tr>)}
+                                </td>
+                                <td className={'py-3 px-5'}>
+                                    <Typography className="text-xs font-semibold text-blue-gray-600">
+                                        {item.lastName}
+                                    </Typography>
+                                </td>
+                                <td className={'py-3 px-5'}>
+                                    <Typography className="text-xs font-semibold text-blue-gray-600">
+                                        {item.phoneNumber}
+                                    </Typography>
+                                </td>
+                                <td className={'py-3 px-5'}>
+                                    <Typography className="text-xs font-semibold text-blue-gray-600">
+                                        {item.roleName === 'ROLE_LEADER' ? 'Leader' : 'Admin'}
+                                    </Typography>
+                                </td>
+                                <td className={`flex py-5 px-5 gap-3`}>
+                                    <Typography
+                                        onClick={() => {
+                                            openEditModal()
+                                            setUserData(item)
+                                        }}
+                                        className="cursor-pointer text-[1.2rem] duration-200 text-blue-gray-600 hover:text-black">
+                                        <FaEdit />
+                                    </Typography>
+                                    <Typography
+                                        onClick={() => {
+                                            openDeleteModal()
+                                            setUserData(item)
+                                        }}
+                                        className="mx-3 cursor-pointer text-[1.2rem] duration-200 text-blue-gray-600 hover:text-black">
+                                        <MdDelete />
+                                    </Typography>
+                                </td>
+                            </tr>) : (<tr>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <Typography
+                                        className="text-md font-semiboldtext-blue-gray-600">
+                                        Malumot yo'q
+                                    </Typography></td>
+                                <td></td>
+                                <td></td>
+                            </tr>)}
                         </tbody>
                     </table>
                 </CardBody>
@@ -240,7 +250,7 @@ export function Tables() {
                                 required
                                 defaultValue={userData ? userData.firstName : "Ma'lumot yo'q"}
                                 id="editname"
-                                label="Ism"/>
+                                label="Ism" />
                         </div>
                         <div className="w-full max-w-[24rem]">
                             <Input
@@ -248,7 +258,7 @@ export function Tables() {
                                 required
                                 defaultValue={userData ? userData.lastName : "Ma'lumot yo'q"}
                                 id="editlastname"
-                                label="Familya"/>
+                                label="Familya" />
                         </div>
                         <div className="relative flex w-full max-w-[24rem]">
                             <Button
@@ -260,7 +270,7 @@ export function Tables() {
                             </Button>
                             <Input
                                 onChange={editRegex}
-                                defaultValue={userData ? userData.phoneNumber : ""}
+                                defaultValue={userData ? userData.phoneNumber.slice(0, 3) : ""}
                                 id="editphone"
                                 type="number"
                                 className="ps-20"
@@ -270,7 +280,7 @@ export function Tables() {
                             />
                         </div>
                         <div className="w-full max-w-[24rem]">
-                            <Input type="password" onChange={addRegex} id="addpassword" label="Parol"/>
+                            <Input type="password" onChange={addRegex} id="addpassword" label="Parol" />
                         </div>
                     </div>
                 </DialogBody>
@@ -284,10 +294,10 @@ export function Tables() {
                         <span>Orqaga</span>
                     </Button>
                     <span className={`${regex ? "cursor-not-allowed" : ""}`}>
-                      <Button disabled={regex} onClick={editUser} variant="gradient" color="gray">
-                        <span>Tahrirlash</span>
-                      </Button>
-                </span>
+                        <Button disabled={regex} onClick={editUser} variant="gradient" color="gray">
+                            <span>Tahrirlash</span>
+                        </Button>
+                    </span>
                 </DialogFooter>
             </Dialog>
 
@@ -297,10 +307,10 @@ export function Tables() {
                 <DialogBody>
                     <div className="flex justify-center flex-col items-center gap-7">
                         <div className="w-full max-w-[24rem]">
-                            <Input onChange={addRegex} required id="addname" label="Ism"/>
+                            <Input onChange={addRegex} required id="addname" label="Ism" />
                         </div>
                         <div className="w-full max-w-[24rem]">
-                            <Input onChange={addRegex} id="addlastname" label="Familya"/>
+                            <Input onChange={addRegex} id="addlastname" label="Familya" />
                         </div>
                         <div className="relative flex w-full max-w-[24rem]">
                             <Button
@@ -315,14 +325,14 @@ export function Tables() {
                                 defaultValue={""}
                                 id="addphone"
                                 type="number"
-                                className="ps-20"
+                                className="ps-20 borderInput"
                                 containerProps={{
                                     className: "min-w-0",
                                 }}
                             />
                         </div>
                         <div className="w-full max-w-[24rem]">
-                            <Input type="password" onChange={addRegex} id="addpassword" label="Parol"/>
+                            <Input type="password" onChange={addRegex} id="addpassword" label="Parol" />
                         </div>
                         <div className="w-full max-w-[24rem]">
                             <Select onChange={(e) => {
@@ -344,10 +354,10 @@ export function Tables() {
                         <span>Orqaga</span>
                     </Button>
                     <span className={`${regex ? "cursor-not-allowed" : ""}`}>
-                    <Button disabled={regex} onClick={addUser} variant="gradient" color="gray">
-                        <span>Qo'shish</span>
-                    </Button>
-                </span>
+                        <Button disabled={regex} onClick={addUser} variant="gradient" color="gray">
+                            <span>Qo'shish</span>
+                        </Button>
+                    </span>
                 </DialogFooter>
             </Dialog>
 
@@ -383,24 +393,24 @@ export function Tables() {
                             variant="large"
                             className=" font-bold uppercase text-blue-gray-400">
                             {userData && userData.pdName !== null ? (
-                                    <div className="w-full max-w-[24rem]">
-                                        <Typography
-                                            variant="large"
-                                            className=" mb-3 font-bold uppercase text-blue-gray-400">
-                                            {`Bu hodimni o'chirish uchun `} <span
+                                <div className="w-full max-w-[24rem]">
+                                    <Typography
+                                        variant="large"
+                                        className=" mb-3 font-bold uppercase text-blue-gray-400">
+                                        {`Bu hodimni o'chirish uchun `} <span
                                             className="text-black">{userData ? userData.pdName : "PD"}</span> {` ning o'rniga yangi admin tayinlashingiz kerak.`}
-                                        </Typography>
-                                        <Select onChange={(e) => {
-                                            setNewAdmin(e)
-                                        }} label="Yangi admin">
-                                            {
-                                                noPdUsers && noPdUsers.map((item, i) =>
-                                                    <Option key={i} value={item.id}>{item.firstName} {item.lastName}</Option>
-                                                )
-                                            }
-                                        </Select>
-                                    </div>
-                                ) : "Bu hodimni o'chirishingizga ishonchingiz komilmi?"
+                                    </Typography>
+                                    <Select onChange={(e) => {
+                                        setNewAdmin(e)
+                                    }} label="Yangi admin">
+                                        {
+                                            noPdUsers && noPdUsers.map((item, i) =>
+                                                <Option key={i} value={item.id}>{item.firstName} {item.lastName}</Option>
+                                            )
+                                        }
+                                    </Select>
+                                </div>
+                            ) : "Bu hodimni o'chirishingizga ishonchingiz komilmi?"
                             }
                         </Typography>
                     </div>

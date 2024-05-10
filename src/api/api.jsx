@@ -1,4 +1,4 @@
-export const api = "http://137.59.79.149:8080";
+export const api = "https://pch14.uz/api/";
 
 // beautification jwt token
 export const config = {

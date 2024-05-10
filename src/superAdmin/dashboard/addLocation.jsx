@@ -29,6 +29,7 @@ export function AddLocation() {
   const [addModal, setAddModal] = useState(false);
   const [regex, setRegex] = useState(true);
   const [pdUsers, setPdUsers] = useState(null);
+  const [selectPdbId, setSelectPdbId] = useState(null);
 
 
   const openEditModal = () => setEditModal(true)
@@ -94,7 +95,7 @@ export function AddLocation() {
       .post(`${api}railway`, addData, config)
       .then((res) => {
         closeAddModal();
-        getkm(1);
+        getkm(selectPdbId);
         toast.success("Manzil muoffaqqiyatli qo'shildi!👌");
       })
       .catch((err) => {
@@ -102,8 +103,6 @@ export function AddLocation() {
         toast.error("Manzil qo'shilmadi❌");
         ;
       })
-      .finally(() => {
-      });
   };
 
 
@@ -119,7 +118,7 @@ export function AddLocation() {
       .put(`${api}railway?id=${kmData ? kmData.id : 0}`, editData, config)
       .then((res) => {
         closeEditModal();
-        getkm(1);
+        getkm(selectPdbId);
         toast.success("Ish quroli muvoffaqqiyatli tahrirlandi!👌");
       })
       .catch((err) => {
@@ -191,6 +190,7 @@ export function AddLocation() {
             </div>
             <div className="w-full max-w-[24rem]">
               <Select onChange={(e) => {
+                setSelectPdbId(e)
                 getkm(e)
               }} label="PDB tanlang">
                 {

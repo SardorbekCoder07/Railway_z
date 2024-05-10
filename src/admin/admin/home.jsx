@@ -51,7 +51,7 @@ export function Home() {
     }
 
     return (<div className="mt-12">
-       
+
         <div className="mb-6 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
             <Card>
                 <CardHeader
@@ -122,11 +122,9 @@ export function Home() {
                                     {item['km']} km
                                 </Button>
                             ))) : (
-                            <Button
-                                onClick={() => setPk(null)}
-                                className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105`}>
-                                Topilmadi
-                            </Button>
+                            <Typography onClick={() => setPk(null)}
+                                className={` text-2xl `}
+                            >Biror bir  PDB tanlang !!!</Typography>
                         )) : (
                             <Typography
                                 onClick={() => setPk(null)}
@@ -169,7 +167,7 @@ export function Home() {
             <Dialog open={pdModal} handler={closePdModal}>
                 <Dialog open={pdModal} handler={closePdModal}>
                     <DialogBody className="sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl overflow-y-auto max-h-screen">
-                        <TabsWithWork pk={pkId} onClose={closePdModal} />
+                        <TabsWithWork pk={pkId} onClose={closePdModal} setPk={setPk} />
                     </DialogBody>
                 </Dialog>
             </Dialog>
