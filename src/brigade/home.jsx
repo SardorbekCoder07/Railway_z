@@ -26,6 +26,7 @@ export function Home() {
     const [getMe, setGetme] = useState(null)
     const [pk, setPk] = useState(null);
     const [pkIdIn, setPkIdIn] = useState(false);
+    const [getAdminStatistic, setgetAdminStatistic] = useState(null)
     const today = new Date();
     const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
     const todayDate = today.toLocaleDateString('uz-UZ', options);
@@ -40,6 +41,7 @@ export function Home() {
         getRailway(null, setRailway)
         getPk(null, setPk)
         setPkIdIn(false)
+        getAdminStatistics()
 
         axios.get(`${api}user/getMe`, config)
             .then((res) => {
@@ -51,6 +53,9 @@ export function Home() {
         getRailway(null, setRailway)
         getPk(null, setPk)
         setPkId([])
+        setTimeout(() => {
+            setPkIdIn(false);
+        }, 2000)
     }, [pkIdIn])
 
     const handleKmButtonClick = (index) => setSelectedKmIndex(index);
@@ -61,9 +66,18 @@ export function Home() {
         else setPkId(uniqueNumbers.filter((num) => num !== item.id))
     }
 
+    const getAdminStatistics = () => {
+        axios.get(`${api}user/statistic/leader`, config)
+          .then((res) => {
+            setgetAdminStatistic(res.data.body)
+          })
+          .catch((err) => {
+          })
+      }
+
     return (<div className="mt-12">
         <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
-            <StatisticsCard />
+            <StatisticsCard getAdminStatistic={getAdminStatistic} />
         </div>
         <div className="mb-6 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
             <Card>
@@ -182,7 +196,7 @@ export function Home() {
             <Dialog open={pdModal} handler={closePdModal}>
                 <Dialog open={pdModal} handler={closePdModal}>
                     <DialogBody className="sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl overflow-y-auto max-h-screen">
-                        <TabsWithWork getPk={getPk} getRailway={getRailway} pk={pkId} setPkIdIn={setPkIdIn} onClose={closePdModal} />
+                        <TabsWithWork getPk={getPk} getRailway={getRailway} pk={pkId} setPkIdIn={setPkIdIn} onClose={closePdModal} getAdminStatistics={getAdminStatistics} />
                     </DialogBody>
                 </Dialog>
             </Dialog>

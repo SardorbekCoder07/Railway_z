@@ -4,28 +4,12 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
   Typography,
 } from "@material-tailwind/react";
-import axios from "axios";
 import PropTypes from "prop-types";
 import { Fragment,useEffect, useState } from "react";
 
-export function StatisticsCard() {
-  const [getAdminStatistic, setgetAdminStatistic] = useState(null)
-  useEffect(() => {
-    setConfig()
-    getAdminStatistics()
-  }, [])
-
-  const getAdminStatistics = () => {
-    axios.get(`${api}user/statistic/leader`, config)
-      .then((res) => {
-        setgetAdminStatistic(res.data.body)
-      })
-      .catch((err) => {
-      })
-  }
+export function StatisticsCard({getAdminStatistic}) {  
   return (
     <>
       <Card
