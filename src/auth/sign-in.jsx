@@ -32,21 +32,23 @@ export function SignIn() {
             axios.post(api + "auth/login", { phoneNumber, password }, '')
                 .then(res => {
                     setLoading(false)
-                    sessionStorage.setItem('jwtTokin', "Bearer " + res.data.body);
-                    if (res.data.message === "ROLE_SUPER_ADMIN") {
-                        setRole('/super-admin/boshqaruv-paneli');
-                        toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
-                    } else if (res.data.message === "ROLE_ADMIN") {
-                        setRole('/admin/hisobot');
-                        toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
-                    } else if (res.data.message === "ROLE_LEADER") {
-                        setRole('/brigadir/boshqaruv-qismi');
-                        toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
+                    if (res.data.success === false) toast.error('Telefon raqam yoki parol xato kirgizildi!!!')
+                    else {
+                        sessionStorage.setItem('jwtTokin', "Bearer " + res.data.body);
+                        if (res.data.message === "ROLE_SUPER_ADMIN") {
+                            setRole('/super-admin/boshqaruv-paneli');
+                            toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
+                        } else if (res.data.message === "ROLE_ADMIN") {
+                            setRole('/admin/hisobot');
+                            toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
+                        } else if (res.data.message === "ROLE_LEADER") {
+                            setRole('/brigadir/boshqaruv-qismi');
+                            toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
+                        }
                     }
                 })
-                .catch((err) => {
+                .catch(() => {
                     setLoading(false)
-                    console.log(err);
                     toast.error('Serverda xatolik yuz berdi❌');
                 })
         } else {
