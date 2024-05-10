@@ -1,14 +1,15 @@
-import {api} from "@/api/api";
-import {EyeIcon, EyeSlashIcon} from "@heroicons/react/24/solid";
+
+import { api } from "@/api/api";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import {
     Input,
     Button,
     Typography,
 } from "@material-tailwind/react";
 import axios from "axios";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function SignIn() {
     const [role, setRole] = useState('/auth/log-in');
@@ -24,33 +25,33 @@ export function SignIn() {
     }, [role]);
 
     function logIn() {
-        let phoneNumber = document.getElementById('phoneNumber').value;
+        let phoneNumber = `+${document.getElementById('phoneNumber').value}`;
         let password = document.getElementById('password').value;
-        if (phoneNumber && password) {
-            setLoading(true); // Set loading state to true
-            axios.post(api + "auth/login", {phoneNumber, password})
-                .then(res => {
-                    sessionStorage.setItem('jwtTokin', "Bearer " + res.data.body);
-                    if (res.data.message === "ROLE_SUPER_ADMIN") {
-                        setRole('/super-admin/boshqaruv-paneli');
-                        toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
-                    } else if (res.data.message === "ROLE_ADMIN") {
-                        setRole('/admin/hisobot');
-                        toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
-                    } else if (res.data.message === "ROLE_LEADER") {
-                        setRole('/brigadir/boshqaruv-qismi');
-                        toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
-                    }
-                })
-                .catch((err) => {
-                    toast.error('Serverda xatolik yuz berdi❌');
-                })
-                .finally(() => {
-                    setLoading(false); // Set loading state to false when request is complete
-                });
-        } else {
-            toast.error('Ma\'lumotlarni to\'liq kiriting.');
-        }
+            if (phoneNumber && password) {
+                setLoading(true); // Set loading state to true
+                axios.post(api + "auth/login", { phoneNumber, password })
+                    .then(res => {
+                        sessionStorage.setItem('jwtTokin', "Bearer " + res.data.body);
+                        if (res.data.message === "ROLE_SUPER_ADMIN") {
+                            setRole('/super-admin/boshqaruv-paneli');
+                            toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
+                        } else if (res.data.message === "ROLE_ADMIN") {
+                            setRole('/admin/hisobot');
+                            toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
+                        } else if (res.data.message === "ROLE_LEADER") {
+                            setRole('/brigadir/boshqaruv-qismi');
+                            toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
+                        }
+                    })
+                    .catch((err) => {
+                        toast.error('Serverda xatolik yuz berdi❌');
+                    })
+                    .finally(() => {
+                        setLoading(false); // Set loading state to false when request is complete
+                    });
+            } else {
+                toast.error('Ma\'lumotlarni to\'liq kiriting.');
+            }
     }
 
     function checkKeyPress(event) {
@@ -94,8 +95,8 @@ export function SignIn() {
                                 className="!absolute right-1 top-1 rounded z-50"
                                 onClick={togglePasswordVisibility}
                             >
-                                {passwordVisible ? <EyeSlashIcon className="h-4 w-4 text-white"/> :
-                                    <EyeIcon className="h-4 w-4 text-white"/>}
+                                {passwordVisible ? <EyeSlashIcon className="h-4 w-4 text-white" /> :
+                                    <EyeIcon className="h-4 w-4 text-white" />}
                             </Button>
                             <Input
                                 onKeyDown={checkKeyPress}
