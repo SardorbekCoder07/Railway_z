@@ -9,12 +9,12 @@ import {
   Input,
 } from "@material-tailwind/react";
 import { api, byId, config, setConfig } from "@/api/api";
-import { getPdb, getPk } from "@/superAdmin/dashboard/apiFunction.jsx";
+import { getPk } from "@/superAdmin/dashboard/apiFunction.jsx";
 import axios from "axios";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import toast from "react-hot-toast";
 
-export function TabsWithWork({ pk, onClose, getRailway, getPk }) {
+export function TabsWithWork({ pk, onClose, setPk, pkIdIn }) {
   const [selectedTab, setSelectedTab] = useState("html");
   const [products, setProducts] = useState([]);
   const [tool, setTool] = useState([]);
@@ -147,9 +147,7 @@ export function TabsWithWork({ pk, onClose, getRailway, getPk }) {
         .then((res) => {
           toast.success("Hisobot muvaffaqiyatli saqlandi✔")
           onClose()
-          // getPdb()
-          // getPk(null)
-
+          getPk(pkIdIn, setPk)
         }).catch((error) => {
           alert("Malumotlarni saqlashda xatolik yuz berdi❌")
         })
@@ -260,8 +258,6 @@ export function TabsWithWork({ pk, onClose, getRailway, getPk }) {
         <div>
           <Button onClick={() => {
             todayPlanAdd()
-            getRailway(null)
-            getPk(null)
           }} className="flex items-center ju" >Send</Button>
         </div>
       ),
