@@ -17,8 +17,8 @@ import { UserPlusIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { api, byId, config, setConfig } from "@/api/api";
 import axios from "axios";
 import toast from "react-hot-toast";
-import {MdDelete} from "react-icons/md";
-import {FaEdit} from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 
 export function PDBusers() {
   const [editModal, setEditModal] = useState(false)
@@ -28,6 +28,7 @@ export function PDBusers() {
   const [pdbData, setpdbdata] = useState(null)
   const [pdId, setpdId] = useState(null)
   const [selectPdId, setSelectPdId] = useState(null)
+  const [regEX, setRegEX] = useState(true)
 
 
   const openEditModal = () => setEditModal(true)
@@ -98,23 +99,14 @@ export function PDBusers() {
       })
   }
 
-  // *******************DELETE USER **********************
-
-  // const deletePDB = () => {
-  //   axios.delete(`${api}pdb/delete?id=${pdbData ? pdbData.id : 0}`,config)
-  //     .then((res) => {
-  //       closeDeleteModal()
-  //       getPDBuser()
-  //       toast.success("PDB muvoffaqqiyatli o'chirildi!👌")
-
-  //     })
-  //     .catch((err) => {
-  //       closeDeleteModal()
-  //       toast.error("PDB o'chirilmadi!❌")
-  //     })
-
-  // }
-
+  // RegEX ADD
+  const addRegEx = () => {
+    if (byId('addname') !== "" && byId("addlastname") !== "") {
+      setRegEX(false)
+    } else {
+      setRegEX(true)
+    }
+  }
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12 ">
       <Card>
@@ -122,7 +114,6 @@ export function PDBusers() {
           <Typography variant="h6" color="white">
             PDB lar jadvali
           </Typography>
-
           <Button
             onClick={openAddModal}
             className="bg-[#fff] text-black px-3 py-2 rounded-md"
@@ -213,7 +204,7 @@ export function PDBusers() {
                           openEditModal()
                           setpdbdata(item)
                         }} className=" cursor-pointer text-[1.2rem] font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
-                          <FaEdit/>
+                          <FaEdit />
                         </Typography>
 
                       </td>
@@ -282,10 +273,10 @@ export function PDBusers() {
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
-                <Input id="addname" label="Nomi" />
+                <Input onChange={addRegEx} id="addname" label="Nomi" />
               </div>
               <div className="w-full max-w-[24rem]">
-                <Input id="addlastname" label="Admin Ism , familya" />
+                <Input onChange={addRegEx} id="addlastname" label="Admin Ism , familya" />
               </div>
               <div className="w-full max-w-[24rem]">
                 <Select onChange={(e) => {
@@ -311,11 +302,14 @@ export function PDBusers() {
             >
               <span>Orqaga</span>
             </Button>
-            <Button
-              onClick={addPdb}
-              variant="gradient" color="gray">
-              <span>Qo'shish</span>
-            </Button>
+            <span className={regEX ? 'cursor-not-allowed' : ''}>
+              <Button
+                disabled={regEX}
+                onClick={addPdb}
+                variant="gradient" color="gray">
+                <span>Qo'shish</span>
+              </Button>
+            </span>
           </DialogFooter>
         </Dialog>
       </div>
