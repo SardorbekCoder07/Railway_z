@@ -25,6 +25,7 @@ export function Home() {
     const [railway, setRailway] = useState(null)
     const [getMe, setGetme] = useState(null)
     const [pk, setPk] = useState(null);
+    const [pkIdIn, setPkIdIn] = useState(false);
     const today = new Date();
     const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
     const todayDate = today.toLocaleDateString('uz-UZ', options);
@@ -38,11 +39,19 @@ export function Home() {
         getPdb(setPdb)
         getRailway(null, setRailway)
         getPk(null, setPk)
+        setPkIdIn(false)
+
         axios.get(`${api}user/getMe`, config)
             .then((res) => {
                 setGetme(res.data.body);
             })
     }, []);
+
+    useEffect(() => {
+        getRailway(null, setRailway)
+        getPk(null, setPk)
+        setPkId([])
+    }, [pkIdIn])
 
     const handleKmButtonClick = (index) => setSelectedKmIndex(index);
 
@@ -163,7 +172,7 @@ export function Home() {
                     <Button
                         className={` ${pkId.length == 0 ? "hidden" : ""} `}
                         onClick={() => openPdModal()}>
-                        Submit
+                        keyingi
                     </Button>
                 </CardBody>
             </table>
@@ -173,7 +182,7 @@ export function Home() {
             <Dialog open={pdModal} handler={closePdModal}>
                 <Dialog open={pdModal} handler={closePdModal}>
                     <DialogBody className="sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl overflow-y-auto max-h-screen">
-                        <TabsWithWork getPk={getPk} getRailway={getRailway} pk={pkId} onClose={closePdModal} />
+                        <TabsWithWork getPk={getPk} getRailway={getRailway} pk={pkId} setPkIdIn={setPkIdIn} onClose={closePdModal} />
                     </DialogBody>
                 </Dialog>
             </Dialog>
@@ -181,7 +190,7 @@ export function Home() {
         <div className="flex justify-center p-3 ">
 
 
-        <Footer/>
+            <Footer />
         </div>
     </div>);
 }

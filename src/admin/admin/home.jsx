@@ -23,7 +23,6 @@ export function Home() {
     const [railway, setRailway] = useState(null)
     const [getMe, setGetme] = useState(null)
     const [pk, setPk] = useState(null);
-    const [pkIdIn, setPkIdIn] = useState(null)
     const today = new Date();
     const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
     const todayDate = today.toLocaleDateString('uz-UZ', options);
@@ -116,7 +115,6 @@ export function Home() {
                                 <Button
                                     onClick={() => {
                                         getPk(item.id, setPk)
-                                        setPkIdIn(item.id)
                                         handleKmButtonClick(index)
                                     }}
                                     className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105 ${selectedKmIndex === index ? "bg-gray-500" : ""}`}
@@ -169,7 +167,7 @@ export function Home() {
             <Dialog open={pdModal} handler={closePdModal}>
                 <Dialog open={pdModal} handler={closePdModal}>
                     <DialogBody className="sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl overflow-y-auto max-h-screen">
-                        <TabsWithWork pk={pkId} onClose={closePdModal} setPk={setPk} pkIdIn={pkIdIn} />
+                        <TabsWithWork pk={pkId} onClose={closePdModal} setPk={setPk} />
                     </DialogBody>
                 </Dialog>
             </Dialog>

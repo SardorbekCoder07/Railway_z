@@ -20,7 +20,7 @@ export const getRailway = (id, setRailway) => {
                 else setRailway(null)
             })
             .catch(err => {})
-    }
+    } else setRailway(null)
 }
 
 // get pk
@@ -32,7 +32,7 @@ export const getPk = (id, setPk) => {
                 else setPk(null)
             })
             .catch(err => {})
-    }
+    } else setPk(null)
 }
 
 // get pk

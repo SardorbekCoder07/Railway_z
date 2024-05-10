@@ -14,52 +14,30 @@ import axios from "axios";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import toast from "react-hot-toast";
 
-export function TabsWithWork({ pk, onClose, setPk, pkIdIn }) {
+export function TabsWithWork({ pk, onClose, setPkIdIn }) {
+
   const [selectedTab, setSelectedTab] = useState("html");
-  const [products, setProducts] = useState([]);
   const [tool, setTool] = useState([]);
   const [toolId, setToolId] = useState([]);
-  const [results, setResults] = useState(true);
-
-  const [employeeCount, setEmployeeCount] = useState('');
-  const [vacationCount, setVacationCount] = useState('');
-  const [sickCount, setSickCount] = useState('');
-  const [restCount, setRestCount] = useState('');
-  const [tripCount, setTripCount] = useState('');
-  const [onTrainingCount, setOnTrainingCount] = useState('');
-
-  const handleInputChanges = setter => event => {
-    const newValue = event.target.value;
-    // Agar input bo'sh bo'lsa, bosh stringni saqlaymiz
-    if (/^\d*$/.test(newValue)) {
-      setter(newValue);
-    }
-
-  };
-
-
-
 
   useEffect(() => {
     setConfig();
     getTool();
   }, []);
 
-  function addProductIds(checked, item) {
-    if (checked) setProducts([...products, item]);
-    else setProducts(products.filter((product) => product.productId !== item.productId));
-  }
-
+  
+  // -------------- Oy va kun ni olish -------------- //
   var hozir = new Date();
   var yil = hozir.getFullYear();
   var oy = hozir.getMonth() + 1;
   var kun = hozir.getDate();
 
-  // Oy va kun uchun ikki raqamli formatni ta'minlash
+  // -------------- Oy va kun uchun ikki raqamli formatni ta'minlash -------------- //
   oy = oy < 10 ? '0' + oy : oy;
   kun = kun < 10 ? '0' + kun : kun;
 
 
+  // ------------- asboplarni iputini ichida malumot bolganini back endga yuborish ------------- //
   const handleInputChange = (value, item) => {
     setTool(prevTool => {
       const newTool = [...prevTool];
@@ -83,7 +61,7 @@ export function TabsWithWork({ pk, onClose, setPk, pkIdIn }) {
     });
   };
 
-
+  // ------------- asboplarni iputini ichida malumot bolganini back endga yuborish ------------- //
   const todayPlanAdd = () => {
 
     toolId.splice(0, toolId.length); // toolId array'ini tozalaymiz
@@ -99,9 +77,8 @@ export function TabsWithWork({ pk, onClose, setPk, pkIdIn }) {
     }
 
 
-
+    // ------------- input ichida qiymat toldirilganmi tekshirish ------------- //
     function todayPlanInfo(obj) {
-
       for (let key in obj) {
         if (obj[key] === undefined || obj[key] === null || obj[key] === false || obj[key] === "NaN" || obj[key] === '') {
           console.log(obj[key]);
@@ -112,6 +89,19 @@ export function TabsWithWork({ pk, onClose, setPk, pkIdIn }) {
       return true; // xammasi 100% tuldirilsa true qaytaradi
     }
 
+    // ------------- tekshirilayoygan obgect ------------- //
+    let requireObg = {
+      todayPlan: byId("todayPlanID"),
+      tomorrowPlan: byId("tomorrowPlan"),
+      employeeCount: byId("employeeCount"),
+      vacationCount: byId("vacationCount"),
+      sickCount: byId("sickCount"),
+      restCount: byId("restCount"),
+      tripCount: byId("tripCount"),
+      onTrainingCount: byId("onTrainingCount")
+    }
+
+    // ------------- backendga jonatilayotgan object ------------- //
     let dataObj = {
       pkIds: pk,
       todayPlan: byId("todayPlanID"),
@@ -129,11 +119,9 @@ export function TabsWithWork({ pk, onClose, setPk, pkIdIn }) {
       relayConnectorsPR: byId("relayConnectorsPR"),
       reqDayTools: toolId,
     }
-    let result = todayPlanInfo(dataObj);
+    let result = todayPlanInfo(requireObg);
 
-
-
-    
+    // ------------- backendga malumot jonatish ------------- //
     if (result) {
       axios.post(`${api}day/plan`, {
         ...dataObj,
@@ -147,7 +135,7 @@ export function TabsWithWork({ pk, onClose, setPk, pkIdIn }) {
         .then((res) => {
           toast.success("Hisobot muvaffaqiyatli saqlandi✔")
           onClose()
-          getPk(pkIdIn, setPk)
+          setPkIdIn(true)
         }).catch((error) => {
           alert("Malumotlarni saqlashda xatolik yuz berdi❌")
         })
@@ -157,6 +145,8 @@ export function TabsWithWork({ pk, onClose, setPk, pkIdIn }) {
     }
   };
 
+
+  // ------------- asboplarni iputini chaqirib olish ------------- //
   const getTool = () => {
     axios.get(`${api}work-tool/work-tool`, config)
       .then((res) => {
@@ -258,7 +248,7 @@ export function TabsWithWork({ pk, onClose, setPk, pkIdIn }) {
         <div>
           <Button onClick={() => {
             todayPlanAdd()
-          }} className="flex items-center ju" >Send</Button>
+          }} className="flex items-center ju" >Yuborish</Button>
         </div>
       ),
     },
@@ -271,7 +261,7 @@ export function TabsWithWork({ pk, onClose, setPk, pkIdIn }) {
         {/* for calendar */}
       </div>
       <div className="text-sm text-gray-900 grid grid-cols-1 md:grid-cols-2 gap-3">
-        
+
         <Input required type="number" id="employeeCount" label="Ishchilar soni" />
         <Input required type="number" id="vacationCount" label="Bemor xodimlar soni" />
         <Input required type="number" id="sickCount" label="Dam olishdagilar soni" />
