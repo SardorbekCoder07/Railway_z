@@ -68,12 +68,12 @@ export function Home() {
 
     const getAdminStatistics = () => {
         axios.get(`${api}user/statistic/leader`, config)
-          .then((res) => {
-            setgetAdminStatistic(res.data.body)
-          })
-          .catch((err) => {
-          })
-      }
+            .then((res) => {
+                setgetAdminStatistic(res.data.body)
+            })
+            .catch((err) => {
+            })
+    }
 
     return (<div className="mt-12">
         <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
@@ -94,6 +94,7 @@ export function Home() {
                                     onClick={() => {
                                         setFirstNamePdb(item)
                                         getRailway(item.id, setRailway)
+                                        getPk(null, setPk)
                                     }}
                                     className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md">
                                     {item.name}
@@ -149,15 +150,15 @@ export function Home() {
                                     {item['km']} km
                                 </Button>
                             ))) : (
-                            <Button
+                            <Typography
                                 onClick={() => setPk(null)}
-                                className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105`}>
-                                Topilmadi
-                            </Button>
+                                className={`text-2xl`}>
+                                Biror bir  PDB tanlang !!!
+                            </Typography>
                         )) : (
                             <Typography
                                 onClick={() => setPk(null)}
-                                className={` text-2xl `}>
+                                className={`text-2xl`}>
                                 Biror bir  PDB tanlang !!!
                             </Typography>
                         )
