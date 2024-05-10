@@ -1,6 +1,4 @@
-// Modal.js
 import React from 'react'
-
 const Modal = ({ handleCloseModal }) => {
   return (
     <div className="modal">
@@ -11,5 +9,4 @@ const Modal = ({ handleCloseModal }) => {
     </div>
   )
 }
-
 export default Modal
