@@ -76,7 +76,8 @@ export function PDBusers() {
       })
       .catch((err) => {
         closeAddModal();
-        toast.error("Xato");
+        toast.success("PDB o'chirishda xatolik yuz berdi")
+
       })
   }
 

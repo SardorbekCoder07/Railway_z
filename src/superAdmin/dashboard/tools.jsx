@@ -86,7 +86,7 @@ export function Tools() {
       .then((res) => {
         closeAddModal()
         gettool()
-        toast.success("Ish quroli muoffaqqiyatli qo'shildi!👌")
+        toast.success("Ish quroli muvoffaqqiyatli qo'shildi!👌")
       })
       .catch((err) => {
         closeAddModal()
@@ -237,12 +237,12 @@ export function Tools() {
                       }} className=" cursor-pointer text-[1.2rem] font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
                         <FaEdit/>
                       </Typography>
-                      <Typography onClick={() => {
+                      {/* <Typography onClick={() => {
                         openDeleteModal()
                         setToolData(item)
                       }} className=" cursor-pointer text-[1.2rem] font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
                         <MdDelete/>
-                      </Typography>
+                      </Typography> */}
                     </td>
                   </tr>
                 )
