@@ -177,7 +177,7 @@ export function PdUsers() {
                     <table className="w-full min-w-[640px] table-auto">
                         <thead>
                         <tr>
-                            {["#", "Bo'linma", "Ishchilar soni", "Yo'l Ustlari", "Amallar"].map((el) => (
+                            {["#", "Bo'linma", "Ishchilar soni", "Yo'l Ustalari", "Amallar"].map((el) => (
                                 <th
                                     key={el}
                                     className="border-b border-blue-gray-50 py-3 px-5 text-left"

@@ -319,17 +319,17 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
   return (
     <div className="mt-5 mb-10 flex flex-col gap-10">
       <div>
-        <h3>PD-report</h3>
+        <h3> Brigadaga ish qo'shish</h3>
         {/* for calendar */}
       </div>
       <div className="text-sm text-gray-900 grid grid-cols-1 md:grid-cols-2 gap-3">
 
-        <Input required className={inputClass('employeeCount')} type="number" id="employeeCount" onChange={handleChange} value={inputs.employeeCount} label="Ishchilar soni" />
-        <Input required className={inputClass('vacationCount')} type="number" id="vacationCount" onChange={handleChange} value={inputs.vacationCount} label="Bemor xodimlar soni" />
-        <Input required className={inputClass('sickCount')} type="number" id="sickCount" onChange={handleChange} value={inputs.sickCount} label="Dam olishdagilar soni" />
-        <Input required className={inputClass('restCount')} type="number" id="restCount" onChange={handleChange} label="Kamandirofkadagilar soni" />
-        <Input required className={inputClass('tripCount')} type="number" id="tripCount" onChange={handleChange} label="Malaka oshirishga ketganlar" />
-        <Input required className={inputClass('onTrainingCount')} type="number" id="onTrainingCount" onChange={handleChange} label="O'quv kursida" />
+        <Input required className={inputClass('employeeCount')} type="number" id="employeeCount" onChange={handleChange} value={inputs.employeeCount} label="Bugungi jami ishlayotganlar soni" />
+        <Input required className={inputClass('vacationCount')} type="number" id="vacationCount" onChange={handleChange} value={inputs.vacationCount} label="Dam oluvchilar soni(otgul)" />
+        <Input required className={inputClass('sickCount')} type="number" id="sickCount" onChange={handleChange} value={inputs.sickCount} label="Kasallar soni" />
+        <Input required className={inputClass('onTrainingCount')} type="number" id="onTrainingCount" onChange={handleChange} label="Ish haqi saqlanmagan holda (BS)" />
+        <Input required className={inputClass('tripCount')} type="number" id="tripCount" onChange={handleChange} label="Xizmat safarifda" />
+        <Input required className={inputClass('restCount')} type="number" id="restCount" onChange={handleChange} label="Malaka oshirishga (o'qishga) ketganlar soni" />
 
         <Input type="text" id="protectionStackST" label="Rels ulagichlari ST." />
         <Input type="text" id="protectionStackPR" label="Rels ulagichlari PR." />

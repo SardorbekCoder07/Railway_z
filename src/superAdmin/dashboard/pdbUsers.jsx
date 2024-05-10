@@ -136,7 +136,7 @@ export function PDBusers() {
                   pdUsers ? pdUsers.map((item, i) =>
                     <Option key={i} value={item.id}>{item.name}</Option>
                   ) : (
-                    <Option>Malumot yo</Option>
+                    <Option>Malumot yo'q</Option>
                   )
                 }
               </Select>
@@ -218,7 +218,7 @@ export function PDBusers() {
                   <td></td>
                   <td className="">
                     <Typography className=" cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
-                      Malumot yo'q
+                      Ma'lumot yo'q
                     </Typography></td>
                   <td></td>
 

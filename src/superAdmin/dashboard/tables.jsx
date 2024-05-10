@@ -151,7 +151,7 @@ export function Tables() {
                     <table className="w-full min-w-[640px] table-auto">
                         <thead>
                             <tr>
-                                {["#", "Ism", "Familya", "Telfon raqami", "Lavozimi", "Amallar"].map((el) => (<th
+                                {["#", "Ism", "Familiya", "Telefon raqami", "Lavozimi", "Amallar"].map((el) => (<th
                                     key={el}
                                     className="border-b border-blue-gray-50 py-3 px-5 text-left"
                                 >

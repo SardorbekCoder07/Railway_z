@@ -121,7 +121,7 @@ export function Hisobot() {
             <div className="w-52">
               <Select
                 onChange={id => getPDB(id)}
-                label="PD ro'yxat">
+                label="Bo'linmani tanlang">
                 {adminUsers && adminUsers.length !== 0 ?
                   adminUsers.map(item => (
                     <Option value={item.id}>{item.name}</Option>
@@ -133,7 +133,7 @@ export function Hisobot() {
             <div className="w-52">
               <Select
                 onChange={id => getRailway(id)}
-                label="PDB">
+                label="Brigadani tanlang">
                 {pdbList && pdbList.length !== 0
                   ? pdbList.map(item =>
                     <Option value={item.id}>{item.name}</Option>
@@ -145,7 +145,7 @@ export function Hisobot() {
             <div className="w-52">
               <Select
                 onChange={id => getPK(id)}
-                label="Railway (km)">
+                label="Masofani tanalng (km)">
                 {railwayList && railwayList.length !== 0
                   ? railwayList.map(item =>
                     <Option value={item.id}>{item.km} km</Option>

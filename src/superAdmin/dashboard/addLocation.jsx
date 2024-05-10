@@ -160,7 +160,7 @@ export function AddLocation() {
       <Card>
         <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
           <Typography variant="h6" color="white">
-            Masofalar Jadvali
+            Yo'l Masofalari Jadvali
           </Typography>
           <Button
             onClick={openAddModal}
@@ -197,7 +197,7 @@ export function AddLocation() {
                   users ? users.map((item, i) =>
                     <Option key={i} value={item.id}>{item.name}</Option>
                   ) : (
-                    <Option>Malumot yo'q</Option>
+                    <Option>Ma'lumot yo'q</Option>
                   )
                 }
               </Select>
@@ -275,7 +275,7 @@ export function AddLocation() {
                   <td></td>
                   <td className="">
                     <Typography className=" cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
-                      Malumot yo'q
+                      Ma'lumot yo'q
                     </Typography></td>
                   <td></td>
 
