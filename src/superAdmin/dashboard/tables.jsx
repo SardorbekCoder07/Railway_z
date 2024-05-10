@@ -19,7 +19,7 @@ export function Tables() {
     const [deleteModal, setDeleteModal] = useState(false)
     const [addModal, setAddModal] = useState(false)
     const [regex, setRegex] = useState(true)
-    const [phoneNUmber,setPhoneNUmber]=useState("")
+    const [phoneNUmber, setPhoneNUmber] = useState("")
 
     const openAddModal = () => setAddModal(true)
     const closeAddModal = () => {
@@ -62,17 +62,23 @@ export function Tables() {
             password: byId("addpassword"),
             phoneNumber: `+998${byId("addphone")}`
         }
-        axios.post(`${api}auth/register?ROLE=${role}`, addData, config)
-            .then(() => {
-                closeAddModal()
-                getUser()
-                toast.success(`${role === 'ROLE_LEADER' ? 'Leader' : 'Admin'} muoffaqqiyatli qo'shildi✔`)
-            })
-            .catch((err) => {
-                closeAddModal()
-                toast.error("xato")
-                { }
-            })
+        const newPhoneNUmber = addData.phoneNumber
+        if (newPhoneNUmber.length === 9) {
+            axios.post(`${api}auth/register?ROLE=${role}`, addData, config)
+                .then(() => {
+                    closeAddModal()
+                    getUser()
+                    toast.success(`${role === 'ROLE_LEADER' ? 'Leader' : 'Admin'} muoffaqqiyatli qo'shildi✔`)
+                })
+                .catch((err) => {
+                    closeAddModal()
+                    toast.error("Telefon Raqam hato !")
+                    { }
+                })
+        }else{
+            const inputStyle=document.querySelector('.borderInput')
+            
+        }
     }
 
     // *******************EDIT USER **********************
@@ -127,9 +133,6 @@ export function Tables() {
             setRegex(true)
         }
     }
-
-
-    // Input RegEx
 
     return (
         <div className="mt-12 mb-8 flex flex-col gap-12 ">
@@ -267,7 +270,7 @@ export function Tables() {
                             </Button>
                             <Input
                                 onChange={editRegex}
-                                defaultValue={userData ? userData.phoneNumber : ""}
+                                defaultValue={userData ? userData.phoneNumber.slice(0, 3) : ""}
                                 id="editphone"
                                 type="number"
                                 className="ps-20"
@@ -322,7 +325,7 @@ export function Tables() {
                                 defaultValue={""}
                                 id="addphone"
                                 type="number"
-                                className="ps-20"
+                                className="ps-20 borderInput"
                                 containerProps={{
                                     className: "min-w-0",
                                 }}
