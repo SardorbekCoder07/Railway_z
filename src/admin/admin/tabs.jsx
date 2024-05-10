@@ -25,7 +25,7 @@ export function TabsWithWork({ pk, onClose, setPkIdIn }) {
     getTool();
   }, []);
 
-  
+
   // -------------- Oy va kun ni olish -------------- //
   var hozir = new Date();
   var yil = hozir.getFullYear();
@@ -177,7 +177,7 @@ export function TabsWithWork({ pk, onClose, setPkIdIn }) {
       button: "",
     },
     {
-      label: "Ertangi Ishlar",
+      label: "Ertangi Ishlar rejasi",
       value: "react",
       input: (
         <div className="relative w-full min-w-[200px]">

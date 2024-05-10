@@ -42,7 +42,7 @@ export function StatisticsCard() {
         </CardHeader>
         <CardBody className="p-4 text-right">
           <Typography variant="small" className="font-normal text-blue-gray-600">
-            Bugungi jami ishchilar soni
+            Bugungi jami ishlayotganlar soni
           </Typography>
           <Typography variant="h6" color="blue-gray">
           </Typography>
@@ -84,7 +84,7 @@ export function StatisticsCard() {
           shadow={false}
           className="absolute grid h-12 w-12 place-items-center  "
         >
-          
+
           <PlusIcon color="red" />
         </CardHeader>
         <CardBody className="p-4 text-right">
