@@ -14,7 +14,7 @@ import axios from "axios";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import toast from "react-hot-toast";
 
-export function TabsWithWork({ pk, onClose, setPkIdIn }) {
+export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 
   const [selectedTab, setSelectedTab] = useState("html");
   const [tool, setTool] = useState([]);
@@ -136,6 +136,7 @@ export function TabsWithWork({ pk, onClose, setPkIdIn }) {
           toast.success("Hisobot muvaffaqiyatli saqlandi✔")
           onClose()
           setPkIdIn(true)
+          getAdminStatistics()
         }).catch((error) => {
           alert("Malumotlarni saqlashda xatolik yuz berdi❌")
         })
@@ -153,12 +154,6 @@ export function TabsWithWork({ pk, onClose, setPkIdIn }) {
         setTool(res.data);
       })
       .catch((err) => { });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Bu yerda backendga jo'natish kodini yozishingiz mumkin
-    console.log('Jo\'natilayotgan ma\'lumotlar:', formData);
   };
 
 
@@ -262,48 +257,47 @@ export function TabsWithWork({ pk, onClose, setPkIdIn }) {
 
   return (
     <div className="mt-5 mb-10 flex flex-col gap-10">
-      <form onSubmit={handleSubmit}>
-        <div>
-          <h3>PD-report</h3>
-          {/* for calendar */}
-        </div>
-        <div className="text-sm text-gray-900 grid grid-cols-1 md:grid-cols-2 gap-3">
-          <Input required type="number" id="employeeCount" label="Ishchilar soni" />
-          <Input required type="number" id="vacationCount" label="Bemor xodimlar soni" />
-          <Input required type="number" id="sickCount" label="Dam olishdagilar soni" />
-          <Input required type="number" id="restCount" label="Kamandirofkadagilar soni" />
-          <Input required type="number" id="tripCount" label="Malaka oshirishga ketganlar" />
-          <Input required type="number" id="onTrainingCount" label="O'quv kursida" />
+      <div>
+        <h3>PD-report</h3>
+        {/* for calendar */}
+      </div>
+      <div className="text-sm text-gray-900 grid grid-cols-1 md:grid-cols-2 gap-3">
 
-          <Input type="text" id="protectionStackST" label="Rels ulagichlari ST." />
-          <Input type="text" id="protectionStackPR" label="Rels ulagichlari PR." />
-          <Input type="text" id="relayConnectorsST" label="Himoya stiklari ishchilari soni ST." />
-          <Input type="text" id="relayConnectorsPR" label="Hiimoya stiklari ishchilari soni PR." />
-        </div>
-        <Tabs id="custom-animation" value={selectedTab}>
-          <TabsHeader>
-            {data.map(({ label, value }) => (
-              <Tab key={value} value={value}>
-                {label}
-              </Tab>
-            ))}
-          </TabsHeader>
-          <TabsBody
-            animate={{
-              initial: { y: 250 },
-              mount: { y: 0 },
-              unmount: { y: 250 },
-            }}
-          >
-            {data.map(({ value, input, button }) => (
-              <TabPanel key={value} value={value} className="flex flex-col gap-2">
-                {input}
-                {button}
-              </TabPanel>
-            ))}
-          </TabsBody>
-        </Tabs>
-      </form>
+        <Input required type="number" id="employeeCount" label="Ishchilar soni" />
+        <Input required type="number" id="vacationCount" label="Bemor xodimlar soni" />
+        <Input required type="number" id="sickCount" label="Dam olishdagilar soni" />
+        <Input required type="number" id="restCount" label="Kamandirofkadagilar soni" />
+        <Input required type="number" id="tripCount" label="Malaka oshirishga ketganlar" />
+        <Input required type="number" id="onTrainingCount" label="O'quv kursida" />
+
+        <Input type="text" id="protectionStackST" label="Rels ulagichlari ST." />
+        <Input type="text" id="protectionStackPR" label="Rels ulagichlari PR." />
+        <Input type="text" id="relayConnectorsST" label="Himoya stiklari ishchilari soni ST." />
+        <Input type="text" id="relayConnectorsPR" label="Hiimoya stiklari ishchilari soni PR." />
+      </div>
+      <Tabs id="custom-animation" value={selectedTab}>
+        <TabsHeader>
+          {data.map(({ label, value }) => (
+            <Tab key={value} value={value}>
+              {label}
+            </Tab>
+          ))}
+        </TabsHeader>
+        <TabsBody
+          animate={{
+            initial: { y: 250 },
+            mount: { y: 0 },
+            unmount: { y: 250 },
+          }}
+        >
+          {data.map(({ value, input, button }) => (
+            <TabPanel key={value} value={value} className="flex flex-col gap-2">
+              {input}
+              {button}
+            </TabPanel>
+          ))}
+        </TabsBody>
+      </Tabs>
     </div>
   );
 }
