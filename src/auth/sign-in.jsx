@@ -27,31 +27,32 @@ export function SignIn() {
     function logIn() {
         let phoneNumber = `+${document.getElementById('phoneNumber').value}`;
         let password = document.getElementById('password').value;
-            if (phoneNumber && password) {
-                setLoading(true); // Set loading state to true
-                axios.post(api + "auth/login", { phoneNumber, password })
-                    .then(res => {
-                        sessionStorage.setItem('jwtTokin', "Bearer " + res.data.body);
-                        if (res.data.message === "ROLE_SUPER_ADMIN") {
-                            setRole('/super-admin/boshqaruv-paneli');
-                            toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
-                        } else if (res.data.message === "ROLE_ADMIN") {
-                            setRole('/admin/hisobot');
-                            toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
-                        } else if (res.data.message === "ROLE_LEADER") {
-                            setRole('/brigadir/boshqaruv-qismi');
-                            toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
-                        }
-                    })
-                    .catch((err) => {
-                        toast.error('Serverda xatolik yuz berdi❌');
-                    })
-                    .finally(() => {
-                        setLoading(false); // Set loading state to false when request is complete
-                    });
-            } else {
-                toast.error('Ma\'lumotlarni to\'liq kiriting.');
-            }
+        if (phoneNumber && password) {
+            setLoading(true); // Set loading state to true
+            axios.post(api + "auth/login", { phoneNumber, password }, '')
+                .then(res => {
+                    setLoading(false)
+                    sessionStorage.setItem('jwtTokin', "Bearer " + res.data.body);
+                    if (res.data.message === "ROLE_SUPER_ADMIN") {
+                        setRole('/super-admin/boshqaruv-paneli');
+                        toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
+                    } else if (res.data.message === "ROLE_ADMIN") {
+                        setRole('/admin/hisobot');
+                        toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
+                    } else if (res.data.message === "ROLE_LEADER") {
+                        setRole('/brigadir/boshqaruv-qismi');
+                        toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
+                    }
+                })
+                .catch((err) => {
+                    setLoading(false)
+                    console.log(err);
+                    toast.error('Serverda xatolik yuz berdi❌');
+                })
+        } else {
+            toast.error('Ma\'lumotlarni to\'liq kiriting.');
+            setLoading(false)
+        }
     }
 
     function checkKeyPress(event) {
