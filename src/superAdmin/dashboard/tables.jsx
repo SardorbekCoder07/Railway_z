@@ -19,7 +19,6 @@ export function Tables() {
     const [deleteModal, setDeleteModal] = useState(false)
     const [addModal, setAddModal] = useState(false)
     const [regex, setRegex] = useState(true)
-    const [phoneNUmber, setPhoneNUmber] = useState("")
 
     const openAddModal = () => setAddModal(true)
     const closeAddModal = () => {
@@ -63,7 +62,7 @@ export function Tables() {
             phoneNumber: `+998${byId("addphone")}`
         }
         const newPhoneNUmber = addData.phoneNumber
-        if (newPhoneNUmber.length === 9) {
+        if (newPhoneNUmber.length === 13) {
             axios.post(`${api}auth/register?ROLE=${role}`, addData, config)
                 .then(() => {
                     closeAddModal()
@@ -72,12 +71,11 @@ export function Tables() {
                 })
                 .catch((err) => {
                     closeAddModal()
-                    toast.error("Telefon Raqam hato !")
-                    { }
+                    toast.error("XATO")
                 })
-        }else{
-            const inputStyle=document.querySelector('.borderInput')
-            
+        } else {
+            closeAddModal()
+            toast.error(" Telefon raqam tuliq kiritilmadi !")
         }
     }
 
@@ -87,7 +85,7 @@ export function Tables() {
             firstName: byId("editname"),
             lastName: byId("editlastname"),
             password: byId("editpassword"),
-            phoneNumber: `+998${byId("addphone")}`
+            phoneNumber: `+998${byId("editphone")}`
 
         }
         axios.put(`${api}user/update?id=${userData ? userData.id : 0}`, editData, config)
@@ -121,7 +119,6 @@ export function Tables() {
         if (byId("addname") !== "" && byId("addlastname") !== "" && byId("addpassword") !== "") {
             setRegex(false)
         }
-
         else {
             setRegex(true)
         }
@@ -270,7 +267,7 @@ export function Tables() {
                             </Button>
                             <Input
                                 onChange={editRegex}
-                                defaultValue={userData ? userData.phoneNumber.slice(0, 3) : ""}
+                                defaultValue={userData ? userData.phoneNumber : ""}
                                 id="editphone"
                                 type="number"
                                 className="ps-20"
@@ -280,7 +277,7 @@ export function Tables() {
                             />
                         </div>
                         <div className="w-full max-w-[24rem]">
-                            <Input type="password" onChange={addRegex} id="addpassword" label="Parol" />
+                            <Input type="password" onChange={editRegex} id="editpassword" label="Parol" />
                         </div>
                     </div>
                 </DialogBody>
@@ -325,7 +322,7 @@ export function Tables() {
                                 defaultValue={""}
                                 id="addphone"
                                 type="number"
-                                className="ps-20 borderInput"
+                                className="ps-20"
                                 containerProps={{
                                     className: "min-w-0",
                                 }}
@@ -361,30 +358,6 @@ export function Tables() {
                 </DialogFooter>
             </Dialog>
 
-            {/* delete modal */}
-            {/*<Dialog open={deleteModal} handler={closeDeleteModal}>*/}
-            {/*    <DialogHeader>O'chirish</DialogHeader>*/}
-            {/*    <DialogBody>*/}
-            {/*        <Typography*/}
-            {/*            variant="large"*/}
-            {/*            className="font-bold uppercase text-blue-gray-400">*/}
-            {/*            {userData ? userData.firstName + 'ni' : 'Bu hodimni'} o'chirishingizga ishonchingiz komilmi?*/}
-            {/*        </Typography>*/}
-            {/*    </DialogBody>*/}
-            {/*    <DialogFooter>*/}
-            {/*        <Button*/}
-            {/*            variant="text"*/}
-            {/*            color="red"*/}
-            {/*            onClick={closeDeleteModal}*/}
-            {/*            className="mr-1"*/}
-            {/*        >*/}
-            {/*            <span>Yo'q</span>*/}
-            {/*        </Button>*/}
-            {/*        <Button onClick={deleteUser} variant="gradient" color="gray">*/}
-            {/*            <span>Ha</span>*/}
-            {/*        </Button>*/}
-            {/*    </DialogFooter>*/}
-            {/*</Dialog>*/}
             <Dialog open={deleteModal} handler={closeDeleteModal}>
                 <DialogHeader>O'chirish</DialogHeader>
                 <DialogBody>
