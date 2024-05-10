@@ -179,7 +179,7 @@ export function Tools() {
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["#","Ish quroli nomi", "Haraktlar"].map((el) => (
+                {["#","Ish quroli nomi", "Amallar"].map((el) => (
                   <th
                     key={el}
                     className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -273,7 +273,7 @@ export function Tools() {
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
-                <Input onChange={editRegex} required defaultValue={ToolData ? ToolData.name : "Ma'lumot yo'q"} id="edittool" label="tool nomi" />
+                <Input onChange={editRegex} required defaultValue={ToolData ? ToolData.name : "Ma'lumot yo'q"} id="edittool" label="Ish qurollar nomi" />
               </div>
             </div>
           </DialogBody>

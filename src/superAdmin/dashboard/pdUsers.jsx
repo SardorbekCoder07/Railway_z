@@ -168,7 +168,7 @@ export function PdUsers() {
             <Card>
                 <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
                     <Typography variant="h6" color="white">
-                        PD lar jadvali
+                        Yo'l Ustlari
                     </Typography>
                     <Button
                         onClick={openAddModal}
@@ -180,7 +180,7 @@ export function PdUsers() {
                     <table className="w-full min-w-[640px] table-auto">
                         <thead>
                         <tr>
-                            {["#", "PD nomi", "Ishchilar soni", "Admin", "Actions"].map((el) => (
+                            {["#", "Bo'linma", "Ishchilar soni", "Yo'l Ustlari", "Amallar"].map((el) => (
                                 <th
                                     key={el}
                                     className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -287,7 +287,7 @@ export function PdUsers() {
                         <div className="flex justify-center flex-col items-center gap-7">
                             <div className="w-full max-w-[24rem]">
                                 <Input onChange={editRegex} required defaultValue={userData ? userData.name : "Ma'lumot yo'q"}
-                                       id="editPD" label="PD nomi"/>
+                                       id="editPD" label="Bo'linma nomi"/>
                             </div>
                             <div className="w-full max-w-[24rem]">
                                 <Input onChange={editRegex} required
@@ -298,7 +298,7 @@ export function PdUsers() {
                                 <Select onChange={(e) => {
                                     setUserId(e)
                                     editRegex()
-                                }} label="PD admini">
+                                }} label="Yo'l ustasini tanlash">
                                     {
                                         users ? users.map((item, i) =>
                                             <Option key={i} value={item.id}>{item.firstName} {item.lastName}</Option>
@@ -334,7 +334,7 @@ export function PdUsers() {
                 {/* add modal */}
 
                 <Dialog open={addModal} handler={closeAddModal}>
-                    <DialogHeader>PD qo'shish</DialogHeader>
+                    <DialogHeader>Bo'linma qo'shish</DialogHeader>
                     <DialogBody>
                         <div className="flex justify-center flex-col items-center gap-7">
                             <div className="w-full max-w-[24rem]">
@@ -347,7 +347,7 @@ export function PdUsers() {
                                 <Select onChange={(e) => {
                                     setUserId(e)
                                     addRegex()
-                                }} label="PD admini">
+                                }} label="Yo'l ustasini tanlash">
                                     {
                                         users ? users.map((item, i) =>
                                             <Option key={i} value={item.id}>{item.firstName} {item.lastName}</Option>
@@ -389,7 +389,7 @@ export function PdUsers() {
                             <Typography
                                 variant="large"
                                 className=" font-bold uppercase text-blue-gray-400">
-                                Bu PDni o'chirishingizga ishonchingiz komilmi?
+                                Bu bo'limni o'chirishingizga ishonchingiz komilmi?
                             </Typography>
                         </div>
                     </DialogBody>

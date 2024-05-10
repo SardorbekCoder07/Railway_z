@@ -40,7 +40,7 @@ export function StatisticsCardS() {
         </CardHeader>
         <CardBody className="p-4 text-right">
           <Typography variant="small" className="font-normal text-blue-gray-600">
-            Adminlar soni
+            Kuzatuvchilar soni
           </Typography>
           <Typography variant="h4" color="blue-gray">
             {adminstatistics ? adminstatistics.countAdmin:0}
@@ -80,7 +80,7 @@ export function StatisticsCardS() {
         </CardHeader>
         <CardBody className="p-4 text-right">
           <Typography variant="small" className="font-normal text-blue-gray-600">
-            PD lar soni
+            Yo'l ustlari soni
           </Typography>
           <Typography variant="h4" color="blue-gray">
             {adminstatistics ? adminstatistics.countPd:0}
@@ -101,7 +101,7 @@ export function StatisticsCardS() {
         </CardHeader>
         <CardBody className="p-4 text-right">
           <Typography variant="small" className="font-normal text-blue-gray-600">
-            PDB lar soni
+            Yo'l brigadalari soni
           </Typography>
           <Typography variant="h4" color="blue-gray">
             {adminstatistics ? adminstatistics.countPdb : 0}

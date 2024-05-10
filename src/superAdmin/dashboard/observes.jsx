@@ -174,7 +174,7 @@ export function Observes() {
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["#", "Ism familiyasi", "Km", "Harakatlar"].map((el) => (
+                {["#", "F.I.O", "Km", "Amallar"].map((el) => (
                   <th key={el} className="border-b border-blue-gray-50 py-3 px-5 text-left">
                     <Typography variant="small" className="text-[11px] font-bold uppercase text-blue-gray-400"
                     >{el}</Typography>
@@ -283,7 +283,7 @@ export function Observes() {
             <div className="w-full max-w-[24rem] flex flex-col gap-7">
               <Select
                 onChange={(e) => getPDB(e)}
-                label="PD ni tanlang">
+                label="Bo'linma nomini tanlang">
                 {pd && pd.length !== 0 ?
                   pd.map(item =>
                     <Option key={item.id} value={item.id}>
@@ -294,7 +294,7 @@ export function Observes() {
               </Select>
               <Select
                 onChange={(e) => setPDBid(e)}
-                label="PDB ni tanlang">
+                label="Brigadani tanlang">
                 {pdbs && pdbs.length !== 0 ?
                   pdbs.map(item =>
                     <Option key={item.id} value={item.id}>
@@ -354,7 +354,7 @@ export function Observes() {
             <div className="w-full max-w-[24rem] flex flex-col gap-7">
               <Select
                 onChange={(e) => getPDB(e)}
-                label="PD ni tanlang">
+                label="Bo'linma nomini tanlang">
                 {pd && pd.length !== 0 ?
                   pd.map(item =>
                     <Option key={item.id} value={item.id}>
@@ -365,7 +365,7 @@ export function Observes() {
               </Select>
               <Select
                 onChange={(e) => setPDBid(e)}
-                label="PDB ni tanlang">
+                label="Brigadanini tanlang">
                 {pdbs && pdbs.length !== 0 ?
                   pdbs.map(item =>
                     <Option key={item.id} value={item.id}>

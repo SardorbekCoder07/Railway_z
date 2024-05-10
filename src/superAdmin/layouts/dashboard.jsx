@@ -9,7 +9,7 @@ import {
 } from "@/superAdmin/widgets/layout";
 import routes from "@/superAdmin/routes";
 import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
- 
+
 
 export function SuperDashboard() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -26,7 +26,7 @@ export function SuperDashboard() {
       <div className="p-4 xl:ml-80">
         <DashboardNavbar />
         <Configurator />
-        
+
         <Routes>
           {routes.map(
             ({ layout, pages }) =>

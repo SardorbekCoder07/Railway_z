@@ -30,12 +30,7 @@ export function Sidenav({ brandImg, brandName, routes }) {
       >
         <Link to="/super-admin/boshqaruv-paneli" className="py-3 px-8 flex justify-center items-center">
         <img className="object-cover w-3/12" src={RailLogo} alt="" />
-          <Typography
-            variant="h6"
-            color={sidenavType === "dark" ? "white" : "blue-gray"}
-          >
-            Railway
-          </Typography>
+         
         </Link>
         <IconButton
           variant="text"

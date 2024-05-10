@@ -160,7 +160,7 @@ export function AddLocation() {
       <Card>
         <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
           <Typography variant="h6" color="white">
-            Km Jadvali
+            Masofalar Jadvali
           </Typography>
           <Button
             onClick={openAddModal}
@@ -178,7 +178,7 @@ export function AddLocation() {
             <div className="w-full max-w-[24rem]">
               <Select onChange={(e) => {
                 getUser(e)
-              }} label="PD tanlang">
+              }} label="Bo'linmani tanlang">
                 {
                   pdUsers ? pdUsers.map((item, i) =>
                     <Option key={i} value={item.id}>{item.name}</Option>
@@ -192,7 +192,7 @@ export function AddLocation() {
               <Select onChange={(e) => {
                 setSelectPdbId(e)
                 getkm(e)
-              }} label="PDB tanlang">
+              }} label="Brigadani tanlang">
                 {
                   users ? users.map((item, i) =>
                     <Option key={i} value={item.id}>{item.name}</Option>
@@ -206,7 +206,7 @@ export function AddLocation() {
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["#", "KM", "Harakatlar"].map((el) => (
+                {["#", "KM", "Amallar"].map((el) => (
                   <th
                     key={el}
                     className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -299,7 +299,7 @@ export function AddLocation() {
               <div className="w-full max-w-[24rem]">
                 <Select onChange={(e) => {
                   getUser(e)
-                }} label="PD tanlang">
+                }} label="Bo'linmani tanlang">
                   {
                     pdUsers ? pdUsers.map((item, i) =>
                       <Option key={i} value={item.id}>{item.name}</Option>
@@ -312,7 +312,7 @@ export function AddLocation() {
               <div className="w-full max-w-[24rem]">
                 <Select onChange={(e) => {
                   setPDBid(e)
-                }} label="PDB tanlang">
+                }} label="Brigadani tanlang">
                   {
                     users ? users.map((item, i) =>
                       <Option key={i} value={item.id}>{item.name}</Option>
@@ -358,7 +358,7 @@ export function AddLocation() {
               <div className="w-full max-w-[24rem]">
               <Select onChange={(e) => {
                 getUser(e)
-              }} label="PD tanlang">
+              }} label="Bo'linmani tanlang">
                 {
                   pdUsers ? pdUsers.map((item, i) =>
                     <Option key={i} value={item.id}>{item.name}</Option>

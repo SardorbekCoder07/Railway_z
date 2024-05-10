@@ -112,7 +112,7 @@ export function PDBusers() {
       <Card>
         <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
           <Typography variant="h6" color="white">
-            PDB lar jadvali
+            Yo'l brigaderlar jadvali
           </Typography>
           <Button
             onClick={openAddModal}
@@ -122,15 +122,15 @@ export function PDBusers() {
           </Button>
         </CardHeader>
         <CardBody className=" px-0 pt-0 pb-2">
-          <Typography variant="h6" color="gray" className="flex items-center justify-center mb-2 ">
+          {/* <Typography variant="h6" color="gray" className="flex items-center justify-center mb-2 ">
             PD tanlang
-          </Typography>
+          </Typography> */}
           <div className="w-full flex justify-center items-center gap-5">
             <div className="w-full max-w-[24rem]">
               <Select onChange={(e) => {
                 setSelectPdId(e)
                 getPDBuser(e)
-              }} label="PD tanlang">
+              }} label="Bo'linmani tanlang">
                 {
                   pdUsers ? pdUsers.map((item, i) =>
                     <Option key={i} value={item.id}>{item.name}</Option>
@@ -144,7 +144,7 @@ export function PDBusers() {
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["#", "Ism", "Familya", "Harakatlar"].map((el) => (
+                {["#", "Brigaderlar", "F.I.O", "Amallar"].map((el) => (
                   <th
                     key={el}
                     className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -239,10 +239,10 @@ export function PDBusers() {
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
-                <Input defaultValue={pdbData ? pdbData.name : "Ma'lumot yo'q"} id="editName" label="PDB nomi" />
+                <Input defaultValue={pdbData ? pdbData.name : "Ma'lumot yo'q"} id="editName" label="BRIGADA" />
               </div>
               <div className="w-full max-w-[24rem]">
-                <Input defaultValue={pdbData ? pdbData.userFullName : "Ma'lumot yo'q"} id="editlastname" label="Admin Ism familya" />
+                <Input defaultValue={pdbData ? pdbData.userFullName : "Ma'lumot yo'q"} id="editlastname" label="F.I.O" />
               </div>
 
             </div>
@@ -267,21 +267,21 @@ export function PDBusers() {
       {/* Add pdb modal */}
       <div>
         <Dialog open={addModal} handler={closeAddModal}>
-          <DialogHeader className="flex items-center justify-between">PDB qo'shish
+          <DialogHeader className="flex items-center justify-between">Brigader qo'shish
             <XMarkIcon className="cursor-pointer" onClick={closeAddModal} width={20} />
           </DialogHeader>
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
-                <Input onChange={addRegEx} id="addname" label="Nomi" />
+                <Input onChange={addRegEx} id="addname" label="Brigadalar" />
               </div>
               <div className="w-full max-w-[24rem]">
-                <Input onChange={addRegEx} id="addlastname" label="Admin Ism , familya" />
+                <Input onChange={addRegEx} id="addlastname" label="F.I.O" />
               </div>
               <div className="w-full max-w-[24rem]">
                 <Select onChange={(e) => {
                   setpdId(e)
-                }} label="PD tanlang">
+                }} label="Bo'linma tanlang">
                   {
                     pdUsers ? pdUsers.map((item, i) =>
                       <Option key={i} value={item.id}>{item.name}</Option>

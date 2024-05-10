@@ -150,7 +150,7 @@ export function Tables() {
                     <table className="w-full min-w-[640px] table-auto">
                         <thead>
                             <tr>
-                                {["#", "Ism", "Familya", "Telfon raqami", "Lavozimi", "Harakatlar"].map((el) => (<th
+                                {["#", "Ism", "Familya", "Telfon raqami", "Lavozimi", "Amallar"].map((el) => (<th
                                     key={el}
                                     className="border-b border-blue-gray-50 py-3 px-5 text-left"
                                 >
@@ -199,7 +199,7 @@ export function Tables() {
                                 </td>
                                 <td className={'py-3 px-5'}>
                                     <Typography className="text-xs font-semibold text-blue-gray-600">
-                                        {item.roleName === 'ROLE_LEADER' ? 'Leader' : 'Admin'}
+                                        {item.roleName === 'ROLE_LEADER' ? 'Yo"l ustasi' : 'Kuzatuchilar'}
                                     </Typography>
                                 </td>
                                 <td className={`flex py-5 px-5 gap-3`}>
@@ -335,8 +335,8 @@ export function Tables() {
                             <Select onChange={(e) => {
                                 setRole(e)
                             }} label="Hodimning lavozimini tanlang">
-                                <Option value="ROLE_ADMIN">Admin</Option>
-                                <Option value="ROLE_LEADER">Leder</Option>
+                                <Option value="ROLE_ADMIN">Kuzatuvchi</Option>
+                                <Option value="ROLE_LEADER">Yo'l ustasi</Option>
                             </Select>
                         </div>
                     </div>

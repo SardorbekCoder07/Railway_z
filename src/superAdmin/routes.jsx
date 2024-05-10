@@ -39,13 +39,13 @@ export const routes = [
             },
             {
                 icon: <TableCellsIcon {...icon} />,
-                name: "PD",
+                name: "Yo'l ustalari",
                 path: "/pd",
                 element: <PdUsers/>,
             },
             {
                 icon: <UsersIcon {...icon} />,
-                name: "PDB lar ro'yxati",
+                name: "Yo'l brigadalari ro'yxati",
                 path: "/jadval",
                 element: <PDBusers/>,
             },
@@ -65,7 +65,7 @@ export const routes = [
             },
             {
                 icon: <MapPinIcon {...icon} />,
-                name: "Manzil",
+                name: "Yo'l masofasi",
                 path: "/Manzil",
                 element: <AddLocation/>,
             },

@@ -9,7 +9,7 @@ import {
 } from "@material-tailwind/react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { Fragment,useEffect, useState } from "react";
 
 export function StatisticsCard() {
   const [getAdminStatistic, setgetAdminStatistic] = useState(null)
@@ -28,7 +28,7 @@ export function StatisticsCard() {
   }
   return (
     <>
-      <Card // Don't forget to add a unique key when mapping over an array
+      <Card
         className="border border-blue-gray-100 shadow-sm"
       >
         <CardHeader
@@ -42,7 +42,7 @@ export function StatisticsCard() {
         </CardHeader>
         <CardBody className="p-4 text-right">
           <Typography variant="small" className="font-normal text-blue-gray-600">
-            Bugungi jami ishchilar soni
+            Bugungi jami ishlayotganlar soni
           </Typography>
           <Typography variant="h6" color="blue-gray">
           </Typography>
@@ -65,7 +65,7 @@ export function StatisticsCard() {
         </CardHeader>
         <CardBody className="p-4 text-right">
           <Typography variant="small" className="font-normal text-blue-gray-600">
-            Dam oluvchilar soni
+            Dam oluvchilar soni(otgul)
           </Typography>
           <Typography variant="h6" color="blue-gray">
           </Typography>
@@ -84,7 +84,7 @@ export function StatisticsCard() {
           shadow={false}
           className="absolute grid h-12 w-12 place-items-center  "
         >
-          
+
           <PlusIcon color="red" />
         </CardHeader>
         <CardBody className="p-4 text-right">
@@ -112,7 +112,8 @@ export function StatisticsCard() {
         </CardHeader>
         <CardBody className="p-4 text-right">
           <Typography variant="small" className="font-normal text-blue-gray-600">
-            Javob so'raganlar soni
+            Ish haqi saqlanmagan holda (BS)
+            <Fragment></Fragment>
           </Typography>
           <Typography variant="h6" color="blue-gray">
           </Typography>
@@ -136,7 +137,7 @@ export function StatisticsCard() {
         </CardHeader>
         <CardBody className="p-4 text-right">
           <Typography variant="small" className="font-normal text-blue-gray-600">
-            Ish bo'yicha sayohatga ketganlar
+            Xizmat Safarida
           </Typography>
           <Typography variant="h6" color="blue-gray">
           </Typography>
@@ -159,7 +160,7 @@ export function StatisticsCard() {
         </CardHeader>
         <CardBody className="p-4 text-right">
           <Typography variant="small" className="font-normal text-blue-gray-600">
-            Malaka oshirishga ketganlar soni
+            Malaka oshirishga (o'qishga) ketganlar soni
           </Typography>
           <Typography variant="h6" color="blue-gray">
           </Typography>

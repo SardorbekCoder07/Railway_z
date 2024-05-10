@@ -125,7 +125,7 @@ export function Home() {
             <div className="w-52">
               <Select
                 onChange={id => getPDB(id)}
-                label="PD ro'yxat">
+                label="Yo'l ustlari">
                 {adminUsers && adminUsers.length !== 0 ?
                   adminUsers.map(item => (
                     <Option value={item.id}>{item.name}</Option>
@@ -137,7 +137,7 @@ export function Home() {
             <div className="w-52">
               <Select
                 onChange={id => getRailway(id)}
-                label="PDB">
+                label="Yo'l brigaderlari">
                 {pdbList && pdbList.length !== 0
                   ? pdbList.map(item =>
                     <Option value={item.id}>{item.name}</Option>
@@ -149,7 +149,7 @@ export function Home() {
             <div className="w-52">
               <Select
                 onChange={id => getPK(id)}
-                label="Railway (km)">
+                label="Km lar">
                 {railwayList && railwayList.length !== 0
                   ? railwayList.map(item =>
                     <Option value={item.id}>{item.km} km</Option>
