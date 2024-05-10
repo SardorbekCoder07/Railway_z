@@ -9,16 +9,33 @@ import {
   Input,
 } from "@material-tailwind/react";
 import { api, byId, config, setConfig } from "@/api/api";
+import { getPdb, getPk } from "@/superAdmin/dashboard/apiFunction.jsx";
 import axios from "axios";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import toast from "react-hot-toast";
 
-export function TabsWithWork({ pk, onClose }) {
+export function TabsWithWork({ pk, onClose, getRailway, getPk }) {
   const [selectedTab, setSelectedTab] = useState("html");
   const [products, setProducts] = useState([]);
   const [tool, setTool] = useState([]);
   const [toolId, setToolId] = useState([]);
   const [results, setResults] = useState(true);
+
+  const [employeeCount, setEmployeeCount] = useState('');
+  const [vacationCount, setVacationCount] = useState('');
+  const [sickCount, setSickCount] = useState('');
+  const [restCount, setRestCount] = useState('');
+  const [tripCount, setTripCount] = useState('');
+  const [onTrainingCount, setOnTrainingCount] = useState('');
+
+  const handleInputChanges = setter => event => {
+    const newValue = event.target.value;
+    // Agar input bo'sh bo'lsa, bosh stringni saqlaymiz
+    if (/^\d*$/.test(newValue)) {
+      setter(newValue);
+    }
+
+  };
 
 
 
@@ -87,6 +104,7 @@ export function TabsWithWork({ pk, onClose }) {
 
       for (let key in obj) {
         if (obj[key] === undefined || obj[key] === null || obj[key] === false || obj[key] === "NaN" || obj[key] === '') {
+          console.log(obj[key]);
           return false;
           // Agar inputlardan birortasi bulsa xam (undefined, null, false, 0, NaN, ''), false qaytariladi
         }
@@ -99,12 +117,12 @@ export function TabsWithWork({ pk, onClose }) {
       todayPlan: byId("todayPlanID"),
       tomorrowPlan: byId("tomorrowPlan"),
       date: `${yil}-${oy}-${kun}`,
-      employeeCount: +byId("employeeCount"),
-      vacationCount: +byId("vacationCount"),
-      sickCount: +byId("sickCount"),
-      restCount: +byId("restCount"),
-      tripCount: +byId("tripCount"),
-      onTrainingCount: +byId("onTrainingCount"),
+      employeeCount: byId("employeeCount"),
+      vacationCount: byId("vacationCount"),
+      sickCount: byId("sickCount"),
+      restCount: byId("restCount"),
+      tripCount: byId("tripCount"),
+      onTrainingCount: byId("onTrainingCount"),
       protectionStackST: byId("protectionStackST"),
       protectionStackPR: byId("protectionStackPR"),
       relayConnectorsST: byId("relayConnectorsST"),
@@ -115,13 +133,23 @@ export function TabsWithWork({ pk, onClose }) {
 
 
 
-
+    
     if (result) {
-      axios.post(`${api}day/plan`, dataObj, config)
+      axios.post(`${api}day/plan`, {
+        ...dataObj,
+        employeeCount: Number(dataObj.employeeCount),
+        vacationCount: Number(dataObj.vacationCount),
+        sickCount: Number(dataObj.sickCount),
+        restCount: Number(dataObj.restCount),
+        tripCount: Number(dataObj.tripCount),
+        onTrainingCount: Number(dataObj.onTrainingCount)
+      }, config)
         .then((res) => {
           toast.success("Hisobot muvaffaqiyatli saqlandi✔")
           onClose()
-          
+          // getPdb()
+          // getPk(null)
+
         }).catch((error) => {
           alert("Malumotlarni saqlashda xatolik yuz berdi❌")
         })
@@ -136,7 +164,7 @@ export function TabsWithWork({ pk, onClose }) {
       .then((res) => {
         setTool(res.data);
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
 
@@ -230,7 +258,11 @@ export function TabsWithWork({ pk, onClose }) {
       ),
       button: (
         <div>
-          <Button onClick={todayPlanAdd} className="flex items-center ju" >Send</Button>
+          <Button onClick={() => {
+            todayPlanAdd()
+            getRailway(null)
+            getPk(null)
+          }} className="flex items-center ju" >Send</Button>
         </div>
       ),
     },
@@ -243,12 +275,14 @@ export function TabsWithWork({ pk, onClose }) {
         {/* for calendar */}
       </div>
       <div className="text-sm text-gray-900 grid grid-cols-1 md:grid-cols-2 gap-3">
+        
         <Input required type="number" id="employeeCount" label="Ishchilar soni" />
         <Input required type="number" id="vacationCount" label="Bemor xodimlar soni" />
         <Input required type="number" id="sickCount" label="Dam olishdagilar soni" />
         <Input required type="number" id="restCount" label="Kamandirofkadagilar soni" />
         <Input required type="number" id="tripCount" label="Malaka oshirishga ketganlar" />
-        <Input required type="number" id="onTrainingCount" label="Odkul" />
+        <Input required type="number" id="onTrainingCount" label="O'quv kursida" />
+
         <Input type="text" id="protectionStackST" label="Rels ulagichlari ST." />
         <Input type="text" id="protectionStackPR" label="Rels ulagichlari PR." />
         <Input type="text" id="relayConnectorsST" label="Himoya stiklari ishchilari soni ST." />
