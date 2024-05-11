@@ -165,7 +165,7 @@ export function PdUsers() {
             <Card>
                 <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
                     <Typography variant="h6" color="white">
-                        Yo'l Ustlari
+                        Yo'l Ustalari
                     </Typography>
                     <Button
                         onClick={openAddModal}
