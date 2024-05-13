@@ -13,7 +13,7 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
-import { MapPinIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { MapPinIcon, UserIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { api, byId, config, setConfig } from "@/api/api";
 import toast from "react-hot-toast";
@@ -184,7 +184,7 @@ export function Observes() {
             onClick={openAddModal}
             className="bg-[#fff] text-black px-3 py-2 rounded-md"
           >
-            <MapPinIcon className="h-6 w-6 text-black inline-block" /> +
+            <UserIcon className="h-6 w-6 text-black inline-block" /> +
           </Button>
         </CardHeader>
         <CardBody className="overflow-x-auto px-0 pt-0 pb-2">
@@ -300,7 +300,7 @@ export function Observes() {
             <div className="w-full max-w-[24rem] flex flex-col gap-7">
               <Select
                 onChange={(e) => getPDB(e)}
-                className={`${validat ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`} 
+                className={`${validat ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`}
                 label="Bo'linma nomini tanlang">
                 {pd && pd.length !== 0 ?
                   pd.map(item =>
@@ -312,7 +312,7 @@ export function Observes() {
               </Select>
               <Select
                 onChange={(e) => setPDBid(e)}
-                className={`${validat ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`} 
+                className={`${validat ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`}
                 label="Brigadani tanlang">
                 {pdbs && pdbs.length !== 0 ?
                   pdbs.map(item =>
@@ -372,7 +372,7 @@ export function Observes() {
             <div className="w-full max-w-[24rem] flex flex-col gap-7">
               <Select
                 onChange={(e) => getPDB(e)}
-                className={`${validat ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`} 
+                className={`${validat ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`}
                 label="Bo'linma nomini tanlang">
                 {pd && pd.length !== 0 ?
                   pd.map(item =>
@@ -388,7 +388,7 @@ export function Observes() {
                   obsevesRegEx()
                 }}
 
-                className={`${validat ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`} 
+                className={`${validat ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`}
                 label="Brigadanini tanlang">
                 {pdbs && pdbs.length !== 0 ?
                   pdbs.map(item =>
