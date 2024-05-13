@@ -5,7 +5,7 @@ import {
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { api, byId, config, setConfig } from "@/api/api";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import './input.css'
@@ -20,7 +20,6 @@ export function Tables() {
     const [editModal, setEditModal] = useState(false)
     const [deleteModal, setDeleteModal] = useState(false)
     const [addModal, setAddModal] = useState(false)
-    const [regex, setRegex] = useState(true)
 
     // ******************* add valitate inputs **********************
     const [validPhoneNumber, setPhoneNumber] = useState(false);
@@ -41,20 +40,29 @@ export function Tables() {
     const closeAddModal = () => {
         setAddModal(false)
         setRegex(true)
-        // validation null qilish
+        // add validation null qilish
         setPhoneNumber(null)
         setValidTextP(null)
         setPassword(null)
         setValidTextT(null)
         setValidRole(null)
+
+
     }
+
     const openEditModal = () => setEditModal(true)
     const closeEditModal = () => {
         setEditModal(false)
-        setRegex(true)
+
+        // add validation null qilish
+        setPhoneNumberEdit(null)
+        setValidTextPEdit(null)
+        setPasswordEdit(null)
+        setValidTextTEdit(null)
+        setValidRoleEdit(null)
     }
     const openDeleteModal = () => setDeleteModal(true)
-    const closeDeleteModal = () => setDeleteModal(false)
+    const closeDeleteModal = () => { setDeleteModal(false) }
 
     useEffect(() => {
         setConfig()
@@ -128,9 +136,18 @@ export function Tables() {
         }
     }
 
-
     // *******************EDIT USER **********************
     const editUser = () => {
+        function todayPlanInfo(obj) {
+            for (let key in obj) {
+                if (obj[key] === undefined || obj[key] === null || obj[key] === false || obj[key] === "NaN" || obj[key] === '') {
+                    return false;
+                    // Agar inputlardan birortasi bulsa xam (undefined, null, false, 0, NaN, ''), false qaytariladi
+                }
+            }
+            return true; // xammasi 100% tuldirilsa true qaytaradi
+        }
+
         const editData = {
             firstName: byId("editname"),
             lastName: byId("editlastname"),
@@ -138,17 +155,31 @@ export function Tables() {
             phoneNumber: `+998${byId("editphone")}`
 
         }
-        axios.put(`${api}user/update?id=${userData ? userData.id : 0}`, editData, config)
-            .then(() => {
-                closeEditModal()
-                getUser()
-                toast.success("Bu hodim muvoffaqqiyatli tahrirlandi!👌")
-            })
-            .catch((err) => {
-                closeEditModal()
-                toast.success("Bu hodimni tahrirlashda xatolik yuz berdi", { zIndex: 1000 })
+        let isTrue = todayPlanInfo(editData)
 
-            })
+        if (isTrue) {
+            if (!validPasswordEdit && !validTextPEdit) {
+                axios.put(`${api}user/update?id=${userData ? userData.id : 0}`, editData, config)
+                    .then(() => {
+                        closeEditModal()
+                        getUser()
+                        toast.success("Bu hodim muvoffaqqiyatli tahrirlandi!👌")
+                    })
+                    .catch((err) => {
+                        closeEditModal()
+                        toast.success("Bu hodimni tahrirlashda xatolik yuz berdi")
+
+                    })
+            } else {
+                toast.error("Telefon raqam yoki parolda xatolik mavjud❌")
+                // setPhoneNumberEdit(true)
+                // setPasswordEdit(true)
+            }
+        } else {
+            toast.error(" Malunot toliq kiritilmagan !")
+            setPhoneNumberEdit(false)
+            setPasswordEdit(false)
+        }
     }
 
     // *******************DELETE USER **********************
@@ -166,16 +197,6 @@ export function Tables() {
             })
     }
 
-    // ******************* REGEX **********************
-
-    const editRegex = () => {
-        if (byId("editname") !== "" && byId("editlastname") !== "" && byId("editphone") !== "" && byId("editpassword") !== "") {
-            setRegex(false)
-        } else {
-            setRegex(true)
-        }
-    }
-
     // ******************* HANDLE CHANGE **********************
 
     const validateInputs = () => {
@@ -191,6 +212,26 @@ export function Tables() {
 
             setPassword(passwordError)
             setValidTextT(passwordError)
+
+        }
+    };
+
+    const editvalidateInputs = () => {
+        let phoneNumber = document.getElementById('editphone').value;
+        let password = document.getElementById('editpassword').value;
+
+        if (editModal) {
+            let phoneError = !(/^\d{9}$/.test(phoneNumber));
+            let passwordError = !(/^[a-zA-Z0-9]{4,}$/.test(password));
+
+            setPhoneNumberEdit(phoneError)
+            setValidTextPEdit(phoneError)
+
+            setPasswordEdit(passwordError)
+            setValidTextTEdit(passwordError)
+
+            console.log(validPhoneNumberEdit);
+            console.log(validPasswordEdit);
 
         }
     };
@@ -304,10 +345,9 @@ export function Tables() {
             <Dialog open={editModal} handler={closeEditModal}>
                 <DialogHeader>Tahrirlash</DialogHeader>
                 <DialogBody>
-                    <div className="flex justify-center flex-col items-center gap-7">
+                    <div className="flex justify-center flex-col items-center gap-5">
                         <div className="w-full max-w-[24rem]">
                             <Input
-                                onChange={editRegex}
                                 required
                                 defaultValue={userData ? userData.firstName : "Ma'lumot yo'q"}
                                 id="editname"
@@ -315,33 +355,40 @@ export function Tables() {
                         </div>
                         <div className="w-full max-w-[24rem]">
                             <Input
-                                onChange={editRegex}
                                 required
                                 defaultValue={userData ? userData.lastName : "Ma'lumot yo'q"}
                                 id="editlastname"
                                 label="Familya" />
                         </div>
-                        <div className="relative flex w-full max-w-[24rem]">
-                            <Button
-                                disabled
-                                size="sm"
-                                className="!absolute left-1 top-1 rounded z-50"
-                            >
-                                +998
-                            </Button>
-                            <Input
-                                onChange={editRegex}
-                                defaultValue={userData ? userData.phoneNumber : ""}
-                                id="editphone"
-                                type="number"
-                                className="ps-20"
-                                containerProps={{
-                                    className: "min-w-0",
-                                }}
-                            />
+                        <div className="relative flex flex-col w-full max-w-[24rem]">
+                            <div className="relative w-full ">
+                                <Button
+                                    disabled
+                                    size="sm"
+                                    className="!absolute left-1 top-1 rounded z-50"
+                                >
+                                    +998
+                                </Button>
+                                <Input
+                                    defaultValue={userData ? userData.phoneNumber : ""}
+                                    id="editphone"
+                                    type="number"
+                                    className={`${validPhoneNumberEdit ? "outline outline-2 outline-offset-2 outline-red-600" : ""}ps-20`}
+                                    containerProps={{
+                                        className: "min-w-0",
+                                    }}
+                                />
+                            </div>
+                            <p className={`${validTextPEdit ? "text-red-500" : ""} text-xs w-full max-w-[24rem] mt-1`}><span className=" underline">9 ta</span>  raqamdan iborat bo'lishi kerak!</p>
                         </div>
+
                         <div className="w-full max-w-[24rem]">
-                            <Input type="password" onChange={editRegex} id="editpassword" label="Parol" />
+                            <Input
+                                className={`${validPasswordEdit ? "outline outline-2 outline-offset-2 outline-red-600" : ""}ps-20`}
+                                type="pasword"
+                                id="editpassword"
+                                label="Parol" />
+                            <p className={`${validTextPEdit ? "text-red-500" : ""} text-xs w-full max-w-[24rem] mt-1`}><span className=" underline">9 ta</span>  raqamdan iborat bo'lishi kerak!</p>
                         </div>
                     </div>
                 </DialogBody>
@@ -354,8 +401,11 @@ export function Tables() {
                     >
                         <span>Orqaga</span>
                     </Button>
-                    <span className={`${regex ? "cursor-not-allowed" : ""}`}>
-                        <Button disabled={regex} onClick={editUser} variant="gradient" color="gray">
+                    <span>
+                        <Button onClick={() => {
+                            editUser()
+                            editvalidateInputs()
+                        }} variant="gradient" color="gray">
                             <span>Tahrirlash</span>
                         </Button>
                     </span>
