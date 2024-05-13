@@ -61,7 +61,7 @@ export function DashboardNavbar() {
   }, [])
 
   // *******************EDIT USER **********************
-  const editUser = () => {
+  const editMe = () => {
     function todayPlanInfo(obj) {
       for (let key in obj) {
         if (obj[key] === undefined || obj[key] === null || obj[key] === false || obj[key] === "NaN" || obj[key] === '') {
@@ -294,7 +294,7 @@ export function DashboardNavbar() {
                 </Button>
                 <span>
                   <Button onClick={() => {
-                    editUser()
+                    editMe()
                     editvalidateInputs()
                   }} variant="gradient" color="gray">
                     <span>Tahrirlash</span>
