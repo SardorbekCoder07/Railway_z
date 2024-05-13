@@ -15,6 +15,10 @@ export function SignIn() {
     const [role, setRole] = useState('/auth/log-in');
     const [loading, setLoading] = useState(false);
     const [passwordVisible, setPasswordVisible] = useState(false);
+    const [validPhoneNumber, setPhoneNumber] = useState(false);
+    const [validPassword, setPassword] = useState(false);
+    const [validTextP, setValidTextP] = useState(false);
+    const [validTextT, setValidTextT] = useState(false);
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
@@ -24,10 +28,25 @@ export function SignIn() {
         document.getElementById('link').click();
     }, [role]);
 
+    const validateInputs = () => {
+        let phoneNumber = document.getElementById('phoneNumber').value;
+        let password = document.getElementById('password').value;
+
+        let phoneError = !(/^\998\d{9}$/.test(phoneNumber));
+        let passwordError = !(/^[a-zA-Z0-9]{4,}$/.test(password));
+
+        setPhoneNumber(phoneError)
+        setValidTextP(phoneError)
+
+        setPassword(passwordError)
+        setValidTextT(passwordError)
+    };
+
     function logIn() {
+
         let phoneNumber = `+${document.getElementById('phoneNumber').value}`;
         let password = document.getElementById('password').value;
-        if (phoneNumber && password) {
+        if (!validPhoneNumber && !validPassword) {
             setLoading(true); // Set loading state to true
             axios.post(api + "auth/login", { phoneNumber, password }, '')
                 .then(res => {
@@ -49,10 +68,11 @@ export function SignIn() {
                 })
                 .catch(() => {
                     setLoading(false)
-                    toast.error('Serverda xatolik yuz berdi❌');
+                    toast.error('Telefon raqam yoki parolda xatolik mavjud❌');
+                    setPhoneNumber(true)
+                    setPassword(true)
                 })
         } else {
-            toast.error('Ma\'lumotlarni to\'liq kiriting.');
             setLoading(false)
         }
     }
@@ -84,11 +104,12 @@ export function SignIn() {
                             type="number"
                             size="lg"
                             placeholder="993332200"
-                            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                            className={`${validPhoneNumber ? "outline outline-2 outline-offset-2 outline-red-600" : ""} !border-t-blue-gray-200 focus:!border-t-gray-900`}
                             labelProps={{
                                 className: "before:content-none after:content-none",
                             }}
                         />
+                        <p className={`${validTextP ? "text-red-500" : ""} text-xs`}>Raqam <span className=" underline">998</span> dan boshlanishi va davomidan 9 ta raqamdan iborat bo'lishi kerak!</p>
                         <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
                             Parol*
                         </Typography>
@@ -102,15 +123,21 @@ export function SignIn() {
                                     <EyeIcon className="h-4 w-4 text-white" />}
                             </Button>
                             <Input
+                                className={`${validPassword ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`}
                                 onKeyDown={checkKeyPress}
                                 type={passwordVisible ? "text" : "password"} // Toggle between text and password type
                                 id="password"
                                 placeholder="*******"
-
                             />
+
                         </div>
+                        <p className={`${validTextT ? "text-red-500" : ""} text-xs`}>parol <span className=" underline">4 dan</span> ko'p raqam va xarflardan iborat bo'lishi kerak</p>
+
                     </div>
-                    <Button onClick={() => logIn()} className="mt-6" fullWidth disabled={loading}>
+                    <Button onClick={() => {
+                        validateInputs()
+                        logIn()
+                    }} className="mt-6" fullWidth disabled={loading}>
                         {loading ? "Yuklanmoqda..." : "Kirish"} {/* Show loading text when loading */}
                     </Button>
                     <Link id="link" to={role}></Link>
