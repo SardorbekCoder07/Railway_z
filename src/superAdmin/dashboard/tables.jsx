@@ -122,7 +122,7 @@ export function Tables() {
                 }
             }
         } else {
-            toast.error(" Malunot toliq kiritilmagan !")
+            toast.error(" Malunot to'liq kiritilmagan !")
             setPhoneNumber(true)
             setPassword(true)
         }

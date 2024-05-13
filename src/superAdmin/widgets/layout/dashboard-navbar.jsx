@@ -30,7 +30,8 @@ import {
   setOpenSidenav,
 } from "@/context";
 import { FaEdit } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { userGetNe } from "@/api/api";
 
 export function DashboardNavbar() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -38,10 +39,35 @@ export function DashboardNavbar() {
   const { pathname } = useLocation();
   const [layout, page] = pathname.split("/").filter((el) => el !== "");
   const [editModal, setEditModal] = useState(false)
+  const [getMy, setGetMy] = useState(null)
+
   const openEditModal = () => setEditModal(true)
   const closeEditModal = () => {
-      setEditModal(false)
+    setEditModal(false)
   }
+
+  useEffect(() => {
+    userGetNe(setGetMy)
+  }, [])
+
+  // ******************* HANDLE CHANGE **********************
+
+  const validateInputs = () => {
+    let phoneNumber = document.getElementById('addphone').value;
+    let password = document.getElementById('addpassword').value;
+
+    if (addModal) {
+      let phoneError = !(/^\d{9}$/.test(phoneNumber));
+      let passwordError = !(/^[a-zA-Z0-9]{4,}$/.test(password));
+
+      setPhoneNumber(phoneError)
+      setValidTextP(phoneError)
+
+      setPassword(passwordError)
+      setValidTextT(passwordError)
+
+    }
+  };
   return (
     <Navbar
       color={"white"}
@@ -97,11 +123,11 @@ export function DashboardNavbar() {
                   color="blue-gray"
                   className="mb-1 font-normal"
                 >
-                  <strong>Ism</strong>
+                  <strong>{getMy ? getMy.firstName : ""}</strong>
                 </Typography>
                 <Avatar
                   className="cursor-pointer"
-                  src="https://demos.creative-tim.com/material-dashboard/assets/img/small-logos/logo-spotify.svg"
+                  src="https://cdn-icons-png.freepik.com/512/6596/6596121.png"
                   alt="item-1"
                   size="md"
                   variant="circular"
@@ -127,7 +153,7 @@ export function DashboardNavbar() {
                     color="blue-gray"
                     className="flex items-center gap-1 text-xs font-normal opacity-60"
                   >
-                    Ali valiyev
+                    {getMy ? getMy.firstName : ""} {getMy ? getMy.lastName : ""}
                   </Typography>
                 </div>
               </MenuItem>
@@ -145,25 +171,7 @@ export function DashboardNavbar() {
                     color="blue-gray"
                     className="flex items-center gap-1 text-xs font-normal opacity-60"
                   >
-                    +998972220790
-                  </Typography>
-                </div>
-              </MenuItem>
-              <MenuItem className="flex items-center gap-4">
-                <div>
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="mb-1 font-normal"
-                  >
-                    <strong>Parol</strong>
-                  </Typography>
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="flex items-center gap-1 text-xs font-normal opacity-60"
-                  >
-                    *******
+                    {getMy ? getMy.phoneNumber : ""}
                   </Typography>
                 </div>
               </MenuItem>
@@ -172,44 +180,44 @@ export function DashboardNavbar() {
 
           <div>
 
-        <Dialog open={editModal} handler={closeEditModal}>
-          <DialogHeader>Tahrirlash</DialogHeader>
-          <DialogBody>
-            <div className="flex justify-center flex-col items-center gap-7">
-              <div className="w-full max-w-[24rem]">
-                <Input
-                  id="editName" label="Ism" />
-              </div>
-              <div className="w-full max-w-[24rem]">
-                <Input
-                  id="editPhone"
-                  label="Telefon raqam" />
-              </div>
-              <div className="w-full max-w-[24rem]">
-                <Input
-                  id="editPassword"
-                  label="Parol" />
-              </div>
-            </div>
-          </DialogBody>
-          <DialogFooter>
-            <Button
-              variant="text"
-              color="red"
-              onClick={closeEditModal}
-              className="mr-1"
-            >
-              <span>Orqaga</span>
-            </Button>
-            <span >
+            <Dialog open={editModal} handler={closeEditModal}>
+              <DialogHeader>Tahrirlash</DialogHeader>
+              <DialogBody>
+                <div className="flex justify-center flex-col items-center gap-7">
+                  <div className="w-full max-w-[24rem]">
+                    <Input
+                      id="editName" label="Ism" />
+                  </div>
+                  <div className="w-full max-w-[24rem]">
+                    <Input
+                      id="editPhone"
+                      label="Telefon raqam" />
+                  </div>
+                  <div className="w-full max-w-[24rem]">
+                    <Input
+                      id="editPassword"
+                      label="Parol" />
+                  </div>
+                </div>
+              </DialogBody>
+              <DialogFooter>
+                <Button
+                  variant="text"
+                  color="red"
+                  onClick={closeEditModal}
+                  className="mr-1"
+                >
+                  <span>Orqaga</span>
+                </Button>
+                <span >
 
-              <Button variant="gradient" color="gray">
-                <span>Tahrirlash</span>
-              </Button>
-            </span>
-          </DialogFooter>
-        </Dialog>
-        </div>
+                  <Button variant="gradient" color="gray">
+                    <span>Tahrirlash</span>
+                  </Button>
+                </span>
+              </DialogFooter>
+            </Dialog>
+          </div>
 
         </div>
       </div>
