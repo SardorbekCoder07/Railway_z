@@ -14,11 +14,67 @@ import axios from "axios";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import toast from "react-hot-toast";
 
-export function TabsWithWork({ pk, onClose, setPkIdIn }) {
+export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 
   const [selectedTab, setSelectedTab] = useState("html");
   const [tool, setTool] = useState([]);
   const [toolId, setToolId] = useState([]);
+  const [inputs, setInputs] = useState({
+    employeeCount: '',
+    vacationCount: '',
+    sickCount: '',
+    restCount: '',
+    tripCount: '',
+    onTrainingCount: '',
+    protectionStackST: '',
+    protectionStackPR: '',
+    relayConnectorsST: '',
+    relayConnectorsPR: '',
+    tomorrowPlan: "",
+    todayPlanID: ""
+  });
+
+  const [errors, setErrors] = useState({});  // Xatolar uchun yangi state
+
+  // Inputlarni o'zgartirish uchun ishlatiladigan funksiya
+  const handleChange = (event) => {
+    const { id, value } = event.target;
+    setInputs(prev => ({
+      ...prev,
+      [id]: value
+    }));
+    // Agar foydalanuvchi input qiymatini o'zgartirsa, xato holatini o'chirib tashlaymiz
+    if (errors[id]) {
+      setErrors(prev => ({
+        ...prev,
+        [id]: false
+      }));
+    }
+  };
+
+  // Ma'lumotlarni yuborish
+  const handleSubmit = () => {
+    const newErrors = {};
+    Object.keys(inputs).forEach(key => {
+      // Ba'zi maydonlar majburiy emas
+      if (!inputs[key] && !(key.includes('protectionStack') || key.includes('relayConnectors'))) {
+        newErrors[key] = true;
+      }
+    });
+
+    if (Object.keys(newErrors).length > 0) {
+      toast.error("Malumotlar to'liq emas❌");
+      setErrors(newErrors);  // Xatoliklar state'ini yangilaymiz
+    } else {
+    }
+  };
+
+  // Xatolik uslubini qo'llash
+  const inputClass = (key) => {
+    return errors[key] ? `outline outline-2 outline-offset-2 outline-red-600 ` : '';
+  };
+
+
 
   useEffect(() => {
     setConfig();
@@ -132,16 +188,14 @@ export function TabsWithWork({ pk, onClose, setPkIdIn }) {
         tripCount: Number(dataObj.tripCount),
         onTrainingCount: Number(dataObj.onTrainingCount)
       }, config)
-        .then((res) => {
+        .then(() => {
           toast.success("Hisobot muvaffaqiyatli saqlandi✔")
           onClose()
           setPkIdIn(true)
-        }).catch((error) => {
+          getAdminStatistics()
+        }).catch(() => {
           alert("Malumotlarni saqlashda xatolik yuz berdi❌")
         })
-    } else {
-      alert("Malumotlar to'liq emas❌")
-
     }
   };
 
@@ -164,7 +218,10 @@ export function TabsWithWork({ pk, onClose, setPkIdIn }) {
       input: (
         <div className="relative w-full min-w-[200px]">
           <textarea
-            className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
+            required
+            onChange={handleChange}
+            value={inputs.todayPlanID}
+            className={`${inputClass('todayPlanID')}peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 `}
             placeholder=" "
             id="todayPlanID"
           />
@@ -182,7 +239,10 @@ export function TabsWithWork({ pk, onClose, setPkIdIn }) {
       input: (
         <div className="relative w-full min-w-[200px]">
           <textarea
-            className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
+            required
+            onChange={handleChange}
+            value={inputs.tomorrowPlan}
+            className={`${inputClass('tomorrowPlan')}peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 `}
             placeholder=" "
             id="tomorrowPlan"
           />
@@ -198,7 +258,7 @@ export function TabsWithWork({ pk, onClose, setPkIdIn }) {
       label: "Ish Qurollari",
       value: "css",
       input: (
-        <div className="relative w-full min-w-[200px]">
+        <div className="relative w-full min-w-[200px] ">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
@@ -236,6 +296,7 @@ export function TabsWithWork({ pk, onClose, setPkIdIn }) {
                           placeholder="Soni"
                           id={item.id}
                         />
+
                       </div>
                     </td>
                   </tr>
@@ -248,6 +309,7 @@ export function TabsWithWork({ pk, onClose, setPkIdIn }) {
         <div>
           <Button onClick={() => {
             todayPlanAdd()
+            handleSubmit()
           }} className="flex items-center ju" >Yuborish</Button>
         </div>
       ),
@@ -257,17 +319,17 @@ export function TabsWithWork({ pk, onClose, setPkIdIn }) {
   return (
     <div className="mt-5 mb-10 flex flex-col gap-10">
       <div>
-        <h3>PD-report</h3>
+        <h3> Brigadaga ish qo'shish</h3>
         {/* for calendar */}
       </div>
       <div className="text-sm text-gray-900 grid grid-cols-1 md:grid-cols-2 gap-3">
 
-        <Input required type="number" id="employeeCount" label="Ishchilar soni" />
-        <Input required type="number" id="vacationCount" label="Bemor xodimlar soni" />
-        <Input required type="number" id="sickCount" label="Dam olishdagilar soni" />
-        <Input required type="number" id="restCount" label="Kamandirofkadagilar soni" />
-        <Input required type="number" id="tripCount" label="Malaka oshirishga ketganlar" />
-        <Input required type="number" id="onTrainingCount" label="O'quv kursida" />
+        <Input required className={inputClass('employeeCount')} type="number" id="employeeCount" onChange={handleChange} value={inputs.employeeCount} label="Bugungi jami ishlayotganlar soni" />
+        <Input required className={inputClass('vacationCount')} type="number" id="vacationCount" onChange={handleChange} value={inputs.vacationCount} label="Dam oluvchilar soni(otgul)" />
+        <Input required className={inputClass('sickCount')} type="number" id="sickCount" onChange={handleChange} value={inputs.sickCount} label="Kasallar soni" />
+        <Input required className={inputClass('onTrainingCount')} type="number" id="onTrainingCount" onChange={handleChange} label="Ish haqi saqlanmagan holda (BS)" />
+        <Input required className={inputClass('tripCount')} type="number" id="tripCount" onChange={handleChange} label="Xizmat safarifda" />
+        <Input required className={inputClass('restCount')} type="number" id="restCount" onChange={handleChange} label="Malaka oshirishga (o'qishga) ketganlar soni" />
 
         <Input type="text" id="protectionStackST" label="Rels ulagichlari ST." />
         <Input type="text" id="protectionStackPR" label="Rels ulagichlari PR." />

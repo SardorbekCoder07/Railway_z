@@ -70,6 +70,7 @@ export function Sidenav({ brandImg, brandName, routes }) {
                           ? "white"
                           : "blue-gray"
                       }
+                      onClick={() => setOpenSidenav(dispatch, false)}
                       className="flex items-center gap-4 px-4 capitalize"
                       fullWidth
                     >

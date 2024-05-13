@@ -17,13 +17,17 @@ import { MapPinIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { api, byId, config, setConfig } from "@/api/api";
 import toast from "react-hot-toast";
-import {MdDelete} from "react-icons/md";
-import {FaEdit} from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 
 export function AddLocation() {
   const [km, setkm] = useState(null);
+
   const [users, setUsers] = useState(null);
+  const [usersValid, setusersValid] = useState(false);
+
   const [pdbId, setPDBid] = useState(null);
+
   const [kmData, setkmData] = useState(null);
   const [editModal, setEditModal] = useState(false);
   const [addModal, setAddModal] = useState(false);
@@ -32,15 +36,24 @@ export function AddLocation() {
   const [selectPdbId, setSelectPdbId] = useState(null);
 
 
-  const openEditModal = () => setEditModal(true)
+  const openEditModal = () => {
+    setEditModal(true)
+
+  }
   const closeEditModal = () => {
     setEditModal(false)
     setRegex(true)
+
   }
-  const openAddModal = () => setAddModal(true)
+  const openAddModal = () => {
+    setAddModal(true)
+    setPDBid(null)
+    setusersValid(false)
+  }
   const closeAddModal = () => {
     setAddModal(false)
     setRegex(true)
+    setPDBid(null)
   }
 
   useEffect(() => {
@@ -91,18 +104,25 @@ export function AddLocation() {
       km: byId("addkm"),
       pdbId: pdbId,
     };
-    axios
-      .post(`${api}railway`, addData, config)
-      .then((res) => {
-        closeAddModal();
-        getkm(selectPdbId);
-        toast.success("Manzil muoffaqqiyatli qo'shildi!👌");
-      })
-      .catch((err) => {
-        closeAddModal();
-        toast.error("Manzil qo'shilmadi❌");
-        ;
-      })
+
+    if (pdbId) {
+      axios
+        .post(`${api}railway`, addData, config)
+        .then((res) => {
+          closeAddModal();
+          getkm(selectPdbId);
+          toast.success("Manzil muoffaqqiyatli qo'shildi!👌");
+        })
+        .catch((err) => {
+          closeAddModal();
+          toast.error("Manzil qo'shilmadi❌");
+          ;
+        })
+    } else {
+      toast.error("Bo'linmani tanlang ❗️");
+      setusersValid(true)
+    }
+
   };
 
 
@@ -114,43 +134,51 @@ export function AddLocation() {
       km: byId("editkm"),
       pdbId: pdbId,
     };
-    axios
-      .put(`${api}railway?id=${kmData ? kmData.id : 0}`, editData, config)
-      .then((res) => {
-        closeEditModal();
-        getkm(selectPdbId);
-        toast.success("Ish quroli muvoffaqqiyatli tahrirlandi!👌");
-      })
-      .catch((err) => {
-        toast.error("Ish quroli tahrirlanmadi❌");
-        closeEditModal();
-      })
-      .finally(() => {
-      });
+    if (pdbId) {
+      axios
+        .put(`${api}railway?id=${kmData ? kmData.id : 0}`, editData, config)
+        .then((res) => {
+          closeEditModal();
+          getkm(selectPdbId);
+          toast.success("Ish quroli muvoffaqqiyatli tahrirlandi!👌");
+        })
+        .catch((err) => {
+          toast.error("Ish quroli tahrirlanmadi❌");
+          closeEditModal();
+        })
+        .finally(() => {
+        });
+    } else {
+      toast.error("Bo'linmani tanlang ❗️");
+      setusersValid(true)
+    }
   };
 
 
   // ******************* REGEX **********************
 
+
   const addRegex = () => {
-    if (
-      byId("addkm") !== ""
-    ) {
-      setRegex(false)
-    }
-    else {
-      setRegex(true)
+    // Bosh va oraliq probellarni olib tashlash uchun trim() metodidan foydalanish
+    const editPDValue = document.getElementById("addkm").value.trim();
+
+    // Har ikkala qiymat ham bo'sh emasligini tekshirish
+    if (editPDValue !== "") {
+      setRegex(false); // Agar har ikkala qiymat ham bo'sh emas bo'lsa, regex state'ini false qilib o'rnatish
+    } else {
+      setRegex(true);  // Aks holda, regex state'ini true qilib o'rnatish
     }
   }
 
   const editRegex = () => {
-    if (
-      byId("editkm") !== ""
-    ) {
-      setRegex(false)
-    }
-    else {
-      setRegex(true)
+    // Bosh va oraliq probellarni olib tashlash uchun trim() metodidan foydalanish
+    const editPDValue = document.getElementById("editkm").value.trim();
+
+    // Har ikkala qiymat ham bo'sh emasligini tekshirish
+    if (editPDValue !== "") {
+      setRegex(false); // Agar har ikkala qiymat ham bo'sh emas bo'lsa, regex state'ini false qilib o'rnatish
+    } else {
+      setRegex(true);  // Aks holda, regex state'ini true qilib o'rnatish
     }
   }
 
@@ -160,7 +188,7 @@ export function AddLocation() {
       <Card>
         <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
           <Typography variant="h6" color="white">
-            Masofalar Jadvali
+            Yo'l Masofalari Jadvali
           </Typography>
           <Button
             onClick={openAddModal}
@@ -170,40 +198,35 @@ export function AddLocation() {
           </Button>
         </CardHeader>
         <CardBody className=" px-0 pt-0 pb-2">
-            <Typography variant="h6" color="gray" className="ml-10 mb-3">
-              KM ma'lumotini olish uchun
-            </Typography>
-          <div className="w-full flex justify-center items-center gap-5">
-
-            <div className="w-full max-w-[24rem]">
-              <Select onChange={(e) => {
-                getUser(e)
-              }} label="Bo'linmani tanlang">
+          <Typography variant="h6" color="gray" className="ml-10 mb-3">
+            KM ma'lumotini olish uchun
+          </Typography>
+          <div className="w-full flex justify-center items-center gap-5 flex-col md:flex-row">
+            <div className="w-full max-w-[20rem]">
+              <Select onChange={(e) => { getUser(e); }} label="Bo'linmani tanlang">
                 {
                   pdUsers ? pdUsers.map((item, i) =>
                     <Option key={i} value={item.id}>{item.name}</Option>
                   ) : (
-                    <Option>Malumot yo'q</Option>
+                    <Option disabled>Malumot yo'q</Option>
                   )
                 }
               </Select>
             </div>
-            <div className="w-full max-w-[24rem]">
-              <Select onChange={(e) => {
-                setSelectPdbId(e)
-                getkm(e)
-              }} label="Brigadani tanlang">
+            <div className="w-full max-w-[20rem]">
+              <Select onChange={(e) => { setSelectPdbId(e); getkm(e); }} label="Brigadani tanlang">
                 {
                   users ? users.map((item, i) =>
                     <Option key={i} value={item.id}>{item.name}</Option>
                   ) : (
-                    <Option>Malumot yo'q</Option>
+                    <Option disabled>Ma'lumot yo'q</Option>
                   )
                 }
               </Select>
             </div>
           </div>
-          <table className="w-full min-w-[640px] table-auto">
+
+          <div className="overflow-x-auto"><table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
                 {["#", "KM", "Amallar"].map((el) => (
@@ -263,7 +286,7 @@ export function AddLocation() {
                         openEditModal()
                         setkmData(item)
                       }} className=" cursor-pointer text-[1.2rem] font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
-                        <FaEdit/>
+                        <FaEdit />
                       </Typography>
                     </td>
                   </tr>
@@ -275,13 +298,14 @@ export function AddLocation() {
                   <td></td>
                   <td className="">
                     <Typography className=" cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
-                      Malumot yo'q
+                      Ma'lumot yo'q
                     </Typography></td>
                   <td></td>
 
                 </tr>}
             </tbody>
-          </table>
+          </table></div>
+
         </CardBody>
       </Card>
       <div>
@@ -297,9 +321,11 @@ export function AddLocation() {
                 <Input type="number" onChange={editRegex} required defaultValue={kmData ? kmData.km : "Ma'lumot yo'q"} id="editkm" label="km nomi" />
               </div>
               <div className="w-full max-w-[24rem]">
-                <Select onChange={(e) => {
-                  getUser(e)
-                }} label="Bo'linmani tanlang">
+                <Select
+                  className={`${usersValid ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`}
+                  onChange={(e) => {
+                    getUser(e)
+                  }} label="Bo'linmani tanlang">
                   {
                     pdUsers ? pdUsers.map((item, i) =>
                       <Option key={i} value={item.id}>{item.name}</Option>
@@ -310,9 +336,11 @@ export function AddLocation() {
                 </Select>
               </div>
               <div className="w-full max-w-[24rem]">
-                <Select onChange={(e) => {
-                  setPDBid(e)
-                }} label="Brigadani tanlang">
+                <Select
+                  className={`${usersValid ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`}
+                  onChange={(e) => {
+                    setPDBid(e)
+                  }} label="Brigadani tanlang">
                   {
                     users ? users.map((item, i) =>
                       <Option key={i} value={item.id}>{item.name}</Option>
@@ -356,30 +384,34 @@ export function AddLocation() {
                 <Input type="number" onChange={addRegex} required id="addkm" label="KM" />
               </div>
               <div className="w-full max-w-[24rem]">
-              <Select onChange={(e) => {
-                getUser(e)
-              }} label="Bo'linmani tanlang">
-                {
-                  pdUsers ? pdUsers.map((item, i) =>
-                    <Option key={i} value={item.id}>{item.name}</Option>
-                  ) : (
-                    <Option>Malumot yo'q</Option>
-                  )
-                }
-              </Select>
+                <Select
+                  className={`${usersValid ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`}
+                  onChange={(e) => {
+                    getUser(e)
+                  }} label="Bo'linmani tanlang">
+                  {
+                    pdUsers ? pdUsers.map((item, i) =>
+                      <Option key={i} value={item.id}>{item.name}</Option>
+                    ) : (
+                      <Option disabled>Malumot yo'q</Option>
+                    )
+                  }
+                </Select>
               </div>
               <div className="w-full max-w-[24rem]">
-              <Select onChange={(e) => {
-                setPDBid(e)
-              }} label="PDB tanlang">
-                {
-                  users ? users.map((item, i) =>
-                    <Option key={i} value={item.id}>{item.name}</Option>
-                  ) : (
-                    <Option>Malumot yo'q</Option>
-                  )
-                }
-              </Select>
+                <Select
+                  className={`${usersValid ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`}
+                  onChange={(e) => {
+                    setPDBid(e)
+                  }} label="PDB tanlang">
+                  {
+                    users ? users.map((item, i) =>
+                      <Option key={i} value={item.id}>{item.name}</Option>
+                    ) : (
+                      <Option disabled>Malumot yo'q</Option>
+                    )
+                  }
+                </Select>
               </div>
             </div>
           </DialogBody>

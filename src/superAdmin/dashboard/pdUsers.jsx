@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
     Card,
     CardHeader,
@@ -13,19 +13,18 @@ import {
     Select,
     Option,
 } from "@material-tailwind/react";
-import {MdDelete} from "react-icons/md";
-import {FaEdit} from "react-icons/fa";
-import {authorsTableData} from "@/superAdmin/data";
-import {CircularPagination} from "@/superAdmin/widgets/layout/circlePagination";
-import {UserPlusIcon} from "@heroicons/react/24/solid";
+import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
+import { UserPlusIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
-import {api, byId, config, setConfig} from "@/api/api";
+import { api, byId, config, setConfig } from "@/api/api";
 import toast from "react-hot-toast";
 
 export function PdUsers() {
     const [PD, setPD] = useState(null)
     const [users, setUsers] = useState(null)
     const [userID, setUserId] = useState(null)
+    const [userValid, setuserValid] = useState(false)
     const [userData, setUserData] = useState(null)
     const [editModal, setEditModal] = useState(false)
     const [deleteModal, setDeleteModal] = useState(false)
@@ -36,6 +35,7 @@ export function PdUsers() {
     const closeAddModal = () => {
         setAddModal(false)
         setRegex(true)
+        setuserValid(false)
     }
     const openEditModal = () => setEditModal(true)
     const closeEditModal = () => {
@@ -56,7 +56,7 @@ export function PdUsers() {
     const getUser = () => {
         axios.get(`${api}user/leader/no/pd`, config)
             .then((res) => {
-                 setUsers(res.data.body);
+                setUsers(res.data.body);
             })
             .catch((err) => {
             })
@@ -80,19 +80,26 @@ export function PdUsers() {
             employeeCount: byId("addemployeeCount"),
             userId: userID ? userID : 0
         }
-        axios.post(`${api}pd/add`, addData, config)
-            .then((res) => {
-                closeAddModal()
-                getPD()
-                toast.success("Vazifa muoffaqqiyatli bajarildi!")
-            })
-            .catch((err) => {
-                closeAddModal()
-                toast.error("PD qo'shishda xatolik yuzberdi")
-                {
-                }
-                ;
-            })
+        console.log(userID);
+        if (userID) {
+            axios.post(`${api}pd/add`, addData, config)
+                .then((res) => {
+                    closeAddModal()
+                    getPD()
+                    getUser()
+                    toast.success("Yo'l ustasi muvaffaqiyatli qo'shildi ✅")
+                    setUserId(null)
+                })
+                .catch((err) => {
+                    closeAddModal()
+                    toast.error("Yo'l ustasi qo'shishda xatolik yuzberdi ❗️");
+                    setUserId(null)
+                })
+        } else {
+            setuserValid(true)
+            toast.error("Hodimni tanlang ❗️")
+        }
+
     }
 
 
@@ -125,11 +132,11 @@ export function PdUsers() {
             .then(() => {
                 closeDeleteModal()
                 getPD()
-                toast.success("Bu PD muvoffaqqiyatli tahrirlandi!👌")
+                toast.success("Yo'l ustasi muvoffaqqiyatli o'chirildi! ✅")
 
             })
             .catch((err) => {
-               toast.error("PD o'chirishda xatolik yuz berdi")
+                toast.error("Yo'l ustasini o'chirishda xatolik yuz berdi")
                 closeDeleteModal()
             })
 
@@ -139,66 +146,70 @@ export function PdUsers() {
     // ******************* REGEX **********************
 
     const addRegex = () => {
-        if (
-            byId("addPD") !== "" &&
-            byId("addemployeeCount") !== ""
-        ) {
-            setRegex(false)
-        } else {
-            setRegex(true)
-        }
+        // Bosh va oraliq probellarni olib tashlash uchun trim() metodidan foydalanish
+        const editPDValue = document.getElementById("addPD").value.trim();
+        const employeeCountValue = document.getElementById("addemployeeCount").value.trim();
 
+        // Har ikkala qiymat ham bo'sh emasligini tekshirish
+        if (editPDValue !== "" && employeeCountValue !== "") {
+            setRegex(false); // Agar har ikkala qiymat ham bo'sh emas bo'lsa, regex state'ini false qilib o'rnatish
+        } else {
+            setRegex(true);  // Aks holda, regex state'ini true qilib o'rnatish
+        }
     }
 
     const editRegex = () => {
-        if (
-            byId("editPD") !== "" &&
-            byId("editemployeeCount") !== ""
-        ) {
-            setRegex(false)
+        // Bosh va oraliq probellarni olib tashlash uchun trim() metodidan foydalanish
+        const editPDValue = document.getElementById("editPD").value.trim();
+        const employeeCountValue = document.getElementById("editemployeeCount").value.trim();
+
+        // Har ikkala qiymat ham bo'sh emasligini tekshirish
+        if (editPDValue !== "" && employeeCountValue !== "") {
+            setRegex(false); // Agar har ikkala qiymat ham bo'sh emas bo'lsa, regex state'ini false qilib o'rnatish
         } else {
-            setRegex(true)
+            setRegex(true);  // Aks holda, regex state'ini true qilib o'rnatish
         }
     }
-     return (
+
+    return (
         <div className="mt-12 mb-8 flex flex-col gap-12 ">
             <Card>
                 <CardHeader variant="gradient" color="gray" className="mb-8 flex items-center justify-between p-6">
                     <Typography variant="h6" color="white">
-                        Yo'l Ustlari
+                        Yo'l Ustalari
                     </Typography>
                     <Button
                         onClick={openAddModal}
                         className="bg-[#fff] text-black px-3 py-2 rounded-md">
-                        <UserPlusIcon className="h-6 w-6 text-black"/>
+                        <UserPlusIcon className="h-6 w-6 text-black" />
                     </Button>
                 </CardHeader>
-                <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
+                <CardBody className="overflow-x-auto px-0 pt-0 pb-2">
                     <table className="w-full min-w-[640px] table-auto">
                         <thead>
-                        <tr>
-                            {["#", "Bo'linma", "Ishchilar soni", "Yo'l Ustlari", "Amallar"].map((el) => (
-                                <th
-                                    key={el}
-                                    className="border-b border-blue-gray-50 py-3 px-5 text-left"
-                                >
-                                    <Typography
-                                        variant="small"
-                                        className="text-[11px] font-bold uppercase text-blue-gray-400"
+                            <tr>
+                                {["#", "Bo'linma", "Ishchilar soni", "Yo'l Ustalari", "Amallar"].map((el) => (
+                                    <th
+                                        key={el}
+                                        className="border-b border-blue-gray-50 py-3 px-5 text-left"
                                     >
-                                        {el}
-                                    </Typography>
-                                </th>
-                            ))}
-                        </tr>
+                                        <Typography
+                                            variant="small"
+                                            className="text-[11px] font-bold uppercase text-blue-gray-400"
+                                        >
+                                            {el}
+                                        </Typography>
+                                    </th>
+                                ))}
+                            </tr>
                         </thead>
                         <tbody>
 
-                        {PD ? PD.map((item, i) => {
+                            {PD ? PD.map((item, i) => {
                                 const className = `py-3 px-5  ${i === PD && PD.length - 1
                                     ? ""
                                     : "border-b border-blue-gray-50"
-                                }`
+                                    }`
                                 return (
 
                                     <tr key={i}>
@@ -242,34 +253,34 @@ export function PdUsers() {
                                                 openEditModal()
                                                 setUserData(item)
                                             }}
-                                                        className=" cursor-pointer text-[1.2rem] font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
-                                                <FaEdit/>
+                                                className=" cursor-pointer text-[1.2rem] font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
+                                                <FaEdit />
                                             </Typography>
                                             <Typography onClick={() => {
                                                 openDeleteModal()
                                                 setUserData(item)
                                             }}
-                                                        className=" cursor-pointer text-[1.2rem] font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
-                                                <MdDelete/>
+                                                className=" cursor-pointer text-[1.2rem] font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
+                                                <MdDelete />
                                             </Typography>
                                         </td>
                                     </tr>
                                 )
                             }
-                        ) : (
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td className="text-center">
-                                    <Typography
-                                        className=" cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
-                                        Malumot yo'q
-                                    </Typography></td>
-                                <td></td>
-                                <td></td>
+                            ) : (
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td className="text-center">
+                                        <Typography
+                                            className=" cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
+                                            Malumot yo'q
+                                        </Typography></td>
+                                    <td></td>
+                                    <td></td>
 
-                            </tr>
-                        )}
+                                </tr>
+                            )}
 
                         </tbody>
                     </table>
@@ -284,12 +295,12 @@ export function PdUsers() {
                         <div className="flex justify-center flex-col items-center gap-7">
                             <div className="w-full max-w-[24rem]">
                                 <Input onChange={editRegex} required defaultValue={userData ? userData.name : "Ma'lumot yo'q"}
-                                       id="editPD" label="Bo'linma nomi"/>
+                                    id="editPD" label="Bo'linma nomi" />
                             </div>
                             <div className="w-full max-w-[24rem]">
                                 <Input onChange={editRegex} required
-                                       defaultValue={userData ? userData.employeeCount : "Ma'lumot yo'q"} id="editemployeeCount"
-                                       label="Ishchi soni"/>
+                                    defaultValue={userData ? userData.employeeCount : "Ma'lumot yo'q"} id="editemployeeCount"
+                                    label="Ishchi soni" />
                             </div>
                             <div className="w-full max-w-[24rem]">
                                 <Select onChange={(e) => {
@@ -319,10 +330,10 @@ export function PdUsers() {
                         </Button>
                         <span className={`${regex ? "cursor-not-allowed" : ""}`}>
 
-              <Button disabled={regex} onClick={editPd} variant="gradient" color="gray">
-                <span>Tahrirlash</span>
-              </Button>
-            </span>
+                            <Button disabled={regex} onClick={editPd} variant="gradient" color="gray">
+                                <span>Tahrirlash</span>
+                            </Button>
+                        </span>
                     </DialogFooter>
                 </Dialog>
             </div>
@@ -335,21 +346,23 @@ export function PdUsers() {
                     <DialogBody>
                         <div className="flex justify-center flex-col items-center gap-7">
                             <div className="w-full max-w-[24rem]">
-                                <Input onChange={addRegex} required id="addPD" label="PD nomi"/>
+                                <Input onChange={addRegex} required id="addPD" label="PD nomi" />
                             </div>
                             <div className="w-full max-w-[24rem]">
-                                <Input onChange={addRegex} required id="addemployeeCount" label="Ishchi soni"/>
+                                <Input onChange={addRegex} required id="addemployeeCount" label="Ishchi soni" type="number" />
                             </div>
                             <div className="w-full max-w-[24rem]">
-                                <Select onChange={(e) => {
-                                    setUserId(e)
-                                    addRegex()
-                                }} label="Yo'l ustasini tanlash">
+                                <Select
+                                    className={`${userValid ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`}
+                                    onChange={(e) => {
+                                        setUserId(e)
+                                        addRegex()
+                                    }} label="Yo'l ustasini tanlash">
                                     {
                                         users ? users.map((item, i) =>
                                             <Option key={i} value={item.id}>{item.firstName} {item.lastName}</Option>
                                         ) : (
-                                            <Option>Malumot yo'q</Option>
+                                            <Option disabled>Malumot yo'q</Option>
 
                                         )
                                     }
@@ -368,10 +381,10 @@ export function PdUsers() {
                         </Button>
                         <span className={`${regex ? "cursor-not-allowed" : ""}`}>
 
-              <Button disabled={regex} onClick={addPD} variant="gradient" color="gray">
-                <span>Qo'shish</span>
-              </Button>
-            </span>
+                            <Button disabled={regex} onClick={addPD} variant="gradient" color="gray">
+                                <span>Qo'shish</span>
+                            </Button>
+                        </span>
                     </DialogFooter>
                 </Dialog>
             </div>

@@ -125,12 +125,12 @@ export function Home() {
             <div className="w-52">
               <Select
                 onChange={id => getPDB(id)}
-                label="Yo'l ustlari">
+                label="Yo'l ustalari">
                 {adminUsers && adminUsers.length !== 0 ?
                   adminUsers.map(item => (
                     <Option value={item.id}>{item.name}</Option>
                   )) : (
-                    <Option value={``}>Ma'lumot yo'q</Option>
+                    <Option value={``} disabled>Ma'lumot yo'q</Option>
                   )}
               </Select>
             </div>
@@ -142,7 +142,7 @@ export function Home() {
                   ? pdbList.map(item =>
                     <Option value={item.id}>{item.name}</Option>
                   )
-                  : <Option value={``}>Ma'lumot yo'q</Option>
+                  : <Option value={``} disabled>Ma'lumot yo'q</Option>
                 }
               </Select>
             </div>
@@ -154,7 +154,7 @@ export function Home() {
                   ? railwayList.map(item =>
                     <Option value={item.id}>{item.km} km</Option>
                   )
-                  : <Option value={``}>Ma'lumot yo'q</Option>
+                  : <Option value={``} disabled>Ma'lumot yo'q</Option>
                 }
               </Select>
             </div>
@@ -250,7 +250,7 @@ export function Home() {
         <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">{dayPlan ? dayPlan.todayPlan : "Malumot mavjud emas"}</Typography>
       </DialogBody>
       <DialogFooter>
-        <Button onClick={handleCloseTodayModal}>Close Modal</Button>
+        <Button onClick={handleCloseTodayModal}>Yopish</Button>
       </DialogFooter>
     </Dialog>
 
@@ -261,7 +261,7 @@ export function Home() {
         <Typography variant="small" className="text-sm text-center font-bold uppercase text-black">{dayPlan ? dayPlan.tomorrowPlan : "Malumot mavjud emas"}</Typography>
       </DialogBody>
       <DialogFooter>
-        <Button onClick={handleCloseTomorrowModal}>Close Modal</Button>
+        <Button onClick={handleCloseTomorrowModal}>Yopish</Button>
       </DialogFooter>
     </Dialog>
 
@@ -285,7 +285,7 @@ export function Home() {
         </div>
       </DialogBody>
       <DialogFooter>
-        <Button onClick={closeToolModal}>Close Modal</Button>
+        <Button onClick={closeToolModal}>Yopish</Button>
       </DialogFooter>
     </Dialog>
 
@@ -381,7 +381,7 @@ export function Home() {
         </div>
       </DialogBody>
       <DialogFooter>
-        <Button onClick={closeElseModal}>Close Modal</Button>
+        <Button onClick={closeElseModal}>Yopish</Button>
       </DialogFooter>
     </Dialog>
 

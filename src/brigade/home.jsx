@@ -26,6 +26,7 @@ export function Home() {
     const [getMe, setGetme] = useState(null)
     const [pk, setPk] = useState(null);
     const [pkIdIn, setPkIdIn] = useState(false);
+    const [getAdminStatistic, setgetAdminStatistic] = useState(null)
     const today = new Date();
     const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
     const todayDate = today.toLocaleDateString('uz-UZ', options);
@@ -40,6 +41,7 @@ export function Home() {
         getRailway(null, setRailway)
         getPk(null, setPk)
         setPkIdIn(false)
+        getAdminStatistics()
 
         axios.get(`${api}user/getMe`, config)
             .then((res) => {
@@ -51,6 +53,9 @@ export function Home() {
         getRailway(null, setRailway)
         getPk(null, setPk)
         setPkId([])
+        setTimeout(() => {
+            setPkIdIn(false);
+        }, 2000)
     }, [pkIdIn])
 
     const handleKmButtonClick = (index) => setSelectedKmIndex(index);
@@ -61,9 +66,18 @@ export function Home() {
         else setPkId(uniqueNumbers.filter((num) => num !== item.id))
     }
 
+    const getAdminStatistics = () => {
+        axios.get(`${api}user/statistic/leader`, config)
+            .then((res) => {
+                setgetAdminStatistic(res.data.body)
+            })
+            .catch((err) => {
+            })
+    }
+
     return (<div className="mt-12">
         <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
-            <StatisticsCard />
+            <StatisticsCard getAdminStatistic={getAdminStatistic} />
         </div>
         <div className="mb-6 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
             <Card>
@@ -80,6 +94,7 @@ export function Home() {
                                     onClick={() => {
                                         setFirstNamePdb(item)
                                         getRailway(item.id, setRailway)
+                                        getPk(null, setPk)
                                     }}
                                     className="bg-[#fff] text-black text-lg px-5 py-2 rounded-md">
                                     {item.name}
@@ -135,15 +150,15 @@ export function Home() {
                                     {item['km']} km
                                 </Button>
                             ))) : (
-                            <Button
+                            <Typography
                                 onClick={() => setPk(null)}
-                                className={`bg-[#fff] text-black text-lg px-5 py-2 rounded-md border-[1px] border-solid border-gray-500 transition-all hover:scale-105`}>
-                                Topilmadi
-                            </Button>
+                                className={`text-2xl`}>
+                                Biror bir  PDB tanlang !!!
+                            </Typography>
                         )) : (
                             <Typography
                                 onClick={() => setPk(null)}
-                                className={` text-2xl `}>
+                                className={`text-2xl`}>
                                 Biror bir  PDB tanlang !!!
                             </Typography>
                         )
@@ -182,7 +197,7 @@ export function Home() {
             <Dialog open={pdModal} handler={closePdModal}>
                 <Dialog open={pdModal} handler={closePdModal}>
                     <DialogBody className="sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl overflow-y-auto max-h-screen">
-                        <TabsWithWork getPk={getPk} getRailway={getRailway} pk={pkId} setPkIdIn={setPkIdIn} onClose={closePdModal} />
+                        <TabsWithWork getPk={getPk} getRailway={getRailway} pk={pkId} setPkIdIn={setPkIdIn} onClose={closePdModal} getAdminStatistics={getAdminStatistics} />
                     </DialogBody>
                 </Dialog>
             </Dialog>

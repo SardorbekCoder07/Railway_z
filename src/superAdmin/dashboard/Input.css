@@ -1,3 +1,6 @@
 .error-input{
     border: 2px solid red;
 }
+[data-floating-ui-portal] > div {
+    z-index: 100 !important;
+}

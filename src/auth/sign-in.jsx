@@ -15,6 +15,10 @@ export function SignIn() {
     const [role, setRole] = useState('/auth/log-in');
     const [loading, setLoading] = useState(false);
     const [passwordVisible, setPasswordVisible] = useState(false);
+    const [validPhoneNumber, setPhoneNumber] = useState(false);
+    const [validPassword, setPassword] = useState(false);
+    const [validTextP, setValidTextP] = useState(false);
+    const [validTextT, setValidTextT] = useState(false);
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
@@ -24,13 +28,31 @@ export function SignIn() {
         document.getElementById('link').click();
     }, [role]);
 
+    const validateInputs = () => {
+        let phoneNumber = document.getElementById('phoneNumber').value;
+        let password = document.getElementById('password').value;
+
+        let phoneError = !(/^\998\d{9}$/.test(phoneNumber));
+        let passwordError = !(/^[a-zA-Z0-9]{4,}$/.test(password));
+
+        setPhoneNumber(phoneError)
+        setValidTextP(phoneError)
+
+        setPassword(passwordError)
+        setValidTextT(passwordError)
+    };
+
     function logIn() {
+
         let phoneNumber = `+${document.getElementById('phoneNumber').value}`;
         let password = document.getElementById('password').value;
-            if (phoneNumber && password) {
-                setLoading(true); // Set loading state to true
-                axios.post(api + "auth/login", { phoneNumber, password })
-                    .then(res => {
+        if (!validPhoneNumber && !validPassword) {
+            setLoading(true); // Set loading state to true
+            axios.post(api + "auth/login", { phoneNumber, password }, '')
+                .then(res => {
+                    setLoading(false)
+                    if (res.data.success === false) toast.error('Telefon raqam yoki parol xato kirgizildi!!!')
+                    else {
                         sessionStorage.setItem('jwtTokin', "Bearer " + res.data.body);
                         if (res.data.message === "ROLE_SUPER_ADMIN") {
                             setRole('/super-admin/boshqaruv-paneli');
@@ -42,16 +64,17 @@ export function SignIn() {
                             setRole('/brigadir/boshqaruv-qismi');
                             toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
                         }
-                    })
-                    .catch((err) => {
-                        toast.error('Serverda xatolik yuz berdi❌');
-                    })
-                    .finally(() => {
-                        setLoading(false); // Set loading state to false when request is complete
-                    });
-            } else {
-                toast.error('Ma\'lumotlarni to\'liq kiriting.');
-            }
+                    }
+                })
+                .catch(() => {
+                    setLoading(false)
+                    toast.error('Telefon raqam yoki parolda xatolik mavjud❌');
+                    setPhoneNumber(true)
+                    setPassword(true)
+                })
+        } else {
+            setLoading(false)
+        }
     }
 
     function checkKeyPress(event) {
@@ -75,39 +98,49 @@ export function SignIn() {
                         <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
                             Telefon raqam*
                         </Typography>
-                        <Input
+                        <div><Input
                             onKeyDown={checkKeyPress}
                             id="phoneNumber"
                             type="number"
                             size="lg"
                             placeholder="993332200"
-                            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                            className={`${validPhoneNumber ? "outline outline-2 outline-offset-2 outline-red-600" : ""} !border-t-blue-gray-200 focus:!border-t-gray-900`}
                             labelProps={{
                                 className: "before:content-none after:content-none",
                             }}
                         />
+                            <p className={`${validTextP ? "text-red-500" : ""} text-xs mt-1`}>Raqam <span className=" underline">998</span> dan boshlanishi va davomidan 9 ta raqamdan iborat bo'lishi kerak!</p>
+                        </div>
                         <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
                             Parol*
                         </Typography>
-                        <div className="relative flex w-full ">
-                            <Button
-                                size="sm"
-                                className="!absolute right-1 top-1 rounded z-50"
-                                onClick={togglePasswordVisibility}
-                            >
-                                {passwordVisible ? <EyeSlashIcon className="h-4 w-4 text-white" /> :
-                                    <EyeIcon className="h-4 w-4 text-white" />}
-                            </Button>
-                            <Input
-                                onKeyDown={checkKeyPress}
-                                type={passwordVisible ? "text" : "password"} // Toggle between text and password type
-                                id="password"
-                                placeholder="*******"
+                        <div>
+                            <div className="relative flex w-full ">
+                                <Button
+                                    size="sm"
+                                    className="!absolute right-1 top-1 rounded z-50"
+                                    onClick={togglePasswordVisibility}
+                                >
+                                    {passwordVisible ? <EyeSlashIcon className="h-4 w-4 text-white" /> :
+                                        <EyeIcon className="h-4 w-4 text-white" />}
+                                </Button>
+                                <Input
+                                    className={`${validPassword ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`}
+                                    onKeyDown={checkKeyPress}
+                                    type={passwordVisible ? "text" : "password"} // Toggle between text and password type
+                                    id="password"
+                                    placeholder="*******"
+                                />
 
-                            />
+                            </div>
+                            <p className={`${validTextT ? "text-red-500" : ""} text-xs mt-1`}>parol <span className=" underline">4 dan</span> ko'p raqam va xarflardan iborat bo'lishi kerak</p>
                         </div>
+
                     </div>
-                    <Button onClick={() => logIn()} className="mt-6" fullWidth disabled={loading}>
+                    <Button onClick={() => {
+                        validateInputs()
+                        logIn()
+                    }} className="mt-6" fullWidth disabled={loading}>
                         {loading ? "Yuklanmoqda..." : "Kirish"} {/* Show loading text when loading */}
                     </Button>
                     <Link id="link" to={role}></Link>

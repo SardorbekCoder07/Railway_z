@@ -65,7 +65,7 @@ export function StatisticsCard() {
         </CardHeader>
         <CardBody className="p-4 text-right">
           <Typography variant="small" className="font-normal text-blue-gray-600">
-            Dam oluvchilar soni
+            Dam oluvchilar soni(otgul)
           </Typography>
           <Typography variant="h6" color="blue-gray">
           </Typography>
@@ -112,7 +112,7 @@ export function StatisticsCard() {
         </CardHeader>
         <CardBody className="p-4 text-right">
           <Typography variant="small" className="font-normal text-blue-gray-600">
-            Javob so'raganlar soni
+            Ish haqi saqlanmagan holda (BS)
           </Typography>
           <Typography variant="h6" color="blue-gray">
           </Typography>
@@ -136,7 +136,7 @@ export function StatisticsCard() {
         </CardHeader>
         <CardBody className="p-4 text-right">
           <Typography variant="small" className="font-normal text-blue-gray-600">
-            Ish bo'yicha sayohatga ketganlar
+            Xizmat safarifda
           </Typography>
           <Typography variant="h6" color="blue-gray">
           </Typography>
@@ -159,7 +159,7 @@ export function StatisticsCard() {
         </CardHeader>
         <CardBody className="p-4 text-right">
           <Typography variant="small" className="font-normal text-blue-gray-600">
-            Malaka oshirishga ketganlar soni
+            Malaka oshirishga (o'qishga) ketganlar soni
           </Typography>
           <Typography variant="h6" color="blue-gray">
           </Typography>
