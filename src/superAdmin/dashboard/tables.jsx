@@ -114,7 +114,6 @@ export function Tables() {
                 { }
             })
     }
-
     // ******************* REGEX **********************
     const addRegex = () => {
         if (byId("addname") !== "" && byId("addlastname") !== "" && byId("addpassword") !== "") {
@@ -131,7 +130,6 @@ export function Tables() {
             setRegex(true)
         }
     }
-
     return (
         <div className="mt-12 mb-8 flex flex-col gap-12 ">
             <Card>
