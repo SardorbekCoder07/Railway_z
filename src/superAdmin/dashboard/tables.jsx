@@ -373,7 +373,7 @@ export function Tables() {
                                     defaultValue={userData ? userData.phoneNumber : ""}
                                     id="editphone"
                                     type="number"
-                                    className={`${validPhoneNumberEdit ? "outline outline-2 outline-offset-2 outline-red-600" : ""}ps-20`}
+                                    className={`${validPhoneNumberEdit ? "outline outline-2 outline-offset-2 outline-red-600" : ""} ps-20`}
                                     containerProps={{
                                         className: "min-w-0",
                                     }}
@@ -384,7 +384,7 @@ export function Tables() {
 
                         <div className="w-full max-w-[24rem]">
                             <Input
-                                className={`${validPasswordEdit ? "outline outline-2 outline-offset-2 outline-red-600" : ""}ps-20`}
+                                className={`${validPasswordEdit ? "outline outline-2 outline-offset-2 outline-red-600" : ""} `}
                                 type="pasword"
                                 id="editpassword"
                                 label="Parol" />
