@@ -198,7 +198,7 @@ export function AddLocation() {
   </div>
 </div>
 
-          <div className="overflow-x-scroll"><table className="w-full min-w-[640px] table-auto">
+          <div className="overflow-x-auto"><table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
                 {["#", "KM", "Amallar"].map((el) => (

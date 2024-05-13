@@ -175,7 +175,7 @@ export function Tools() {
             <WrenchScrewdriverIcon className="h-6 w-6 text-black inline-block" /> +
           </Button>
         </CardHeader>
-        <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
+        <CardBody className="overflow-x-auto px-0 pt-0 pb-2">
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>

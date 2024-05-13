@@ -193,6 +193,7 @@ export function Tables() {
             })
             .catch((err) => {
                 closeDeleteModal()
+                toast.success("Hodimni o'chirishda xatolik yuz berdi ! ❌")
                 { }
             })
     }

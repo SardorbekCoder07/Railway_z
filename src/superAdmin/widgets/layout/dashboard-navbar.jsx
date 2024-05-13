@@ -159,7 +159,7 @@ export function DashboardNavbar() {
           </Typography>
         </div>
         <div className="flex items-center justify-between">
-
+        <div></div>
           <IconButton
             variant="text"
             color="blue-gray"
@@ -168,7 +168,6 @@ export function DashboardNavbar() {
           >
             <Bars3Icon strokeWidth={3} className="h-6 w-6 text-blue-gray-500" />
           </IconButton>
-
           <Menu>
             <MenuHandler>
               <div className="flex items-center justify-center gap-2">
@@ -232,7 +231,6 @@ export function DashboardNavbar() {
               </MenuItem>
             </MenuList>
           </Menu>
-
           <div>
 
             <Dialog open={editModal} handler={closeEditModal}>

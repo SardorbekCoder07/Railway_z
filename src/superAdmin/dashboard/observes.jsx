@@ -171,7 +171,7 @@ export function Observes() {
           </Button>
         </CardHeader>
         <CardBody className="overflow-x-auto px-0 pt-0 pb-2">
-          <table className="w-full min-w-[640px] table-auto">
+          <table className="w-full min-w-[640px] ">
             <thead>
               <tr>
                 {["#", "F.I.O", "Km", "Amallar"].map((el) => (

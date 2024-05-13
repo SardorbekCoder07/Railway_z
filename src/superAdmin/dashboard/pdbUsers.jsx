@@ -142,7 +142,7 @@ export function PDBusers() {
               </Select>
             </div>
           </div>
-          <div className="overflow-x-scroll">
+          <div className="overflow-x-auto">
 <table className="w-full min-w-[640px] table-auto  ">
             <thead>
               <tr>
