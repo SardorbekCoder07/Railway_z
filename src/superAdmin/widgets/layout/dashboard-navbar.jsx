@@ -61,7 +61,7 @@ export function DashboardNavbar() {
   }, [])
 
   // *******************EDIT USER **********************
-  const editMe = () => {
+  const editUser = () => {
     function todayPlanInfo(obj) {
       for (let key in obj) {
         if (obj[key] === undefined || obj[key] === null || obj[key] === false || obj[key] === "NaN" || obj[key] === '') {
@@ -159,8 +159,8 @@ export function DashboardNavbar() {
           </Typography>
         </div>
         <div className="flex items-center justify-between">
-        <div></div>
-          <IconButton
+        <div>
+           <IconButton
             variant="text"
             color="blue-gray"
             className="grid xl:hidden"
@@ -168,7 +168,9 @@ export function DashboardNavbar() {
           >
             <Bars3Icon strokeWidth={3} className="h-6 w-6 text-blue-gray-500" />
           </IconButton>
-          <Menu>
+        </div>
+              <div>
+              <Menu>
             <MenuHandler>
               <div className="flex items-center justify-center gap-2">
 
@@ -231,6 +233,10 @@ export function DashboardNavbar() {
               </MenuItem>
             </MenuList>
           </Menu>
+              </div>
+
+
+        </div>
           <div>
 
             <Dialog open={editModal} handler={closeEditModal}>
@@ -294,7 +300,7 @@ export function DashboardNavbar() {
                 </Button>
                 <span>
                   <Button onClick={() => {
-                    editMe()
+                    editUser()
                     editvalidateInputs()
                   }} variant="gradient" color="gray">
                     <span>Tahrirlash</span>
@@ -303,8 +309,6 @@ export function DashboardNavbar() {
               </DialogFooter>
             </Dialog>
           </div>
-
-        </div>
       </div>
     </Navbar>
   );
