@@ -31,16 +31,26 @@ export function Observes() {
   const [deleteModal, setDeleteModal] = useState(false);
   const [textError, setTextError] = useState(false);
   const [observesRegEx, setObservesRegEx] = useState(true)
+  const [validat, setValidat] = useState(false)
 
   const openAddModal = () => setAddModal(true)
   const closeAddModal = () => {
     setTextError(false)
+    setObservesRegEx(true)
     setAddModal(false)
+    setValidat(false)
+    setPDBid(null)
   }
-  const openEditModal = () => setEditModal(true)
+  const openEditModal = () => {
+    setEditModal(true)
+    obsevesRegEx()
+  }
   const closeEditModal = () => {
     setTextError(false)
+    setValidat(false)
+    setObservesRegEx(true)
     setEditModal(false)
+    setPDBid(null)
   }
   const openDeleteModal = () => setDeleteModal(true)
   const closeDeleteModal = () => {
@@ -102,14 +112,15 @@ export function Observes() {
             toast.success("Kuzatuvchi muoffaqqiyatli qo'shildi!👌");
           } else toast.error("Kuzatuvchi qo'shilmadi❌");
           setTextError(false)
-
         })
         .catch(() => {
           closeAddModal();
           setTextError(false)
           toast.error("Kuzatuvchi qo'shilmadi❌");
         })
-    } else setTextError(true)
+    } else {
+      setValidat(true)
+    }
   };
 
   // *******************EDIT USER **********************
@@ -129,7 +140,7 @@ export function Observes() {
           setTextError(false)
           toast.error("Kuzatuvchi tahrirlanmadi❌");
         })
-    } else setTextError(true)
+    } else  setValidat(true)
   };
 
   // *******************DELETE USER **********************
@@ -289,6 +300,7 @@ export function Observes() {
             <div className="w-full max-w-[24rem] flex flex-col gap-7">
               <Select
                 onChange={(e) => getPDB(e)}
+                className={`${validat ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`} 
                 label="Bo'linma nomini tanlang">
                 {pd && pd.length !== 0 ?
                   pd.map(item =>
@@ -300,6 +312,7 @@ export function Observes() {
               </Select>
               <Select
                 onChange={(e) => setPDBid(e)}
+                className={`${validat ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`} 
                 label="Brigadani tanlang">
                 {pdbs && pdbs.length !== 0 ?
                   pdbs.map(item =>
@@ -310,9 +323,6 @@ export function Observes() {
                 }
               </Select>
             </div>
-            <Typography color={'red'} variant={'paragraph'}>
-              {textError ? 'Ma\'lumotlarni to\'liq kirgizing' : ''}
-            </Typography>
           </div>
         </DialogBody>
         <DialogFooter>
@@ -362,6 +372,7 @@ export function Observes() {
             <div className="w-full max-w-[24rem] flex flex-col gap-7">
               <Select
                 onChange={(e) => getPDB(e)}
+                className={`${validat ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`} 
                 label="Bo'linma nomini tanlang">
                 {pd && pd.length !== 0 ?
                   pd.map(item =>
@@ -372,7 +383,12 @@ export function Observes() {
                 }
               </Select>
               <Select
-                onChange={(e) => setPDBid(e)}
+                onChange={(e) => {
+                  setPDBid(e)
+                  obsevesRegEx()
+                }}
+
+                className={`${validat ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`} 
                 label="Brigadanini tanlang">
                 {pdbs && pdbs.length !== 0 ?
                   pdbs.map(item =>
@@ -383,9 +399,6 @@ export function Observes() {
                 }
               </Select>
             </div>
-            <Typography color={'red'} variant={'paragraph'}>
-              {textError ? 'Ma\'lumotlarni to\'liq kirgizing' : ''}
-            </Typography>
           </div>
         </DialogBody>
         <DialogFooter>
