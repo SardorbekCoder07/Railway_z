@@ -142,7 +142,8 @@ export function PDBusers() {
               </Select>
             </div>
           </div>
-          <table className="w-full min-w-[640px] table-auto">
+          <div className="overflow-x-scroll">
+<table className="w-full min-w-[640px] table-auto  ">
             <thead>
               <tr>
                 {["#", "Brigaderlar", "F.I.O", "Amallar"].map((el) => (
@@ -226,6 +227,8 @@ export function PDBusers() {
               )}
             </tbody>
           </table>
+          </div>
+
         </CardBody>
       </Card>
       {/* Edit pdb  */}

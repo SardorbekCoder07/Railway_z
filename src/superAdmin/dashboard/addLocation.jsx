@@ -173,37 +173,32 @@ export function AddLocation() {
             <Typography variant="h6" color="gray" className="ml-10 mb-3">
               KM ma'lumotini olish uchun
             </Typography>
-          <div className="w-full flex justify-center items-center gap-5">
+            <div className="w-full flex justify-center items-center gap-5 flex-col md:flex-row">
+  <div className="w-full max-w-[20rem]">
+    <Select onChange={(e) => { getUser(e); }} label="Bo'linmani tanlang">
+      {
+        pdUsers ? pdUsers.map((item, i) =>
+          <Option key={i} value={item.id}>{item.name}</Option>
+        ) : (
+          <Option>Malumot yo'q</Option>
+        )
+      }
+    </Select>
+  </div>
+  <div className="w-full max-w-[20rem]">
+    <Select onChange={(e) => { setSelectPdbId(e); getkm(e); }} label="Brigadani tanlang">
+      {
+        users ? users.map((item, i) =>
+          <Option key={i} value={item.id}>{item.name}</Option>
+        ) : (
+          <Option>Ma'lumot yo'q</Option>
+        )
+      }
+    </Select>
+  </div>
+</div>
 
-            <div className="w-full max-w-[24rem]">
-              <Select onChange={(e) => {
-                getUser(e)
-              }} label="Bo'linmani tanlang">
-                {
-                  pdUsers ? pdUsers.map((item, i) =>
-                    <Option key={i} value={item.id}>{item.name}</Option>
-                  ) : (
-                    <Option>Malumot yo'q</Option>
-                  )
-                }
-              </Select>
-            </div>
-            <div className="w-full max-w-[24rem]">
-              <Select onChange={(e) => {
-                setSelectPdbId(e)
-                getkm(e)
-              }} label="Brigadani tanlang">
-                {
-                  users ? users.map((item, i) =>
-                    <Option key={i} value={item.id}>{item.name}</Option>
-                  ) : (
-                    <Option>Ma'lumot yo'q</Option>
-                  )
-                }
-              </Select>
-            </div>
-          </div>
-          <table className="w-full min-w-[640px] table-auto">
+          <div className="overflow-x-scroll"><table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
                 {["#", "KM", "Amallar"].map((el) => (
@@ -281,7 +276,8 @@ export function AddLocation() {
 
                 </tr>}
             </tbody>
-          </table>
+          </table></div>
+
         </CardBody>
       </Card>
       <div>
