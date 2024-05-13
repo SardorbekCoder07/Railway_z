@@ -13,6 +13,15 @@ import { useEffect, useState } from "react";
 
 export function StatisticsCard() {
   const [getAdminStatistic, setgetAdminStatistic] = useState(null)
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const fullText = "Malaka oshirishga (o'qishga) ketganlar soni";
+  const truncatedText = fullText.length > 30 ? fullText.slice(0, 27) + "..." : fullText;
+
+
+  const toggleText = () => {
+    setIsExpanded(!isExpanded);
+  };
   useEffect(() => {
     setConfig()
     getAdminStatistics()
@@ -159,7 +168,9 @@ export function StatisticsCard() {
         </CardHeader>
         <CardBody className="p-4 text-right">
           <Typography variant="small" className="font-normal text-blue-gray-600">
-            Malaka oshirishga (o'qishga) ketganlar soni
+          <div onClick={toggleText} style={{ cursor: "pointer", maxWidth: "300px" }}>
+      {isExpanded ? fullText : truncatedText}
+    </div>
           </Typography>
           <Typography variant="h6" color="blue-gray">
           </Typography>
