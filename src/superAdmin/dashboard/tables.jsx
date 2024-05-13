@@ -39,7 +39,7 @@ export function Tables() {
     const openAddModal = () => setAddModal(true)
     const closeAddModal = () => {
         setAddModal(false)
-        setRegex(true)
+
         // add validation null qilish
         setPhoneNumber(null)
         setValidTextP(null)
@@ -114,10 +114,15 @@ export function Tables() {
             if (!validPhoneNumber && !validPassword) {
                 if (role) {
                     axios.post(`${api}auth/register?ROLE=${role}`, addData, config)
-                        .then(() => {
+                        .then((res) => {
                             closeAddModal()
                             getUser()
-                            toast.success(`${role === 'ROLE_LEADER' ? 'Leader' : 'Admin'} muoffaqqiyatli qo'shildi✔`)
+                            console.log(res.data);
+                            if (res.data.message === "Phone number already exists") {
+                                toast.error("Telefon raqam ro'yxatdan o'tgan ❌")
+                            } else {
+                                toast.success(`${role === 'ROLE_LEADER' ? 'Leader' : 'Admin'} muoffaqqiyatli qo'shildi✔`)
+                            }
                         })
                         .catch((err) => {
                             closeAddModal()
@@ -130,7 +135,7 @@ export function Tables() {
                 }
             }
         } else {
-            toast.error(" Malunot to'liq kiritilmagan !")
+            toast.error(" Malunot toliq kiritilmagan !")
             setPhoneNumber(true)
             setPassword(true)
         }

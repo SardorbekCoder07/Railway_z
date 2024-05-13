@@ -15,8 +15,6 @@ import {
 } from "@material-tailwind/react";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
-import { authorsTableData } from "@/superAdmin/data";
-import { CircularPagination } from "@/superAdmin/widgets/layout/circlePagination";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { api, byId, config, setConfig } from "@/api/api";
@@ -67,6 +65,7 @@ export function PdUsers() {
         axios.get(`${api}pd/all`, config)
             .then((res) => {
                 setPD(res.data.body);
+                console.log(res.data.body);
             })
             .catch((err) => {
             })
@@ -349,7 +348,7 @@ export function PdUsers() {
                                         users ? users.map((item, i) =>
                                             <Option key={i} value={item.id}>{item.firstName} {item.lastName}</Option>
                                         ) : (
-                                            <Option>Malumot yo'q</Option>
+                                            <Option disabled>Malumot yo'q</Option>
 
                                         )
                                     }

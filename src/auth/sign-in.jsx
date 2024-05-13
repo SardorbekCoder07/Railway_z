@@ -98,7 +98,7 @@ export function SignIn() {
                         <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
                             Telefon raqam*
                         </Typography>
-                        <Input
+                        <div><Input
                             onKeyDown={checkKeyPress}
                             id="phoneNumber"
                             type="number"
@@ -109,29 +109,32 @@ export function SignIn() {
                                 className: "before:content-none after:content-none",
                             }}
                         />
-                        <p className={`${validTextP ? "text-red-500" : ""} text-xs`}>Raqam <span className=" underline">998</span> dan boshlanishi va davomidan 9 ta raqamdan iborat bo'lishi kerak!</p>
+                            <p className={`${validTextP ? "text-red-500" : ""} text-xs mt-1`}>Raqam <span className=" underline">998</span> dan boshlanishi va davomidan 9 ta raqamdan iborat bo'lishi kerak!</p>
+                        </div>
                         <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
                             Parol*
                         </Typography>
-                        <div className="relative flex w-full ">
-                            <Button
-                                size="sm"
-                                className="!absolute right-1 top-1 rounded z-50"
-                                onClick={togglePasswordVisibility}
-                            >
-                                {passwordVisible ? <EyeSlashIcon className="h-4 w-4 text-white" /> :
-                                    <EyeIcon className="h-4 w-4 text-white" />}
-                            </Button>
-                            <Input
-                                className={`${validPassword ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`}
-                                onKeyDown={checkKeyPress}
-                                type={passwordVisible ? "text" : "password"} // Toggle between text and password type
-                                id="password"
-                                placeholder="*******"
-                            />
+                        <div>
+                            <div className="relative flex w-full ">
+                                <Button
+                                    size="sm"
+                                    className="!absolute right-1 top-1 rounded z-50"
+                                    onClick={togglePasswordVisibility}
+                                >
+                                    {passwordVisible ? <EyeSlashIcon className="h-4 w-4 text-white" /> :
+                                        <EyeIcon className="h-4 w-4 text-white" />}
+                                </Button>
+                                <Input
+                                    className={`${validPassword ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`}
+                                    onKeyDown={checkKeyPress}
+                                    type={passwordVisible ? "text" : "password"} // Toggle between text and password type
+                                    id="password"
+                                    placeholder="*******"
+                                />
 
+                            </div>
+                            <p className={`${validTextT ? "text-red-500" : ""} text-xs mt-1`}>parol <span className=" underline">4 dan</span> ko'p raqam va xarflardan iborat bo'lishi kerak</p>
                         </div>
-                        <p className={`${validTextT ? "text-red-500" : ""} text-xs`}>parol <span className=" underline">4 dan</span> ko'p raqam va xarflardan iborat bo'lishi kerak</p>
 
                     </div>
                     <Button onClick={() => {
