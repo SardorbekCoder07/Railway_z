@@ -136,30 +136,30 @@ export function Tools() {
 
   }
 
-
-
-
+  
   const addRegex = () => {
-    if (
-      byId("addtool") !== ""
-    ) {
-      setRegex(false)
+    // Bosh va oraliq probellarni olib tashlash uchun trim() metodidan foydalanish
+    const editPDValue = document.getElementById("addtool").value.trim();
+
+    // Har ikkala qiymat ham bo'sh emasligini tekshirish
+    if (editPDValue !== "" ) {
+      setRegex(false); // Agar har ikkala qiymat ham bo'sh emas bo'lsa, regex state'ini false qilib o'rnatish
+    } else {
+      setRegex(true);  // Aks holda, regex state'ini true qilib o'rnatish
     }
-    else {
-      setRegex(true)
+  }
+  const editRegex = () => {
+    // Bosh va oraliq probellarni olib tashlash uchun trim() metodidan foydalanish
+    const editPDValue = document.getElementById("edittool").value.trim();
+
+    // Har ikkala qiymat ham bo'sh emasligini tekshirish
+    if (editPDValue !== "" ) {
+      setRegex(false); // Agar har ikkala qiymat ham bo'sh emas bo'lsa, regex state'ini false qilib o'rnatish
+    } else {
+      setRegex(true);  // Aks holda, regex state'ini true qilib o'rnatish
     }
   }
 
-  const editRegex = () => {
-    if (
-      byId("edittool") !== ""
-    ) {
-      setRegex(false)
-    }
-    else {
-      setRegex(true)
-    }
-  }
 
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12 ">
