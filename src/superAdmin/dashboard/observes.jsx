@@ -149,11 +149,17 @@ export function Observes() {
   }
 
   // Observes RegEx
+
   const obsevesRegEx = () => {
-    if (byId('addObservers') !== "" && byId('addKm') !== "") {
-      setObservesRegEx(false)
+    // Bosh va oraliq probellarni olib tashlash uchun trim() metodidan foydalanish
+    const editPDValue = document.getElementById("addObservers").value.trim();
+    const employeeCountValue = document.getElementById("addKm").value.trim();
+
+    // Har ikkala qiymat ham bo'sh emasligini tekshirish
+    if (editPDValue !== "" && employeeCountValue !== "") {
+      setObservesRegEx(false); // Agar har ikkala qiymat ham bo'sh emas bo'lsa, regex state'ini false qilib o'rnatish
     } else {
-      setObservesRegEx(true)
+      setObservesRegEx(true);  // Aks holda, regex state'ini true qilib o'rnatish
     }
   }
   return (
@@ -289,7 +295,7 @@ export function Observes() {
                     <Option key={item.id} value={item.id}>
                       {item.name}
                     </Option>
-                  ) : <Option>Malumot yo'q</Option>
+                  ) : <Option disabled>Malumot yo'q</Option>
                 }
               </Select>
               <Select
@@ -300,7 +306,7 @@ export function Observes() {
                     <Option key={item.id} value={item.id}>
                       {item.name}
                     </Option>
-                  ) : <Option>Malumot yo'q</Option>
+                  ) : <Option disabled>Malumot yo'q</Option>
                 }
               </Select>
             </div>
@@ -336,6 +342,7 @@ export function Observes() {
             <div className="w-full max-w-[24rem]">
               <Input
                 defaultValue={observersData ? observersData.userFullName : "Malumot yo'q"}
+                onChange={obsevesRegEx}
                 type="text"
                 required
                 id="addObservers"
@@ -345,6 +352,7 @@ export function Observes() {
             <div className="w-full max-w-[24rem]">
               <Input
                 defaultValue={observersData ? observersData.km : "Malumot yo'q"}
+                onChange={obsevesRegEx}
                 type="text"
                 required
                 id="addKm"
@@ -360,7 +368,7 @@ export function Observes() {
                     <Option key={item.id} value={item.id}>
                       {item.name}
                     </Option>
-                  ) : <Option>Malumot yo'q</Option>
+                  ) : <Option disabled>Malumot yo'q</Option>
                 }
               </Select>
               <Select
@@ -371,7 +379,7 @@ export function Observes() {
                     <Option key={item.id} value={item.id}>
                       {item.name}
                     </Option>
-                  ) : <Option>Malumot yo'q</Option>
+                  ) : <Option disabled>Malumot yo'q</Option>
                 }
               </Select>
             </div>
@@ -389,9 +397,11 @@ export function Observes() {
           >
             Orqaga
           </Button>
-          <Button onClick={editObservers} variant="gradient" color="gray">
-            Tahrirlash
-          </Button>
+          <span className={observesRegEx ? 'cursor-not-allowed' : ''}>
+            <Button disabled={observesRegEx} onClick={editObservers} variant="gradient" color="gray">
+              <span>Tahrirlash</span>
+            </Button>
+          </span>
         </DialogFooter>
       </Dialog>
 
