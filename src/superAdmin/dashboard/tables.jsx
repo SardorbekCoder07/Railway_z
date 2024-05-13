@@ -5,9 +5,11 @@ import {
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { api, byId, config, setConfig } from "@/api/api";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
+import './input.css'
+
 
 export function Tables() {
     const [users, setUsers] = useState(null)
@@ -20,10 +22,31 @@ export function Tables() {
     const [addModal, setAddModal] = useState(false)
     const [regex, setRegex] = useState(true)
 
+    // ******************* add valitate inputs **********************
+    const [validPhoneNumber, setPhoneNumber] = useState(false);
+    const [validPassword, setPassword] = useState(false);
+    const [validTextP, setValidTextP] = useState(false);
+    const [validTextT, setValidTextT] = useState(false);
+    const [validRole, setValidRole] = useState(false);
+
+    // ******************* edit valitate inputs **********************
+    const [validPhoneNumberEdit, setPhoneNumberEdit] = useState(false);
+    const [validPasswordEdit, setPasswordEdit] = useState(false);
+    const [validTextPEdit, setValidTextPEdit] = useState(false);
+    const [validTextTEdit, setValidTextTEdit] = useState(false);
+    const [validRoleEdit, setValidRoleEdit] = useState(false);
+    // *******************GET role **********************
+
     const openAddModal = () => setAddModal(true)
     const closeAddModal = () => {
         setAddModal(false)
         setRegex(true)
+        // validation null qilish
+        setPhoneNumber(null)
+        setValidTextP(null)
+        setPassword(null)
+        setValidTextT(null)
+        setValidRole(null)
     }
     const openEditModal = () => setEditModal(true)
     const closeEditModal = () => {
@@ -54,30 +77,57 @@ export function Tables() {
     }
 
     // *******************ADD USER **********************
+
+
     const addUser = () => {
+
+        function todayPlanInfo(obj) {
+            for (let key in obj) {
+                if (obj[key] === undefined || obj[key] === null || obj[key] === false || obj[key] === "NaN" || obj[key] === '') {
+                    console.log(obj[key]);
+                    return false;
+                    // Agar inputlardan birortasi bulsa xam (undefined, null, false, 0, NaN, ''), false qaytariladi
+                }
+            }
+            return true; // xammasi 100% tuldirilsa true qaytaradi
+        }
         const addData = {
             firstName: byId("addname"),
             lastName: byId("addlastname"),
             password: byId("addpassword"),
             phoneNumber: `+998${byId("addphone")}`
         }
+
+        let isTrue = todayPlanInfo(addData)
+
         const newPhoneNUmber = addData.phoneNumber
-        if (newPhoneNUmber.length === 13) {
-            axios.post(`${api}auth/register?ROLE=${role}`, addData, config)
-                .then(() => {
-                    closeAddModal()
-                    getUser()
-                    toast.success(`${role === 'ROLE_LEADER' ? 'Leader' : 'Admin'} muoffaqqiyatli qo'shildi✔`)
-                })
-                .catch((err) => {
-                    closeAddModal()
-                    toast.error("XATO")
-                })
+
+        if (isTrue) {
+            if (!validPhoneNumber && !validPassword) {
+                if (role) {
+                    axios.post(`${api}auth/register?ROLE=${role}`, addData, config)
+                        .then(() => {
+                            closeAddModal()
+                            getUser()
+                            toast.success(`${role === 'ROLE_LEADER' ? 'Leader' : 'Admin'} muoffaqqiyatli qo'shildi✔`)
+                        })
+                        .catch((err) => {
+                            closeAddModal()
+                            toast.error("Telefon raqam yoki parolda xatolik mavjud❌")
+                            setPhoneNumber(true)
+                            setPassword(true)
+                        })
+                } else {
+                    setValidRole(true)
+                }
+            }
         } else {
-            closeAddModal()
-            toast.error(" Telefon raqam tuliq kiritilmadi !")
+            toast.error(" Malunot toliq kiritilmagan !")
+            setPhoneNumber(true)
+            setPassword(true)
         }
     }
+
 
     // *******************EDIT USER **********************
     const editUser = () => {
@@ -96,7 +146,7 @@ export function Tables() {
             })
             .catch((err) => {
                 closeEditModal()
-                toast.success("Bu hodimni tahrirlashda xatolik yuz berdi")
+                toast.success("Bu hodimni tahrirlashda xatolik yuz berdi", { zIndex: 1000 })
 
             })
     }
@@ -107,6 +157,7 @@ export function Tables() {
             .then(() => {
                 closeDeleteModal()
                 getUser()
+
                 toast.success("Bu hodim muvoffaqqiyatli o'chirildi!👌")
             })
             .catch((err) => {
@@ -116,14 +167,7 @@ export function Tables() {
     }
 
     // ******************* REGEX **********************
-    const addRegex = () => {
-        if (byId("addname") !== "" && byId("addlastname") !== "" && byId("addpassword") !== "") {
-            setRegex(false)
-        }
-        else {
-            setRegex(true)
-        }
-    }
+
     const editRegex = () => {
         if (byId("editname") !== "" && byId("editlastname") !== "" && byId("editphone") !== "" && byId("editpassword") !== "") {
             setRegex(false)
@@ -131,6 +175,25 @@ export function Tables() {
             setRegex(true)
         }
     }
+
+    // ******************* HANDLE CHANGE **********************
+
+    const validateInputs = () => {
+        let phoneNumber = document.getElementById('addphone').value;
+        let password = document.getElementById('addpassword').value;
+
+        if (addModal) {
+            let phoneError = !(/^\d{9}$/.test(phoneNumber));
+            let passwordError = !(/^[a-zA-Z0-9]{4,}$/.test(password));
+
+            setPhoneNumber(phoneError)
+            setValidTextP(phoneError)
+
+            setPassword(passwordError)
+            setValidTextT(passwordError)
+
+        }
+    };
 
     return (
         <div className="mt-12 mb-8 flex flex-col gap-12 ">
@@ -300,42 +363,50 @@ export function Tables() {
             </Dialog>
 
             {/* add modal */}
-            <Dialog open={addModal} handler={closeAddModal}>
+            <Dialog
+                open={addModal} handler={closeAddModal}>
                 <DialogHeader>Hodim qo'shish</DialogHeader>
                 <DialogBody>
-                    <div className="flex justify-center flex-col items-center gap-7">
+                    <div className="flex justify-center flex-col items-center gap-5">
                         <div className="w-full max-w-[24rem]">
-                            <Input onChange={addRegex} required id="addname" label="Ism" />
+                            <Input required id="addname" label="Ism" />
                         </div>
                         <div className="w-full max-w-[24rem]">
-                            <Input onChange={addRegex} id="addlastname" label="Familya" />
+                            <Input id="addlastname" label="Familya" />
                         </div>
-                        <div className="relative flex w-full max-w-[24rem]">
-                            <Button
-                                disabled
-                                size="sm"
-                                className="!absolute left-1 top-1 rounded z-50"
-                            >
-                                +998
-                            </Button>
-                            <Input
-                                onChange={addRegex}
-                                defaultValue={""}
-                                id="addphone"
-                                type="number"
-                                className="ps-20"
-                                containerProps={{
-                                    className: "min-w-0",
-                                }}
-                            />
+                        <div className="relative flex flex-col w-full max-w-[24rem]">
+                            <div className="relative w-full">
+                                <Button
+                                    disabled
+                                    size="sm"
+                                    className="!absolute left-1 top-1 rounded z-50"
+                                >
+                                    +998
+                                </Button>
+
+                                <Input
+
+                                    defaultValue={""}
+                                    id="addphone"
+                                    type="number"
+                                    className={`${validPhoneNumber ? "outline outline-2 outline-offset-2 outline-red-600" : ""} ps-20`}
+                                    containerProps={{
+                                        className: "min-w-0",
+                                    }}
+                                />
+                            </div>
+                            <p className={`${validTextP ? "text-red-500" : ""} text-xs w-full max-w-[24rem] mt-1`}><span className=" underline">9 ta</span>  raqamdan iborat bo'lishi kerak!</p>
+                        </div>
+
+                        <div className="w-full max-w-[24rem]">
+                            <Input className={`${validPassword ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`} type="password" id="addpassword" label="Parol" />
+                            <p className={`${validTextT ? "text-red-500" : ""}w-full max-w-[24rem] text-xs mt-1`}>parol <span className=" underline">4 dan</span> ko'p raqam va xarflardan iborat bo'lishi kerak</p>
                         </div>
                         <div className="w-full max-w-[24rem]">
-                            <Input type="password" onChange={addRegex} id="addpassword" label="Parol" />
-                        </div>
-                        <div className="w-full max-w-[24rem]">
-                            <Select onChange={(e) => {
-                                setRole(e)
-                            }} label="Hodimning lavozimini tanlang">
+                            <Select
+                                className={`${validRole ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`} onChange={(e) => {
+                                    setRole(e)
+                                }} label="Hodimning lavozimini tanlang">
                                 <Option value="ROLE_ADMIN">Kuzatuvchi</Option>
                                 <Option value="ROLE_LEADER">Yo'l ustasi</Option>
                             </Select>
@@ -351,11 +422,12 @@ export function Tables() {
                     >
                         <span>Orqaga</span>
                     </Button>
-                    <span className={`${regex ? "cursor-not-allowed" : ""}`}>
-                        <Button disabled={regex} onClick={addUser} variant="gradient" color="gray">
-                            <span>Qo'shish</span>
-                        </Button>
-                    </span>
+                    <Button onClick={() => {
+                        addUser()
+                        validateInputs()
+                    }} variant="gradient" color="gray">
+                        <span>Qo'shish</span>
+                    </Button>
                 </DialogFooter>
             </Dialog>
 
