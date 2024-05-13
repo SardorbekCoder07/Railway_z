@@ -136,9 +136,6 @@ export function Tools() {
 
   }
 
-
-
-
   
   const addRegex = () => {
     // Bosh va oraliq probellarni olib tashlash uchun trim() metodidan foydalanish
