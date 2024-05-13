@@ -27,14 +27,22 @@ export function PDBusers() {
   const [pdUsers, setPdUsers] = useState(null)
   const [pdbData, setpdbdata] = useState(null)
   const [pdId, setpdId] = useState(null)
+  const [pdIdValid, setpdIdValid] = useState(false)
   const [selectPdId, setSelectPdId] = useState(null)
   const [regEX, setRegEX] = useState(true)
 
 
   const openEditModal = () => setEditModal(true)
   const closeEditModal = () => setEditModal(false)
-  const openAddModal = () => setAddModal(true)
-  const closeAddModal = () => setAddModal(false)
+  const openAddModal = () => {
+    setAddModal(true)
+  }
+  const closeAddModal = () => {
+    setAddModal(false)
+    setpdIdValid(false)
+    setpdId(null)
+    getPD()
+  }
 
   useEffect(() => {
     setConfig()
@@ -49,36 +57,47 @@ export function PDBusers() {
       .then((res) => {
         setPdUsers(res.data.body);
       })
-      .catch((err) => { })
+      .catch((err) => {
+        console.error(err);
+      })
   }
 
   const getPDBuser = (id) => {
     axios.get(`${api}pdb/list?pdId=${id}`, config)
       .then((res) => {
         setPdbaUsers(res.data.body)
+        console.log(res.data.body);
       })
       .catch((err) => {
-      })
+        console.error(err);
+      }) 
   }
 
-  // ----------PDB add------------
+  // ---------- PDB add ------------
   const addPdb = () => {
     const addPDBdata = {
       pdId: pdId ? pdId : 0,
       name: byId("addname"),
       userFullName: byId("addlastname"),
     }
-    axios.post(`${api}pdb`, addPDBdata, config)
-      .then((res) => {
-        closeAddModal();
-        getPDBuser(selectPdId ? selectPdId : 0)
-        toast.success("Vazifa muvoffaqqiyatli bajarildi!")
-      })
-      .catch((err) => {
-        closeAddModal();
-        toast.success("PDB o'chirishda xatolik yuz berdi")
 
-      })
+    if (pdId) {
+      axios.post(`${api}pdb`, addPDBdata, config)
+        .then((res) => {
+          closeAddModal();
+          getPDBuser(selectPdId ? selectPdId : 0)
+          toast.success("Vazifa muvoffaqqiyatli bajarildi!")
+        })
+        .catch((err) => {
+          closeAddModal();
+          toast.success("PDB o'chirishda xatolik yuz berdi")
+
+        })
+    } else {
+      toast.error("Brigaderni tanlang ❗️")
+      setpdIdValid(true)
+    }
+
   }
 
   // ----------PDB edit------------
@@ -101,13 +120,21 @@ export function PDBusers() {
   }
 
   // RegEX ADD
+
   const addRegEx = () => {
-    if (byId('addname') !== "" && byId("addlastname") !== "") {
-      setRegEX(false)
+    // Bosh va oraliq probellarni olib tashlash uchun trim() metodidan foydalanish
+    const editPDValue = document.getElementById("addname").value.trim();
+    const employeeCountValue = document.getElementById("addlastname").value.trim();
+
+    // Har ikkala qiymat ham bo'sh emasligini tekshirish
+    if (editPDValue !== "" && employeeCountValue !== "") {
+      setRegEX(false); // Agar har ikkala qiymat ham bo'sh emas bo'lsa, regex state'ini false qilib o'rnatish
     } else {
-      setRegEX(true)
+      setRegEX(true);  // Aks holda, regex state'ini true qilib o'rnatish
     }
   }
+
+
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12 ">
       <Card>
@@ -143,90 +170,90 @@ export function PDBusers() {
             </div>
           </div>
           <div className="overflow-x-auto">
-<table className="w-full min-w-[640px] table-auto  ">
-            <thead>
-              <tr>
-                {["#", "Brigaderlar", "F.I.O", "Amallar"].map((el) => (
-                  <th
-                    key={el}
-                    className="border-b border-blue-gray-50 py-3 px-5 text-left"
-                  >
-                    <Typography
-                      variant="small"
-                      className="text-[11px] font-bold uppercase text-blue-gray-400"
-                    >
-                      {el}
-                    </Typography>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {pdbUsers ? pdbUsers.map(
-                (item, i) => {
-                  const className = `py-3 px-5  ${i === pdbUsers && pdbUsers.length - 1
-                    ? ""
-                    : "border-b border-blue-gray-50"
-                    }`
-                  return (
-                    <tr key={i}>
-                      <td className={className}>
-                        <div className="flex items-center gap-4">
-                          <div>
-                            <Typography
-                              variant="small"
-                              className="font-semibold text-blue-gray-600"
-                            >
-                              {i + 1}
-                            </Typography>
-                          </div>
-                        </div>
-                      </td>
-                      <td className={className}>
-                        <div className="flex items-center gap-4">
-                          <div>
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-semibold"
-                            >
-                              {item.name}
-                            </Typography>
-                          </div>
-                        </div>
-                      </td>
-                      <td className={className}>
-                        <Typography className="text-xs font-semibold text-blue-gray-600">
-                          {item.userFullName}
-                        </Typography>
-
-                      </td>
-                      <td className={`${className} flex py-5 gap-3`}>
-                        <Typography onClick={() => {
-                          openEditModal()
-                          setpdbdata(item)
-                        }} className=" cursor-pointer text-[1.2rem] font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
-                          <FaEdit />
-                        </Typography>
-
-                      </td>
-                    </tr>
-                  );
-                }
-              ) : (
+            <table className="w-full min-w-[640px] table-auto  ">
+              <thead>
                 <tr>
-                  <td></td>
-                  <td></td>
-                  <td className="">
-                    <Typography className=" cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
-                      Ma'lumot yo'q
-                    </Typography></td>
-                  <td></td>
-
+                  {["#", "Brigaderlar", "F.I.O", "Amallar"].map((el) => (
+                    <th
+                      key={el}
+                      className="border-b border-blue-gray-50 py-3 px-5 text-left"
+                    >
+                      <Typography
+                        variant="small"
+                        className="text-[11px] font-bold uppercase text-blue-gray-400"
+                      >
+                        {el}
+                      </Typography>
+                    </th>
+                  ))}
                 </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {pdbUsers ? pdbUsers.map(
+                  (item, i) => {
+                    const className = `py-3 px-5  ${i === pdbUsers && pdbUsers.length - 1
+                      ? ""
+                      : "border-b border-blue-gray-50"
+                      }`
+                    return (
+                      <tr key={i}>
+                        <td className={className}>
+                          <div className="flex items-center gap-4">
+                            <div>
+                              <Typography
+                                variant="small"
+                                className="font-semibold text-blue-gray-600"
+                              >
+                                {i + 1}
+                              </Typography>
+                            </div>
+                          </div>
+                        </td>
+                        <td className={className}>
+                          <div className="flex items-center gap-4">
+                            <div>
+                              <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="font-semibold"
+                              >
+                                {item.name}
+                              </Typography>
+                            </div>
+                          </div>
+                        </td>
+                        <td className={className}>
+                          <Typography className="text-xs font-semibold text-blue-gray-600">
+                            {item.userFullName}
+                          </Typography>
+
+                        </td>
+                        <td className={`${className} flex py-5 gap-3`}>
+                          <Typography onClick={() => {
+                            openEditModal()
+                            setpdbdata(item)
+                          }} className=" cursor-pointer text-[1.2rem] font-semibold hover:text-yellow-300 duration-150 ease-in-out   text-blue-gray-600">
+                            <FaEdit />
+                          </Typography>
+
+                        </td>
+                      </tr>
+                    );
+                  }
+                ) : (
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td className="">
+                      <Typography className=" cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
+                        Ma'lumot yo'q
+                      </Typography></td>
+                    <td></td>
+
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
 
         </CardBody>
@@ -268,6 +295,8 @@ export function PDBusers() {
           </DialogFooter>
         </Dialog>
       </div>
+
+
       {/* Add pdb modal */}
       <div>
         <Dialog open={addModal} handler={closeAddModal}>
@@ -283,9 +312,11 @@ export function PDBusers() {
                 <Input onChange={addRegEx} id="addlastname" label="F.I.O" />
               </div>
               <div className="w-full max-w-[24rem]">
-                <Select onChange={(e) => {
-                  setpdId(e)
-                }} label="Bo'linma tanlang">
+                <Select
+                  className={`${pdIdValid ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`}
+                  onChange={(e) => {
+                    setpdId(e)
+                  }} label="Bo'linma tanlang">
                   {
                     pdUsers ? pdUsers.map((item, i) =>
                       <Option key={i} value={item.id}>{item.name}</Option>

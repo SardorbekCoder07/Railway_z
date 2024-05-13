@@ -24,6 +24,7 @@ export function PdUsers() {
     const [PD, setPD] = useState(null)
     const [users, setUsers] = useState(null)
     const [userID, setUserId] = useState(null)
+    const [userValid, setuserValid] = useState(false)
     const [userData, setUserData] = useState(null)
     const [editModal, setEditModal] = useState(false)
     const [deleteModal, setDeleteModal] = useState(false)
@@ -34,6 +35,7 @@ export function PdUsers() {
     const closeAddModal = () => {
         setAddModal(false)
         setRegex(true)
+        setuserValid(false)
     }
     const openEditModal = () => setEditModal(true)
     const closeEditModal = () => {
@@ -65,7 +67,6 @@ export function PdUsers() {
         axios.get(`${api}pd/all`, config)
             .then((res) => {
                 setPD(res.data.body);
-                console.log(res.data.body);
             })
             .catch((err) => {
             })
@@ -79,19 +80,26 @@ export function PdUsers() {
             employeeCount: byId("addemployeeCount"),
             userId: userID ? userID : 0
         }
-        axios.post(`${api}pd/add`, addData, config)
-            .then((res) => {
-                closeAddModal()
-                getPD()
-                toast.success("Vazifa muoffaqqiyatli bajarildi!")
-            })
-            .catch((err) => {
-                closeAddModal()
-                toast.error("PD qo'shishda xatolik yuzberdi")
-                {
-                }
-                ;
-            })
+        console.log(userID);
+        if (userID) {
+            axios.post(`${api}pd/add`, addData, config)
+                .then((res) => {
+                    closeAddModal()
+                    getPD()
+                    getUser()
+                    toast.success("Yo'l ustasi muvaffaqiyatli qo'shildi ✅")
+                    setUserId(null)
+                })
+                .catch((err) => {
+                    closeAddModal()
+                    toast.error("Yo'l ustasi qo'shishda xatolik yuzberdi ❗️");
+                    setUserId(null)
+                })
+        } else {
+            setuserValid(true)
+            toast.error("Hodimni tanlang ❗️")
+        }
+
     }
 
 
@@ -124,11 +132,11 @@ export function PdUsers() {
             .then(() => {
                 closeDeleteModal()
                 getPD()
-                toast.success("Bu PD muvoffaqqiyatli tahrirlandi!👌")
+                toast.success("Yo'l ustasi muvoffaqqiyatli o'chirildi! ✅")
 
             })
             .catch((err) => {
-                toast.error("PD o'chirishda xatolik yuz berdi")
+                toast.error("Yo'l ustasini o'chirishda xatolik yuz berdi")
                 closeDeleteModal()
             })
 
@@ -138,27 +146,31 @@ export function PdUsers() {
     // ******************* REGEX **********************
 
     const addRegex = () => {
-        if (
-            byId("addPD") !== "" &&
-            byId("addemployeeCount") !== ""
-        ) {
-            setRegex(false)
-        } else {
-            setRegex(true)
-        }
+        // Bosh va oraliq probellarni olib tashlash uchun trim() metodidan foydalanish
+        const editPDValue = document.getElementById("addPD").value.trim();
+        const employeeCountValue = document.getElementById("addemployeeCount").value.trim();
 
+        // Har ikkala qiymat ham bo'sh emasligini tekshirish
+        if (editPDValue !== "" && employeeCountValue !== "") {
+            setRegex(false); // Agar har ikkala qiymat ham bo'sh emas bo'lsa, regex state'ini false qilib o'rnatish
+        } else {
+            setRegex(true);  // Aks holda, regex state'ini true qilib o'rnatish
+        }
     }
 
     const editRegex = () => {
-        if (
-            byId("editPD") !== "" &&
-            byId("editemployeeCount") !== ""
-        ) {
-            setRegex(false)
+        // Bosh va oraliq probellarni olib tashlash uchun trim() metodidan foydalanish
+        const editPDValue = document.getElementById("editPD").value.trim();
+        const employeeCountValue = document.getElementById("editemployeeCount").value.trim();
+
+        // Har ikkala qiymat ham bo'sh emasligini tekshirish
+        if (editPDValue !== "" && employeeCountValue !== "") {
+            setRegex(false); // Agar har ikkala qiymat ham bo'sh emas bo'lsa, regex state'ini false qilib o'rnatish
         } else {
-            setRegex(true)
+            setRegex(true);  // Aks holda, regex state'ini true qilib o'rnatish
         }
     }
+
     return (
         <div className="mt-12 mb-8 flex flex-col gap-12 ">
             <Card>
@@ -337,13 +349,15 @@ export function PdUsers() {
                                 <Input onChange={addRegex} required id="addPD" label="PD nomi" />
                             </div>
                             <div className="w-full max-w-[24rem]">
-                                <Input onChange={addRegex} required id="addemployeeCount" label="Ishchi soni" />
+                                <Input onChange={addRegex} required id="addemployeeCount" label="Ishchi soni" type="number" />
                             </div>
                             <div className="w-full max-w-[24rem]">
-                                <Select onChange={(e) => {
-                                    setUserId(e)
-                                    addRegex()
-                                }} label="Yo'l ustasini tanlash">
+                                <Select
+                                    className={`${userValid ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`}
+                                    onChange={(e) => {
+                                        setUserId(e)
+                                        addRegex()
+                                    }} label="Yo'l ustasini tanlash">
                                     {
                                         users ? users.map((item, i) =>
                                             <Option key={i} value={item.id}>{item.firstName} {item.lastName}</Option>
