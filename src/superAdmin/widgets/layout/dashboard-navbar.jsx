@@ -31,7 +31,9 @@ import {
 } from "@/context";
 import { FaEdit } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { userGetNe } from "@/api/api";
+import { api, byId, config, userGetNe } from "@/api/api";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 export function DashboardNavbar() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -40,6 +42,14 @@ export function DashboardNavbar() {
   const [layout, page] = pathname.split("/").filter((el) => el !== "");
   const [editModal, setEditModal] = useState(false)
   const [getMy, setGetMy] = useState(null)
+
+
+  // ******************* edit valitate inputs **********************
+  const [validPhoneNumberEdit, setPhoneNumberEdit] = useState(false);
+  const [validPasswordEdit, setPasswordEdit] = useState(false);
+  const [validTextPEdit, setValidTextPEdit] = useState(false);
+  const [validTextTEdit, setValidTextTEdit] = useState(false);
+  const [validRoleEdit, setValidRoleEdit] = useState(false);
 
   const openEditModal = () => setEditModal(true)
   const closeEditModal = () => {
@@ -50,24 +60,69 @@ export function DashboardNavbar() {
     userGetNe(setGetMy)
   }, [])
 
-  // ******************* HANDLE CHANGE **********************
+  // *******************EDIT USER **********************
+  const editUser = () => {
+    function todayPlanInfo(obj) {
+      for (let key in obj) {
+        if (obj[key] === undefined || obj[key] === null || obj[key] === false || obj[key] === "NaN" || obj[key] === '') {
+          return false;
+          // Agar inputlardan birortasi bulsa xam (undefined, null, false, 0, NaN, ''), false qaytariladi
+        }
+      }
+      return true; // xammasi 100% tuldirilsa true qaytaradi
+    }
 
-  const validateInputs = () => {
-    let phoneNumber = document.getElementById('addphone').value;
-    let password = document.getElementById('addpassword').value;
-
-    if (addModal) {
-      let phoneError = !(/^\d{9}$/.test(phoneNumber));
-      let passwordError = !(/^[a-zA-Z0-9]{4,}$/.test(password));
-
-      setPhoneNumber(phoneError)
-      setValidTextP(phoneError)
-
-      setPassword(passwordError)
-      setValidTextT(passwordError)
+    const editData = {
+      firstName: byId("editname"),
+      lastName: byId("editlastname"),
+      password: byId("editpassword"),
+      phoneNumber: `+998${byId("editphone")}`
 
     }
-  };
+    let isTrue = todayPlanInfo(editData)
+
+    if (isTrue) {
+      if (!validPasswordEdit && !validTextPEdit) {
+        axios.put(`${api}user/update?id=${getMy ? getMy.id : 0}`, editData, config)
+          .then(() => {
+            closeEditModal()
+            userGetNe(setGetMy)
+            toast.success("Bu hodim muvoffaqqiyatli tahrirlandi!👌")
+          })
+          .catch((err) => {
+            closeEditModal()
+            toast.error("Bu hodimni tahrirlashda xatolik yuz berdi")
+
+          })
+      } else {
+        toast.error("Telefon raqam yoki parolda xatolik mavjud❌")
+      }
+    } else {
+      toast.error(" Malunot toliq kiritilmagan !")
+      setPhoneNumberEdit(false)
+      setPasswordEdit(false)
+    }
+  }
+
+  // ******************* HANDLE CHANGE **********************
+
+  const editvalidateInputs = () => {
+    let phoneNumber = document.getElementById('editphone').value;
+    let password = document.getElementById('editpassword').value;
+
+    if (editModal) {
+        let phoneError = !(/^\d{9}$/.test(phoneNumber));
+        let passwordError = !(/^[a-zA-Z0-9]{4,}$/.test(password));
+
+        setPhoneNumberEdit(phoneError)
+        setValidTextPEdit(phoneError)
+
+        setPasswordEdit(passwordError)
+        setValidTextTEdit(passwordError)
+
+    }
+};
+
   return (
     <Navbar
       color={"white"}
@@ -183,20 +238,50 @@ export function DashboardNavbar() {
             <Dialog open={editModal} handler={closeEditModal}>
               <DialogHeader>Tahrirlash</DialogHeader>
               <DialogBody>
-                <div className="flex justify-center flex-col items-center gap-7">
+                <div className="flex justify-center flex-col items-center gap-5">
                   <div className="w-full max-w-[24rem]">
                     <Input
-                      id="editName" label="Ism" />
+                      required
+                      defaultValue={getMy ? getMy.firstName : "Ma'lumot yo'q"}
+                      id="editname"
+                      label="Ism" />
                   </div>
                   <div className="w-full max-w-[24rem]">
                     <Input
-                      id="editPhone"
-                      label="Telefon raqam" />
+                      required
+                      defaultValue={getMy ? getMy.lastName : "Ma'lumot yo'q"}
+                      id="editlastname"
+                      label="Familya" />
                   </div>
+                  <div className="relative flex flex-col w-full max-w-[24rem]">
+                    <div className="relative w-full ">
+                      <Button
+                        disabled
+                        size="sm"
+                        className="!absolute left-1 top-1 rounded z-50"
+                      >
+                        +998
+                      </Button>
+                      <Input
+                        defaultValue={getMy ? getMy.phoneNumber.substr(4) : ""}
+                        id="editphone"
+                        type="number"
+                        className={`${validPhoneNumberEdit ? "outline outline-2 outline-offset-2 outline-red-600" : ""} ps-20`}
+                        containerProps={{
+                          className: "min-w-0",
+                        }}
+                      />
+                    </div>
+                    <p className={`${validTextPEdit ? "text-red-500" : ""} text-xs w-full max-w-[24rem] mt-1`}><span className=" underline">9 ta</span>  raqamdan iborat bo'lishi kerak!</p>
+                  </div>
+
                   <div className="w-full max-w-[24rem]">
                     <Input
-                      id="editPassword"
+                      className={`${validPasswordEdit ? "outline outline-2 outline-offset-2 outline-red-600" : ""} `}
+                      type="pasword"
+                      id="editpassword"
                       label="Parol" />
+                    <p className={`${validTextPEdit ? "text-red-500" : ""} text-xs w-full max-w-[24rem] mt-1`}><span className=" underline">4 ta</span>  raqamdan kam bo'lmasligi kerak!</p>
                   </div>
                 </div>
               </DialogBody>
@@ -209,9 +294,11 @@ export function DashboardNavbar() {
                 >
                   <span>Orqaga</span>
                 </Button>
-                <span >
-
-                  <Button variant="gradient" color="gray">
+                <span>
+                  <Button onClick={() => {
+                    editUser()
+                    editvalidateInputs()
+                  }} variant="gradient" color="gray">
                     <span>Tahrirlash</span>
                   </Button>
                 </span>
