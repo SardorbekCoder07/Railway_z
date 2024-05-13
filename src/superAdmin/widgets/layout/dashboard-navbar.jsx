@@ -111,17 +111,17 @@ export function DashboardNavbar() {
     let password = document.getElementById('editpassword').value;
 
     if (editModal) {
-        let phoneError = !(/^\d{9}$/.test(phoneNumber));
-        let passwordError = !(/^[a-zA-Z0-9]{4,}$/.test(password));
+      let phoneError = !(/^\d{9}$/.test(phoneNumber));
+      let passwordError = !(/^[a-zA-Z0-9]{4,}$/.test(password));
 
-        setPhoneNumberEdit(phoneError)
-        setValidTextPEdit(phoneError)
+      setPhoneNumberEdit(phoneError)
+      setValidTextPEdit(phoneError)
 
-        setPasswordEdit(passwordError)
-        setValidTextTEdit(passwordError)
+      setPasswordEdit(passwordError)
+      setValidTextTEdit(passwordError)
 
     }
-};
+  };
 
   return (
     <Navbar
@@ -159,156 +159,151 @@ export function DashboardNavbar() {
           </Typography>
         </div>
         <div className="flex items-center justify-between">
-        <div>
-           <IconButton
-            variant="text"
-            color="blue-gray"
-            className="grid xl:hidden"
-            onClick={() => setOpenSidenav(dispatch, !openSidenav)}
-          >
-            <Bars3Icon strokeWidth={3} className="h-6 w-6 text-blue-gray-500" />
-          </IconButton>
-        </div>
-              <div>
-              <Menu>
-            <MenuHandler>
-              <div className="flex items-center justify-center gap-2">
-
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="mb-1 font-normal"
-                >
-                  <strong>{getMy ? getMy.firstName : ""}</strong>
-                </Typography>
-                <Avatar
-                  className="cursor-pointer"
-                  src="https://cdn-icons-png.freepik.com/512/6596/6596121.png"
-                  alt="item-1"
-                  size="md"
-                  variant="circular"
-                />
-              </div>
-            </MenuHandler>
-            <MenuList className="w-max border-0">
-              <MenuItem onClick={openEditModal} className="flex items-center justify-center">
-                <FaEdit className={'text-[1.2rem]'} />
-              </MenuItem>
-              <MenuItem className="flex items-center gap-3">
-
-                <div>
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="mb-1 font-normal"
-                  >
-                    <strong>Ism, familiya</strong>
-                  </Typography>
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="flex items-center gap-1 text-xs font-normal opacity-60"
-                  >
-                    {getMy ? getMy.firstName : ""} {getMy ? getMy.lastName : ""}
-                  </Typography>
-                </div>
-              </MenuItem>
-              <MenuItem className="flex items-center gap-4">
-                <div>
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="mb-1 font-normal"
-                  >
-                    <strong>Telefon raqam </strong>
-                  </Typography>
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="flex items-center gap-1 text-xs font-normal opacity-60"
-                  >
-                    {getMy ? getMy.phoneNumber : ""}
-                  </Typography>
-                </div>
-              </MenuItem>
-            </MenuList>
-          </Menu>
-              </div>
-
-
-        </div>
           <div>
-
-            <Dialog open={editModal} handler={closeEditModal}>
-              <DialogHeader>Tahrirlash</DialogHeader>
-              <DialogBody>
-                <div className="flex justify-center flex-col items-center gap-5">
-                  <div className="w-full max-w-[24rem]">
-                    <Input
-                      required
-                      defaultValue={getMy ? getMy.firstName : "Ma'lumot yo'q"}
-                      id="editname"
-                      label="Ism" />
-                  </div>
-                  <div className="w-full max-w-[24rem]">
-                    <Input
-                      required
-                      defaultValue={getMy ? getMy.lastName : "Ma'lumot yo'q"}
-                      id="editlastname"
-                      label="Familya" />
-                  </div>
-                  <div className="relative flex flex-col w-full max-w-[24rem]">
-                    <div className="relative w-full ">
-                      <Button
-                        disabled
-                        size="sm"
-                        className="!absolute left-1 top-1 rounded z-50"
-                      >
-                        +998
-                      </Button>
-                      <Input
-                        defaultValue={getMy ? getMy.phoneNumber.substr(4) : ""}
-                        id="editphone"
-                        type="number"
-                        className={`${validPhoneNumberEdit ? "outline outline-2 outline-offset-2 outline-red-600" : ""} ps-20`}
-                        containerProps={{
-                          className: "min-w-0",
-                        }}
-                      />
-                    </div>
-                    <p className={`${validTextPEdit ? "text-red-500" : ""} text-xs w-full max-w-[24rem] mt-1`}><span className=" underline">9 ta</span>  raqamdan iborat bo'lishi kerak!</p>
-                  </div>
-
-                  <div className="w-full max-w-[24rem]">
-                    <Input
-                      className={`${validPasswordEdit ? "outline outline-2 outline-offset-2 outline-red-600" : ""} `}
-                      type="pasword"
-                      id="editpassword"
-                      label="Parol" />
-                    <p className={`${validTextPEdit ? "text-red-500" : ""} text-xs w-full max-w-[24rem] mt-1`}><span className=" underline">4 ta</span>  raqamdan kam bo'lmasligi kerak!</p>
-                  </div>
-                </div>
-              </DialogBody>
-              <DialogFooter>
-                <Button
-                  variant="text"
-                  color="red"
-                  onClick={closeEditModal}
-                  className="mr-1"
-                >
-                  <span>Orqaga</span>
-                </Button>
-                <span>
-                  <Button onClick={() => {
-                    editUser()
-                    editvalidateInputs()
-                  }} variant="gradient" color="gray">
-                    <span>Tahrirlash</span>
-                  </Button>
-                </span>
-              </DialogFooter>
-            </Dialog>
+            <IconButton
+              variant="text"
+              color="blue-gray"
+              className="grid xl:hidden"
+              onClick={() => setOpenSidenav(dispatch, !openSidenav)}
+            >
+              <Bars3Icon strokeWidth={3} className="h-6 w-6 text-blue-gray-500" />
+            </IconButton>
           </div>
+          <div>
+            <Menu>
+              <MenuHandler>
+                <div className="flex items-center justify-center gap-2">
+
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="mb-1 font-normal"
+                  >
+                    <strong>{getMy ? getMy.firstName : ""}</strong>
+                  </Typography>
+                  <Avatar
+                    className="cursor-pointer"
+                    src="https://cdn-icons-png.freepik.com/512/6596/6596121.png"
+                    alt="item-1"
+                    size="md"
+                    variant="circular"
+                  />
+                </div>
+              </MenuHandler>
+              <MenuList className="w-max border-0">
+                <MenuItem onClick={openEditModal} className="flex items-center justify-center">
+                  <FaEdit className={'text-[1.2rem]'} />
+                </MenuItem>
+                <MenuItem className="flex items-center gap-3">
+
+                  <div>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="mb-1 font-normal"
+                    >
+                      <strong>Ism, familiya</strong>
+                    </Typography>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="flex items-center gap-1 text-xs font-normal opacity-60"
+                    >
+                      {getMy ? getMy.firstName : ""} {getMy ? getMy.lastName : ""}
+                    </Typography>
+                  </div>
+                </MenuItem>
+                <MenuItem className="flex items-center gap-4">
+                  <div>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="mb-1 font-normal"
+                    >
+                      <strong>Telefon raqam </strong>
+                    </Typography>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="flex items-center gap-1 text-xs font-normal opacity-60"
+                    >
+                      {getMy ? getMy.phoneNumber : ""}
+                    </Typography>
+                  </div>
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          </div>
+        </div>
+        <Dialog open={editModal} handler={closeEditModal}>
+          <DialogHeader>Tahrirlash</DialogHeader>
+          <DialogBody>
+            <div className="flex justify-center flex-col items-center gap-5">
+              <div className="w-full max-w-[24rem]">
+                <Input
+                  required
+                  defaultValue={getMy ? getMy.firstName : "Ma'lumot yo'q"}
+                  id="editname"
+                  label="Ism" />
+              </div>
+              <div className="w-full max-w-[24rem]">
+                <Input
+                  required
+                  defaultValue={getMy ? getMy.lastName : "Ma'lumot yo'q"}
+                  id="editlastname"
+                  label="Familya" />
+              </div>
+              <div className="relative flex flex-col w-full max-w-[24rem]">
+                <div className="relative w-full ">
+                  <Button
+                    disabled
+                    size="sm"
+                    className="!absolute left-1 top-1 rounded z-50"
+                  >
+                    +998
+                  </Button>
+                  <Input
+                    defaultValue={getMy ? getMy.phoneNumber.substr(4) : ""}
+                    id="editphone"
+                    type="number"
+                    className={`${validPhoneNumberEdit ? "outline outline-2 outline-offset-2 outline-red-600" : ""} ps-20`}
+                    containerProps={{
+                      className: "min-w-0",
+                    }}
+                  />
+                </div>
+                <p className={`${validTextPEdit ? "text-red-500" : ""} text-xs w-full max-w-[24rem] mt-1`}><span className=" underline">9 ta</span>  raqamdan iborat bo'lishi kerak!</p>
+              </div>
+
+              <div className="w-full max-w-[24rem]">
+                <Input
+                  className={`${validPasswordEdit ? "outline outline-2 outline-offset-2 outline-red-600" : ""} `}
+                  type="pasword"
+                  id="editpassword"
+                  label="Parol" />
+                <p className={`${validTextPEdit ? "text-red-500" : ""} text-xs w-full max-w-[24rem] mt-1`}><span className=" underline">4 ta</span>  raqamdan kam bo'lmasligi kerak!</p>
+              </div>
+            </div>
+          </DialogBody>
+          <DialogFooter>
+            <Button
+              variant="text"
+              color="red"
+              onClick={closeEditModal}
+              className="mr-1"
+            >
+              <span>Orqaga</span>
+            </Button>
+            <span>
+              <Button onClick={() => {
+                editUser()
+                editvalidateInputs()
+              }} variant="gradient" color="gray">
+                <span>Tahrirlash</span>
+              </Button>
+            </span>
+          </DialogFooter>
+        </Dialog>
       </div>
     </Navbar>
   );
