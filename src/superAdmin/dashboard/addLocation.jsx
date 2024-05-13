@@ -24,10 +24,9 @@ export function AddLocation() {
   const [km, setkm] = useState(null);
 
   const [users, setUsers] = useState(null);
-  const [usersValid, setusersValid] = useState(null);
+  const [usersValid, setusersValid] = useState(false);
 
   const [pdbId, setPDBid] = useState(null);
-  const [pdbIdValid, setPDBidValid] = useState(null);
 
   const [kmData, setkmData] = useState(null);
   const [editModal, setEditModal] = useState(false);
@@ -37,15 +36,24 @@ export function AddLocation() {
   const [selectPdbId, setSelectPdbId] = useState(null);
 
 
-  const openEditModal = () => setEditModal(true)
+  const openEditModal = () => {
+    setEditModal(true)
+
+  }
   const closeEditModal = () => {
     setEditModal(false)
     setRegex(true)
+
   }
-  const openAddModal = () => setAddModal(true)
+  const openAddModal = () => {
+    setAddModal(true)
+    setPDBid(null)
+    setusersValid(false)
+  }
   const closeAddModal = () => {
     setAddModal(false)
     setRegex(true)
+    setPDBid(null)
   }
 
   useEffect(() => {
@@ -96,20 +104,25 @@ export function AddLocation() {
       km: byId("addkm"),
       pdbId: pdbId,
     };
-    console.log(pdbId);
-    console.log(addData);
-    // axios
-    //   .post(`${api}railway`, addData, config)
-    //   .then((res) => {
-    //     closeAddModal();
-    //     getkm(selectPdbId);
-    //     toast.success("Manzil muoffaqqiyatli qo'shildi!👌");
-    //   })
-    //   .catch((err) => {
-    //     closeAddModal();
-    //     toast.error("Manzil qo'shilmadi❌");
-    //     ;
-    //   })
+
+    if (pdbId) {
+      axios
+        .post(`${api}railway`, addData, config)
+        .then((res) => {
+          closeAddModal();
+          getkm(selectPdbId);
+          toast.success("Manzil muoffaqqiyatli qo'shildi!👌");
+        })
+        .catch((err) => {
+          closeAddModal();
+          toast.error("Manzil qo'shilmadi❌");
+          ;
+        })
+    } else {
+      toast.error("Bo'linmani tanlang ❗️");
+      setusersValid(true)
+    }
+
   };
 
 
@@ -121,19 +134,24 @@ export function AddLocation() {
       km: byId("editkm"),
       pdbId: pdbId,
     };
-    axios
-      .put(`${api}railway?id=${kmData ? kmData.id : 0}`, editData, config)
-      .then((res) => {
-        closeEditModal();
-        getkm(selectPdbId);
-        toast.success("Ish quroli muvoffaqqiyatli tahrirlandi!👌");
-      })
-      .catch((err) => {
-        toast.error("Ish quroli tahrirlanmadi❌");
-        closeEditModal();
-      })
-      .finally(() => {
-      });
+    if (pdbId) {
+      axios
+        .put(`${api}railway?id=${kmData ? kmData.id : 0}`, editData, config)
+        .then((res) => {
+          closeEditModal();
+          getkm(selectPdbId);
+          toast.success("Ish quroli muvoffaqqiyatli tahrirlandi!👌");
+        })
+        .catch((err) => {
+          toast.error("Ish quroli tahrirlanmadi❌");
+          closeEditModal();
+        })
+        .finally(() => {
+        });
+    } else {
+      toast.error("Bo'linmani tanlang ❗️");
+      setusersValid(true)
+    }
   };
 
 
@@ -303,9 +321,11 @@ export function AddLocation() {
                 <Input type="number" onChange={editRegex} required defaultValue={kmData ? kmData.km : "Ma'lumot yo'q"} id="editkm" label="km nomi" />
               </div>
               <div className="w-full max-w-[24rem]">
-                <Select onChange={(e) => {
-                  getUser(e)
-                }} label="Bo'linmani tanlang">
+                <Select
+                  className={`${usersValid ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`}
+                  onChange={(e) => {
+                    getUser(e)
+                  }} label="Bo'linmani tanlang">
                   {
                     pdUsers ? pdUsers.map((item, i) =>
                       <Option key={i} value={item.id}>{item.name}</Option>
@@ -316,9 +336,11 @@ export function AddLocation() {
                 </Select>
               </div>
               <div className="w-full max-w-[24rem]">
-                <Select onChange={(e) => {
-                  setPDBid(e)
-                }} label="Brigadani tanlang">
+                <Select
+                  className={`${usersValid ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`}
+                  onChange={(e) => {
+                    setPDBid(e)
+                  }} label="Brigadani tanlang">
                   {
                     users ? users.map((item, i) =>
                       <Option key={i} value={item.id}>{item.name}</Option>
@@ -362,9 +384,11 @@ export function AddLocation() {
                 <Input type="number" onChange={addRegex} required id="addkm" label="KM" />
               </div>
               <div className="w-full max-w-[24rem]">
-                <Select onChange={(e) => {
-                  getUser(e)
-                }} label="Bo'linmani tanlang">
+                <Select
+                  className={`${usersValid ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`}
+                  onChange={(e) => {
+                    getUser(e)
+                  }} label="Bo'linmani tanlang">
                   {
                     pdUsers ? pdUsers.map((item, i) =>
                       <Option key={i} value={item.id}>{item.name}</Option>
@@ -375,9 +399,11 @@ export function AddLocation() {
                 </Select>
               </div>
               <div className="w-full max-w-[24rem]">
-                <Select onChange={(e) => {
-                  setPDBid(e)
-                }} label="PDB tanlang">
+                <Select
+                  className={`${usersValid ? "outline outline-2 outline-offset-2 outline-red-600" : ""}`}
+                  onChange={(e) => {
+                    setPDBid(e)
+                  }} label="PDB tanlang">
                   {
                     users ? users.map((item, i) =>
                       <Option key={i} value={item.id}>{item.name}</Option>
