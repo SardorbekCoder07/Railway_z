@@ -8,7 +8,7 @@ import { api, byId, config, setConfig } from "@/api/api";
 import toast from "react-hot-toast";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
-import './input.css'
+
 
 
 export function Tables() {
