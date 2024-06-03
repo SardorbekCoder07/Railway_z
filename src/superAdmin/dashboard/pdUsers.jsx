@@ -68,7 +68,6 @@ export function PdUsers() {
         axios.get(`${api}pd/all`, config)
             .then((res) => {
                 setPD(res.data.body);
-                console.log(res.data);
             })
             .catch((err) => {
                 console.log(err);
