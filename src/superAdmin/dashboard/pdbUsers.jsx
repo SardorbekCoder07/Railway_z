@@ -55,7 +55,8 @@ export function PDBusers() {
   const getPD = () => {
     axios.get(`${api}pd/all`, config)
       .then((res) => {
-        setPdUsers(res.data.body);
+        if (res.data.success && res.data.body.length !== 0) setPdUsers(res.data.body);
+        else setPdUsers(null)
       })
       .catch((err) => {
         console.error(err);
@@ -65,12 +66,12 @@ export function PDBusers() {
   const getPDBuser = (id) => {
     axios.get(`${api}pdb/list?pdId=${id}`, config)
       .then((res) => {
-        setPdbaUsers(res.data.body)
-        console.log(res.data.body);
+        if (res.data.success && res.data.body.length !== 0) setPdbaUsers(res.data.body);
+        else setPdbaUsers(null)
       })
       .catch((err) => {
         console.error(err);
-      }) 
+      })
   }
 
   // ---------- PDB add ------------

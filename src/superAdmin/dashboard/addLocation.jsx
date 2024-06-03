@@ -68,7 +68,8 @@ export function AddLocation() {
   const getPD = () => {
     axios.get(`${api}pd/all`, config)
       .then((res) => {
-        setPdUsers(res.data.body);
+        if (res.data.success && res.data.body.length !== 0) setPdUsers(res.data.body);
+                else setPdUsers(null)
       })
       .catch((err) => { })
   }
@@ -80,7 +81,8 @@ export function AddLocation() {
   const getUser = (id) => {
     axios.get(`${api}pdb/list?pdId=${id}`, config)
       .then((res) => {
-        setUsers(res.data.body)
+        if (res.data.success && res.data.body.length !== 0) setUsers(res.data.body);
+                else setUsers(null)
       })
       .catch((err) => {
       })
@@ -92,7 +94,8 @@ export function AddLocation() {
   const getkm = (id) => {
     axios.get(`${api}railway/list?pdbId=${id}`, config)
       .then((res) => {
-        setkm(res.data.body);
+        if (res.data.success && res.data.body.length !== 0) setkm(res.data.body);
+                else setkm(null)
       })
       .catch((err) => { })
   }

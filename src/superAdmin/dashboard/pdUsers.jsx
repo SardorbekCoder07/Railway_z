@@ -67,7 +67,8 @@ export function PdUsers() {
     const getPD = () => {
         axios.get(`${api}pd/all`, config)
             .then((res) => {
-                setPD(res.data.body);
+                if (res.data.success && res.data.body.length !== 0) setPD(res.data.body);
+                else setPD(null)
             })
             .catch((err) => {
                 console.log(err);
