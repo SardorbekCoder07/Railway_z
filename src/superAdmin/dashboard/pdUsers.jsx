@@ -56,7 +56,8 @@ export function PdUsers() {
     const getUser = () => {
         axios.get(`${api}user/leader/no/pd`, config)
             .then((res) => {
-                setUsers(res.data.body);
+                if (res.data.success && res.data.body.length !== 0) setUsers(res.data.body);
+                else setUsers(null)
             })
             .catch((err) => {
             })
@@ -67,8 +68,10 @@ export function PdUsers() {
         axios.get(`${api}pd/all`, config)
             .then((res) => {
                 setPD(res.data.body);
+                console.log(res.data);
             })
             .catch((err) => {
+                console.log(err);
             })
     }
 
@@ -312,7 +315,6 @@ export function PdUsers() {
                                             <Option key={i} value={item.id}>{item.firstName} {item.lastName}</Option>
                                         ) : (
                                             <Option disabled>Malumot yo'q</Option>
-
                                         )
                                     }
                                 </Select>
@@ -363,7 +365,6 @@ export function PdUsers() {
                                             <Option key={i} value={item.id}>{item.firstName} {item.lastName}</Option>
                                         ) : (
                                             <Option disabled>Malumot yo'q</Option>
-
                                         )
                                     }
                                 </Select>
