@@ -311,7 +311,7 @@ export function PdUsers() {
                                         users ? users.map((item, i) =>
                                             <Option key={i} value={item.id}>{item.firstName} {item.lastName}</Option>
                                         ) : (
-                                            <Option>Malumot yo'q</Option>
+                                            <Option disabled>Malumot yo'q</Option>
 
                                         )
                                     }

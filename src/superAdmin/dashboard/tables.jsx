@@ -431,7 +431,7 @@ export function Tables() {
                                     disabled
                                     size="sm"
                                     className="!absolute left-1 top-1 rounded z-50"
-                                >
+                                > 
                                     +998
                                 </Button>
 

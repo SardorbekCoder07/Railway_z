@@ -163,7 +163,7 @@ export function PDBusers() {
                   pdUsers ? pdUsers.map((item, i) =>
                     <Option key={i} value={item.id}>{item.name}</Option>
                   ) : (
-                    <Option>Malumot yo'q</Option>
+                    <Option disabled>Malumot yo'q</Option>
                   )
                 }
               </Select>
@@ -321,7 +321,7 @@ export function PDBusers() {
                     pdUsers ? pdUsers.map((item, i) =>
                       <Option key={i} value={item.id}>{item.name}</Option>
                     ) : (
-                      <Option>Malumot yo</Option>
+                      <Option disabled>Malumot yo'q</Option>
                     )
                   }
                 </Select>

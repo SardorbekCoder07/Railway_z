@@ -126,7 +126,7 @@ export function Hisobot() {
                   adminUsers.map(item => (
                     <Option value={item.id}>{item.name}</Option>
                   )) : (
-                    <Option value={``}>Ma'lumot yo'q</Option>
+                    <Option disabled>Ma'lumot yo'q</Option>
                   )}
               </Select>
             </div>
@@ -138,7 +138,7 @@ export function Hisobot() {
                   ? pdbList.map(item =>
                     <Option value={item.id}>{item.name}</Option>
                   )
-                  : <Option value={``}>Ma'lumot yo'q</Option>
+                  : <Option disabled>Ma'lumot yo'q</Option>
                 }
               </Select>
             </div>
@@ -150,7 +150,7 @@ export function Hisobot() {
                   ? railwayList.map(item =>
                     <Option value={item.id}>{item.km} km</Option>
                   )
-                  : <Option value={``}>Ma'lumot yo'q</Option>
+                  : <Option disabled>Ma'lumot yo'q</Option>
                 }
               </Select>
             </div>

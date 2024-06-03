@@ -130,7 +130,7 @@ export function Home() {
                   adminUsers.map(item => (
                     <Option value={item.id}>{item.name}</Option>
                   )) : (
-                    <Option value={``} disabled>Ma'lumot yo'q</Option>
+                    <Option disabled>Ma'lumot yo'q</Option>
                   )}
               </Select>
             </div>
@@ -142,7 +142,7 @@ export function Home() {
                   ? pdbList.map(item =>
                     <Option value={item.id}>{item.name}</Option>
                   )
-                  : <Option value={``} disabled>Ma'lumot yo'q</Option>
+                  : <Option disabled>Ma'lumot yo'q</Option>
                 }
               </Select>
             </div>
@@ -154,7 +154,7 @@ export function Home() {
                   ? railwayList.map(item =>
                     <Option value={item.id}>{item.km} km</Option>
                   )
-                  : <Option value={``} disabled>Ma'lumot yo'q</Option>
+                  : <Option disabled>Ma'lumot yo'q</Option>
                 }
               </Select>
             </div>
