@@ -9,6 +9,8 @@ import toast from "react-hot-toast";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 
+
+
 export function Tables() {
     const [users, setUsers] = useState(null)
     const [noPdUsers, setNoPdUsers] = useState(null)
@@ -37,6 +39,7 @@ export function Tables() {
     const openAddModal = () => setAddModal(true)
     const closeAddModal = () => {
         setAddModal(false)
+
         // add validation null qilish
         setPhoneNumber(false)
         setValidTextP(false)
@@ -216,6 +219,7 @@ export function Tables() {
             .then(() => {
                 closeDeleteModal()
                 getUser()
+
                 toast.success("Bu hodim muvoffaqqiyatli o'chirildi!👌")
             })
             .catch(() => {
@@ -497,9 +501,9 @@ export function Tables() {
                                         setNewAdmin(e)
                                     }} label="Yangi admin">
                                         {
-                                            noPdUsers.length !== 0 ? noPdUsers.map((item, i) =>
+                                            noPdUsers && noPdUsers.map((item, i) =>
                                                 <Option key={i} value={item.id}>{item.firstName} {item.lastName}</Option>
-                                            ) : <Option disabled>Malumot yo'q</Option>
+                                            )
                                         }
                                     </Select>
                                 </div>
