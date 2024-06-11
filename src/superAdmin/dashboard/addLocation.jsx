@@ -384,7 +384,7 @@ export function AddLocation() {
           <DialogBody>
             <div className="flex justify-center flex-col items-center gap-7">
               <div className="w-full max-w-[24rem]">
-                <Input type="number" onChange={addRegex} required id="addkm" label="KM" />
+                <Input type="text" onChange={addRegex} required id="addkm" label="KM" />
               </div>
               <div className="w-full max-w-[24rem]">
                 <Select

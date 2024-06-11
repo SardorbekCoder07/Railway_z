@@ -17,7 +17,7 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
-import { api, byId, config, setConfig } from "@/api/api";
+import { api, byId, config, getPD, setConfig } from "@/api/api";
 import toast from "react-hot-toast";
 
 export function PdUsers() {
@@ -64,16 +64,7 @@ export function PdUsers() {
     }
 
     // *******************GET USER **********************
-    const getPD = () => {
-        axios.get(`${api}pd/all`, config)
-            .then((res) => {
-                if (res.data.success && res.data.body.length !== 0) setPD(res.data.body);
-                else setPD(null)
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }
+    getPD(setPD)
 
     // *******************ADD USER **********************
 
