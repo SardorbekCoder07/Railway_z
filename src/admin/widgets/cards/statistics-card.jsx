@@ -36,151 +36,189 @@ export function StatisticsCard() {
       })
   }
   return (
-    <>
-      <Card // Don't forget to add a unique key when mapping over an array
-        className="border border-blue-gray-100 shadow-sm"
-      >
-        <CardHeader
-          variant="gradient"
-          color="transparent"
-          floated={false}
-          shadow={false}
-          className="absolute grid h-12 w-12 place-items-center "
-        >
-          <UserGroupIcon color="black" />
-        </CardHeader>
-        <CardBody className="p-4 text-right">
-          <Typography variant="small" className="font-normal text-blue-gray-600">
-            Bugungi jami ishlayotganlar soni
-          </Typography>
-          <Typography variant="h6" color="blue-gray">
-          </Typography>
-          <Typography variant="h3" color="blue-gray">
-            {getAdminStatistic ? getAdminStatistic.employeeCount : 0}
-          </Typography>
-        </CardBody>
-      </Card>
-      <Card // Don't forget to add a unique key when mapping over an array
-        className="border border-blue-gray-100 shadow-sm"
-      >
-        <CardHeader
-          variant="gradient"
-          color="transparent"
-          floated={false}
-          shadow={false}
-          className="absolute grid h-12 w-12 place-items-center "
-        >
-          <CalendarDaysIcon color="skyblue"/>
-        </CardHeader>
-        <CardBody className="p-4 text-right">
-          <Typography variant="small" className="font-normal text-blue-gray-600">
-            Dam oluvchilar soni(otgul)
-          </Typography>
-          <Typography variant="h6" color="blue-gray">
-          </Typography>
-          <Typography variant="h3" color="blue-gray">
-            {getAdminStatistic ? getAdminStatistic.vacationCount : 0}
-          </Typography>
-        </CardBody>
-      </Card>
-      <Card // Don't forget to add a unique key when mapping over an array
-        className="border border-blue-gray-100 shadow-sm"
-      >
-        <CardHeader
-          variant="gradient"
-          color="transparent"
-          floated={false}
-          shadow={false}
-          className="absolute grid h-12 w-12 place-items-center  "
-        >
-
-          <PlusIcon color="red" />
-        </CardHeader>
-        <CardBody className="p-4 text-right">
-          <Typography variant="small" className="font-normal text-blue-gray-600">
-            Kasallar soni
-          </Typography>
-          <Typography variant="h6" color="blue-gray">
-          </Typography>
-          <Typography variant="h3" color="blue-gray">
-            {getAdminStatistic ? getAdminStatistic.onTrainingCount : 0}
-          </Typography>
-        </CardBody>
-      </Card>
-      <Card // Don't forget to add a unique key when mapping over an array
-        className="border border-blue-gray-100 shadow-sm"
-      >
-        <CardHeader
-          variant="gradient"
-          color="transparent"
-          floated={false}
-          shadow={false}
-          className="absolute grid h-12 w-12 place-items-center "
-        >
-          <UsersIcon />
-        </CardHeader>
-        <CardBody className="p-4 text-right">
-          <Typography variant="small" className="font-normal text-blue-gray-600">
-            Ish haqi saqlanmagan holda (BS)
-          </Typography>
-          <Typography variant="h6" color="blue-gray">
-          </Typography>
-          <Typography variant="h3" color="blue-gray">
-            {getAdminStatistic ? getAdminStatistic.sickCount : 0}
-          </Typography>
-        </CardBody>
-      </Card>
-      <Card // Don't forget to add a unique key when mapping over an array
-        className="border border-blue-gray-100 shadow-sm"
-      >
-        <CardHeader
-          variant="gradient"
-          color="transparent"
-          floated={false}
-          shadow={false}
-          className="absolute grid h-12 w-12 place-items-center "
-        >
-          <GlobeAsiaAustraliaIcon color="green" />
-
-        </CardHeader>
-        <CardBody className="p-4 text-right">
-          <Typography variant="small" className="font-normal text-blue-gray-600">
-            Xizmat safarifda
-          </Typography>
-          <Typography variant="h6" color="blue-gray">
-          </Typography>
-          <Typography variant="h3" color="blue-gray">
-            {getAdminStatistic ? getAdminStatistic.restCount : 0}
-          </Typography>
-        </CardBody>
-      </Card>
-      <Card // Don't forget to add a unique key when mapping over an array
-        className="border border-blue-gray-100 shadow-sm"
-      >
-        <CardHeader
-          variant="gradient"
-          color="transparent"
-          floated={false}
-          shadow={false}
-          className="absolute grid h-12 w-12 place-items-center "
-        >
-          <BookOpenIcon color="brown"/>
-        </CardHeader>
-        <CardBody className="p-4 text-right">
-          <Typography variant="small" className="font-normal text-blue-gray-600">
-          <div onClick={toggleText} style={{ cursor: "pointer", maxWidth: "300px" }}>
-      {isExpanded ? fullText : truncatedText}
-    </div>
-          </Typography>
-          <Typography variant="h6" color="blue-gray">
-          </Typography>
-          <Typography variant="h3" color="blue-gray">
-            {getAdminStatistic ? getAdminStatistic.tripCount : 0}
-          </Typography>
-        </CardBody>
-      </Card>
-    </>
-  );
+		<>
+			<Card // Don't forget to add a unique key when mapping over an array
+				className='border border-blue-gray-100 shadow-sm'
+			>
+				<CardHeader
+					variant='gradient'
+					color='transparent'
+					floated={false}
+					shadow={false}
+					className='absolute grid h-12 w-12 place-items-center '
+				>
+					<UserGroupIcon color='black' />
+				</CardHeader>
+				<CardBody className='p-4 text-right'>
+					<Typography
+						variant='small'
+						className='font-normal text-blue-gray-600'
+					>
+						Bugungi jami ishlayotganlar soni
+					</Typography>
+					<Typography variant='h6' color='blue-gray'></Typography>
+					<Typography variant='h3' color='blue-gray'>
+						{getAdminStatistic ? getAdminStatistic.employeeCount : 0}
+					</Typography>
+				</CardBody>
+			</Card>
+			<Card // Don't forget to add a unique key when mapping over an array
+				className='border border-blue-gray-100 shadow-sm'
+			>
+				<CardHeader
+					variant='gradient'
+					color='transparent'
+					floated={false}
+					shadow={false}
+					className='absolute grid h-12 w-12 place-items-center '
+				>
+					<UserGroupIcon color='black' />
+				</CardHeader>
+				<CardBody className='p-4 text-right'>
+					<Typography
+						variant='small'
+						className='font-normal text-blue-gray-600'
+					>
+						Mehnat ta'tili
+					</Typography>
+					<Typography variant='h6' color='blue-gray'></Typography>
+					<Typography variant='h3' color='blue-gray'>
+						{getAdminStatistic ? getAdminStatistic.onHolidayCount : 0}
+					</Typography>
+				</CardBody>
+			</Card>
+			<Card // Don't forget to add a unique key when mapping over an array
+				className='border border-blue-gray-100 shadow-sm'
+			>
+				<CardHeader
+					variant='gradient'
+					color='transparent'
+					floated={false}
+					shadow={false}
+					className='absolute grid h-12 w-12 place-items-center '
+				>
+					<CalendarDaysIcon color='skyblue' />
+				</CardHeader>
+				<CardBody className='p-4 text-right'>
+					<Typography
+						variant='small'
+						className='font-normal text-blue-gray-600'
+					>
+						Dam oluvchilar soni(otgul)
+					</Typography>
+					<Typography variant='h6' color='blue-gray'></Typography>
+					<Typography variant='h3' color='blue-gray'>
+						{getAdminStatistic ? getAdminStatistic.vacationCount : 0}
+					</Typography>
+				</CardBody>
+			</Card>
+			<Card // Don't forget to add a unique key when mapping over an array
+				className='border border-blue-gray-100 shadow-sm'
+			>
+				<CardHeader
+					variant='gradient'
+					color='transparent'
+					floated={false}
+					shadow={false}
+					className='absolute grid h-12 w-12 place-items-center  '
+				>
+					<PlusIcon color='red' />
+				</CardHeader>
+				<CardBody className='p-4 text-right'>
+					<Typography
+						variant='small'
+						className='font-normal text-blue-gray-600'
+					>
+						Kasallar soni
+					</Typography>
+					<Typography variant='h6' color='blue-gray'></Typography>
+					<Typography variant='h3' color='blue-gray'>
+						{getAdminStatistic ? getAdminStatistic.onTrainingCount : 0}
+					</Typography>
+				</CardBody>
+			</Card>
+			<Card // Don't forget to add a unique key when mapping over an array
+				className='border border-blue-gray-100 shadow-sm'
+			>
+				<CardHeader
+					variant='gradient'
+					color='transparent'
+					floated={false}
+					shadow={false}
+					className='absolute grid h-12 w-12 place-items-center '
+				>
+					<UsersIcon />
+				</CardHeader>
+				<CardBody className='p-4 text-right'>
+					<Typography
+						variant='small'
+						className='font-normal text-blue-gray-600'
+					>
+						Ish haqi saqlanmagan holda (BS)
+					</Typography>
+					<Typography variant='h6' color='blue-gray'></Typography>
+					<Typography variant='h3' color='blue-gray'>
+						{getAdminStatistic ? getAdminStatistic.sickCount : 0}
+					</Typography>
+				</CardBody>
+			</Card>
+			<Card // Don't forget to add a unique key when mapping over an array
+				className='border border-blue-gray-100 shadow-sm'
+			>
+				<CardHeader
+					variant='gradient'
+					color='transparent'
+					floated={false}
+					shadow={false}
+					className='absolute grid h-12 w-12 place-items-center '
+				>
+					<GlobeAsiaAustraliaIcon color='green' />
+				</CardHeader>
+				<CardBody className='p-4 text-right'>
+					<Typography
+						variant='small'
+						className='font-normal text-blue-gray-600'
+					>
+						Xizmat safarifda
+					</Typography>
+					<Typography variant='h6' color='blue-gray'></Typography>
+					<Typography variant='h3' color='blue-gray'>
+						{getAdminStatistic ? getAdminStatistic.restCount : 0}
+					</Typography>
+				</CardBody>
+			</Card>
+			<Card // Don't forget to add a unique key when mapping over an array
+				className='border border-blue-gray-100 shadow-sm'
+			>
+				<CardHeader
+					variant='gradient'
+					color='transparent'
+					floated={false}
+					shadow={false}
+					className='absolute grid h-12 w-12 place-items-center '
+				>
+					<BookOpenIcon color='brown' />
+				</CardHeader>
+				<CardBody className='p-4 text-right'>
+					<Typography
+						variant='small'
+						className='font-normal text-blue-gray-600'
+					>
+						<div
+							onClick={toggleText}
+							style={{ cursor: 'pointer', maxWidth: '300px' }}
+						>
+							{isExpanded ? fullText : truncatedText}
+						</div>
+					</Typography>
+					<Typography variant='h6' color='blue-gray'></Typography>
+					<Typography variant='h3' color='blue-gray'>
+						{getAdminStatistic ? getAdminStatistic.tripCount : 0}
+					</Typography>
+				</CardBody>
+			</Card>
+		</>
+	);
 }
 
 StatisticsCard.defaultProps = {

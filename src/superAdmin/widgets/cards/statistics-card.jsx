@@ -22,6 +22,7 @@ export function StatisticsCardS() {
     axios.get(`${api}user/statistic`, config)
       .then((res) => {
          setAdminStatistics(res.data.body)
+         console.log(res);
       })
       .catch((err) =>  {})
   }
@@ -47,6 +48,7 @@ export function StatisticsCardS() {
           </Typography>
         </CardBody>
       </Card>
+    
       <Card className="border border-blue-gray-100 shadow-sm">
         <CardHeader
           variant="gradient"
