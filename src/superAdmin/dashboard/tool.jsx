@@ -108,8 +108,6 @@ export function Tool() {
 			})
 			.catch(err => {
 				toast.error('Ish tahrirlanmadi❌');
-				{
-				}
 				closeEditModal();
 			});
 	};
@@ -154,7 +152,7 @@ export function Tool() {
 	};
 
 	return (
-		<div className='mt-12 mb-8 flex flex-col gap-12 '>
+		<div className='mt-7 mb-8 flex flex-col gap-12 '>
 			<Card>
 				<CardHeader
 					variant='gradient'

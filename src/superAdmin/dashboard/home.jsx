@@ -32,6 +32,7 @@ export function Home() {
 	const [ids, setIds] = useState([]);
 	const [pdbInfo, setPdbInfo] = useState([]);
 	const [toggleInfo, setToggleInfo] = useState(false);
+	const [date, setDate] = useState('');
 
 	const openElseModal = () => setElseModal(true);
 	const closeElseModal = () => setElseModal(false);
@@ -46,22 +47,23 @@ export function Home() {
 	const TABLE_HEAD = [
 		'KM',
 		'PK',
-		'Work',
-		'OBSH',
-		'VEX', // tripCount
-		'OTP', // restCount
-		'OTG', // vacationCount
-		'Bol', // sickCount
-		'UK', // onTrainingCount
-		'On holiday', //onHolidayCount
-		'Asbob', //
-		'TR', // workToolList.count
+		'Ertangi ishlar rejasi',
+		'Bugungi ish rejasi',
+		'Jami ishchi',
+		'Xizmat safarida', // tripCount
+		"O'qishda", // restCount
+		'Otgul', // vacationCount
+		'Kasallar soni', // sickCount
+		'B/S', // onTrainingCount
+		"Mehnat ta'tilida", //onHolidayCount
+		'Ish qurollari', //
+		'Soni', // workToolList.count
 	];
 
 	// getUserAdmin
-	const getUserAdmin = () => {
+	const getUserAdmin = date => {
 		axios
-			.get(`${api}pd/work-pd/all`, config)
+			.get(`${api}pd/work-pd/all?localDate=${date}`, config)
 			.then(res => {
 				if (res.status === 200) {
 					setAdminUsers(res.data.body);
@@ -82,12 +84,13 @@ export function Home() {
 			});
 		}
 	};
-
 	const handleInfo = async id => {
 		setToggleInfo(true);
 		try {
-			const { data } = await axios.get(`${api}pdb/get/info/${id}`, config);
-			console.log(data);
+			const { data } = await axios.get(
+				`${api}pdb/get/info/${id}?localDate=${date}`,
+				config
+			);
 			setPdbInfo(data.body);
 		} catch (error) {
 			console.log(error);
@@ -101,11 +104,11 @@ export function Home() {
 
 	return (
 		<>
-			<div className='mt-12'>
+			<div>
 				<div className='mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-3'>
 					<StatisticsCard />
 				</div>
-				<div className='mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4'>
+				<div className='mb-12	 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4'>
 					<StatisticsCardS />
 				</div>
 				<div className='mb-6 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3'>
@@ -162,6 +165,15 @@ export function Home() {
               </Select>
             </div>
           </div> */}
+							<div className='w-32'>
+								<Input
+									onChange={e => {
+										setDate(e.target.value);
+										getUserAdmin(e.target.value);
+									}}
+									type='date'
+								/>
+							</div>
 							<div className='overflow-x-auto'>
 								<table className='w-full min-w-full table-auto'>
 									<thead>
@@ -169,14 +181,14 @@ export function Home() {
 											<th
 												className={`border-b border-blue-gray-200 py-3 px-5 text-left`}
 											>
-												#
+												№
 											</th>
 											<th className='border-b border-blue-gray-200 py-3 px-5 text-left'>
 												<Typography
 													variant='small'
 													className='text-sm font-bold uppercase text-blue-gray-400'
 												>
-													PD
+													Bo'linma
 												</Typography>
 											</th>
 											<th
@@ -187,7 +199,7 @@ export function Home() {
 													variant='small'
 													className='text-sm font-bold uppercase text-blue-gray-400'
 												>
-													PDB
+													Brigadalar
 												</Typography>
 											</th>
 										</tr>
@@ -195,7 +207,7 @@ export function Home() {
 									<tbody>
 										{adminUsers && adminUsers.length !== 0 ? (
 											adminUsers.map((item, i) => (
-												<tr onClick={() => getPDB(item.id)}>
+												<tr key={i}>
 													<td className='border-b border-blue-gray-200 py-3 px-5'>
 														{i + 1}
 													</td>
@@ -471,8 +483,8 @@ export function Home() {
 				</Dialog>
 			</div>
 			<Dialog
-				className='overflow-y-auto max-h-screen'
-				size='lg'
+				size='xl'
+				className='!w-screen max-h-screen overflow-y-auto'
 				open={toggleInfo}
 				onClose={() => setToggleInfo(false)}
 			>
@@ -480,7 +492,7 @@ export function Home() {
 					<h1>PDB ma'lumotlari</h1>
 				</DialogHeader>
 				<DialogBody>
-					<Card className='h-full w-full overflow-scroll'>
+					<Card className='h-full w-full overflow-y-auto'>
 						<table className='w-full min-w-max table-auto text-center'>
 							<thead>
 								<tr>
@@ -516,6 +528,7 @@ export function Home() {
 												sickCount,
 												onTrainingCount,
 												onHolidayCount,
+												todayPlan,
 											},
 											index
 										) => (
@@ -549,6 +562,15 @@ export function Home() {
 														className='font-normal text-lg'
 													>
 														{tomorrowPlan}
+													</Typography>
+												</td>
+												<td className='p-4'>
+													<Typography
+														variant='small'
+														color='blue-gray'
+														className='font-normal text-lg'
+													>
+														{todayPlan ? 'Bajarildi' : 'Bajarilmadi'}
 													</Typography>
 												</td>
 												<td className='p-4'>
@@ -674,9 +696,221 @@ export function Home() {
 					</Card>
 				</DialogBody>
 				<DialogFooter>
-					<Button onClick={() => setToggleInfo(false)}>Cancel</Button>
+					<Button onClick={() => setToggleInfo(false)}>Yopish</Button>
 				</DialogFooter>
 			</Dialog>
+			{/* <div
+				className={
+					toggleInfo
+						? 'w-full h-full bg-white fixed top-0 left-0 z-50'
+						: 'hidden'
+				}
+			>
+				<Card className='h-full w-full overflow-auto'>
+					<table className='w-full min-w-max table-auto text-center'>
+						<thead>
+							<tr>
+								{TABLE_HEAD.map(head => (
+									<th
+										key={head}
+										className='border-b border-blue-gray-100 bg-blue-gray-50 p-4'
+									>
+										<Typography
+											variant='small'
+											color='blue-gray'
+											className='text-lg font-medium leading-none opacity-70'
+										>
+											{head}
+										</Typography>
+									</th>
+								))}
+							</tr>
+						</thead>
+						<tbody>
+							{pdbInfo.length !== 0 ? (
+								pdbInfo.map(
+									(
+										{
+											railwayKmName,
+											pkNameList,
+											tomorrowPlan,
+											employeeCount,
+											tripCount,
+											restCount,
+											vacationCount,
+											workToolList,
+											sickCount,
+											onTrainingCount,
+											onHolidayCount,
+											todayPlan,
+										},
+										index
+									) => (
+										<tr
+											key={railwayKmName}
+											className='even:bg-blue-gray-50/50 text-center'
+										>
+											<td className='p-4 text-center'>
+												<Typography
+													variant='small'
+													color='blue-gray'
+													className='font-normal text-lg'
+												>
+													{railwayKmName}
+												</Typography>
+											</td>
+											<td className='p-4'>
+												<Typography
+													variant='small'
+													color='blue-gray'
+													className='font-normal flex gap-3 text-lg'
+												>
+													{pkNameList && pkNameList.map(item => <p>{item}</p>)}
+												</Typography>
+											</td>
+											<td className='p-4'>
+												<Typography
+													variant='small'
+													color='blue-gray'
+													className='font-normal text-lg'
+												>
+													{tomorrowPlan}
+												</Typography>
+											</td>
+											<td className='p-4'>
+												<Typography
+													variant='small'
+													color='blue-gray'
+													className='font-normal text-lg'
+												>
+													{todayPlan ? 'Bajarildi' : 'Bajarilmadi'}
+												</Typography>
+											</td>
+											<td className='p-4'>
+												<Typography
+													as='a'
+													href='#'
+													variant='small'
+													color='blue-gray'
+													className='font-medium text-lg'
+												>
+													{employeeCount}
+												</Typography>
+											</td>
+											<td className='p-4'>
+												<Typography
+													as='a'
+													href='#'
+													variant='small'
+													color='blue-gray'
+													className='font-medium text-lg'
+												>
+													{tripCount}
+												</Typography>
+											</td>
+											<td className='p-4'>
+												<Typography
+													as='a'
+													href='#'
+													variant='small'
+													color='blue-gray'
+													className='font-medium text-lg'
+												>
+													{restCount}
+												</Typography>
+											</td>
+											<td className='p-4'>
+												<Typography
+													as='a'
+													href='#'
+													variant='small'
+													color='blue-gray'
+													className='font-medium text-lg'
+												>
+													{vacationCount}
+												</Typography>
+											</td>
+											<td className='p-4'>
+												<Typography
+													as='a'
+													href='#'
+													variant='small'
+													color='blue-gray'
+													className='font-medium text-lg'
+												>
+													{sickCount}
+												</Typography>
+											</td>
+											<td className='p-4'>
+												<Typography
+													as='a'
+													href='#'
+													variant='small'
+													color='blue-gray'
+													className='font-medium text-lg'
+												>
+													{onTrainingCount}
+												</Typography>
+											</td>
+											<td className='p-4'>
+												<Typography
+													as='a'
+													href='#'
+													variant='small'
+													color='blue-gray'
+													className='font-medium text-lg'
+												>
+													{onHolidayCount}
+												</Typography>
+											</td>
+											<td className='p-4'>
+												<Typography
+													as='a'
+													href='#'
+													variant='small'
+													color='blue-gray'
+													className='font-medium text-lg'
+												>
+													{workToolList.map(item => (
+														<p>{item.resWorkToolNamd}</p>
+													))}
+												</Typography>
+											</td>
+											<td className='p-4'>
+												<Typography
+													as='a'
+													href='#'
+													variant='small'
+													color='blue-gray'
+													className='font-medium text-lg'
+												>
+													{workToolList.map(item => (
+														<p>{item.count}</p>
+													))}
+												</Typography>
+											</td>
+										</tr>
+									)
+								)
+							) : (
+								<tr>
+									<td className='py-3'>
+										<Typography
+											variant='small'
+											className='text-sm mx-auto text-center font-bold uppercase text-black'
+										>
+											<img src={empatyFolder} alt='' />
+										</Typography>
+									</td>
+								</tr>
+							)}
+						</tbody>
+					</table>
+				</Card>
+				<div>
+					<Button onClick={() => setToggleInfo(false)}>Yopish</Button>
+				</div>
+			</div> */}
 		</>
 	);
 }

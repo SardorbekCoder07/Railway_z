@@ -291,8 +291,8 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 						Hisobot Kiriting
 					</label> */}
 					<div className='flex gap-10 mx-auto'>
-						<Radio onChange={() => setCheck(true)} name='type' label='Ha' />
-						<Radio onChange={() => setCheck(false)} name='type' label="Yo'q" />
+						<Radio onChange={() => setCheck(true)} name='type' label='Bajarildi' />
+						<Radio onChange={() => setCheck(false)} name='type' label="Bajarilmadi" />
 					</div>
 				</div>
 			),

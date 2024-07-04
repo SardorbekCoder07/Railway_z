@@ -1,41 +1,51 @@
-import { api, config, setConfig } from "@/api/api";
-import { BookOpenIcon, CalendarDaysIcon, GlobeAsiaAustraliaIcon, PlusIcon, UserGroupIcon, UsersIcon } from "@heroicons/react/24/solid";
+import { api, config, setConfig } from '@/api/api';
 import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Typography,
-} from "@material-tailwind/react";
-import axios from "axios";
-import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+	BookOpenIcon,
+	CalendarDaysIcon,
+	GlobeAsiaAustraliaIcon,
+	PlusIcon,
+	UserGroupIcon,
+	UsersIcon,
+} from '@heroicons/react/24/solid';
+import {
+	Card,
+	CardHeader,
+	CardBody,
+	CardFooter,
+	Typography,
+} from '@material-tailwind/react';
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { FaPlusCircle } from 'react-icons/fa';
+import { TbCoinOff } from 'react-icons/tb';
+import holiday from '../../../../public/img/holidays.png';
 
 export function StatisticsCard() {
-  const [getAdminStatistic, setgetAdminStatistic] = useState(null)
-  const [isExpanded, setIsExpanded] = useState(false);
+	const [getAdminStatistic, setgetAdminStatistic] = useState(null);
+	const [isExpanded, setIsExpanded] = useState(false);
 
-  const fullText = "Malaka oshirishga (o'qishga) ketganlar soni";
-  const truncatedText = fullText.length > 30 ? fullText.slice(0, 27) + "..." : fullText;
+	const fullText = "Malaka oshirishga (o'qishga) ketganlar soni";
+	const truncatedText =
+		fullText.length > 30 ? fullText.slice(0, 27) + '...' : fullText;
 
+	const toggleText = () => {
+		setIsExpanded(!isExpanded);
+	};
+	useEffect(() => {
+		setConfig();
+		getAdminStatistics();
+	}, []);
 
-  const toggleText = () => {
-    setIsExpanded(!isExpanded);
-  };
-  useEffect(() => {
-    setConfig()
-    getAdminStatistics()
-  }, [])
-
-  const getAdminStatistics = () => {
-    axios.get(`${api}user/statistic/admin`, config)
-      .then((res) => {
-        setgetAdminStatistic(res.data.body)
-      })
-      .catch((err) => {
-      })
-  }
-  return (
+	const getAdminStatistics = () => {
+		axios
+			.get(`${api}user/statistic/admin`, config)
+			.then(res => {
+				setgetAdminStatistic(res.data.body);
+			})
+			.catch(err => {});
+	};
+	return (
 		<>
 			<Card // Don't forget to add a unique key when mapping over an array
 				className='border border-blue-gray-100 shadow-sm'
@@ -72,7 +82,7 @@ export function StatisticsCard() {
 					shadow={false}
 					className='absolute grid h-12 w-12 place-items-center '
 				>
-					<UserGroupIcon color='black' />
+					<img src={holiday} alt='' />
 				</CardHeader>
 				<CardBody className='p-4 text-right'>
 					<Typography
@@ -122,7 +132,7 @@ export function StatisticsCard() {
 					shadow={false}
 					className='absolute grid h-12 w-12 place-items-center  '
 				>
-					<PlusIcon color='red' />
+					<FaPlusCircle color='red' size={40} />
 				</CardHeader>
 				<CardBody className='p-4 text-right'>
 					<Typography
@@ -147,7 +157,7 @@ export function StatisticsCard() {
 					shadow={false}
 					className='absolute grid h-12 w-12 place-items-center '
 				>
-					<UsersIcon />
+					<TbCoinOff size={50} color='#edbf53' />
 				</CardHeader>
 				<CardBody className='p-4 text-right'>
 					<Typography
@@ -222,39 +232,39 @@ export function StatisticsCard() {
 }
 
 StatisticsCard.defaultProps = {
-  color: "blue",
-  footer: null,
+	color: 'blue',
+	footer: null,
 };
 
 StatisticsCard.propTypes = {
-  color: PropTypes.oneOf([
-    "white",
-    "blue-gray",
-    "gray",
-    "brown",
-    "deep-orange",
-    "orange",
-    "amber",
-    "yellow",
-    "lime",
-    "light-green",
-    "green",
-    "teal",
-    "cyan",
-    "light-blue",
-    "blue",
-    "indigo",
-    "deep-purple",
-    "purple",
-    "pink",
-    "red",
-  ]),
-  icon: PropTypes.node.isRequired,
-  title: PropTypes.node.isRequired,
-  value: PropTypes.node.isRequired,
-  footer: PropTypes.node,
+	color: PropTypes.oneOf([
+		'white',
+		'blue-gray',
+		'gray',
+		'brown',
+		'deep-orange',
+		'orange',
+		'amber',
+		'yellow',
+		'lime',
+		'light-green',
+		'green',
+		'teal',
+		'cyan',
+		'light-blue',
+		'blue',
+		'indigo',
+		'deep-purple',
+		'purple',
+		'pink',
+		'red',
+	]),
+	icon: PropTypes.node.isRequired,
+	title: PropTypes.node.isRequired,
+	value: PropTypes.node.isRequired,
+	footer: PropTypes.node,
 };
 
-StatisticsCard.displayName = "/src/widgets/cards/statistics-card.jsx";
+StatisticsCard.displayName = '/src/widgets/cards/statistics-card.jsx';
 
 export default StatisticsCard;

@@ -29,7 +29,7 @@ export function StatisticsCardS() {
 
 	return (
 		<>
-			<Card className='border border-blue-gray-100 shadow-sm'>
+			<Card className='border w-full border-blue-gray-100 shadow-sm'>
 				<CardHeader
 					variant='gradient'
 					color='gray'
@@ -52,30 +52,7 @@ export function StatisticsCardS() {
 				</CardBody>
 			</Card>
 
-			<Card className='border border-blue-gray-100 shadow-sm'>
-				<CardHeader
-					variant='gradient'
-					color='gray'
-					floated={false}
-					shadow={false}
-					className='absolute grid h-12 w-12 place-items-center'
-				>
-					<UserCircleIcon />
-				</CardHeader>
-				<CardBody className='p-4 text-right'>
-					<Typography
-						variant='small'
-						className='font-normal text-blue-gray-600'
-					>
-						Lederlar soni soni
-					</Typography>
-					<Typography variant='h4' color='blue-gray'>
-						{adminstatistics ? adminstatistics.leaderCount : 0}
-					</Typography>
-				</CardBody>
-			</Card>
-
-			<Card className='border border-blue-gray-100 shadow-sm'>
+			<Card className='border w-full border-blue-gray-100 shadow-sm'>
 				<CardHeader
 					variant='gradient'
 					color='gray'
@@ -98,7 +75,7 @@ export function StatisticsCardS() {
 				</CardBody>
 			</Card>
 
-			<Card className='border border-blue-gray-100 shadow-sm'>
+			<Card className='border w-full border-blue-gray-100 shadow-sm'>
 				<CardHeader
 					variant='gradient'
 					color='gray'
