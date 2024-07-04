@@ -82,11 +82,11 @@ export function Tool() {
 			.then(res => {
 				closeAddModal();
 				gettool();
-				toast.success("Ish quroli muvoffaqqiyatli qo'shildi!👌");
+				toast.success("Ish muvoffaqqiyatli qo'shildi!👌");
 			})
 			.catch(err => {
 				closeAddModal();
-				toast.error("Ish quroli qo'shilmadi❌");
+				toast.error("Ish qo'shilmadi❌");
 
 				{
 				}
