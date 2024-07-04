@@ -100,18 +100,14 @@ export function Tool() {
 			name: byId('edittool'),
 		};
 		axios
-			.put(
-				`${api}work?id=${ToolData ? ToolData.id : 0}`,
-				editData,
-				config
-			)
+			.put(`${api}work?id=${ToolData ? ToolData.id : 0}`, editData, config)
 			.then(res => {
 				closeEditModal();
 				gettool();
-				toast.success('Ish quroli muvoffaqqiyatli tahrirlandi!👌');
+				toast.success('Ish muvoffaqqiyatli tahrirlandi!👌');
 			})
 			.catch(err => {
-				toast.error('Ish quroli tahrirlanmadi❌');
+				toast.error('Ish tahrirlanmadi❌');
 				{
 				}
 				closeEditModal();
@@ -180,7 +176,7 @@ export function Tool() {
 					<table className='w-full min-w-[640px] table-auto'>
 						<thead>
 							<tr>
-								{['#', 'Ish quroli nomi', 'Amallar'].map(el => (
+								{['#', 'Ish nomi', 'Amallar'].map(el => (
 									<th
 										key={el}
 										className='border-b border-blue-gray-50 py-3 px-5 text-left'
@@ -241,12 +237,15 @@ export function Tool() {
 												>
 													<FaEdit />
 												</Typography>
-												<Typography onClick={() => {
-                        openDeleteModal()
-                        setToolData(item)
-                      }} className=" cursor-pointer text-[1.2rem] font-semibold text-red-700 duration-150 ease-in-out">
-                        <MdDelete/>
-                      </Typography>
+												<Typography
+													onClick={() => {
+														openDeleteModal();
+														setToolData(item);
+													}}
+													className=' cursor-pointer text-[1.2rem] font-semibold text-red-700 duration-150 ease-in-out'
+												>
+													<MdDelete />
+												</Typography>
 											</td>
 										</tr>
 									);
@@ -286,7 +285,7 @@ export function Tool() {
 									required
 									defaultValue={ToolData ? ToolData.name : "Ma'lumot yo'q"}
 									id='edittool'
-									label='Ish qurollar nomi'
+									label='Ish nomi'
 								/>
 							</div>
 						</div>
@@ -318,7 +317,7 @@ export function Tool() {
 
 				<Dialog open={addModal} handler={closeAddModal}>
 					<DialogHeader className='flex items-center justify-between'>
-						Ish quroli qo'shish
+						Ish qo'shish
 						<XMarkIcon
 							className='cursor-pointer'
 							onClick={closeAddModal}
@@ -332,7 +331,7 @@ export function Tool() {
 									onChange={addRegex}
 									required
 									id='addtool'
-									label='Ish quroli nomi'
+									label='Ish nomi'
 								/>
 							</div>
 						</div>
@@ -369,7 +368,7 @@ export function Tool() {
 								variant='large'
 								className=' font-bold uppercase text-blue-gray-400'
 							>
-								Bu ish qurolini o'chirishingizga ishonchingiz komilmi?
+								Bu ishni o'chirishingizga ishonchingiz komilmi?
 							</Typography>
 						</div>
 					</DialogBody>

@@ -46,8 +46,10 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 
 	// Inputlarni o'zgartirish uchun ishlatiladigan funksiya
 	const handleChange = event => {
-		console.log(event);
-		setInputs(event);
+		setInputs(prev => ({
+			...prev,
+			[id]: value,
+		}));
 		// Agar foydalanuvchi input qiymatini o'zgartirsa, xato holatini o'chirib tashlaymiz
 		if (errors[event]) {
 			setErrors(prev => ({
@@ -413,7 +415,7 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 					label="Malaka oshirishga (o'qishga) ketganlar soni"
 				/>
 
-				<Input type='text' id='protectionStackST' label="Mehnat ta'tili." />
+				<Input type='number' id='protectionStackST' label="Mehnat ta'tili." />
 				{/*<Input type="text" id="protectionStackPR" label="Rels ulagichlari PR." />
         <Input type="text" id="relayConnectorsST" label="Himoya stiklari ishchilari soni ST." />
         <Input type="text" id="relayConnectorsPR" label="Hiimoya stiklari ishchilari soni PR." /> */}
