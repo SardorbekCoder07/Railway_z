@@ -9,6 +9,7 @@ import {
 	Input,
 	Select,
 	Option,
+	Radio,
 } from '@material-tailwind/react';
 import { api, byId, config, setConfig } from '@/api/api';
 import { getPk } from '@/superAdmin/dashboard/apiFunction.jsx';
@@ -28,15 +29,11 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 		tripCount: '',
 		onTrainingCount: '',
 		protectionStackST: '',
-		protectionStackPR: '',
-		relayConnectorsST: '',
-		relayConnectorsPR: '',
-		tomorrowPlan: '',
-		todayPlanID: '',
 	});
-
+	const [id, setId] = useState();
 	const [errors, setErrors] = useState({}); // Xatolar uchun yangi state
 	const [work, setWork] = useState([]);
+	const [check, setCheck] = useState();
 
 	useEffect(() => {
 		setConfig();
@@ -46,14 +43,15 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 
 	// Inputlarni o'zgartirish uchun ishlatiladigan funksiya
 	const handleChange = event => {
-		setInputs(prev => ({
-			...prev,
+		const { id, value } = event.target;
+		setInputs(prevInputs => ({
+			...prevInputs,
 			[id]: value,
 		}));
-		// Agar foydalanuvchi input qiymatini o'zgartirsa, xato holatini o'chirib tashlaymiz
-		if (errors[event]) {
-			setErrors(prev => ({
-				...prev,
+
+		if (errors[id]) {
+			setErrors(prevErrors => ({
+				...prevErrors,
 				[id]: false,
 			}));
 		}
@@ -164,8 +162,7 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 
 		// ------------- tekshirilayoygan obgect ------------- //
 		let requireObg = {
-			todayPlan: byId('todayPlanID'),
-			tomorrowPlan: byId('tomorrowPlan'),
+			tomorrowWorkId: id,
 			employeeCount: byId('employeeCount'),
 			vacationCount: byId('vacationCount'),
 			sickCount: byId('sickCount'),
@@ -177,8 +174,8 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 		// ------------- backendga jonatilayotgan object ------------- //
 		let dataObj = {
 			pkIds: pk,
-			todayPlan: byId('todayPlanID'),
-			tomorrowPlan: byId('tomorrowPlan'),
+			todayWork: check,
+			tomorrowWorkId: id,
 			date: `${yil}-${oy}-${kun}`,
 			employeeCount: byId('employeeCount'),
 			vacationCount: byId('vacationCount'),
@@ -186,7 +183,7 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 			restCount: byId('restCount'),
 			tripCount: byId('tripCount'),
 			onTrainingCount: byId('onTrainingCount'),
-			onHolidayCount: byId('protectionStackST'),
+			onHolidayCount: +byId('protectionStackST'),
 			// protectionStackPR: byId("protectionStackPR"),
 			// relayConnectorsST: byId("relayConnectorsST"),
 			// relayConnectorsPR: byId("relayConnectorsPR"),
@@ -194,6 +191,15 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 		};
 		let result = todayPlanInfo(requireObg);
 
+		console.log({
+			...dataObj,
+			employeeCount: Number(dataObj.employeeCount),
+			vacationCount: Number(dataObj.vacationCount),
+			sickCount: Number(dataObj.sickCount),
+			restCount: Number(dataObj.restCount),
+			tripCount: Number(dataObj.tripCount),
+			onTrainingCount: Number(dataObj.onTrainingCount),
+		});
 		// ------------- backendga malumot jonatish ------------- //
 		if (result) {
 			axios
@@ -247,8 +253,9 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
             id="tomorrowPlan"
           /> */}
 					<Select
+						onChange={e => setId(e)}
 						id='tomorrowPlan'
-						onChange={handleChange}
+						required={true}
 						label='Hisobot Kiriting'
 					>
 						{work && work.length !== 0 ? (
@@ -269,7 +276,7 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 			value: 'html',
 			input: (
 				<div className='relative w-full min-w-[200px]'>
-					<textarea
+					{/* <textarea
 						required
 						onChange={handleChange}
 						value={inputs.todayPlanID}
@@ -281,7 +288,11 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 					/>
 					<label className="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-gray-500 peer-focus:text-gray-900 before:border-blue-gray-200 peer-focus:before:!border-gray-900 after:border-blue-gray-200 peer-focus:after:!border-gray-900">
 						Hisobot Kiriting
-					</label>
+					</label> */}
+					<div className='flex gap-10 mx-auto'>
+						<Radio onChange={() => setCheck(true)} name='type' label='Ha' />
+						<Radio onChange={() => setCheck(false)} name='type' label="Yo'q" />
+					</div>
 				</div>
 			),
 			button: '',
