@@ -16,6 +16,7 @@ import { getPk } from '@/superAdmin/dashboard/apiFunction.jsx';
 import axios from 'axios';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import toast from 'react-hot-toast';
+import { IoMdClose } from 'react-icons/io';
 
 export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 	const [selectedTab, setSelectedTab] = useState('html');
@@ -369,8 +370,11 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 
 	return (
 		<div className='mt-5 mb-10 flex flex-col gap-10'>
-			<div>
+			<div className='flex justify-between'>
 				<h3> Brigadaga ish qo'shish</h3>
+				<div className='cursor-pointer' onClick={onClose}>
+					<IoMdClose size={20} />
+				</div>
 				{/* for calendar */}
 			</div>
 			<div className='text-sm text-gray-900 grid grid-cols-1 md:grid-cols-2 gap-3'>

@@ -470,7 +470,12 @@ export function Home() {
 					</DialogFooter>
 				</Dialog>
 			</div>
-			<Dialog size='lg' open={toggleInfo}>
+			<Dialog
+				className='overflow-y-auto max-h-screen'
+				size='lg'
+				open={toggleInfo}
+				onClose={() => setToggleInfo(false)}
+			>
 				<DialogHeader>
 					<h1>PDB ma'lumotlari</h1>
 				</DialogHeader>
@@ -502,7 +507,7 @@ export function Home() {
 											{
 												railwayKmName,
 												pkNameList,
-												workName,
+												tomorrowPlan,
 												employeeCount,
 												tripCount,
 												restCount,
@@ -543,7 +548,7 @@ export function Home() {
 														color='blue-gray'
 														className='font-normal text-lg'
 													>
-														{workName}
+														{tomorrowPlan}
 													</Typography>
 												</td>
 												<td className='p-4'>

@@ -7,6 +7,7 @@ import {
 	Dialog,
 	DialogBody,
 	Typography,
+	DialogHeader,
 } from '@material-tailwind/react';
 import {
 	getPdb,
@@ -20,6 +21,7 @@ import axios from 'axios';
 import { TabsWithWork } from '@/admin/admin';
 import StatisticsCard from './statistics-card';
 import { Footer } from '@/admin/widgets/layout';
+import { IoMdClose } from 'react-icons/io';
 
 export function Home() {
 	const [pdModal, setPdModal] = useState(false);
