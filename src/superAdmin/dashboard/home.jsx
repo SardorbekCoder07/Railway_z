@@ -20,6 +20,7 @@ import axios from 'axios';
 import Download from '@/superAdmin/dashboard/download.jsx';
 import { StatisticsCard } from '@/admin/widgets/cards';
 import empatyFolder from '../../../public/img/empty-folder.png';
+import moment from 'moment';
 
 export function Home() {
 	const [elseModal, setElseModal] = useState(false);
@@ -32,6 +33,7 @@ export function Home() {
 	const [ids, setIds] = useState([]);
 	const [pdbInfo, setPdbInfo] = useState([]);
 	const [toggleInfo, setToggleInfo] = useState(false);
+	const newDate = moment(new Date()).format('YYYY-MM-DD')
 	const [date, setDate] = useState('');
 
 	const openElseModal = () => setElseModal(true);
@@ -69,7 +71,7 @@ export function Home() {
 					setAdminUsers(res.data.body);
 				} else setAdminUsers(null);
 			})
-			.catch(err => {});
+			.catch(err => { });
 	};
 
 	// get pdb
@@ -99,8 +101,9 @@ export function Home() {
 
 	useEffect(() => {
 		setConfig();
-		getUserAdmin();
+		getUserAdmin(newDate);
 	}, []);
+
 
 	return (
 		<>
@@ -167,6 +170,7 @@ export function Home() {
           </div> */}
 							<div className='w-32'>
 								<Input
+									placeholder={date}
 									onChange={e => {
 										setDate(e.target.value);
 										getUserAdmin(e.target.value);
