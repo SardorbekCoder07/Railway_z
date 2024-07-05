@@ -118,10 +118,10 @@ export function Tool() {
 			.then(() => {
 				closeDeleteModal();
 				gettool();
-				toast.success("Ish quroli muvoffaqqiyatli o'chirildi!👌");
+				toast.success("Ish muvoffaqqiyatli o'chirildi!👌");
 			})
 			.catch(err => {
-				toast.error("Ish quroli o'chirilmadi");
+				toast.error("Ish o'chirilmadi");
 				{
 				}
 				closeDeleteModal();

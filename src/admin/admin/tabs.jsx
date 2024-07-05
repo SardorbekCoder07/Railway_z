@@ -254,7 +254,7 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 			label: 'Ertangi Ishlar rejasi',
 			value: 'react',
 			input: (
-				<div className='relative h-32 w-full min-w-[200px]'>
+				<div className='relative overflow-y-auto h-32 w-full min-w-[200px]'>
 					{/* <textarea
             required
             onChange={handleChange}
