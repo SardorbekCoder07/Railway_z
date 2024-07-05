@@ -10,6 +10,12 @@ import {
 	Select,
 	Option,
 	Radio,
+	List,
+	ListItem,
+	Card,
+	ListItemPrefix,
+	Checkbox,
+	Typography,
 } from '@material-tailwind/react';
 import { api, byId, config, setConfig } from '@/api/api';
 import { getPk } from '@/superAdmin/dashboard/apiFunction.jsx';
@@ -31,7 +37,7 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 		onTrainingCount: '',
 		protectionStackST: '',
 	});
-	const [id, setId] = useState();
+	const [id, setId] = useState([]);
 	const [errors, setErrors] = useState({}); // Xatolar uchun yangi state
 	const [work, setWork] = useState([]);
 	const [check, setCheck] = useState();
@@ -61,7 +67,6 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 	const getWork = async () => {
 		try {
 			const { data } = await axios.get(`${api}work`, config);
-			console.log(data);
 			setWork(data.body);
 		} catch (error) {
 			console.log(error);
@@ -129,6 +134,11 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 		});
 	};
 
+	const handleSelect = workId => {
+		console.log(id.filter(prev => prev === workId));
+		setId(prev => [...prev, workId]);
+	};
+	console.log(id);
 	// ------------- asboplarni iputini ichida malumot bolganini back endga yuborish ------------- //
 	const todayPlanAdd = () => {
 		toolId.splice(0, toolId.length); // toolId array'ini tozalaymiz
@@ -253,7 +263,39 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
             placeholder=" "
             id="tomorrowPlan"
           /> */}
-					<Select
+					<Card>
+						<List>
+							{work && work.length !== 0 ? (
+								work.map(item => (
+									<ListItem className='p-0'>
+										<label
+											htmlFor='vertical-list-react'
+											className='flex w-full cursor-pointer items-center px-3 py-2'
+										>
+											<ListItemPrefix className='mr-3'>
+												<Checkbox
+													value={item.id}
+													onChange={e => handleSelect(e.target.value)}
+													id='vertical-list-react'
+													ripple={false}
+													className='hover:before:opacity-0'
+													containerProps={{
+														className: 'p-0',
+													}}
+												/>
+											</ListItemPrefix>
+											<Typography color='blue-gray' className='font-medium'>
+												{item.name}
+											</Typography>
+										</label>
+									</ListItem>
+								))
+							) : (
+								<Typography className='p-2'>Ma'lumot yo'q</Typography>
+							)}
+						</List>
+					</Card>
+					{/* <Select
 						onChange={e => setId(e)}
 						id='tomorrowPlan'
 						required={true}
@@ -264,7 +306,7 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 						) : (
 							<Option disabled>Ma'lumot yo'q</Option>
 						)}
-					</Select>
+					</Select> */}
 					{/* <label className="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-gray-500 peer-focus:text-gray-900 before:border-blue-gray-200 peer-focus:before:!border-gray-900 after:border-blue-gray-200 peer-focus:after:!border-gray-900">
 						Hisobot Kiriting
 					</label> */}
@@ -291,8 +333,16 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 						Hisobot Kiriting
 					</label> */}
 					<div className='flex gap-10 mx-auto'>
-						<Radio onChange={() => setCheck(true)} name='type' label='Bajarildi' />
-						<Radio onChange={() => setCheck(false)} name='type' label="Bajarilmadi" />
+						<Radio
+							onChange={() => setCheck(true)}
+							name='type'
+							label='Bajarildi'
+						/>
+						<Radio
+							onChange={() => setCheck(false)}
+							name='type'
+							label='Bajarilmadi'
+						/>
 					</div>
 				</div>
 			),
@@ -430,7 +480,14 @@ export function TabsWithWork({ pk, onClose, setPkIdIn, getAdminStatistics }) {
 					label="Malaka oshirishga (o'qishga) ketganlar soni"
 				/>
 
-				<Input type='number' id='protectionStackST' label="Mehnat ta'tili." />
+				<Input
+					required
+					className={inputClass('protectionStackST')}
+					type='number'
+					id='protectionStackST'
+					onChange={handleChange}
+					label="Mehnat ta'tili."
+				/>
 				{/*<Input type="text" id="protectionStackPR" label="Rels ulagichlari PR." />
         <Input type="text" id="relayConnectorsST" label="Himoya stiklari ishchilari soni ST." />
         <Input type="text" id="relayConnectorsPR" label="Hiimoya stiklari ishchilari soni PR." /> */}
