@@ -126,15 +126,15 @@ export function DashboardNavbar() {
   return (
     <Navbar
       color={"white"}
-      className={`rounded-xl transition-all ${"sticky top-4 z-40 py-3 shadow-md shadow-blue-gray-500/5"
+      className={`rounded-xl mb-10 transition-all ${"sticky top-4 z-40 py-3 shadow-md shadow-blue-gray-500/5"
         }`}
       fullWidth
-      blurred={fixedNavbar}
+      blurred={true}
     >
       <div className="flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center">
         <div className="capitalize">
           <Breadcrumbs
-            className={`bg-transparent p-0 transition-all ${fixedNavbar ? "mt-1" : ""
+            className={`bg-transparent p-0 transition-all ${true ? "mt-1" : ""
               }`}
           >
             <Link to={`/${layout}/boshqaruv-paneli`}>

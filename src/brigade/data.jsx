@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 
 const NavList = () => {
   const [deleteModal, setDeleteModal] = useState(false);
-
   const openDeleteModal = () => setDeleteModal(true);
   const closeDeleteModal = () => setDeleteModal(false);
 
@@ -46,11 +45,13 @@ const NavList = () => {
         <Typography className='text-xl font-bold'>Railway PLan</Typography>
       </div>
       {/* text */}
+      
       <div>
         <Button   onClick={openDeleteModal} className='flex items-center gap-2 '>Chiqish
           <ArrowRightIcon width={20}/>
         </Button>
       </div>
+      
       {/* man pull qilolmadm shunga commit qilish uchun uzgarish kiritdm */}
       <Dialog open={deleteModal} onClose={closeDeleteModal} className='p-4'>
         <DialogHeader>Tizimdan Chiqaszmi ?</DialogHeader>

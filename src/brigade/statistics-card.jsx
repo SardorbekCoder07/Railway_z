@@ -19,6 +19,7 @@ import { Fragment, useEffect, useState } from 'react';
 export function StatisticsCard({ getAdminStatistic }) {
 	return (
 		<>
+		
 			<Card className='border border-blue-gray-100 shadow-sm'>
 				<CardHeader
 					variant='gradient'
